@@ -28,6 +28,12 @@ const PHASES = [
     blurb: 'The principles and assumptions an exam asks you to name: revenue recognition, matching, historical cost and the rest.',
     levels: [11],
   },
+  {
+    id: 4,
+    label: 'Phase 4 — Adjusting & Closing (Chapter 3)',
+    blurb: 'The end-of-period work: deferrals, accruals, closing entries and the post-closing trial balance.',
+    levels: [12, 13, 14, 15],
+  },
 ]
 
 export default function Home() {
