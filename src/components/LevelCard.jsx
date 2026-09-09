@@ -15,6 +15,8 @@ export const LEVEL_META = {
   13: { title: 'Deferrals', icon: '🛡️', color: 'from-amber-600 to-orange-600', desc: 'Prepaids, supplies, unearned revenue, depreciation', phase: 4 },
   14: { title: 'Accruals', icon: '⏳', color: 'from-emerald-600 to-teal-600', desc: 'Earned or incurred but unrecorded — including interest', phase: 4 },
   15: { title: 'Closing Entries', icon: '🔒', color: 'from-rose-600 to-pink-600', desc: 'Zero the temporary accounts, land on ending R/E', phase: 4 },
+  16: { title: 'The Four Financial Statements', icon: '📑', color: 'from-purple-600 to-violet-600', desc: 'Income statement, retained earnings, and how they link', phase: 5 },
+  17: { title: 'The Classified Balance Sheet', icon: '🧾', color: 'from-cyan-600 to-sky-600', desc: 'Current vs long-term, working capital, current ratio', phase: 5 },
   11: { title: 'Assumptions & Principles', icon: '📜', color: 'from-teal-600 to-emerald-600', desc: 'The four and four that hold up everything else', phase: 3 },
 }
 

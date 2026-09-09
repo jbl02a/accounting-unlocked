@@ -34,6 +34,12 @@ const PHASES = [
     blurb: 'The end-of-period work: deferrals, accruals, closing entries and the post-closing trial balance.',
     levels: [12, 13, 14, 15],
   },
+  {
+    id: 5,
+    label: 'Phase 5 — The Financial Statements (Chapter 1)',
+    blurb: 'What the cycle produces: the four statements, how they link, and reading a classified balance sheet.',
+    levels: [16, 17],
+  },
 ]
 
 export default function Home() {

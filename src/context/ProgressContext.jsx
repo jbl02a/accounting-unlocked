@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react'
 
 const ProgressContext = createContext(null)
 
-export const TOTAL_LEVELS = 15
+export const TOTAL_LEVELS = 17
 const STORAGE_KEY = 'accounting-unlocked-progress'
 
 function buildDefault() {
