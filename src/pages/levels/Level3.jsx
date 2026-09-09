@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { useHints, HintBar, hintTally } from '../../components/Hint'
 
 const QUESTIONS = [
-  { account: 'Cash', type: 'asset', action: 'increasing', correct: 'debit', explanation: 'Cash is an Asset. Assets increase with a Debit.' },
-  { account: 'Accounts Payable', type: 'liability', action: 'increasing', correct: 'credit', explanation: 'Accounts Payable is a Liability. Liabilities increase with a Credit.' },
-  { account: 'Sales Revenue', type: 'revenue', action: 'increasing', correct: 'credit', explanation: 'Sales Revenue is Revenue. Revenue increases with a Credit.' },
-  { account: 'Rent Expense', type: 'expense', action: 'increasing', correct: 'debit', explanation: 'Rent Expense is an Expense. Expenses increase with a Debit.' },
-  { account: 'Common Stock', type: 'equity', action: 'increasing', correct: 'credit', explanation: 'Common Stock is Equity. Equity increases with a Credit.' },
-  { account: 'Cash', type: 'asset', action: 'decreasing', correct: 'credit', explanation: 'Cash is an Asset. Assets decrease with a Credit.' },
-  { account: 'Bank Loan', type: 'liability', action: 'decreasing', correct: 'debit', explanation: 'Bank Loan is a Liability. Liabilities decrease with a Debit.' },
-  { account: 'Office Supplies', type: 'asset', action: 'increasing', correct: 'debit', explanation: 'Office Supplies is an Asset. Assets increase with a Debit.' },
-  { account: 'Utilities Expense', type: 'expense', action: 'increasing', correct: 'debit', explanation: 'Utilities Expense is an Expense. Expenses increase with a Debit.' },
-  { account: 'Retained Earnings', type: 'equity', action: 'increasing', correct: 'credit', explanation: 'Retained Earnings is Equity. Equity increases with a Credit.' },
+  { account: 'Cash', type: 'asset', action: 'increasing', correct: 'debit', explanation: 'Cash is an Asset. Assets increase with a Debit.', hint: 'First name the category: cash is something the business owns. Then recall which side that category lives on — an account always GROWS on its own normal side.' },
+  { account: 'Accounts Payable', type: 'liability', action: 'increasing', correct: 'credit', explanation: 'Accounts Payable is a Liability. Liabilities increase with a Credit.', hint: 'A payable is money owed to an outsider, which makes it a liability. Liabilities sit on the opposite side from assets — and increasing puts it on its own side.' },
+  { account: 'Sales Revenue', type: 'revenue', action: 'increasing', correct: 'credit', explanation: 'Sales Revenue is Revenue. Revenue increases with a Credit.', hint: 'Revenue makes the owners\u2019 stake in the business bigger. Work out which side equity grows on, because revenue always follows equity there.' },
+  { account: 'Rent Expense', type: 'expense', action: 'increasing', correct: 'debit', explanation: 'Rent Expense is an Expense. Expenses increase with a Debit.', hint: 'Expenses do the opposite of revenue — they shrink the owners\u2019 stake. So if revenue grows on one side, expenses have to grow on the other.' },
+  { account: 'Common Stock', type: 'equity', action: 'increasing', correct: 'credit', explanation: 'Common Stock is Equity. Equity increases with a Credit.', hint: 'Common Stock is the owners\u2019 investment, which is straight equity. This is the base case — whichever side equity grows on is the answer.' },
+  { account: 'Cash', type: 'asset', action: 'decreasing', correct: 'credit', explanation: 'Cash is an Asset. Assets decrease with a Credit.', hint: 'Read it twice — this one says DECREASING. Work out the side cash normally grows on, then take the opposite side.' },
+  { account: 'Bank Loan', type: 'liability', action: 'decreasing', correct: 'debit', explanation: 'Bank Loan is a Liability. Liabilities decrease with a Debit.', hint: 'Paying down a loan makes a liability smaller. Find the side liabilities normally grow on, then flip it — shrinking always means the opposite side.' },
+  { account: 'Office Supplies', type: 'asset', action: 'increasing', correct: 'debit', explanation: 'Office Supplies is an Asset. Assets increase with a Debit.', hint: 'Unused supplies are something the business owns, so this is an asset going up. Identical reasoning to the very first question.' },
+  { account: 'Utilities Expense', type: 'expense', action: 'increasing', correct: 'debit', explanation: 'Utilities Expense is an Expense. Expenses increase with a Debit.', hint: 'Every expense account behaves the same way, no matter what the money was spent on. If you got Rent Expense, this is the same answer.' },
+  { account: 'Retained Earnings', type: 'equity', action: 'increasing', correct: 'credit', explanation: 'Retained Earnings is Equity. Equity increases with a Credit.', hint: 'Retained earnings are profits kept in the business — still part of the owners\u2019 stake. Same category as Common Stock, so the same answer.' },
 ]
 
 const TYPE_COLORS = {
@@ -55,6 +56,7 @@ export default function Level3() {
   const [chosen, setChosen] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
   const [done, setDone] = useState(false)
+  const hints = useHints()
 
   const q = QUESTIONS[current]
 
@@ -163,6 +165,7 @@ export default function Level3() {
         <h2 className="text-3xl font-extrabold text-white mb-2">Quiz Complete!</h2>
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-2">{pct}%</p>
         <p className="text-slate-400 mb-2">{correctCount} / {QUESTIONS.length} correct</p>
+        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-2">{hintTally(hints.usedCount)}</p>}
         <p className="text-slate-300 mb-8">
           {pct === 100 ? "Flawless! You've mastered debits and credits." :
            pct >= 80 ? "Great work! The rules are sticking." :
@@ -210,6 +213,15 @@ export default function Level3() {
         </p>
         <p className="text-slate-400 text-sm">Should this be recorded as a…</p>
       </div>
+
+      {!showFeedback && (
+        <HintBar
+          open={hints.isOpen(current)}
+          onToggle={() => hints.toggle(current)}
+          text={q.hint}
+          className="mb-5"
+        />
+      )}
 
       {/* Answer buttons */}
       <div className="grid grid-cols-2 gap-4 mb-6">

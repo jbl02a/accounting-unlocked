@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { money } from '../../components/EntryTable'
+import { useHints, HintBar, hintTally } from '../../components/Hint'
 
 // Beacon Tutoring's first month. These same nine accounts tie out to $19,700 on
 // each side, which is exactly the trial balance the student builds in Level 9.
@@ -13,6 +14,7 @@ const ACCOUNTS = [
     normal: 'debit',
     debits: [{ label: 'Owner investment', amt: 12000 }, { label: 'Services for cash', amt: 4500 }, { label: 'Collected on account', amt: 1900 }],
     credits: [{ label: 'Paid rent', amt: 1100 }, { label: 'Paid on account', amt: 700 }, { label: 'Paid salaries', amt: 2300 }, { label: 'Paid dividends', amt: 600 }],
+        hint: 'Do it in three steps and do not skip one: add the left column, add the right column, subtract the smaller from the bigger. The balance always lands on whichever side came out larger — do not guess it from the account type.',
     explanation: 'Cash is an asset, so its normal balance is a debit. Add the left side ($18,400), add the right side ($4,700), subtract, and put the $13,700 balance on the bigger side — the debit side.',
   },
   {
@@ -22,6 +24,7 @@ const ACCOUNTS = [
     normal: 'debit',
     debits: [{ label: 'Services on account', amt: 3000 }],
     credits: [{ label: 'Customer paid us', amt: 1900 }],
+        hint: 'Only two numbers here. One is what customers were billed, the other is what they have paid so far. What is still outstanding?',
     explanation: 'Beacon billed $3,000 and has collected $1,900 of it, so customers still owe $1,100. A receivable is an asset — it keeps a debit balance until it is fully collected.',
   },
   {
@@ -31,6 +34,7 @@ const ACCOUNTS = [
     normal: 'credit',
     debits: [{ label: 'Paid the vendor', amt: 700 }],
     credits: [{ label: 'Bought supplies on account', amt: 900 }],
+        hint: 'Careful with the side on this one. The bigger number is on the RIGHT here, not the left — so which side does the leftover balance land on?',
     explanation: 'A payable grows with a credit and shrinks with a debit. Beacon owed $900 and paid $700, so $200 is still owed — a $200 credit balance. Notice it is the mirror image of the receivable above.',
   },
   {
@@ -40,6 +44,7 @@ const ACCOUNTS = [
     normal: 'credit',
     debits: [],
     credits: [{ label: 'Cash job', amt: 4500 }, { label: 'Job on account', amt: 3000 }],
+        hint: 'There is nothing at all on the debit side. When only one side has entries, there is nothing to subtract — the balance is simply their total, sitting on that side.',
     explanation: 'Revenue only ever goes up during the period, and it goes up with credits. $4,500 + $3,000 = $7,500 credit balance. It does not matter that only part of it was collected in cash.',
   },
   {
@@ -49,6 +54,7 @@ const ACCOUNTS = [
     normal: 'debit',
     debits: [{ label: 'Cash paid to owner', amt: 600 }],
     credits: [],
+        hint: 'The arithmetic is trivial — one entry, one side. The question actually worth thinking about is WHY an account in the equity family has its balance on this particular side.',
     explanation: 'Dividends reduce equity, and the way to reduce an equity account is with a DEBIT. That is why Dividends — alone among the equity accounts — carries a debit balance. It is not an expense; it never touches the income statement.',
   },
   {
@@ -58,6 +64,7 @@ const ACCOUNTS = [
     normal: 'debit',
     debits: [{ label: 'Payroll', amt: 2300 }],
     credits: [],
+        hint: 'One entry again. Confirm which side expenses live on and you already have the answer.',
     explanation: 'Expenses increase with debits and essentially never get credited during the period. A $2,300 debit balance.',
   },
 ]
@@ -144,6 +151,7 @@ export default function Level8() {
   const [checked, setChecked] = useState(false)
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
+  const hints = useHints()
 
   const acct = ACCOUNTS[index]
   const drTotal = acct.debits.reduce((s, d) => s + d.amt, 0)
@@ -276,6 +284,7 @@ export default function Level8() {
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-400 mb-2">
             {correct} / {ACCOUNTS.length}
           </p>
+          {hints.usedCount > 0 && <p className="text-xs text-slate-500">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
@@ -334,6 +343,10 @@ export default function Level8() {
       <div className="mb-5">
         <TAccount account={acct} reveal={checked} />
       </div>
+
+      {!checked && (
+        <HintBar open={hints.isOpen(acct.id)} onToggle={() => hints.toggle(acct.id)} text={acct.hint} className="mb-4" />
+      )}
 
       <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-5">
         <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Ending balance</label>

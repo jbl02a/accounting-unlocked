@@ -1,18 +1,29 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { useHints, HintToggle, HintPanel, hintTally } from '../../components/Hint'
 
 const CARDS = [
-  { id: 1, label: 'Office Supplies', emoji: '🖊️', correct: 'asset' },
-  { id: 2, label: 'Sales Revenue', emoji: '💰', correct: 'revenue' },
-  { id: 3, label: 'Accounts Payable', emoji: '📄', correct: 'liability' },
-  { id: 4, label: 'Retained Earnings', emoji: '🏦', correct: 'equity' },
-  { id: 5, label: 'Utilities Expense', emoji: '💡', correct: 'expense' },
-  { id: 6, label: 'Cash', emoji: '💵', correct: 'asset' },
-  { id: 7, label: 'Bank Loan', emoji: '🏛️', correct: 'liability' },
-  { id: 8, label: 'Common Stock', emoji: '📈', correct: 'equity' },
-  { id: 9, label: 'Service Revenue', emoji: '🤝', correct: 'revenue' },
-  { id: 10, label: 'Rent Expense', emoji: '🏠', correct: 'expense' },
+  { id: 1, label: 'Office Supplies', emoji: '🖊️', correct: 'asset',
+    hint: 'These are pens and paper still sitting in the closet, not yet used. The business owns them right now — which bucket holds things the business owns?' },
+  { id: 2, label: 'Sales Revenue', emoji: '💰', correct: 'revenue',
+    hint: 'This is money the business EARNED by doing what it does. Be careful not to file it with Cash — the cash itself and the earning of it are two different categories.' },
+  { id: 3, label: 'Accounts Payable', emoji: '📄', correct: 'liability',
+    hint: 'Pa-Y-able → the business will pa-Y a supplier. An amount owed to an outsider goes in which bucket?' },
+  { id: 4, label: 'Retained Earnings', emoji: '🏦', correct: 'equity',
+    hint: 'These are profits the business kept instead of paying out to owners. They are not owed to any outsider, so whose stake in the business are they part of?' },
+  { id: 5, label: 'Utilities Expense', emoji: '💡', correct: 'expense',
+    hint: 'The electric bill. Money spent to keep the lights on is a cost of operating — and costs have their own bucket, separate from the cash used to pay them.' },
+  { id: 6, label: 'Cash', emoji: '💵', correct: 'asset',
+    hint: 'The simplest card here. Something the business has and can spend belongs with everything else it owns.' },
+  { id: 7, label: 'Bank Loan', emoji: '🏛️', correct: 'liability',
+    hint: 'The bank gave the business money that has to be paid back. Owed to an outsider puts it in the same bucket as Accounts Payable.' },
+  { id: 8, label: 'Common Stock', emoji: '📈', correct: 'equity',
+    hint: 'This is what owners put in to get their shares. It is never repaid like a loan, so it is not owed to an outsider — it is the owners\u2019 own stake.' },
+  { id: 9, label: 'Service Revenue', emoji: '🤝', correct: 'revenue',
+    hint: 'Same family as Sales Revenue: money earned by doing work for customers. If you placed that one, this goes in the same bucket.' },
+  { id: 10, label: 'Rent Expense', emoji: '🏠', correct: 'expense',
+    hint: 'A cost of operating the business, just like the electric bill. Anything with \u201cExpense\u201d in the name is telling you the answer outright.' },
 ]
 
 const BUCKETS = [
@@ -39,6 +50,7 @@ export default function Level2() {
   const [dragOver, setDragOver] = useState(null)
   const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
+  const hints = useHints()
 
   function placeCard(cardId, bucketId) {
     if (submitted) return
@@ -137,13 +149,26 @@ export default function Level2() {
                 key={card.id}
                 draggable
                 onDragStart={e => e.dataTransfer.setData('cardId', card.id)}
-                className="flex items-center gap-1.5 bg-slate-800 border border-slate-600 rounded-xl px-3 py-2 text-sm font-medium text-white cursor-grab active:cursor-grabbing hover:border-cyan-400 transition-colors"
+                className="flex items-center gap-1.5 bg-slate-800 border border-slate-600 rounded-xl pl-3 pr-1.5 py-1.5 text-sm font-medium text-white cursor-grab active:cursor-grabbing hover:border-cyan-400 transition-colors"
               >
                 <span>{card.emoji}</span>
                 <span>{card.label}</span>
+                <HintToggle open={hints.isOpen(card.id)} onClick={() => hints.toggle(card.id)} label={card.label} className="w-6 h-6" />
               </div>
             ))}
           </div>
+          {unplaced.some(c => hints.isOpen(c.id)) && (
+            <div className="space-y-2 mb-3">
+              {unplaced.filter(c => hints.isOpen(c.id)).map(c => (
+                <HintPanel key={c.id}>
+                  <span className="text-white font-semibold">{c.label}: </span>{c.hint}
+                </HintPanel>
+              ))}
+            </div>
+          )}
+          <p className="text-xs text-slate-500 mb-3">
+            Tap a card&rsquo;s <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-slate-400 align-middle">?</span> if you want a nudge on it. Hints never cost you points.
+          </p>
         </div>
       )}
 
@@ -202,13 +227,17 @@ export default function Level2() {
           <summary className="px-4 py-2 text-sm text-slate-400 cursor-pointer hover:text-white">Quick-place (tap to expand)</summary>
           <div className="px-4 pb-4 space-y-2 mt-2">
             {unplaced.map(card => (
-              <div key={card.id} className="flex items-center gap-2 flex-wrap">
-                <span className="text-sm text-slate-300 w-40">{card.emoji} {card.label}</span>
-                {BUCKETS.map(b => (
-                  <button key={b.id} onClick={() => placeCard(card.id, b.id)} className={`text-xs px-2 py-0.5 rounded border ${BUCKET_COLORS[b.color].badge} ${BUCKET_COLORS[b.color].text}`}>
-                    {b.label}
-                  </button>
-                ))}
+              <div key={card.id}>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-sm text-slate-300 w-40">{card.emoji} {card.label}</span>
+                  {BUCKETS.map(b => (
+                    <button key={b.id} onClick={() => placeCard(card.id, b.id)} className={`text-xs px-2 py-0.5 rounded border ${BUCKET_COLORS[b.color].badge} ${BUCKET_COLORS[b.color].text}`}>
+                      {b.label}
+                    </button>
+                  ))}
+                  <HintToggle open={hints.isOpen(card.id)} onClick={() => hints.toggle(card.id)} label={card.label} className="w-6 h-6" />
+                </div>
+                {hints.isOpen(card.id) && <HintPanel className="mt-2">{card.hint}</HintPanel>}
               </div>
             ))}
           </div>
@@ -237,6 +266,7 @@ export default function Level2() {
             </div>
           )}
           {score === 100 && <p className="text-center text-green-400 font-bold mt-2">🎉 Perfect! You know your account types cold.</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-slate-400 mt-3">{hintTally(hints.usedCount)}</p>}
         </div>
       )}
 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { money } from '../../components/EntryTable'
+import { useHints, HintToggle, HintPanel, HintBar, hintTally } from '../../components/Hint'
 
 // Bayside Landscaping — a complete, balanced trial balance ($65,500 each side).
 // "order" is the position each account takes on a properly ordered trial balance.
@@ -69,6 +70,10 @@ const HINTS = {
   'Supplies Expense': 'This is the portion of the supplies that actually got used up, so it is a real expense now. Notice it goes in the opposite direction from the Supplies asset near the top.',
 }
 
+const ORDER_HINT = 'Do not try to recall the list by account name — work in CATEGORIES and the order falls out. Which of these are things the company owns? Those go first. Then what it owes to outsiders. Then the owners\u2019 stake. Then revenue, then expenses last. The only sub-order worth memorizing is inside the equity group: stock, then retained earnings, then dividends.'
+
+const TOTALS_HINT = 'Add only the numbers sitting in the debit column for the first box, and only the credit column for the second. Two tips: add them in the order they are listed rather than jumping around, and if the two totals do not match, go back and recount — do not adjust a number to force it. A real trial balance that does not balance means a mistake to hunt down, never a number to fudge.'
+
 const ORDER_QUIZ = ['Cash', 'Accounts Receivable', 'Accounts Payable', 'Common Stock', 'Retained Earnings', 'Dividends', 'Service Revenue', 'Rent Expense']
 const ORDER_SCRAMBLED = ['Dividends', 'Service Revenue', 'Cash', 'Retained Earnings', 'Rent Expense', 'Accounts Payable', 'Common Stock', 'Accounts Receivable']
 
@@ -125,8 +130,7 @@ export default function Level9() {
   // Step 1 — column placement
   const [placed, setPlaced] = useState({})
   const [checked1, setChecked1] = useState(false)
-  const [openHints, setOpenHints] = useState([])
-  const [hintsUsed, setHintsUsed] = useState([])
+  const hints = useHints()
 
   // Step 2 — ordering
   const [ordered, setOrdered] = useState([])
@@ -148,18 +152,13 @@ export default function Level9() {
   const maxPoints = TB.length + ORDER_QUIZ.length + 2
   const earned = placementCorrect + orderCorrect + totalsCorrect
 
-  function toggleHint(name) {
-    setOpenHints(prev => (prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]))
-    setHintsUsed(prev => (prev.includes(name) ? prev : [...prev, name]))
-  }
-
   function finish() {
     completeLevel(9, Math.round((earned / maxPoints) * 100))
     setDone(true)
   }
 
   function restart() {
-    setStep(1); setPlaced({}); setChecked1(false); setOpenHints([]); setHintsUsed([])
+    setStep(1); setPlaced({}); setChecked1(false); hints.reset()
     setOrdered([]); setChecked2(false)
     setDrTotal(''); setCrTotal(''); setChecked3(false); setDone(false)
   }
@@ -275,6 +274,7 @@ export default function Level9() {
           <p className="text-slate-400 text-sm">
             Columns {placementCorrect}/{TB.length} · Order {orderCorrect}/{ORDER_QUIZ.length} · Totals {totalsCorrect}/2
           </p>
+          {hints.usedCount > 0 && <p className="text-xs text-slate-500 mt-2">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <p className="text-sm text-slate-400 mb-3 text-center">Here is the finished statement. This is the format to reproduce on your exam.</p>
@@ -330,11 +330,11 @@ export default function Level9() {
                   </div>
                   {!checked1 && (
                     <button
-                      onClick={() => toggleHint(a.name)}
+                      onClick={() => hints.toggle(a.name)}
                       aria-label={`Hint for ${a.name}`}
                       title="Stuck on this one? Get a nudge."
                       className={`w-7 h-7 shrink-0 rounded-full text-xs font-bold border transition-colors ${
-                        openHints.includes(a.name)
+                        hints.isOpen(a.name)
                           ? 'border-sky-400 bg-sky-900/40 text-sky-200'
                           : 'border-slate-600 bg-slate-800 text-slate-400 hover:border-sky-400 hover:text-sky-300'
                       }`}
@@ -361,12 +361,7 @@ export default function Level9() {
                     )
                   })}
                 </div>
-                {!checked1 && openHints.includes(a.name) && (
-                  <div className="mt-2 rounded-lg bg-sky-500/10 border border-sky-500/30 p-3">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-sky-300 mb-1">Hint</p>
-                    <p className="text-xs text-slate-300 leading-relaxed">{HINTS[a.name]}</p>
-                  </div>
-                )}
+                {!checked1 && hints.isOpen(a.name) && <HintPanel className="mt-2">{HINTS[a.name]}</HintPanel>}
                 {wrong && <p className="text-xs text-amber-300 mt-1">{WHY[a.name]}</p>}
               </div>
             )
@@ -377,11 +372,7 @@ export default function Level9() {
           <div className={`rounded-xl p-4 mb-5 ${placementCorrect === TB.length ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
             <p className="font-bold text-white">{placementCorrect} of {TB.length} in the right column</p>
             {placementCorrect < TB.length && <p className="text-sm text-slate-300 mt-1">The reason for each miss is shown in amber above. Dividends and Accumulated Depreciation are the two that catch almost everyone.</p>}
-            {hintsUsed.length > 0 && (
-              <p className="text-xs text-slate-400 mt-2">
-                You used {hintsUsed.length} hint{hintsUsed.length === 1 ? '' : 's'} — that is exactly what they are there for. Try the round again later without them to see what stuck.
-              </p>
-            )}
+            {hints.usedCount > 0 && <p className="text-xs text-slate-400 mt-2">{hintTally(hints.usedCount)}</p>}
           </div>
         )}
 
@@ -410,6 +401,10 @@ export default function Level9() {
         <p className="text-sm text-slate-400 mb-4">
           Tap the accounts in the order they belong on a trial balance — assets, then liabilities, then equity, then revenue, then expenses.
         </p>
+
+        {!checked2 && (
+          <HintBar open={hints.isOpen('order')} onToggle={() => hints.toggle('order')} text={ORDER_HINT} className="mb-4" />
+        )}
 
         <div className="rounded-xl border border-white/10 bg-slate-900/50 p-4 mb-4">
           <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">Your trial balance</p>
@@ -484,6 +479,10 @@ export default function Level9() {
       <p className="text-sm text-slate-400 mb-4">
         Here is the finished trial balance with every account in place. Add up each column and enter the totals.
       </p>
+
+      {!checked3 && (
+        <HintBar open={hints.isOpen('totals')} onToggle={() => hints.toggle('totals')} text={TOTALS_HINT} className="mb-4" />
+      )}
 
       <div className="mb-5 rounded-xl border border-white/10 overflow-hidden">
         <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 py-2">

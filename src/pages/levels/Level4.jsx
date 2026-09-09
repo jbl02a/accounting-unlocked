@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { useHints, HintBar, hintTally } from '../../components/Hint'
 
 const TRANSACTIONS = [
   {
@@ -8,6 +9,7 @@ const TRANSACTIONS = [
     description: 'The company buys $500 of office supplies with cash.',
     emoji: '🖊️',
     hint: 'Think: what did we receive? What did we give up?',
+    deeper: 'Only two accounts move here, and they are BOTH things the company owns. One went up (it now has supplies) and one went down (cash left). The account that went up takes the debit; the one that went down takes the credit.',
     debitAccount: 'Office Supplies',
     creditAccount: 'Cash',
     debitAmount: 500,
@@ -21,6 +23,7 @@ const TRANSACTIONS = [
     description: 'The company earns $1,200 by completing a consulting job. Client pays cash immediately.',
     emoji: '💼',
     hint: 'What did we gain? Cash. What increased because we earned it?',
+    deeper: 'One asset came in, and the reason it came in is that the company EARNED it. Assets go up with a debit. The earning gets its own revenue account — and revenue goes up on the opposite side.',
     debitAccount: 'Cash',
     creditAccount: 'Service Revenue',
     debitAmount: 1200,
@@ -34,6 +37,7 @@ const TRANSACTIONS = [
     description: 'The company pays $800 of monthly rent.',
     emoji: '🏠',
     hint: 'Paying rent creates an expense. Cash goes out. Expense goes up.',
+    deeper: 'Rent is a cost of operating, so it belongs in an expense account rather than an asset one — the company has nothing left to show for it. Expenses go up with a debit, and cash leaving is always a credit.',
     debitAccount: 'Rent Expense',
     creditAccount: 'Cash',
     debitAmount: 800,
@@ -75,6 +79,7 @@ export default function Level4() {
   const [answers, setAnswers] = useState({})
   const [submitted, setSubmitted] = useState({})
   const [allDone, setAllDone] = useState(false)
+  const hints = useHints()
 
   const tx = TRANSACTIONS[txIndex]
   const ans = answers[tx.id] || { debit: '', credit: '' }
@@ -179,6 +184,7 @@ export default function Level4() {
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400 mb-2">
           {correct} / 3
         </p>
+        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
         <p className="text-slate-400 mb-8">
           {correct === 3 ? "You're thinking like a real accountant. Every entry balanced perfectly." :
            correct >= 2 ? "Nearly there! Review the explanations — you're very close." :
@@ -220,6 +226,15 @@ export default function Level4() {
           </div>
         </div>
       </div>
+
+      {!isSubmitted && (
+        <HintBar
+          open={hints.isOpen(tx.id)}
+          onToggle={() => hints.toggle(tx.id)}
+          text={tx.deeper}
+          className="mb-5"
+        />
+      )}
 
       {/* Entry builder */}
       <div className="rounded-xl border border-white/10 bg-slate-900/50 overflow-hidden mb-6">

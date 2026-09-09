@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { useHints, HintBar } from '../../components/Hint'
 
 // Griffin Co. Balance Sheet
 // 3 deliberate errors planted:
@@ -81,6 +82,7 @@ export default function Level5() {
   const [flagged, setFlagged] = useState(new Set())
   const [submitted, setSubmitted] = useState(false)
   const [wrongFlags, setWrongFlags] = useState(new Set())
+  const hints = useHints()
 
   // Clickable items that could be errors
   function toggleFlag(errorId) {
@@ -103,6 +105,8 @@ export default function Level5() {
   }
 
   const foundCount = [1, 2, 3].filter(e => flagged.has(e)).length
+
+  const AUDIT_HINT = 'Auditors work a checklist rather than hunting at random. Run these three passes: (1) Read every account name and ask whether it is on the right SIDE — is anything filed under Liabilities actually something the company owns? (2) Ignore the printed totals and add the asset column yourself, then compare. (3) Test the equation: does Assets = Liabilities + Equity? If not, the equity section is where to look. There is one error waiting in each pass.'
 
   if (phase === 'learn') {
     return (
@@ -155,6 +159,14 @@ export default function Level5() {
         <p className="text-slate-400 text-sm">
           Click on any row or total that you think contains an error. {!submitted ? `${flagged.size} item${flagged.size !== 1 ? 's' : ''} flagged.` : ''}
         </p>
+        {!submitted && (
+          <HintBar
+            open={hints.isOpen('audit')}
+            onToggle={() => hints.toggle('audit')}
+            text={AUDIT_HINT}
+            className="mt-3"
+          />
+        )}
       </div>
 
       {/* Flag count */}

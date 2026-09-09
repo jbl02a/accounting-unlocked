@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable from '../../components/EntryTable'
+import { useHints, HintBar, hintTally } from '../../components/Hint'
 
 const DECODER = [
   { phrase: '"…on account"  /  "…on credit"', means: 'No cash moves right now. A receivable or a payable is created instead.' },
@@ -62,6 +63,7 @@ const QUESTIONS = [
     prompt: 'Cypress Design finishes a $3,500 logo project and sends the client an invoice. The client will pay in 30 days. What account does Cypress record?',
     options: ['Accounts Receivable — an asset', 'Accounts Payable — a liability', 'Unearned Revenue — a liability', 'Cash — an asset'],
     correctIndex: 0,
+        hint: 'Ask who is waiting on whom. The customer already received the finished work; Cypress is the one still waiting to be paid. Whichever side is owed money decides the account.',
     explanation: 'The customer owes US, so it is a receivable. Receivables are assets — a legal claim to future cash.',
   },
   {
@@ -76,6 +78,7 @@ const QUESTIONS = [
       [{ account: 'Accounts Receivable', dr: 3500 }, { account: 'Accounts Payable', cr: 3500 }],
     ],
     correctIndex: 0,
+        hint: 'Two things changed: the company earned income, and it gained the right to collect money later. Nothing about cash changed. Work out which of those two goes on the debit side.',
     explanation: 'A/R goes up (asset ⬆ = debit) and Service Revenue goes up (revenue ⬆ = credit). No cash touched this transaction.',
   },
   {
@@ -85,6 +88,7 @@ const QUESTIONS = [
     prompt: 'Cypress buys $600 of printer supplies on account from a vendor. What account does Cypress record?',
     options: ['Accounts Payable — a liability', 'Accounts Receivable — an asset', 'Notes Receivable — an asset', 'Supplies Expense — an expense'],
     correctIndex: 0,
+        hint: 'Flip the last question around. Here Cypress is the one who received something and has not paid yet. Who is owed money now?',
     explanation: 'WE owe the vendor, so it is a payable — a liability. Same word "account," opposite direction.',
   },
   {
@@ -99,6 +103,7 @@ const QUESTIONS = [
       [{ account: 'Supplies', dr: 600 }, { account: 'Accounts Receivable', cr: 600 }],
     ],
     correctIndex: 0,
+        hint: 'Something the company owns went up — it has the supplies. Nothing was paid, so what got created on the other side to balance it?',
     explanation: 'Supplies (asset) up with a debit; Accounts Payable (liability) up with a credit. Cash is untouched — that is the whole point of "on account."',
   },
   {
@@ -113,6 +118,7 @@ const QUESTIONS = [
       [{ account: 'Cash', dr: 3500 }, { account: 'Accounts Payable', cr: 3500 }],
     ],
     correctIndex: 0,
+        hint: 'Before picking, ask the key question: has Cypress earned anything NEW today? Or did one thing it owned simply turn into a different thing it owns?',
     explanation: 'Crediting Service Revenue again would count the same $3,500 of income twice. The revenue was already earned and recorded — collecting only converts A/R into Cash.',
   },
   {
@@ -127,6 +133,7 @@ const QUESTIONS = [
       [{ account: 'Supplies', dr: 600 }, { account: 'Cash', cr: 600 }],
     ],
     correctIndex: 0,
+        hint: 'Mirror of the last one. The supplies were recorded the day they arrived. So today, is a new cost being created — or is an existing debt being erased?',
     explanation: 'The supplies were already recorded when purchased. Paying only removes the debt: debit A/P to shrink the liability, credit Cash as it leaves.',
   },
   {
@@ -136,6 +143,7 @@ const QUESTIONS = [
     prompt: 'A new client pays Cypress $1,200 up front for a project that starts next month. What does Cypress credit?',
     options: ['Unearned Revenue — a liability', 'Service Revenue — revenue', 'Accounts Receivable — an asset', 'Accounts Payable — a liability'],
     correctIndex: 0,
+        hint: 'Cash arrived, but no work has been done. Cypress owes the client something — but is it money, or is it work? Both count as obligations.',
     explanation: 'Cash was received but nothing has been earned yet, so Cypress owes the client WORK. That obligation is a liability called Unearned Revenue. Revenue gets recorded later, as the work is performed.',
   },
   {
@@ -150,6 +158,7 @@ const QUESTIONS = [
       'They increase by $7,000',
     ],
     correctIndex: 0,
+        hint: 'List the two accounts that change and mark whether each goes up or down. Then add those two movements together and see what the net effect on total assets is.',
     explanation: 'Cash goes up $3,500 and Accounts Receivable goes down $3,500. One asset became another asset — the total is unchanged, and so is the accounting equation.',
   },
 ]
@@ -173,6 +182,7 @@ export default function Level6() {
   const [chosen, setChosen] = useState(null)
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
+  const hints = useHints()
 
   const q = QUESTIONS[current]
 
@@ -281,6 +291,7 @@ export default function Level6() {
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400 mb-2">
           {correct} / {QUESTIONS.length}
         </p>
+        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
         <p className="text-slate-400 mb-8">
           {correct === QUESTIONS.length ? 'Perfect. You can tell a receivable from a payable in your sleep.'
             : correct >= 6 ? 'Strong work. Re-read the two traps and run it again.'
@@ -317,6 +328,10 @@ export default function Level6() {
           <p className="font-semibold text-white">{q.prompt}</p>
         </div>
       </div>
+
+      {chosen === null && (
+        <HintBar open={hints.isOpen(q.id)} onToggle={() => hints.toggle(q.id)} text={q.hint} className="mb-5" />
+      )}
 
       <div className="space-y-3 mb-6">
         {q.options.map((opt, i) => {

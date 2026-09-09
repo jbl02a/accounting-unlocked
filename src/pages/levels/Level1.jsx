@@ -1,13 +1,19 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { useHints, HintToggle, HintPanel } from '../../components/Hint'
 
 const ITEMS = [
-  { id: 1, label: 'Cash', correct: 'asset', emoji: '💵' },
-  { id: 2, label: 'Bank Loan', correct: 'liability', emoji: '🏦' },
-  { id: 3, label: 'Owner Investment', correct: 'equity', emoji: '👤' },
-  { id: 4, label: 'Office Equipment', correct: 'asset', emoji: '💻' },
-  { id: 5, label: 'Accounts Payable', correct: 'liability', emoji: '📄' },
+  { id: 1, label: 'Cash', correct: 'asset', emoji: '💵',
+    hint: 'Ask the ownership question: can the business spend this freely, or does an outsider have a claim on it? Whatever the business controls and can use sits on the left side of the equation.' },
+  { id: 2, label: 'Bank Loan', correct: 'liability', emoji: '🏦',
+    hint: 'The bank handed over money, but the business has to give it back. Something that must be repaid to an outsider is a claim against the business, not a thing it owns outright.' },
+  { id: 3, label: 'Owner Investment', correct: 'equity', emoji: '👤',
+    hint: 'The owner put money in. Does the business owe this back to an OUTSIDER, the way it owes a bank? If not, whose claim is it — and which of the three categories holds the owner\u2019s claim?' },
+  { id: 4, label: 'Office Equipment', correct: 'asset', emoji: '💻',
+    hint: 'The business bought it and uses it every day. Same question as Cash: is this something owned, or something owed?' },
+  { id: 5, label: 'Accounts Payable', correct: 'liability', emoji: '📄',
+    hint: 'Pa-Y-able → the business will pa-Y somebody. That makes it a claim an outsider has against the business, which is the same family as the bank loan.' },
 ]
 
 function Seesaw({ assetCount, liabilityEquityCount }) {
@@ -67,6 +73,7 @@ export default function Level1() {
   const [dragOver, setDragOver] = useState(null)
   const [submitted, setSubmitted] = useState(false)
   const [phase, setPhase] = useState('learn') // 'learn' | 'play'
+  const hints = useHints()
 
   const assetCount = Object.values(placed).filter(v => v === 'asset').length
   const liabilityEquityCount = Object.values(placed).filter(v => v === 'liability' || v === 'equity').length
@@ -238,14 +245,21 @@ export default function Level1() {
               </div>
             ))}
           </div>
+          <p className="text-xs text-slate-500 mt-4">
+            Not sure where one goes? Tap its <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-slate-400 align-middle">?</span> below for a nudge. Hints never cost you points.
+          </p>
           {/* Quick-place buttons for mobile */}
           {unplacedItems.length > 0 && (
             <div className="mt-3 space-y-2">
               {unplacedItems.map(item => (
-                <div key={item.id} className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm text-slate-400 w-36">{item.emoji} {item.label}</span>
-                  <button onClick={() => placeItem(item.id, 'asset')} className="text-xs px-2 py-1 rounded bg-indigo-900 border border-indigo-600 text-indigo-300 hover:bg-indigo-800">→ Asset</button>
-                  <button onClick={() => placeItem(item.id, 'liability')} className="text-xs px-2 py-1 rounded bg-purple-900 border border-purple-600 text-purple-300 hover:bg-purple-800">→ L + E</button>
+                <div key={item.id}>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-sm text-slate-400 w-36">{item.emoji} {item.label}</span>
+                    <button onClick={() => placeItem(item.id, 'asset')} className="text-xs px-2 py-1 rounded bg-indigo-900 border border-indigo-600 text-indigo-300 hover:bg-indigo-800">→ Asset</button>
+                    <button onClick={() => placeItem(item.id, 'liability')} className="text-xs px-2 py-1 rounded bg-purple-900 border border-purple-600 text-purple-300 hover:bg-purple-800">→ L + E</button>
+                    <HintToggle open={hints.isOpen(item.id)} onClick={() => hints.toggle(item.id)} label={item.label} />
+                  </div>
+                  {hints.isOpen(item.id) && <HintPanel className="mt-2">{item.hint}</HintPanel>}
                 </div>
               ))}
             </div>

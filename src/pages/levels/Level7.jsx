@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable, { money } from '../../components/EntryTable'
+import { useHints, HintBar, hintTally } from '../../components/Hint'
 
 // Each transaction lists the accounts the student may use (including distractors).
 // "answer" holds the correct amount and side for every account that belongs in the entry.
@@ -12,6 +13,7 @@ const TRANSACTIONS = [
     date: 'Apr 2',
     description: 'Ridgeline Fitness buys gym equipment for $9,000. It pays $3,000 in cash and signs a note payable for the rest.',
     hint: 'One thing came in ($9,000 of equipment). Two things paid for it.',
+        deeper: 'Start with the line you are certain about: the equipment is worth the full $9,000, so write that debit first. Now the credits have to add up to $9,000 as well — split them between the cash that actually left and the promise the gym signed.',
     accounts: ['Equipment', 'Cash', 'Notes Payable', 'Accounts Payable', 'Equipment Expense'],
     answer: { Equipment: { dr: 9000 }, Cash: { cr: 3000 }, 'Notes Payable': { cr: 6000 } },
     explanation: 'Equipment (asset) rises by the FULL $9,000 price — that is what the gym now owns. The credits split the payment: $3,000 of cash left, and a $6,000 promise to pay was created. $9,000 of debits = $9,000 of credits.',
@@ -22,6 +24,7 @@ const TRANSACTIONS = [
     date: 'Apr 7',
     description: 'Ridgeline performs $5,000 of personal-training services for a corporate client. The client pays $2,000 in cash now and will pay the other $3,000 next month.',
     hint: 'Revenue is earned in full today. Two different assets came in.',
+        deeper: 'The revenue line is the easy one: all $5,000 was earned today, so credit the whole amount. Now split the debit side by HOW it will be collected — part arrived as cash, part is still owed by the client.',
     accounts: ['Cash', 'Accounts Receivable', 'Service Revenue', 'Unearned Revenue', 'Accounts Payable'],
     answer: { Cash: { dr: 2000 }, 'Accounts Receivable': { dr: 3000 }, 'Service Revenue': { cr: 5000 } },
     explanation: 'All $5,000 was earned, so Service Revenue is credited for the full amount. The debits split by how it will be collected: $2,000 in Cash today, $3,000 sitting in Accounts Receivable until the client pays.',
@@ -32,6 +35,7 @@ const TRANSACTIONS = [
     date: 'Apr 15',
     description: 'Ridgeline writes one check for $1,750 covering April rent of $1,400 and the utility bill of $350.',
     hint: 'One credit, two debits. Expenses are never lumped into a single account.',
+        deeper: 'Only one check was written, so there is a single credit for the full amount. The debits are the individual costs — one line each, because the income statement has to show rent and utilities separately.',
     accounts: ['Rent Expense', 'Utilities Expense', 'Cash', 'Accounts Payable', 'Prepaid Rent'],
     answer: { 'Rent Expense': { dr: 1400 }, 'Utilities Expense': { dr: 350 }, Cash: { cr: 1750 } },
     explanation: 'Each expense gets its own account so the income statement shows where the money actually went. Cash is credited once for the total check: $1,400 + $350 = $1,750.',
@@ -42,6 +46,7 @@ const TRANSACTIONS = [
     date: 'Apr 18',
     description: 'Ridgeline purchases $2,000 of supplies. It pays $800 in cash and puts the remaining $1,200 on account.',
     hint: 'Supplies are an asset when purchased, not an expense.',
+        deeper: 'The company now owns all $2,000 of supplies, so that is the debit regardless of how much was paid. Split the credits between the cash that left today and the amount still owing to the vendor.',
     accounts: ['Supplies', 'Cash', 'Accounts Payable', 'Supplies Expense', 'Accounts Receivable'],
     answer: { Supplies: { dr: 2000 }, Cash: { cr: 800 }, 'Accounts Payable': { cr: 1200 } },
     explanation: 'Supplies are debited for the full $2,000 — the gym owns all of them. The unpaid $1,200 becomes Accounts Payable, a liability. It becomes Supplies Expense only later, as the supplies get used up.',
@@ -52,6 +57,7 @@ const TRANSACTIONS = [
     date: 'Apr 21',
     description: 'The owner invests $15,000 cash plus a treadmill worth $5,000 into the business in exchange for common stock.',
     hint: 'Two assets in, one equity account up for the combined value.',
+        deeper: 'Two separate things came into the business, so there are two debit lines at their individual values. The owner got one thing in return — stock — so that credit is the combined total of both.',
     accounts: ['Cash', 'Equipment', 'Common Stock', 'Dividends', 'Service Revenue'],
     answer: { Cash: { dr: 15000 }, Equipment: { dr: 5000 }, 'Common Stock': { cr: 20000 } },
     explanation: 'Both assets are debited at their value. Common Stock is credited for the total $20,000 the owner put in. Owner investments are equity — never revenue.',
@@ -62,6 +68,7 @@ const TRANSACTIONS = [
     date: 'Apr 30',
     description: 'Ridgeline pays $4,000 on its bank note: $3,700 goes toward the principal and $300 is interest.',
     hint: 'Only the principal portion shrinks the debt. The interest is the cost of borrowing.',
+        deeper: 'The credit is easy: $4,000 of cash left the bank account. The debits split that total into two very different things — the part that reduces what the gym owes, and the part that is purely the cost of having borrowed.',
     accounts: ['Notes Payable', 'Interest Expense', 'Cash', 'Interest Payable', 'Notes Receivable'],
     answer: { 'Notes Payable': { dr: 3700 }, 'Interest Expense': { dr: 300 }, Cash: { cr: 4000 } },
     explanation: 'Debiting Notes Payable $3,700 reduces the liability. The $300 of interest is a cost of doing business, so it is an expense (debit). Cash is credited for the whole $4,000 that left the bank account.',
@@ -84,6 +91,7 @@ export default function Level7() {
   const [checked, setChecked] = useState(false)
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
+  const hints = useHints()
 
   const tx = TRANSACTIONS[index]
 
@@ -215,6 +223,7 @@ export default function Level7() {
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400 mb-2">
           {correct} / {TRANSACTIONS.length}
         </p>
+        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
         <p className="text-slate-400 mb-8">
           {correct === TRANSACTIONS.length ? 'Every entry balanced and every account correct. That is exam-ready work.'
             : correct >= 4 ? 'Solid. Re-read the ones you missed — the split is usually on the payment side.'
@@ -260,6 +269,10 @@ export default function Level7() {
           </div>
         </div>
       </div>
+
+      {!checked && (
+        <HintBar open={hints.isOpen(tx.id)} onToggle={() => hints.toggle(tx.id)} text={tx.deeper} className="mb-4" />
+      )}
 
       <p className="text-xs text-slate-500 mb-2">
         Type an amount next to each account you need, in the Debit or Credit column. Leave the accounts you do not need blank — some are here as distractors.
