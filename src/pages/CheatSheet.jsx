@@ -74,6 +74,10 @@ const SECTIONS = [
       { term: 'Purchased on account', def: 'Debit the asset or expense, Credit Accounts Payable.' },
       { term: 'Paid on account', def: 'Debit Accounts Payable, Credit Cash. NEVER record the expense again.' },
       { term: 'Unearned Revenue', def: 'Cash received BEFORE the work is done. A LIABILITY \u2014 you owe them service, not money.' },
+      { term: 'Notes Receivable', def: 'An ASSET, like A/R \u2014 but backed by a signed promissory note that earns INTEREST.' },
+      { term: 'Notes Payable', def: 'A LIABILITY, like A/P \u2014 but a signed promise to repay that COSTS interest.' },
+      { term: 'Accounts vs. Notes', def: 'The category never changes: receivable = asset, payable = liability either way. Notes just add paperwork, interest and time.' },
+      { term: 'Overdue account \u2192 note', def: 'Debit Notes Receivable, Credit Accounts Receivable. One asset becomes a stronger one \u2014 no revenue, no gain.' },
       { term: 'Collecting a receivable', def: 'Total assets do not change: Cash up, A/R down by the same amount.' },
     ]
   },

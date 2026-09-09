@@ -11,6 +11,7 @@ const DECODER = [
   { phrase: '"Received payment on account"', means: 'A customer is paying off an old bill → Cash up, A/R down. No new revenue.' },
   { phrase: '"Paid on account"  /  "paid the amount owed"', means: 'We are paying off an old bill → A/P down, Cash down. No new expense.' },
   { phrase: '"Received cash in advance"', means: 'We owe them WORK, not money → Unearned Revenue (Liability).' },
+  { phrase: '"Signed a promissory note"  /  "gave a note"', means: 'A formal, written, interest-bearing promise → a NOTE receivable or payable, not an account.' },
 ]
 
 const SALES_CYCLE = [
@@ -52,6 +53,36 @@ const PURCHASE_CYCLE = [
       { account: 'Cash', cr: 600 },
     ],
     note: 'No expense here! We are just erasing a debt. Debit the liability to shrink it.',
+  },
+]
+
+const ACCOUNTS_VS_NOTES = [
+  { feature: 'The paperwork', acct: 'Informal. An invoice and an implied promise to pay.', note: 'A formal promissory note, signed, stating the amount, the rate and the due date.' },
+  { feature: 'Interest', acct: 'None. You pay what you owe, nothing more.', note: 'Yes — a stated rate. This is the big practical difference.' },
+  { feature: 'Typical length', acct: 'Short. Usually 30 to 60 days.', note: 'Anything from 60 days to several years.' },
+  { feature: 'Where it comes from', acct: 'Ordinary buying and selling on account.', note: 'Borrowing or lending money, financing a large purchase, or rescuing an overdue account.' },
+  { feature: 'What category it is', acct: 'A/R is an ASSET. A/P is a LIABILITY.', note: 'Exactly the same — N/R is an ASSET, N/P is a LIABILITY.' },
+]
+
+const NOTE_ENTRIES = [
+  {
+    step: 'Financing a purchase with a note',
+    caption: 'Bought $9,000 of equipment, paying $3,000 cash and signing a note for the rest.',
+    lines: [
+      { account: 'Equipment', dr: 9000 },
+      { account: 'Cash', cr: 3000 },
+      { account: 'Notes Payable', cr: 6000 },
+    ],
+    note: 'Notes Payable is credited because it is a liability, exactly like Accounts Payable would be. The note is just the formal version.',
+  },
+  {
+    step: 'Converting an overdue account into a note',
+    caption: 'A customer owing $5,000 on account cannot pay on time, so they sign a 90-day note instead.',
+    lines: [
+      { account: 'Notes Receivable', dr: 5000 },
+      { account: 'Accounts Receivable', cr: 5000 },
+    ],
+    note: 'No revenue and no gain here — one asset simply becomes a stronger, interest-bearing asset. This entry shows up on exams constantly.',
   },
 ]
 
@@ -161,6 +192,36 @@ const QUESTIONS = [
         hint: 'List the two accounts that change and mark whether each goes up or down. Then add those two movements together and see what the net effect on total assets is.',
     explanation: 'Cash goes up $3,500 and Accounts Receivable goes down $3,500. One asset became another asset — the total is unchanged, and so is the accounting equation.',
   },
+  {
+    id: 9,
+    kind: 'entry',
+    emoji: '📝',
+    prompt: 'A customer who owes Cypress $4,000 on account cannot pay by the due date. Instead they sign a 90-day promissory note at 8% interest for that amount. Record it.',
+    hint: 'Nothing was collected and nothing new was earned — the customer just replaced a casual IOU with a formal, signed one. So one asset is turning into a different asset.',
+    options: [
+      [{ account: 'Notes Receivable', dr: 4000 }, { account: 'Accounts Receivable', cr: 4000 }],
+      [{ account: 'Accounts Receivable', dr: 4000 }, { account: 'Notes Receivable', cr: 4000 }],
+      [{ account: 'Notes Receivable', dr: 4000 }, { account: 'Service Revenue', cr: 4000 }],
+      [{ account: 'Cash', dr: 4000 }, { account: 'Notes Receivable', cr: 4000 }],
+    ],
+    correctIndex: 0,
+    explanation: 'No cash moved and nothing new was earned, so there is no revenue. The casual receivable is replaced by a formal one: debit Notes Receivable to bring in the stronger asset, credit Accounts Receivable to clear the old one. The 8% interest is not recorded yet — it gets recorded as it is earned over the 90 days.',
+  },
+  {
+    id: 10,
+    kind: 'text',
+    emoji: '⚖️',
+    prompt: 'How does a NOTE payable differ from an ACCOUNT payable?',
+    hint: 'Careful — this is testing whether you think the formal paperwork changes what KIND of account it is. Ask yourself first whether both still represent money the company owes.',
+    options: [
+      'Both are liabilities. The note is a formal written promise that charges interest and often runs longer',
+      'A note payable is an asset, because a signed document has value',
+      'A note payable does not have to be repaid, unlike an account payable',
+      'A note payable is recorded as an expense on the day it is signed',
+    ],
+    correctIndex: 0,
+    explanation: 'The classification never changes: a payable is money owed, so both are liabilities, and both are credited when they grow. What changes is the paperwork (a signed promissory note), the interest (notes charge it, accounts do not), and usually the length. The same is true on the other side — Notes Receivable and Accounts Receivable are both assets.',
+  },
 ]
 
 function CycleCard({ item, accent }) {
@@ -257,6 +318,40 @@ export default function Level6() {
           {PURCHASE_CYCLE.map((item, i) => <CycleCard key={i} item={item} accent="text-red-300" />)}
         </div>
 
+        <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
+          <h3 className="font-bold text-white mb-1">&ldquo;Accounts&rdquo; vs. &ldquo;Notes&rdquo; — what actually changes</h3>
+          <p className="text-sm text-slate-400 mb-4">
+            You will meet Notes Receivable and Notes Payable in the trial balance. Here is the thing students get wrong:
+            the formal paperwork does <span className="text-white font-semibold">not</span> change what kind of account it is.
+          </p>
+          <div className="rounded-lg border border-white/10 overflow-hidden mb-4">
+            <div className="grid grid-cols-[6.5rem_1fr_1fr] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 py-2 gap-2">
+              <span></span><span>Accounts Receivable / Payable</span><span>Notes Receivable / Payable</span>
+            </div>
+            {ACCOUNTS_VS_NOTES.map((row, i) => (
+              <div key={i} className={`grid grid-cols-[6.5rem_1fr_1fr] px-3 py-2 gap-2 text-xs border-t border-white/5 ${i === ACCOUNTS_VS_NOTES.length - 1 ? 'bg-sky-500/10' : ''}`}>
+                <span className="font-semibold text-sky-300">{row.feature}</span>
+                <span className="text-slate-300">{row.acct}</span>
+                <span className="text-slate-300">{row.note}</span>
+              </div>
+            ))}
+          </div>
+          <div className="rounded-lg bg-sky-500/10 border border-sky-500/30 p-3 mb-4">
+            <p className="text-sm text-white font-semibold mb-1">The one sentence to remember</p>
+            <p className="text-xs text-slate-300">
+              A receivable is an <span className="text-white">asset</span> and a payable is a <span className="text-white">liability</span> whether or not there is a note.
+              The note only adds paperwork, interest and time — it never moves the account to the other side of the balance sheet.
+            </p>
+          </div>
+          <p className="text-sm text-slate-400 mb-3">
+            The interest is the practical difference. A note costs the borrower <span className="text-white font-semibold">Interest Expense</span> and earns
+            the holder <span className="text-white font-semibold">Interest Revenue</span>. An account does neither.
+          </p>
+          <div className="space-y-3">
+            {NOTE_ENTRIES.map((item, i) => <CycleCard key={i} item={item} accent="text-sky-300" />)}
+          </div>
+        </div>
+
         <div className="rounded-xl bg-amber-500/10 border border-amber-500/30 p-5 mb-8">
           <p className="font-bold text-amber-300 mb-2">⚠️ The two mistakes graders love to catch</p>
           <ol className="list-decimal list-inside space-y-1 text-sm text-slate-300">
@@ -270,7 +365,7 @@ export default function Level6() {
           onClick={() => setPhase('play')}
           className="w-full py-4 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-600 text-white font-bold text-lg hover:opacity-90 transition-opacity"
         >
-          Practice: 8 questions →
+          Practice: {QUESTIONS.length} questions →
         </button>
         <button
           onClick={() => { completeLevel(6); navigate('/') }}
@@ -294,7 +389,7 @@ export default function Level6() {
         {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
         <p className="text-slate-400 mb-8">
           {correct === QUESTIONS.length ? 'Perfect. You can tell a receivable from a payable in your sleep.'
-            : correct >= 6 ? 'Strong work. Re-read the two traps and run it again.'
+            : correct >= QUESTIONS.length - 3 ? 'Strong work. Re-read the two traps and run it again.'
             : 'Go back through the two cycles — Step 2 never touches revenue or expense.'}
         </p>
         <div className="flex flex-col sm:flex-row gap-3">

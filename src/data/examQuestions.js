@@ -212,6 +212,42 @@ export const QUESTIONS = [
     correctIndex: 0,
     explanation: 'Accrual accounting recognizes revenue when it is earned and expenses when they are incurred, regardless of when cash moves. That is exactly why Accounts Receivable and Accounts Payable exist.',
   },
+  {
+    id: 'r7', section: 'ar-ap', kind: 'text',
+    prompt: 'How does a NOTE payable differ from an ACCOUNT payable?',
+    options: [
+      'Both are liabilities; the note is a signed promise that charges interest and usually runs longer',
+      'The note is an asset, because a signed document has value',
+      'The note is an expense, recorded the day it is signed',
+      'The note is equity, because it is a formal claim on the business',
+    ],
+    correctIndex: 0,
+    explanation: 'Formal paperwork never changes the category. Money owed is a liability whether the promise is a signed note or an ordinary invoice. What changes is the documentation, the interest, and typically the length.',
+  },
+  {
+    id: 'r8', section: 'ar-ap', kind: 'entry',
+    prompt: 'A customer owing $4,000 on account cannot pay on time, so they sign a 90-day promissory note for that amount instead.',
+    options: [
+      [{ account: 'Notes Receivable', dr: 4000 }, { account: 'Accounts Receivable', cr: 4000 }],
+      [{ account: 'Accounts Receivable', dr: 4000 }, { account: 'Notes Receivable', cr: 4000 }],
+      [{ account: 'Notes Receivable', dr: 4000 }, { account: 'Service Revenue', cr: 4000 }],
+      [{ account: 'Cash', dr: 4000 }, { account: 'Accounts Receivable', cr: 4000 }],
+    ],
+    correctIndex: 0,
+    explanation: 'No cash arrived and nothing new was earned, so no revenue is recorded. The informal receivable is simply replaced by a formal, interest-bearing one: debit Notes Receivable, credit Accounts Receivable.',
+  },
+  {
+    id: 'r9', section: 'ar-ap', kind: 'text',
+    prompt: 'Which of these does a note produce that an ordinary account does not?',
+    options: [
+      'Interest — expense for the borrower, revenue for the holder',
+      'A liability for both parties to the transaction',
+      'An immediate cash payment',
+      'A reduction of equity',
+    ],
+    correctIndex: 0,
+    explanation: 'Interest is the practical difference. A note states a rate, so the borrower records Interest Expense and the holder records Interest Revenue as time passes. An ordinary account payable or receivable carries no interest.',
+  },
 
   // ── Journal entries ─────────────────────────────────────────────────
   {
