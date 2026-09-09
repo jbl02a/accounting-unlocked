@@ -128,6 +128,18 @@ const SCENARIOS = [
     correctIndex: 0,
     explanation: 'Business life is divided into artificial time periods so results can be reported regularly. (Going concern is the related idea that the company will keep operating — but the quarterly reporting itself is periodicity.)',
   },
+  {
+    text: 'Riverbend has no plans to close or sell out. Its accountant therefore reports the workshop equipment at cost less depreciation, rather than at what it would bring in an immediate liquidation sale.',
+    options: ['Going Concern Assumption', 'Cost Principle', 'Conservatism', 'Materiality'],
+    correctIndex: 0,
+    explanation: 'Careful here — two principles are in play and only one is the answer. The COST principle explains the dollar figure used (what Riverbend paid). The GOING CONCERN assumption is what makes cost the right basis in the first place: the company will keep operating and use the equipment up, so liquidation value is irrelevant. If Riverbend were shutting down, everything would be restated at liquidation value.',
+  },
+  {
+    text: 'Riverbend\u2019s accountant is weighing two equally defensible estimates for uncollectible accounts: $4,000 or $9,000. Genuinely unsure which is closer to the truth, she records $9,000 so that assets and income are not overstated.',
+    options: ['Conservatism', 'Materiality', 'Full Disclosure Principle', 'Revenue Recognition Principle'],
+    correctIndex: 0,
+    explanation: 'When two treatments are equally defensible, conservatism breaks the tie in the direction that avoids overstating assets or income. Note what it does NOT mean: it is not a license to deliberately understate results — only to avoid painting a rosier picture than the facts support.',
+  },
 ]
 
 function shuffled(arr) {

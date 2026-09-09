@@ -523,6 +523,25 @@ export const QUESTIONS = [
     correctIndex: 0,
     explanation: 'Business life is divided into artificial time periods so results can be reported regularly. Going concern is the related but separate idea that the company will keep operating.',
   },
+  {
+    id: 'p10', section: 'principles', kind: 'text',
+    prompt: 'A company reports its equipment at cost less accumulated depreciation rather than at the amount it would fetch in an immediate liquidation sale. This is justified by:',
+    options: [
+      'The going concern assumption',
+      'The full disclosure principle',
+      'Materiality',
+      'The periodicity assumption',
+    ],
+    correctIndex: 0,
+    explanation: 'We assume the company will stay in business long enough to use the equipment up, so what it would sell for tomorrow does not matter. If a company is about to shut down, the assumption breaks and its assets must be restated at liquidation value — something auditors are required to flag.',
+  },
+  {
+    id: 'p11', section: 'principles', kind: 'text',
+    prompt: 'Two accounting treatments are equally defensible: one reports higher income, the other lower. Choosing the one less likely to overstate assets or income reflects:',
+    options: ['Conservatism', 'The cost principle', 'The economic entity assumption', 'The revenue recognition principle'],
+    correctIndex: 0,
+    explanation: 'Conservatism breaks a genuine tie in the direction that avoids making the company look better than it is. It does not mean deliberately understating results — only that when in real doubt, you do not paint the rosier picture.',
+  },
 ]
 
 export function questionsFor(scope) {
