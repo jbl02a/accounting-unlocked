@@ -34,7 +34,7 @@ const SECTIONS = [
       { term: 'Equity — Credit increases', def: 'Equity goes UP with a credit, DOWN with a debit.' },
       { term: 'Revenue — Credit increases', def: 'Revenue goes UP with a credit, DOWN with a debit.' },
       { term: 'Expenses — Debit increases', def: 'Expenses go UP with a debit, DOWN with a credit.' },
-      { term: 'Mnemonic: DEAD CLIC', def: 'Debits increase: Expenses, Assets, Dividends. Credits increase: Liabilities, Income, Capital.' },
+      { term: 'Mnemonic: DEALER', def: 'Normal DEBIT balances: Dividends, Expenses, Assets. Normal CREDIT balances: Liabilities, Equity, Revenue. (Some books teach the same idea as DEAD CLIC.)' },
     ]
   },
   {

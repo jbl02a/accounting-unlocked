@@ -6,85 +6,108 @@ import { useHints, HintBar, hintTally } from '../../components/Hint'
 // The handful of principles and assumptions a first financial accounting exam
 // actually asks about. Each one gets a plain-English rule and one concrete example.
 const PRINCIPLES = [
+  // Four assumptions, then four principles — the grouping used in Chapter 2.
+  {
+    id: 'entity',
+    group: 'assumption',
+    name: 'Economic Entity Assumption',
+    short: 'The business is separate from its owners',
+    rule: 'Each company is accounted for separately from its owners and from other companies.',
+    example: 'The owner buys a boat with personal money. It never touches the company books.',
+    matchText: 'The owner pays for a family vacation with her own credit card, and none of it is recorded in the company’s books.',
+    why: 'Without this you could never tell whether the business itself is profitable. It is also why an owner putting money in is recorded as Common Stock, not revenue.',
+  },
+  {
+    id: 'going',
+    group: 'assumption',
+    name: 'Going Concern Assumption',
+    short: 'The company will keep operating',
+    rule: 'We assume a company will continue to operate long enough to carry out its existing commitments.',
+    example: 'That is why equipment is carried at cost and depreciated over years, instead of at what it would fetch in a fire sale.',
+    matchText: 'A company reports its delivery trucks at cost and depreciates them over eight years rather than at what they would sell for tomorrow.',
+    why: 'If a company is about to shut down, this assumption breaks and everything gets restated at liquidation value. Auditors have to flag that.',
+  },
+  {
+    id: 'period',
+    group: 'assumption',
+    name: 'Time-Period Assumption',
+    short: 'Chop company life into reporting periods',
+    rule: 'The life of a company is divided into artificial time periods so net income can be measured for a specific period.',
+    example: 'A construction firm reports quarterly results even though its projects run for years.',
+    matchText: 'A construction company prepares financial statements every three months even though its building projects each take two years.',
+    why: 'Nobody can wait until a company closes to find out how it did. This assumption is also exactly why adjusting entries are needed at period end.',
+  },
+  {
+    id: 'monetary',
+    group: 'assumption',
+    name: 'Monetary Unit Assumption',
+    short: 'Report in dollars',
+    rule: 'A company accounts for and reports its financial results in monetary terms — dollars, euros, yen.',
+    example: 'A company’s brilliant staff and loyal customers are hugely valuable — and appear nowhere on the balance sheet.',
+    matchText: 'A company’s outstanding reputation for customer service is never listed as an asset on its balance sheet.',
+    why: 'Accounting reports in one common unit so numbers can be added together. "Really good employees" cannot be added to "$14,500 of cash."',
+  },
+  {
+    id: 'cost',
+    group: 'principle',
+    name: 'Historical Cost Principle',
+    short: 'Record at what you PAID',
+    rule: 'Activities are initially measured at cost — the exchange price at the time the activity occurs.',
+    example: 'Land bought in 2015 for $80,000 is worth $200,000 today. The balance sheet still says $80,000.',
+    matchText: 'A building purchased for $250,000 in 2019 is appraised at $400,000 today, but the balance sheet still reports $250,000.',
+    why: 'Purchase price is objective and verifiable — there is a receipt. Market value is somebody’s opinion, and opinions change daily.',
+  },
   {
     id: 'revenue',
+    group: 'principle',
     name: 'Revenue Recognition Principle',
     short: 'Record revenue when it is EARNED',
-    rule: 'Record revenue when you do the work or deliver the goods — not when the cash shows up.',
+    rule: 'Revenue is recorded in the period the company satisfies its performance obligation — delivers the goods or performs the service — and collection is reasonably assured.',
     example: 'You finish a $2,000 job on March 28. The client pays you on April 15. The revenue belongs to MARCH.',
     matchText: 'A landscaper finishes a $2,000 job on March 28 and records the revenue in March, even though the client does not pay until April 15.',
     why: 'This is the reason Accounts Receivable exists. If revenue only counted when cash arrived, a company could look broke in the month it did all its best work.',
   },
   {
     id: 'expense',
+    group: 'principle',
     name: 'Expense Recognition (Matching) Principle',
     short: 'Match expenses to the revenue they produced',
-    rule: 'Record an expense in the same period as the revenue it helped generate — not when you pay the bill.',
+    rule: 'An expense is recorded and reported in the same period as the revenue it helped generate, regardless of when cash is paid.',
     example: 'Sales commissions earned on March sales are March expenses, even though the checks go out in April.',
     matchText: 'Employees earn $4,000 of wages during the last week of December. The company records the expense in December, though payday is January 3.',
     why: 'This is why Accounts Payable exists, and it is the twin of revenue recognition. Together they ARE accrual accounting.',
   },
   {
-    id: 'cost',
-    name: 'Cost Principle (Historical Cost)',
-    short: 'Record assets at what you PAID',
-    rule: 'Assets go on the books at their purchase price and stay there — not at what they are worth today.',
-    example: 'Land bought in 2015 for $80,000 is worth $200,000 today. The balance sheet still says $80,000.',
-    matchText: 'A building purchased for $250,000 in 2019 is appraised at $400,000 today, but the balance sheet still reports $250,000.',
-    why: 'Purchase price is objective and verifiable — there is a receipt. Market value is somebody’s opinion, and opinions change daily.',
-  },
-  {
-    id: 'entity',
-    name: 'Economic Entity Assumption',
-    short: 'Keep the business separate from the owner',
-    rule: 'The company’s records include only the company’s activity. The owner’s personal life stays out.',
-    example: 'The owner buys a boat with personal money. It never touches the company books.',
-    matchText: 'The owner pays for a family vacation with her own credit card, and none of it is recorded in the company’s books.',
-    why: 'Without this, you could never tell whether the business itself is profitable. It is also why an owner putting money in is recorded as Common Stock, not revenue.',
-  },
-  {
-    id: 'monetary',
-    name: 'Monetary Unit Assumption',
-    short: 'Only record what you can put a dollar figure on',
-    rule: 'If it cannot be measured reliably in money, it does not go in the accounting records.',
-    example: 'A company’s brilliant staff and loyal customers are hugely valuable — and appear nowhere on the balance sheet.',
-    matchText: 'A company’s outstanding reputation for customer service is never listed as an asset on its balance sheet.',
-    why: 'Accounting reports in one common unit so numbers can be added together. "Really good employees" cannot be added to "$14,500 of cash."',
-  },
-  {
-    id: 'going',
-    name: 'Going Concern Assumption',
-    short: 'Assume the business will keep operating',
-    rule: 'We assume the company will stay in business long enough to use up its assets and pay its debts.',
-    example: 'That is why equipment is carried at cost and depreciated over ten years, instead of at what it would fetch in a fire sale.',
-    matchText: 'A company reports its delivery trucks at cost and depreciates them over eight years rather than at what they would sell for tomorrow.',
-    why: 'If a company is about to shut down, this assumption breaks and everything gets restated at liquidation value. Auditors have to flag that.',
-  },
-  {
-    id: 'period',
-    name: 'Periodicity (Time Period) Assumption',
-    short: 'Chop business life into reporting periods',
-    rule: 'A company’s ongoing life gets divided into months, quarters and years so results can be reported.',
-    example: 'A construction firm reports quarterly results even though its projects run for years.',
-    matchText: 'A construction company prepares financial statements every three months even though its building projects each take two years.',
-    why: 'Nobody can wait until a company closes to find out how it did. Splitting time into periods is also exactly why adjusting entries are needed.',
-  },
-  {
-    id: 'disclosure',
-    name: 'Full Disclosure Principle',
-    short: 'Report anything that would change a reader’s mind',
-    rule: 'Any information that would affect someone’s decision must appear in the statements or the notes attached to them.',
-    example: 'A pending $5 million lawsuit is described in the notes even though not a dollar has been paid.',
-    matchText: 'A company describes a pending $5 million lawsuit in the notes to its financial statements, even though no money has changed hands.',
-    why: 'The numbers alone can hide risk. The notes are part of the financial statements, not an optional extra.',
+    id: 'conservatism',
+    group: 'principle',
+    name: 'Conservatism Principle',
+    short: 'When in doubt, do not overstate',
+    rule: 'When more than one equally acceptable method exists, choose the one that results in LOWER assets and revenues, or HIGHER liabilities and expenses.',
+    example: 'Two equally defensible estimates for uncollectible accounts — $4,000 and $9,000. The accountant records $9,000.',
+    matchText: 'Facing two equally acceptable estimates, the accountant picks the one that reports lower income rather than higher.',
+    why: 'It breaks a genuine tie in the direction that will not flatter the company. It is NOT a licence to deliberately understate results.',
   },
 ]
 
 const EXTRA = [
-  { name: 'Materiality', text: 'If an amount is too small to change anyone’s decision, you are allowed to handle it the easy way — like expensing a $12 stapler instead of depreciating it for five years.' },
-  { name: 'Conservatism', text: 'When two treatments are equally defensible, pick the one less likely to overstate assets or income. Do not make the company look better than it is.' },
-  { name: 'Cost–Benefit', text: 'Information has to be worth more than it costs to produce. This is why small companies are not held to every rule a global corporation is.' },
+  { name: 'Full disclosure', text: 'Any information that would make a difference to financial statement users should be revealed in the statements or the notes attached to them.' },
+  { name: 'Materiality', text: 'If the omission or misstatement of an amount could influence a decision, it is material. Amounts too small to change a decision can be handled the easy way.' },
+  { name: 'Cost constraint', text: 'The benefit received from accounting information should be greater than the cost of providing it. If cost exceeds benefit, the information is not considered useful.' },
 ]
+
+// Chapter 2 also tests these by name.
+const QUALITATIVE = {
+  fundamental: [
+    { name: 'Relevance', text: 'Capable of making a difference in a decision — it has predictive value, confirmatory value, or both.' },
+    { name: 'Faithful representation', text: 'Complete, neutral and free from error — it portrays the real economic event.' },
+  ],
+  enhancing: [
+    { name: 'Comparability', text: 'Allows comparisons between companies. Consistency is part of this: the same company applying the same methods over time.' },
+    { name: 'Verifiability', text: 'Independent parties would reach the same measurement.' },
+    { name: 'Timeliness', text: 'Available before it loses its ability to influence a decision.' },
+    { name: 'Understandability', text: 'A user with reasonable accounting knowledge can comprehend it.' },
+  ],
+}
 
 const MATCH_HINT = 'Do not read all sixteen boxes at once. Pick off the pairs you are sure about first — every one you lock in removes a wrong option from the rest. When you are stuck, look for the giveaway in the example: a gap between when the work was done and when the money moved points at revenue recognition or matching; an old purchase price still on the books points at cost; something valuable with no dollar figure points at monetary unit; the owner’s personal money points at economic entity.'
 
@@ -234,9 +257,9 @@ export default function Level11() {
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
           <div className="text-sm text-teal-400 font-semibold mb-1">Level 11</div>
-          <h1 className="text-3xl font-extrabold text-white mb-2">Accounting Principles</h1>
+          <h1 className="text-3xl font-extrabold text-white mb-2">Assumptions &amp; Principles</h1>
           <p className="text-slate-400">
-            Every rule you have learned so far comes from one of a handful of ideas. Exams love these because they are easy to ask about: here is a situation, name the principle.
+            Four assumptions and four principles hold up everything else you have learned. Exams love them because they are easy to ask about: here is a situation, name the one at work.
           </p>
         </div>
 
@@ -259,8 +282,15 @@ export default function Level11() {
           </div>
         </div>
 
-        <div className="space-y-3 mb-6">
-          {PRINCIPLES.map((p, i) => (
+        {[
+          { key: 'assumption', label: 'The Four Assumptions', blurb: 'What accounting takes for granted before it records anything.' },
+          { key: 'principle', label: 'The Four Principles', blurb: 'How activity gets measured and which period it lands in.' },
+        ].map(section => (
+        <div key={section.key} className="mb-6">
+          <h3 className="font-bold text-white mb-1">{section.label}</h3>
+          <p className="text-xs text-slate-400 mb-3">{section.blurb}</p>
+          <div className="space-y-3">
+          {PRINCIPLES.filter(p => p.group === section.key).map((p, i) => (
             <div key={p.id} className="rounded-xl bg-white/5 border border-white/10 p-4">
               <div className="flex items-start gap-3">
                 <span className="shrink-0 w-6 h-6 rounded-full bg-teal-500/20 text-teal-300 text-xs font-bold flex items-center justify-center">{i + 1}</span>
@@ -277,11 +307,36 @@ export default function Level11() {
               </div>
             </div>
           ))}
+          </div>
+        </div>
+        ))}
+
+        <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
+          <h3 className="font-bold text-white mb-1">Qualitative characteristics of useful information</h3>
+          <p className="text-xs text-slate-400 mb-3">Chapter 2 asks you to name these. Two are fundamental; four enhance them.</p>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-teal-300 mb-1">Fundamental</p>
+          <div className="divide-y divide-white/5 mb-3">
+            {QUALITATIVE.fundamental.map(q => (
+              <div key={q.name} className="py-2 flex flex-col sm:flex-row sm:gap-4">
+                <div className="sm:w-40 shrink-0 text-sm font-semibold text-white">{q.name}</div>
+                <div className="text-xs text-slate-400">{q.text}</div>
+              </div>
+            ))}
+          </div>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-teal-300 mb-1">Enhancing</p>
+          <div className="divide-y divide-white/5">
+            {QUALITATIVE.enhancing.map(q => (
+              <div key={q.name} className="py-2 flex flex-col sm:flex-row sm:gap-4">
+                <div className="sm:w-40 shrink-0 text-sm font-semibold text-white">{q.name}</div>
+                <div className="text-xs text-slate-400">{q.text}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-8">
-          <h3 className="font-bold text-white mb-1">Three more you may hear</h3>
-          <p className="text-xs text-slate-400 mb-3">Worth recognizing by name. They rarely carry many points on a first exam.</p>
+          <h3 className="font-bold text-white mb-1">Three more you should recognize</h3>
+          <p className="text-xs text-slate-400 mb-3">Not counted among the four principles, but named in the same chapter.</p>
           <div className="divide-y divide-white/5">
             {EXTRA.map(e => (
               <div key={e.name} className="py-2.5 flex flex-col sm:flex-row sm:gap-4">
@@ -342,7 +397,7 @@ export default function Level11() {
         <div className="flex items-center justify-between mb-5">
           <div>
             <div className="text-sm text-teal-400 font-semibold">Level 11 — Round 1 of 2</div>
-            <h1 className="text-xl font-extrabold text-white">Match each principle to its example</h1>
+            <h1 className="text-xl font-extrabold text-white">Match each one to its example</h1>
           </div>
           <div className="text-right">
             <p className="text-sm font-bold text-white">{matched.length} / {PRINCIPLES.length}</p>
@@ -351,7 +406,7 @@ export default function Level11() {
         </div>
 
         <p className="text-sm text-slate-400 mb-4">
-          Tap a principle on the left, then the example on the right that shows it in action. Correct pairs lock in green.
+          Tap an assumption or principle on the left, then the example on the right that shows it in action. Correct pairs lock in green.
         </p>
 
         {!allMatched && (
@@ -361,7 +416,7 @@ export default function Level11() {
         <div className="grid sm:grid-cols-2 gap-3 mb-6">
           {/* Principles */}
           <div className="space-y-2">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-1">Principle</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-1">Assumption / Principle</p>
             {PRINCIPLES.map(p => {
               const isMatched = matched.includes(p.id)
               const isPicked = pickedPrinciple === p.id
@@ -450,7 +505,7 @@ export default function Level11() {
       <div className="flex items-center justify-between mb-5">
         <div>
           <div className="text-sm text-teal-400 font-semibold">Level 11 — Round 2, question {sIndex + 1} of {SCENARIOS.length}</div>
-          <h1 className="text-xl font-extrabold text-white">Which principle is at work?</h1>
+          <h1 className="text-xl font-extrabold text-white">Which one is at work?</h1>
         </div>
         <div className="flex gap-1">
           {SCENARIOS.map((_, i) => (

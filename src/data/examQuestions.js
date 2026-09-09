@@ -90,14 +90,14 @@ export const QUESTIONS = [
     prompt: 'Assets increase with a:',
     options: ['Debit', 'Credit', 'Either, depending on the account', 'Neither — assets only change at year-end'],
     correctIndex: 0,
-    explanation: 'Assets, Expenses and Dividends all increase with debits. Remember DEAD: Debits increase Expenses, Assets, Dividends.',
+    explanation: 'Assets, Expenses and Dividends all increase with debits — the DEA half of DEALER.',
   },
   {
     id: 'd2', section: 'dr-cr', kind: 'text',
     prompt: 'Liabilities increase with a:',
     options: ['Credit', 'Debit', 'Either one', 'Only an adjusting entry'],
     correctIndex: 0,
-    explanation: 'Liabilities, Revenue and Capital (equity) increase with credits — the CLIC half of DEAD CLIC.',
+    explanation: 'Liabilities, Equity and Revenue increase with credits — the LER half of DEALER.',
   },
   {
     id: 'd3', section: 'dr-cr', kind: 'text',

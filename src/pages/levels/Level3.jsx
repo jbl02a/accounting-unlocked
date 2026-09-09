@@ -127,7 +127,15 @@ export default function Level3() {
 
         {/* Mnemonic */}
         <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-5 mb-8">
-          <p className="font-bold text-emerald-400 mb-2">Memory trick: DEAD CLIC</p>
+          <p className="font-bold text-emerald-400 mb-2">Memory trick: DEALER</p>
+          <p className="text-xs text-slate-400 mb-3">
+            <span className="text-white font-semibold">D</span>ividends,{' '}
+            <span className="text-white font-semibold">E</span>xpenses,{' '}
+            <span className="text-white font-semibold">A</span>ssets have normal DEBIT balances.{' '}
+            <span className="text-white font-semibold">L</span>iabilities,{' '}
+            <span className="text-white font-semibold">E</span>quity,{' '}
+            <span className="text-white font-semibold">R</span>evenue have normal CREDIT balances.
+          </p>
           <div className="grid grid-cols-2 gap-3 text-sm">
             <div>
               <p className="text-white font-semibold mb-1">Debits increase:</p>

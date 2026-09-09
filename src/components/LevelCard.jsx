@@ -11,7 +11,7 @@ export const LEVEL_META = {
   8: { title: 'T-Accounts & Ledger Balances', icon: '📗', color: 'from-lime-600 to-green-600', desc: 'Post the entries, foot each account', phase: 2 },
   9: { title: 'The Trial Balance', icon: '🧮', color: 'from-amber-600 to-yellow-600', desc: 'Right column, right order, and it must balance', phase: 2 },
   10: { title: 'Full Cycle Challenge', icon: '🏆', color: 'from-fuchsia-600 to-rose-600', desc: 'Transactions → journal → ledger → trial balance', phase: 2 },
-  11: { title: 'Accounting Principles', icon: '📜', color: 'from-teal-600 to-emerald-600', desc: 'The big ideas behind every rule — match them to examples', phase: 3 },
+  11: { title: 'Assumptions & Principles', icon: '📜', color: 'from-teal-600 to-emerald-600', desc: 'The four and four that hold up everything else', phase: 3 },
 }
 
 export default function LevelCard({ levelNum, levelData }) {
