@@ -47,6 +47,28 @@ const WHY = {
   'Supplies Expense': 'Expenses increase with debits, always.',
 }
 
+// Optional nudges. Unlike WHY (shown after checking), these are written to walk him
+// to the answer without stating it — one reasoning step is always left for him.
+const HINTS = {
+  Cash: 'Start with the category, not the column. Is cash something the business OWNS or something it OWES? Once you name the category, its normal balance gives you the column.',
+  'Accounts Receivable': 'Read the name literally. Is this money the company will RECEIVE, or money it must PAY? Whoever is owed decides the category — and the category decides the column.',
+  Supplies: 'Careful, this is not Supplies Expense (that one is further down). These are supplies still sitting in the closet, unused. Does the company still own something here?',
+  'Prepaid Insurance': 'The company handed over cash and got something in return: months of coverage it has not used yet. Is that unused coverage something it owns, or something it owes?',
+  Equipment: 'Big things the company buys and keeps for years. Same category as Cash and Supplies above — name that category and the column follows.',
+  'Accumulated Depreciation — Equipment': 'This is the trap on the sheet, so go slowly. It is listed with the assets, but ask what it DOES: does it add to the value of Equipment, or subtract from it? An account that subtracts from an asset has to sit on the opposite side from that asset.',
+  'Accounts Payable': 'Pa-Y-able → the company will pa-Y. So who is owed here, the company or the vendor? Answer that and you have the category.',
+  'Unearned Revenue': 'Do not let the word "Revenue" decide this for you. The cash is already collected, but the work has NOT been done — so the company still owes the customer something. Owing something puts it in which category?',
+  'Notes Payable': 'Same family as Accounts Payable, just a formal written promise to a bank instead of an informal bill from a vendor. Same category, so the same column.',
+  'Common Stock': 'This is the owners’ investment — their stake in the business. Equity goes UP when owners put money in. Which side does equity increase on?',
+  'Retained Earnings': 'Profits from earlier periods that the company kept instead of paying out. That is still part of the owners’ stake, so it is the same category as Common Stock — and the same column.',
+  Dividends: 'This is the one that catches almost everyone, so think it through. Dividends hand profit BACK to the owners, which makes equity go DOWN. If equity goes UP with a credit, what makes it go down? (Also worth noting: this is not an expense.)',
+  'Service Revenue': 'Revenue makes the owners’ stake in the business bigger. Equity increases on one particular side — revenue follows equity there.',
+  'Salaries Expense': 'Expenses do the exact opposite of revenue: they shrink the owners’ stake. So if revenue sits in the credit column, where do expenses have to land?',
+  'Rent Expense': 'Every expense account on this sheet behaves identically — no exceptions. If you worked out Salaries Expense, this one is the same answer.',
+  'Utilities Expense': 'Another expense. What the money was spent on never changes the column; only the category does.',
+  'Supplies Expense': 'This is the portion of the supplies that actually got used up, so it is a real expense now. Notice it goes in the opposite direction from the Supplies asset near the top.',
+}
+
 const ORDER_QUIZ = ['Cash', 'Accounts Receivable', 'Accounts Payable', 'Common Stock', 'Retained Earnings', 'Dividends', 'Service Revenue', 'Rent Expense']
 const ORDER_SCRAMBLED = ['Dividends', 'Service Revenue', 'Cash', 'Retained Earnings', 'Rent Expense', 'Accounts Payable', 'Common Stock', 'Accounts Receivable']
 
@@ -103,6 +125,8 @@ export default function Level9() {
   // Step 1 — column placement
   const [placed, setPlaced] = useState({})
   const [checked1, setChecked1] = useState(false)
+  const [openHints, setOpenHints] = useState([])
+  const [hintsUsed, setHintsUsed] = useState([])
 
   // Step 2 — ordering
   const [ordered, setOrdered] = useState([])
@@ -124,13 +148,19 @@ export default function Level9() {
   const maxPoints = TB.length + ORDER_QUIZ.length + 2
   const earned = placementCorrect + orderCorrect + totalsCorrect
 
+  function toggleHint(name) {
+    setOpenHints(prev => (prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]))
+    setHintsUsed(prev => (prev.includes(name) ? prev : [...prev, name]))
+  }
+
   function finish() {
     completeLevel(9, Math.round((earned / maxPoints) * 100))
     setDone(true)
   }
 
   function restart() {
-    setStep(1); setPlaced({}); setChecked1(false); setOrdered([]); setChecked2(false)
+    setStep(1); setPlaced({}); setChecked1(false); setOpenHints([]); setHintsUsed([])
+    setOrdered([]); setChecked2(false)
     setDrTotal(''); setCrTotal(''); setChecked3(false); setDone(false)
   }
 
@@ -283,6 +313,9 @@ export default function Level9() {
         <p className="text-sm text-slate-400 mb-4">
           These are Bayside Landscaping&rsquo;s ledger balances on June 30. For each one, choose the column it belongs in on the trial balance.
         </p>
+        <p className="text-xs text-slate-500 mb-4">
+          Stuck on one? Tap its <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-slate-400 align-middle">?</span> for a nudge — it points you at the reasoning without giving away the column. Hints are optional and never cost you points, so skip them on the accounts you already know.
+        </p>
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
           {TB.map((a, i) => {
             const pick = placed[a.name]
@@ -295,6 +328,20 @@ export default function Level9() {
                     <p className="text-sm text-white truncate">{a.name}</p>
                     <p className="text-xs text-slate-500 font-mono">{money(a.amount)}</p>
                   </div>
+                  {!checked1 && (
+                    <button
+                      onClick={() => toggleHint(a.name)}
+                      aria-label={`Hint for ${a.name}`}
+                      title="Stuck on this one? Get a nudge."
+                      className={`w-7 h-7 shrink-0 rounded-full text-xs font-bold border transition-colors ${
+                        openHints.includes(a.name)
+                          ? 'border-sky-400 bg-sky-900/40 text-sky-200'
+                          : 'border-slate-600 bg-slate-800 text-slate-400 hover:border-sky-400 hover:text-sky-300'
+                      }`}
+                    >
+                      ?
+                    </button>
+                  )}
                   {['debit', 'credit'].map(s => {
                     const selected = pick === s
                     const isAnswer = checked1 && a.side === s
@@ -314,6 +361,12 @@ export default function Level9() {
                     )
                   })}
                 </div>
+                {!checked1 && openHints.includes(a.name) && (
+                  <div className="mt-2 rounded-lg bg-sky-500/10 border border-sky-500/30 p-3">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-sky-300 mb-1">Hint</p>
+                    <p className="text-xs text-slate-300 leading-relaxed">{HINTS[a.name]}</p>
+                  </div>
+                )}
                 {wrong && <p className="text-xs text-amber-300 mt-1">{WHY[a.name]}</p>}
               </div>
             )
@@ -324,6 +377,11 @@ export default function Level9() {
           <div className={`rounded-xl p-4 mb-5 ${placementCorrect === TB.length ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
             <p className="font-bold text-white">{placementCorrect} of {TB.length} in the right column</p>
             {placementCorrect < TB.length && <p className="text-sm text-slate-300 mt-1">The reason for each miss is shown in amber above. Dividends and Accumulated Depreciation are the two that catch almost everyone.</p>}
+            {hintsUsed.length > 0 && (
+              <p className="text-xs text-slate-400 mt-2">
+                You used {hintsUsed.length} hint{hintsUsed.length === 1 ? '' : 's'} — that is exactly what they are there for. Try the round again later without them to see what stuck.
+              </p>
+            )}
           </div>
         )}
 
