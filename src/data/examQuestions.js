@@ -322,7 +322,7 @@ export const QUESTIONS = [
       [{ account: 'Cash', dr: 2000 }, { account: 'Dividends', cr: 2000 }],
     ],
     correctIndex: 0,
-    explanation: 'Dividends get their own debit-balance account. They reduce equity but are not an expense, so they never hit the income statement.',
+    explanation: 'There is no such account as "Dividend Expense" — it is not in GAAP, and that option is a distractor. An expense is a cost incurred to GENERATE revenue: rent buys office space, salaries buy work. A dividend buys the business nothing; it hands profit to the owners, so it is a distribution, not a cost. Note both entries balance and a trial balance would never catch the error — what breaks is net income. Calling it an expense would understate net income by $2,000 and every ratio built on it. (Ending retained earnings comes out the same either way, since $2,000 leaves equity regardless. Expenses reduce net income; dividends reduce retained earnings directly.)',
   },
   {
     id: 'j7', section: 'journal', kind: 'entry',

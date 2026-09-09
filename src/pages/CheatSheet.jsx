@@ -92,6 +92,7 @@ const SECTIONS = [
       { term: 'Common Stock', def: 'CREDIT balance. The owners\u2019 investment in the business.' },
       { term: 'Retained Earnings', def: 'CREDIT balance. Profits from prior periods that stayed in the business.' },
       { term: 'Dividends', def: 'DEBIT balance. The one equity-family account that is a debit \u2014 it REDUCES equity. Not an expense.' },
+      { term: 'Dividends vs. an expense', def: 'An expense is a cost incurred to GENERATE revenue. A dividend hands profit to owners and buys the business nothing, so it is a distribution. Expenses reduce NET INCOME; dividends reduce RETAINED EARNINGS directly. There is no such account as \u201cDividend Expense.\u201d' },
       { term: 'Revenue', def: 'CREDIT balance. Essentially never debited during the period.' },
       { term: 'Expenses', def: 'DEBIT balance. Essentially never credited during the period.' },
       { term: 'Finding a balance', def: 'Add the debit side, add the credit side, subtract. The balance sits on the bigger side.' },

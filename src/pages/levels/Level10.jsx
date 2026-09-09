@@ -96,7 +96,7 @@ const JOURNAL_QUIZ = [
     ],
     correctIndex: 0,
         hint: 'Cash clearly leaves. The real question is what to call the other side: is paying the owner a cost of running the business, or is it handing profit back to him?',
-    explanation: 'Dividends get their own account with a debit balance. They are NOT an expense — they never touch the income statement. They are a distribution of profit that reduces equity.',
+    explanation: 'Watch option B — "Dividend Expense" is not a real account. An expense is a cost incurred to GENERATE revenue; a dividend buys the business nothing, it hands profit to the owners. So it is a distribution, not a cost, and it never appears on the income statement. Both entries balance, so a trial balance would not catch it — the damage is to net income, which would be understated by $1,000.',
   },
 ]
 
