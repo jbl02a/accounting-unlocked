@@ -194,6 +194,15 @@ export default function Level9() {
           <p className="text-sm text-slate-300 mt-4">
             The shortcut: <span className="text-white font-semibold">balance sheet accounts first (A, L, E), then income statement accounts (R, E)</span> — the same order as the accounting equation, with revenue and expenses tacked on the end.
           </p>
+          <div className="mt-4 rounded-lg bg-amber-500/10 border border-amber-500/30 p-3">
+            <p className="text-sm text-white font-semibold mb-1">One thing worth checking against your own worksheet</p>
+            <p className="text-xs text-slate-300">
+              Textbooks list Dividends in the equity group, right after Retained Earnings — that is the order taught here.
+              Some worksheets instead put Dividends <span className="text-white">last</span>, after the expenses. Either placement is accepted;
+              what is never negotiable is that Dividends sits in the <span className="text-white">DEBIT</span> column and the two totals match.
+              Follow whichever layout your worksheet uses. (Dividends is also sometimes labelled <span className="text-white">Dividends Declared</span> — same account.)
+            </p>
+          </div>
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">

@@ -104,6 +104,7 @@ const SECTIONS = [
     items: [
       { term: 'What it is', def: 'A list of every ledger account and its balance, in two columns, proving total debits = total credits.' },
       { term: 'The order \u2014 memorize it', def: '1. Assets  2. Liabilities  3. Equity (Common Stock, Retained Earnings, then Dividends)  4. Revenue  5. Expenses.' },
+      { term: 'Where Dividends goes', def: 'Textbooks list it with equity, after Retained Earnings. Some worksheets put it last, after the expenses. Either is accepted \u2014 it just has to be in the DEBIT column. Also written \u201cDividends Declared.\u201d' },
       { term: 'Shortcut for the order', def: 'Balance sheet accounts first (A, L, E), then income statement accounts (R, E).' },
       { term: 'Debit column', def: 'Assets, Expenses, and Dividends.' },
       { term: 'Credit column', def: 'Liabilities, Common Stock, Retained Earnings, Revenue, and contra-assets.' },
