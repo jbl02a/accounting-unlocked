@@ -3,32 +3,29 @@ import { useProgress } from '../context/ProgressContext'
 
 export default function Navbar() {
   const location = useLocation()
-  const { totalCompleted, resetProgress } = useProgress()
+  const { totalCompleted, totalLevels, resetProgress } = useProgress()
+
+  const linkClass = path =>
+    `text-sm px-3 py-1.5 rounded-lg transition-colors font-medium ${
+      location.pathname === path ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:text-white hover:bg-white/10'
+    }`
 
   return (
     <nav className="border-b border-white/10 bg-black/30 backdrop-blur-md sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-2">
         <Link to="/" className="flex items-center gap-2 font-bold text-lg text-white hover:text-indigo-300 transition-colors">
           <span className="text-2xl">📊</span>
-          <span>Accounting <span className="text-indigo-400">Unlocked</span></span>
+          <span className="hidden xs:inline sm:inline">Accounting <span className="text-indigo-400">Unlocked</span></span>
         </Link>
 
-        <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-1 text-sm text-slate-400">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden md:flex items-center gap-1 text-sm text-slate-400">
             <span className="text-indigo-400 font-semibold">{totalCompleted}</span>
-            <span>/5 levels done</span>
+            <span>/{totalLevels} levels done</span>
           </div>
 
-          <Link
-            to="/cheatsheet"
-            className={`text-sm px-3 py-1.5 rounded-lg transition-colors font-medium ${
-              location.pathname === '/cheatsheet'
-                ? 'bg-indigo-600 text-white'
-                : 'text-slate-300 hover:text-white hover:bg-white/10'
-            }`}
-          >
-            Cheat Sheet
-          </Link>
+          <Link to="/exam" className={linkClass('/exam')}>Practice Exam</Link>
+          <Link to="/cheatsheet" className={linkClass('/cheatsheet')}>Cheat Sheet</Link>
 
           <button
             onClick={() => {

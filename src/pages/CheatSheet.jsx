@@ -62,6 +62,69 @@ const SECTIONS = [
     ]
   },
   {
+    title: 'Receivables vs. Payables',
+    color: 'from-sky-600 to-cyan-600',
+    icon: '📥',
+    items: [
+      { term: 'Accounts Receivable', def: 'THEY owe US. An ASSET. Created by performing work "on account." Increases with a debit.' },
+      { term: 'Accounts Payable', def: 'WE owe THEM. A LIABILITY. Created by buying "on account." Increases with a credit.' },
+      { term: 'Memory hook', def: 'Recei-V-able \u2192 we recei-V-e. Pa-Y-able \u2192 we pa-Y.' },
+      { term: 'Performed services on account', def: 'Debit Accounts Receivable, Credit Service Revenue. Revenue is earned NOW, cash comes later.' },
+      { term: 'Collected on account', def: 'Debit Cash, Credit Accounts Receivable. NEVER credit revenue again \u2014 that double-counts the income.' },
+      { term: 'Purchased on account', def: 'Debit the asset or expense, Credit Accounts Payable.' },
+      { term: 'Paid on account', def: 'Debit Accounts Payable, Credit Cash. NEVER record the expense again.' },
+      { term: 'Unearned Revenue', def: 'Cash received BEFORE the work is done. A LIABILITY \u2014 you owe them service, not money.' },
+      { term: 'Collecting a receivable', def: 'Total assets do not change: Cash up, A/R down by the same amount.' },
+    ]
+  },
+  {
+    title: 'Normal Balances',
+    color: 'from-lime-600 to-green-600',
+    icon: '⚖️',
+    items: [
+      { term: 'Assets', def: 'DEBIT balance. Cash, A/R, Supplies, Prepaid Insurance, Equipment.' },
+      { term: 'Contra-assets', def: 'CREDIT balance. Accumulated Depreciation \u2014 listed with assets but subtracts from them.' },
+      { term: 'Liabilities', def: 'CREDIT balance. A/P, Notes Payable, Unearned Revenue, Salaries Payable.' },
+      { term: 'Common Stock', def: 'CREDIT balance. The owners\u2019 investment in the business.' },
+      { term: 'Retained Earnings', def: 'CREDIT balance. Profits from prior periods that stayed in the business.' },
+      { term: 'Dividends', def: 'DEBIT balance. The one equity-family account that is a debit \u2014 it REDUCES equity. Not an expense.' },
+      { term: 'Revenue', def: 'CREDIT balance. Essentially never debited during the period.' },
+      { term: 'Expenses', def: 'DEBIT balance. Essentially never credited during the period.' },
+      { term: 'Finding a balance', def: 'Add the debit side, add the credit side, subtract. The balance sits on the bigger side.' },
+    ]
+  },
+  {
+    title: 'The Trial Balance',
+    color: 'from-amber-600 to-yellow-600',
+    icon: '🧮',
+    items: [
+      { term: 'What it is', def: 'A list of every ledger account and its balance, in two columns, proving total debits = total credits.' },
+      { term: 'The order \u2014 memorize it', def: '1. Assets  2. Liabilities  3. Equity (Common Stock, Retained Earnings, then Dividends)  4. Revenue  5. Expenses.' },
+      { term: 'Shortcut for the order', def: 'Balance sheet accounts first (A, L, E), then income statement accounts (R, E).' },
+      { term: 'Debit column', def: 'Assets, Expenses, and Dividends.' },
+      { term: 'Credit column', def: 'Liabilities, Common Stock, Retained Earnings, Revenue, and contra-assets.' },
+      { term: 'What it proves', def: 'ONLY that debits equal credits. It cannot catch a right amount posted to the wrong account.' },
+      { term: 'What it misses', def: 'A transaction never recorded at all, or an entry recorded twice, still leaves the columns equal.' },
+      { term: 'Off by a number divisible by 9', def: 'Look for a transposition \u2014 $450 written as $540.' },
+      { term: 'Off by a number divisible by 2', def: 'Look for an amount in the wrong column. Half the difference is the amount to find.' },
+    ]
+  },
+  {
+    title: 'Compound Entries & The Cycle',
+    color: 'from-violet-600 to-purple-600',
+    icon: '🧾',
+    items: [
+      { term: 'Compound entry', def: 'A journal entry with three or more lines. Perfectly normal \u2014 total debits must still equal total credits.' },
+      { term: 'Format', def: 'ALL debits first and flush left, then ALL credits indented below. Never alternate.' },
+      { term: 'Split the payment, not the purchase', def: 'A $9,000 machine bought with $3,000 cash and a note is still a $9,000 debit to Equipment.' },
+      { term: 'The accounting cycle', def: 'Transaction \u2192 journal entry \u2192 post to ledger \u2192 trial balance \u2192 financial statements.' },
+      { term: 'Posting', def: 'Copying each debit and credit from the journal into the individual account (T-account).' },
+      { term: 'Footing', def: 'Totaling each side of an account to find its ending balance.' },
+      { term: 'Net income', def: 'Revenue \u2212 Expenses. Dividends are NOT subtracted \u2014 they are not an expense.' },
+      { term: 'Ending retained earnings', def: 'Beginning R/E + Net Income \u2212 Dividends.' },
+    ]
+  },
+  {
     title: 'Key Vocabulary',
     color: 'from-violet-600 to-fuchsia-600',
     icon: '📖',
@@ -72,6 +135,14 @@ const SECTIONS = [
       { term: 'Liquidity', def: 'How quickly an asset can be converted to cash.' },
       { term: 'Net Income', def: 'Revenue minus Expenses. The "bottom line."' },
       { term: 'T-Account', def: 'A visual tool shaped like a "T" with debits on the left and credits on the right.' },
+      { term: 'Ledger', def: 'The full collection of T-accounts \u2014 every transaction sorted by account instead of by date.' },
+      { term: 'Journal', def: 'The chronological record of transactions, in date order, before they are posted.' },
+      { term: 'Prepaid Expense', def: 'Something paid for in advance (insurance, rent). An ASSET until it is used up.' },
+      { term: 'Unearned Revenue', def: 'Cash collected before the work is done. A LIABILITY until the work is performed.' },
+      { term: 'Dividends', def: 'Profit distributed to owners. Reduces equity, carries a DEBIT balance, is not an expense.' },
+      { term: 'Accrual accounting', def: 'Record revenue when earned and expenses when incurred \u2014 not when cash moves.' },
+      { term: 'Contra account', def: 'An account that offsets another, like Accumulated Depreciation against Equipment.' },
+      { term: 'Transposition error', def: 'Digits reversed ($540 for $450). The trial balance difference is divisible by 9.' },
     ]
   }
 ]
@@ -83,7 +154,7 @@ export default function CheatSheet() {
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
           Accounting Cheat Sheet
         </h1>
-        <p className="text-slate-400">Every key term and rule, all in one place. Bookmark this page.</p>
+        <p className="text-slate-400">Every key term and rule from all ten levels, in one place. Bookmark this page.</p>
       </div>
 
       <div className="space-y-6">

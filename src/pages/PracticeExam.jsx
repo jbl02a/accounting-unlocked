@@ -1,0 +1,347 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useProgress } from '../context/ProgressContext'
+import EntryTable from '../components/EntryTable'
+import { QUESTIONS, SECTIONS, questionsFor, shuffle } from '../data/examQuestions'
+
+const SCOPES = [
+  { id: 'full', label: 'Full practice exam', icon: '📝', blurb: `All ${QUESTIONS.length} questions, every topic. The real rehearsal.` },
+  { id: 'quick', label: 'Quick 15', icon: '⚡', blurb: '15 questions pulled at random. Good for a five-minute review.' },
+]
+
+function OptionButton({ q, index, chosen, revealed, onPick }) {
+  const isAnswer = revealed && index === q.correctIndex
+  const isWrongPick = revealed && chosen === index && index !== q.correctIndex
+  const selected = chosen === index
+  const state = isAnswer ? 'border-green-500 bg-green-900/30'
+    : isWrongPick ? 'border-red-500 bg-red-900/30'
+    : revealed ? 'border-white/10 bg-white/5 opacity-60'
+    : selected ? 'border-indigo-500 bg-indigo-900/30'
+    : 'border-white/10 bg-white/5 hover:border-indigo-400 hover:bg-white/10'
+  return (
+    <button
+      onClick={() => onPick(index)}
+      disabled={revealed}
+      className={`w-full text-left rounded-xl border p-3 transition-colors ${state}`}
+    >
+      <div className="flex items-start gap-3">
+        <span className={`text-xs font-bold mt-1 shrink-0 ${selected && !revealed ? 'text-indigo-300' : 'text-slate-500'}`}>{'ABCD'[index]}</span>
+        <div className="flex-1">
+          {q.kind === 'entry' ? <EntryTable lines={q.options[index]} dense /> : <span className="text-sm text-white">{q.options[index]}</span>}
+        </div>
+        {isAnswer && <span className="text-green-400">✓</span>}
+        {isWrongPick && <span className="text-red-400">✗</span>}
+      </div>
+    </button>
+  )
+}
+
+export default function PracticeExam() {
+  const { progress, recordExam } = useProgress()
+  const [stage, setStage] = useState('setup')
+  const [mode, setMode] = useState('exam') // 'exam' = feedback at the end, 'practice' = instant
+  const [scopeLabel, setScopeLabel] = useState('')
+  const [questions, setQuestions] = useState([])
+  const [index, setIndex] = useState(0)
+  const [answers, setAnswers] = useState({})
+  const [revealedIds, setRevealedIds] = useState([])
+
+  const best = progress.exam?.best
+  const attempts = progress.exam?.attempts || []
+
+  function start(scope, label) {
+    const picked = scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor(scope))
+    setQuestions(picked)
+    setScopeLabel(label)
+    setIndex(0)
+    setAnswers({})
+    setRevealedIds([])
+    setStage('taking')
+  }
+
+  const q = questions[index]
+  const revealed = mode === 'practice' && revealedIds.includes(q?.id)
+  const answeredCount = Object.keys(answers).length
+  const correctCount = questions.filter(item => answers[item.id] === item.correctIndex).length
+
+  function pick(i) {
+    setAnswers(prev => ({ ...prev, [q.id]: i }))
+    if (mode === 'practice') setRevealedIds(prev => [...prev, q.id])
+  }
+
+  function submit() {
+    const correct = questions.filter(item => answers[item.id] === item.correctIndex).length
+    const score = Math.round((correct / questions.length) * 100)
+    recordExam({ score, correct, total: questions.length, label: scopeLabel })
+    setStage('results')
+  }
+
+  // ── Setup ───────────────────────────────────────────────────────────
+  if (stage === 'setup') {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-4 py-1.5 text-sm text-indigo-300 font-medium mb-4">
+            <span>📝</span><span>Optional — but this is the one that matters</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Practice Exam</h1>
+          <p className="text-slate-400">
+            Transactions in plain English. You pick the right account, the right entry, the right column.
+            Every question tells you why afterward.
+          </p>
+          {best !== null && best !== undefined && (
+            <p className="mt-4 inline-block rounded-full bg-green-500/10 border border-green-500/20 px-4 py-1.5 text-sm text-green-300 font-semibold">
+              Best score so far: {best}%
+            </p>
+          )}
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">How do you want to take it?</p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              { id: 'exam', title: 'Exam mode', desc: 'No feedback until you submit. Closest to the real thing.' },
+              { id: 'practice', title: 'Practice mode', desc: 'Shows the answer and the reason after every question.' },
+            ].map(m => (
+              <button
+                key={m.id}
+                onClick={() => setMode(m.id)}
+                className={`text-left rounded-xl border p-4 transition-colors ${
+                  mode === m.id ? 'border-indigo-500 bg-indigo-900/30' : 'border-white/10 bg-white/5 hover:border-indigo-400'
+                }`}
+              >
+                <p className="font-bold text-white text-sm mb-1">{m.title} {mode === m.id && <span className="text-indigo-400">✓</span>}</p>
+                <p className="text-xs text-slate-400">{m.desc}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-3 mb-6">
+          {SCOPES.map(s => (
+            <button
+              key={s.id}
+              onClick={() => start(s.id, s.label)}
+              className="w-full text-left rounded-2xl border border-white/10 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 p-5 hover:border-indigo-400 transition-colors"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-3xl">{s.icon}</span>
+                <div className="flex-1">
+                  <p className="font-bold text-white">{s.label}</p>
+                  <p className="text-sm text-slate-400">{s.blurb}</p>
+                </div>
+                <span className="text-indigo-400 font-bold">→</span>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Or drill one topic</p>
+        <div className="grid sm:grid-cols-2 gap-3 mb-8">
+          {SECTIONS.map(s => {
+            const count = QUESTIONS.filter(qq => qq.section === s.id).length
+            return (
+              <button
+                key={s.id}
+                onClick={() => start(s.id, s.label)}
+                className="text-left rounded-xl border border-white/10 bg-white/5 p-4 hover:border-indigo-400 hover:bg-white/10 transition-colors"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xl">{s.icon}</span>
+                  <p className="font-semibold text-white text-sm">{s.label}</p>
+                  <span className="ml-auto text-xs text-slate-500">{count} Q</span>
+                </div>
+                <p className="text-xs text-slate-400">{s.blurb}</p>
+              </button>
+            )
+          })}
+        </div>
+
+        {attempts.length > 0 && (
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Recent attempts</p>
+            <div className="divide-y divide-white/5">
+              {attempts.slice(0, 5).map((a, i) => (
+                <div key={i} className="py-2 flex items-center gap-3 text-sm">
+                  <span className={`font-bold w-12 ${a.score >= 80 ? 'text-green-400' : a.score >= 60 ? 'text-amber-400' : 'text-red-400'}`}>{a.score}%</span>
+                  <span className="text-slate-300 flex-1">{a.label}</span>
+                  <span className="text-slate-500 text-xs">{a.correct}/{a.total}</span>
+                  <span className="text-slate-600 text-xs hidden sm:inline">{new Date(a.date).toLocaleDateString()}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // ── Results ─────────────────────────────────────────────────────────
+  if (stage === 'results') {
+    const score = Math.round((correctCount / questions.length) * 100)
+    const bySection = SECTIONS.map(s => {
+      const qs = questions.filter(item => item.section === s.id)
+      if (!qs.length) return null
+      return { ...s, correct: qs.filter(item => answers[item.id] === item.correctIndex).length, total: qs.length }
+    }).filter(Boolean)
+
+    return (
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <div className="text-5xl mb-3">{score === 100 ? '🏆' : score >= 80 ? '🎉' : score >= 60 ? '📈' : '📚'}</div>
+          <h1 className="text-3xl font-extrabold text-white mb-1">{scopeLabel}</h1>
+          <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 my-3">{score}%</p>
+          <p className="text-slate-400">{correctCount} of {questions.length} correct</p>
+          <p className="text-slate-400 text-sm mt-3 max-w-md mx-auto">
+            {score === 100 ? 'Flawless. Walk into that exam.'
+              : score >= 80 ? 'Exam-ready. Read the misses below and you are in great shape.'
+              : score >= 60 ? 'Good foundation. The section breakdown shows exactly where to spend your time.'
+              : 'Go back through the levels for your weakest section, then run this again — the questions come back in a new order.'}
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">By topic</p>
+          <div className="space-y-3">
+            {bySection.map(s => {
+              const pct = Math.round((s.correct / s.total) * 100)
+              return (
+                <div key={s.id}>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-slate-300">{s.icon} {s.label}</span>
+                    <span className={`font-semibold ${pct >= 80 ? 'text-green-400' : pct >= 60 ? 'text-amber-400' : 'text-red-400'}`}>
+                      {s.correct}/{s.total}
+                    </span>
+                  </div>
+                  <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                    <div className={`h-full rounded-full ${pct >= 80 ? 'bg-green-500' : pct >= 60 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${pct}%` }} />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 mb-8">
+          <button onClick={() => setStage('setup')} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold hover:opacity-90">
+            Take Another →
+          </button>
+          <Link to="/cheatsheet" className="flex-1 py-3 rounded-xl bg-white/10 text-white font-semibold hover:bg-white/20 text-center">
+            Open Cheat Sheet
+          </Link>
+        </div>
+
+        <h2 className="font-bold text-white mb-3">Full review</h2>
+        <div className="space-y-4">
+          {questions.map((item, i) => {
+            const chosen = answers[item.id]
+            const right = chosen === item.correctIndex
+            return (
+              <div key={item.id} className={`rounded-xl border p-4 ${right ? 'border-green-700/50 bg-green-900/10' : 'border-red-700/50 bg-red-900/10'}`}>
+                <div className="flex items-start gap-2 mb-2">
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded ${right ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}>
+                    {right ? '✓' : '✗'} {i + 1}
+                  </span>
+                  <p className="text-sm font-semibold text-white flex-1">{item.prompt}</p>
+                </div>
+                <div className="text-sm space-y-1 mb-2 pl-1">
+                  <div className="flex gap-2">
+                    <span className="text-slate-500 shrink-0 text-xs pt-0.5">Correct:</span>
+                    <div className="flex-1">
+                      {item.kind === 'entry'
+                        ? <EntryTable lines={item.options[item.correctIndex]} dense />
+                        : <span className="text-green-300">{item.options[item.correctIndex]}</span>}
+                    </div>
+                  </div>
+                  {!right && (
+                    <div className="flex gap-2">
+                      <span className="text-slate-500 shrink-0 text-xs pt-0.5">You said:</span>
+                      <div className="flex-1">
+                        {chosen === undefined ? <span className="text-slate-500 italic">skipped</span>
+                          : item.kind === 'entry'
+                            ? <EntryTable lines={item.options[chosen]} dense />
+                            : <span className="text-red-300">{item.options[chosen]}</span>}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">{item.explanation}</p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
+  // ── Taking the exam ─────────────────────────────────────────────────
+  const isLast = index === questions.length - 1
+  const chosen = answers[q.id]
+  const sectionMeta = SECTIONS.find(s => s.id === q.section)
+
+  return (
+    <div className="max-w-xl mx-auto">
+      <div className="mb-4">
+        <div className="flex items-center justify-between text-sm mb-2">
+          <span className="text-indigo-400 font-semibold">Question {index + 1} of {questions.length}</span>
+          <span className="text-slate-500">{answeredCount} answered</span>
+        </div>
+        <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
+          <div className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-300" style={{ width: `${((index + 1) / questions.length) * 100}%` }} />
+        </div>
+      </div>
+
+      <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-5">
+        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">{sectionMeta?.icon} {sectionMeta?.label}</p>
+        <p className="font-semibold text-white">{q.prompt}</p>
+      </div>
+
+      <div className="space-y-3 mb-5">
+        {q.options.map((_, i) => (
+          <OptionButton key={i} q={q} index={i} chosen={chosen} revealed={revealed} onPick={pick} />
+        ))}
+      </div>
+
+      {revealed && (
+        <div className={`rounded-xl p-5 mb-5 ${chosen === q.correctIndex ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
+          <p className="font-bold text-white mb-2">{chosen === q.correctIndex ? '✅ Correct' : '📖 Not quite'}</p>
+          <p className="text-sm text-slate-300">{q.explanation}</p>
+        </div>
+      )}
+
+      <div className="flex gap-3">
+        <button
+          onClick={() => setIndex(i => Math.max(0, i - 1))}
+          disabled={index === 0}
+          className="px-4 py-3 rounded-xl bg-white/10 text-white font-semibold disabled:opacity-30 hover:bg-white/20"
+        >
+          ←
+        </button>
+        {!isLast ? (
+          <button
+            onClick={() => setIndex(i => i + 1)}
+            className="flex-1 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold hover:opacity-90"
+          >
+            {chosen === undefined ? 'Skip for now →' : 'Next Question →'}
+          </button>
+        ) : (
+          <button
+            onClick={submit}
+            className="flex-1 py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold hover:opacity-90"
+          >
+            Submit &amp; See Score →
+          </button>
+        )}
+      </div>
+
+      {answeredCount < questions.length && isLast && (
+        <p className="text-xs text-amber-400 text-center mt-3">
+          {questions.length - answeredCount} question{questions.length - answeredCount === 1 ? '' : 's'} still unanswered — use ← to go back.
+        </p>
+      )}
+      <button onClick={() => setStage('setup')} className="w-full mt-4 text-xs text-slate-600 hover:text-slate-400">
+        Quit and start over
+      </button>
+    </div>
+  )
+}

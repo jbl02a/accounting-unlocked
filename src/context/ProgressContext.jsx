@@ -2,49 +2,92 @@ import { createContext, useContext, useState, useEffect } from 'react'
 
 const ProgressContext = createContext(null)
 
-const DEFAULT_PROGRESS = {
-  levels: {
-    1: { unlocked: true, completed: false, score: null },
-    2: { unlocked: false, completed: false, score: null },
-    3: { unlocked: false, completed: false, score: null },
-    4: { unlocked: false, completed: false, score: null },
-    5: { unlocked: false, completed: false, score: null },
+export const TOTAL_LEVELS = 10
+const STORAGE_KEY = 'accounting-unlocked-progress'
+
+function buildDefault() {
+  const levels = {}
+  for (let i = 1; i <= TOTAL_LEVELS; i++) {
+    // Every level is unlocked. Practice is encouraged, never required.
+    levels[i] = { unlocked: true, completed: false, score: null }
   }
+  return { levels, exam: { attempts: [], best: null } }
+}
+
+// Older saves only knew about levels 1-5 and had no exam record, so fold whatever
+// is on disk into the current shape instead of throwing the student's work away.
+function migrate(saved) {
+  const base = buildDefault()
+  if (!saved || typeof saved !== 'object') return base
+  const levels = { ...base.levels }
+  for (const [num, data] of Object.entries(saved.levels || {})) {
+    if (!levels[num]) continue
+    levels[num] = {
+      unlocked: true,
+      completed: Boolean(data?.completed),
+      score: typeof data?.score === 'number' ? data.score : null,
+    }
+  }
+  const attempts = Array.isArray(saved.exam?.attempts) ? saved.exam.attempts : []
+  const best = typeof saved.exam?.best === 'number' ? saved.exam.best : null
+  return { levels, exam: { attempts, best } }
 }
 
 export function ProgressProvider({ children }) {
   const [progress, setProgress] = useState(() => {
     try {
-      const saved = localStorage.getItem('accounting-unlocked-progress')
-      return saved ? JSON.parse(saved) : DEFAULT_PROGRESS
+      const saved = localStorage.getItem(STORAGE_KEY)
+      return migrate(saved ? JSON.parse(saved) : null)
     } catch {
-      return DEFAULT_PROGRESS
+      return buildDefault()
     }
   })
 
   useEffect(() => {
-    localStorage.setItem('accounting-unlocked-progress', JSON.stringify(progress))
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress))
+    } catch {
+      /* private browsing / storage disabled — progress just won't persist */
+    }
   }, [progress])
 
+  // score === null means "lesson read, practice skipped" — it never wipes out a real score.
   function completeLevel(levelNum, score = null) {
     setProgress(prev => {
-      const next = { ...prev, levels: { ...prev.levels } }
-      next.levels[levelNum] = { ...next.levels[levelNum], completed: true, score }
-      if (levelNum < 5) {
-        next.levels[levelNum + 1] = { ...next.levels[levelNum + 1], unlocked: true }
+      const current = prev.levels[levelNum] || { completed: false, score: null }
+      const bestScore =
+        score === null ? current.score
+          : current.score === null ? score
+          : Math.max(current.score, score)
+      return {
+        ...prev,
+        levels: {
+          ...prev.levels,
+          [levelNum]: { unlocked: true, completed: true, score: bestScore },
+        },
       }
-      return next
+    })
+  }
+
+  function recordExam({ score, correct, total, label }) {
+    setProgress(prev => {
+      const attempt = { score, correct, total, label, date: new Date().toISOString() }
+      const attempts = [attempt, ...(prev.exam?.attempts || [])].slice(0, 10)
+      const best = Math.max(score, prev.exam?.best ?? 0)
+      return { ...prev, exam: { attempts, best } }
     })
   }
 
   function resetProgress() {
-    setProgress(DEFAULT_PROGRESS)
+    setProgress(buildDefault())
   }
 
   const totalCompleted = Object.values(progress.levels).filter(l => l.completed).length
 
   return (
-    <ProgressContext.Provider value={{ progress, completeLevel, resetProgress, totalCompleted }}>
+    <ProgressContext.Provider
+      value={{ progress, completeLevel, recordExam, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
+    >
       {children}
     </ProgressContext.Provider>
   )

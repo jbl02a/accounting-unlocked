@@ -1,31 +1,21 @@
 import { Link } from 'react-router-dom'
 
-const LEVEL_META = {
-  1: { title: 'The Accounting Equation', icon: '⚖️', color: 'from-indigo-600 to-purple-600', desc: 'A = L + E — the foundation of everything' },
-  2: { title: 'The Big 5 Account Types', icon: '🗂️', color: 'from-cyan-600 to-blue-600', desc: 'Assets, Liabilities, Equity, Revenue, Expenses' },
-  3: { title: 'Debits & Credits', icon: '↔️', color: 'from-emerald-600 to-teal-600', desc: 'Left side, right side — the T-account rules' },
-  4: { title: 'Journal Entries', icon: '📓', color: 'from-orange-600 to-amber-600', desc: 'Record transactions like a pro accountant' },
-  5: { title: 'Reading a Balance Sheet', icon: '📋', color: 'from-rose-600 to-pink-600', desc: 'Spot errors in a real financial statement' },
+export const LEVEL_META = {
+  1: { title: 'The Accounting Equation', icon: '⚖️', color: 'from-indigo-600 to-purple-600', desc: 'A = L + E — the foundation of everything', phase: 1 },
+  2: { title: 'The Big 5 Account Types', icon: '🗂️', color: 'from-cyan-600 to-blue-600', desc: 'Assets, Liabilities, Equity, Revenue, Expenses', phase: 1 },
+  3: { title: 'Debits & Credits', icon: '↔️', color: 'from-emerald-600 to-teal-600', desc: 'Left side, right side — the T-account rules', phase: 1 },
+  4: { title: 'Journal Entries', icon: '📓', color: 'from-orange-600 to-amber-600', desc: 'Record transactions like a pro accountant', phase: 1 },
+  5: { title: 'Reading a Balance Sheet', icon: '📋', color: 'from-rose-600 to-pink-600', desc: 'Spot errors in a real financial statement', phase: 1 },
+  6: { title: 'Receivables vs. Payables', icon: '📥', color: 'from-sky-600 to-cyan-600', desc: 'Who owes whom — and the entry when they pay', phase: 2 },
+  7: { title: 'Compound Journal Entries', icon: '🧾', color: 'from-violet-600 to-purple-600', desc: 'Three, four, five lines that still balance', phase: 2 },
+  8: { title: 'T-Accounts & Ledger Balances', icon: '📗', color: 'from-lime-600 to-green-600', desc: 'Post the entries, foot each account', phase: 2 },
+  9: { title: 'The Trial Balance', icon: '🧮', color: 'from-amber-600 to-yellow-600', desc: 'Right column, right order, and it must balance', phase: 2 },
+  10: { title: 'Full Cycle Challenge', icon: '🏆', color: 'from-fuchsia-600 to-rose-600', desc: 'Transactions → journal → ledger → trial balance', phase: 2 },
 }
 
 export default function LevelCard({ levelNum, levelData }) {
   const meta = LEVEL_META[levelNum]
-  const { unlocked, completed, score } = levelData
-
-  if (!unlocked) {
-    return (
-      <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 opacity-50 cursor-not-allowed select-none">
-        <div className="flex items-start justify-between mb-3">
-          <span className="text-3xl grayscale">{meta.icon}</span>
-          <span className="text-2xl">🔒</span>
-        </div>
-        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Level {levelNum}</div>
-        <h3 className="font-bold text-lg text-slate-400 mb-1">{meta.title}</h3>
-        <p className="text-sm text-slate-500">{meta.desc}</p>
-        <p className="text-xs text-slate-600 mt-3">Complete the previous level to unlock</p>
-      </div>
-    )
-  }
+  const { completed, score } = levelData
 
   return (
     <Link to={`/level/${levelNum}`} className="group block">
@@ -36,7 +26,7 @@ export default function LevelCard({ levelNum, levelData }) {
             {completed ? (
               <div className="flex items-center gap-1">
                 <span className="text-green-400 text-xl">✅</span>
-                {score !== null && (
+                {score !== null && score !== undefined && (
                   <span className="text-xs font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded-full">
                     {score}%
                   </span>
