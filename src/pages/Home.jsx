@@ -5,7 +5,7 @@ import LevelCard, { LEVEL_META } from '../components/LevelCard'
 const MOTIVATIONAL = [
   "Every CFO started exactly where you are. Let's go.",
   "Accounting isn't about numbers — it's about stories. Ready to read them?",
-  "Ten levels. One transformation. You've got this.",
+  "Every level builds on the last. One transformation. You've got this.",
   "The language of business is waiting for you.",
 ]
 
@@ -21,6 +21,12 @@ const PHASES = [
     label: 'Phase 2 — The Accounting Cycle',
     blurb: 'Receivables and payables, multi-line entries, the ledger, and the trial balance from start to finish.',
     levels: [6, 7, 8, 9, 10],
+  },
+  {
+    id: 3,
+    label: 'Phase 3 — The Why Behind the Rules',
+    blurb: 'The principles and assumptions an exam asks you to name: revenue recognition, matching, historical cost and the rest.',
+    levels: [11],
   },
 ]
 
@@ -45,7 +51,7 @@ export default function Home() {
           clicks.
         </h1>
         <p className="text-slate-400 text-lg max-w-xl mx-auto mb-4">
-          Ten bite-sized levels that take you from the accounting equation all the way to a finished trial balance. Read the lessons, and practice as much or as little as you want.
+          {totalLevels} bite-sized levels that take you from the accounting equation to a finished trial balance — and the principles behind all of it. Read the lessons, and practice as much or as little as you want.
         </p>
         <p className="text-slate-500 text-sm italic">&ldquo;{quote}&rdquo;</p>
       </div>
@@ -64,7 +70,7 @@ export default function Home() {
         </div>
         {totalCompleted === totalLevels && (
           <p className="text-center text-green-400 font-semibold mt-3 text-sm">
-            🎉 All ten levels done. Go prove it on the practice exam.
+            🎉 Every level done. Go prove it on the practice exam.
           </p>
         )}
       </div>

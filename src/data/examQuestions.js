@@ -7,6 +7,7 @@ export const SECTIONS = [
   { id: 'ar-ap', label: 'Receivables & Payables', icon: '📥', blurb: 'Who owes whom, and what happens when they pay.' },
   { id: 'journal', label: 'Journal Entries', icon: '📓', blurb: 'Transactions in words → the entry that records them.' },
   { id: 'trial', label: 'Trial Balance', icon: '🧮', blurb: 'Column, order, totals and what it really proves.' },
+  { id: 'principles', label: 'Accounting Principles', icon: '📜', blurb: 'Name the rule behind the transaction.' },
 ]
 
 export const QUESTIONS = [
@@ -432,6 +433,95 @@ export const QUESTIONS = [
     ],
     correctIndex: 0,
     explanation: 'Despite the word "Revenue" in its name, it is an obligation to deliver work — a liability. It is listed with the liabilities, in the credit column.',
+  },
+  // ── Accounting principles ───────────────────────────────────────────
+  {
+    id: 'p1', section: 'principles', kind: 'text',
+    prompt: 'A company completes a $7,000 job in September and is paid in October. It records the revenue in September. This follows:',
+    options: ['The revenue recognition principle', 'The cost principle', 'The matching principle', 'The monetary unit assumption'],
+    correctIndex: 0,
+    explanation: 'Revenue is recorded when it is EARNED — when the work is done — not when the cash arrives. This is exactly why Accounts Receivable exists.',
+  },
+  {
+    id: 'p2', section: 'principles', kind: 'text',
+    prompt: 'Employees earn $5,000 of wages in the last week of June but are not paid until July 2. Recording the $5,000 as a June expense follows:',
+    options: [
+      'The expense recognition (matching) principle',
+      'The revenue recognition principle',
+      'The full disclosure principle',
+      'The going concern assumption',
+    ],
+    correctIndex: 0,
+    explanation: 'Expenses belong in the period they helped earn revenue, regardless of when the bill is paid. The unpaid $5,000 sits in Salaries Payable until July 2.',
+  },
+  {
+    id: 'p3', section: 'principles', kind: 'text',
+    prompt: 'Land bought in 2016 for $95,000 is worth $240,000 today, but the balance sheet still reports $95,000. This is:',
+    options: ['The cost principle', 'Conservatism', 'The periodicity assumption', 'The economic entity assumption'],
+    correctIndex: 0,
+    explanation: 'Assets are carried at historical cost because a purchase price is objective and verifiable. A market value is an estimate that would change every year.',
+  },
+  {
+    id: 'p4', section: 'principles', kind: 'text',
+    prompt: 'The owner pays for a personal cruise with her own money and it is never entered in the company books. This applies:',
+    options: [
+      'The economic entity assumption',
+      'The monetary unit assumption',
+      'The full disclosure principle',
+      'The matching principle',
+    ],
+    correctIndex: 0,
+    explanation: 'A business is a separate economic entity from its owner. Mixing personal transactions in would make it impossible to tell whether the business itself is profitable.',
+  },
+  {
+    id: 'p5', section: 'principles', kind: 'text',
+    prompt: 'A company has an outstanding reputation and a talented staff, but neither appears on its balance sheet. Why not?',
+    options: [
+      'The monetary unit assumption — only items measurable in dollars are recorded',
+      'The cost principle — they were not purchased',
+      'Conservatism — good news is never recorded',
+      'The periodicity assumption — they cannot be assigned to one period',
+    ],
+    correctIndex: 0,
+    explanation: 'Accounting records only what can be reliably measured in money, so results can be added together. A reputation is genuinely valuable and still stays off the books.',
+  },
+  {
+    id: 'p6', section: 'principles', kind: 'text',
+    prompt: 'A company describes a pending $3 million lawsuit in the notes to its financial statements even though nothing has been paid. This is:',
+    options: ['The full disclosure principle', 'The cost principle', 'The revenue recognition principle', 'Materiality'],
+    correctIndex: 0,
+    explanation: 'Anything that would change how a lender or investor reads the statements must be disclosed — in the notes if not in the numbers. The notes are part of the financial statements.',
+  },
+  {
+    id: 'p7', section: 'principles', kind: 'text',
+    prompt: 'Which pair of principles together define ACCRUAL accounting?',
+    options: [
+      'Revenue recognition and expense recognition (matching)',
+      'Cost principle and going concern',
+      'Economic entity and monetary unit',
+      'Full disclosure and materiality',
+    ],
+    correctIndex: 0,
+    explanation: 'Record revenue when earned and expenses when incurred — cash timing is irrelevant. Those two rules are the whole basis of accrual accounting, and the reason A/R, A/P and Unearned Revenue exist.',
+  },
+  {
+    id: 'p8', section: 'principles', kind: 'text',
+    prompt: 'Under the CASH basis of accounting (not GAAP), a company that performs $10,000 of work in May and collects the cash in June would report the revenue in:',
+    options: ['June, when the cash is received', 'May, when the work was performed', 'Both months, split evenly', 'Neither month until the year closes'],
+    correctIndex: 0,
+    explanation: 'Cash basis records revenue only when cash moves — which is exactly why it is not allowed for most companies. Under accrual accounting (what you are learning), the revenue belongs to May.',
+  },
+  {
+    id: 'p9', section: 'principles', kind: 'text',
+    prompt: 'A company reports financial statements every quarter even though it intends to operate for decades. This reflects:',
+    options: [
+      'The periodicity (time period) assumption',
+      'The going concern assumption',
+      'The cost principle',
+      'The economic entity assumption',
+    ],
+    correctIndex: 0,
+    explanation: 'Business life is divided into artificial time periods so results can be reported regularly. Going concern is the related but separate idea that the company will keep operating.',
   },
 ]
 

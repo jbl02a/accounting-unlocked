@@ -125,6 +125,25 @@ const SECTIONS = [
     ]
   },
   {
+    title: 'Accounting Principles',
+    color: 'from-teal-600 to-emerald-600',
+    icon: '📜',
+    items: [
+      { term: 'Revenue Recognition', def: 'Record revenue when it is EARNED (work done, goods delivered) \u2014 not when the cash arrives.' },
+      { term: 'Expense Recognition (Matching)', def: 'Record expenses in the same period as the revenue they helped produce \u2014 not when the bill is paid.' },
+      { term: 'Accrual accounting', def: 'Those two principles together. Cash timing is irrelevant. Required by GAAP \u2014 and the reason A/R, A/P and Unearned Revenue exist.' },
+      { term: 'Cash basis', def: 'Revenue when cash comes in, expenses when cash goes out. Simple, but not allowed for most companies.' },
+      { term: 'Cost Principle', def: 'Assets are recorded at what you PAID and stay there \u2014 not at today\u2019s market value.' },
+      { term: 'Economic Entity Assumption', def: 'The business and its owner are separate. Personal transactions never enter the company books.' },
+      { term: 'Monetary Unit Assumption', def: 'Only record what can be reliably measured in dollars. A great reputation is not an asset.' },
+      { term: 'Going Concern Assumption', def: 'Assume the business will keep operating \u2014 which is why assets are carried at cost and depreciated, not at fire-sale value.' },
+      { term: 'Periodicity Assumption', def: 'Divide the company\u2019s life into months, quarters and years so results can be reported.' },
+      { term: 'Full Disclosure', def: 'Anything that would change a reader\u2019s decision goes in the statements or the notes.' },
+      { term: 'Materiality', def: 'Amounts too small to change anyone\u2019s decision can be handled the easy way (expense the $12 stapler).' },
+      { term: 'Conservatism', def: 'When two treatments are equally defensible, choose the one less likely to overstate assets or income.' },
+    ]
+  },
+  {
     title: 'Key Vocabulary',
     color: 'from-violet-600 to-fuchsia-600',
     icon: '📖',
