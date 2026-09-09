@@ -148,6 +148,63 @@ const SECTIONS = [
     ]
   },
   {
+    title: 'Adjusting Entries (Chapter 3)',
+    color: 'from-blue-600 to-indigo-600',
+    icon: '⏳',
+    items: [
+      { term: 'Adjusting entry', def: 'Made at the END of a period to record the completed portion of a partially completed transaction.' },
+      { term: 'The three rules', def: '1. NEVER touches Cash.  2. End of period only.  3. Hits at least one income statement AND one balance sheet account.' },
+      { term: 'Deferral', def: 'CASH FIRST. Prepaid (asset) or Unearned (liability) sits on the balance sheet until used or earned.' },
+      { term: 'Accrual', def: 'CASH LATER. Revenue earned or expense incurred but nothing recorded yet.' },
+      { term: 'Deferred expense', def: 'Dr Insurance Expense / Cr Prepaid Insurance. Total \u00f7 months \u00d7 months USED.' },
+      { term: 'Supplies used', def: 'Beginning + Purchased \u2212 Still on hand = USED. Dr Supplies Expense / Cr Supplies.' },
+      { term: 'Deferred revenue', def: 'Dr Unearned Revenue / Cr Service Revenue for the portion now earned.' },
+      { term: 'Accrued revenue', def: 'Dr Accounts Receivable / Cr Service Revenue. Earned, not billed.' },
+      { term: 'Accrued expense', def: 'Dr Salaries Expense / Cr Salaries Payable. Incurred, not paid.' },
+      { term: 'Accrued interest', def: 'Interest = Principal \u00d7 Rate \u00d7 Time. Dr Interest Expense / Cr Interest PAYABLE (never Notes Payable).' },
+      { term: 'Depreciation', def: '(Cost \u2212 salvage) \u00f7 useful life. Dr Depreciation Expense / Cr Accumulated Depreciation.' },
+      { term: 'Book value', def: 'Cost \u2212 Accumulated Depreciation. The asset itself never leaves the books at historical cost.' },
+      { term: 'Forgot an accrued expense?', def: 'Expenses understated \u2192 net income OVERstated \u2192 equity overstated; liabilities understated.' },
+    ]
+  },
+  {
+    title: 'Closing the Books',
+    color: 'from-rose-600 to-pink-600',
+    icon: '🔒',
+    items: [
+      { term: 'Permanent (real)', def: 'Assets, liabilities, Common Stock, Retained Earnings. Balances carry forward.' },
+      { term: 'Temporary (nominal)', def: 'Revenues, expenses, DIVIDENDS. Reset to zero every year.' },
+      { term: 'Closing entry 1', def: 'Dr Service Revenue / Cr Retained Earnings \u2014 revenue has a credit balance, so debit it to zero.' },
+      { term: 'Closing entry 2', def: 'Dr Retained Earnings / Cr each expense \u2014 expenses have debit balances, so credit them.' },
+      { term: 'Closing entry 3', def: 'Dr Retained Earnings / Cr Dividends. Dividends are never routed through income.' },
+      { term: 'Income Summary', def: 'Some texts close revenues and expenses here first, then close it to Retained Earnings \u2014 four entries instead of three. Same result.' },
+      { term: 'Ending Retained Earnings', def: 'Beginning R/E + Net Income \u2212 Dividends.' },
+      { term: 'Post-closing trial balance', def: 'Permanent accounts ONLY, proving debits = credits for what carries into next year.' },
+    ]
+  },
+  {
+    title: 'The Four Statements (Chapter 1)',
+    color: 'from-purple-600 to-violet-600',
+    icon: '📑',
+    items: [
+      { term: 'Order of preparation', def: '1. Income Statement \u2192 2. Retained Earnings Statement \u2192 3. Balance Sheet \u2192 4. Statement of Cash Flows. Each feeds the next.' },
+      { term: 'Income Statement', def: 'Revenues \u2212 Expenses = Net Income. FOR a period of time.' },
+      { term: 'Retained Earnings Statement', def: 'Beginning R/E + Net Income \u2212 Dividends = Ending R/E. FOR a period.' },
+      { term: 'Balance Sheet', def: 'Assets = Liabilities + Stockholders\u2019 Equity. AS OF a point in time \u2014 the only snapshot.' },
+      { term: 'Statement of Cash Flows', def: 'Operating (earning income) + Investing (long-term assets) + Financing (stock, debt, dividends).' },
+      { term: 'Articulation', def: 'The statements link: income statement \u2192 retained earnings \u2192 balance sheet; cash flows explains the Cash line.' },
+      { term: 'Single-step', def: 'Total revenues \u2212 total expenses. One subtraction.' },
+      { term: 'Multiple-step', def: 'Adds subtotals: Gross margin = Net sales \u2212 COGS; Income from operations = Gross margin \u2212 operating expenses.' },
+      { term: 'Net profit margin', def: 'Net Income \u00f7 Sales Revenue.' },
+      { term: 'Classified balance sheet', def: 'Current vs long-term, split on the ONE-YEAR test, for both assets and liabilities.' },
+      { term: 'Working capital', def: 'Current Assets \u2212 Current Liabilities. A dollar cushion.' },
+      { term: 'Current ratio', def: 'Current Assets \u00f7 Current Liabilities. A plain number \u2014 below 1.00 is a warning sign.' },
+      { term: 'Forms of business', def: 'Sole proprietorship, partnership, corporation. A corporation is a separate legal entity owned by stockholders.' },
+      { term: 'Business activities', def: 'Operating (earning revenue), Investing (buying assets), Financing (raising capital).' },
+      { term: 'GAAP / SEC / FASB', def: 'The SEC has legal authority over public company accounting; it has entrusted standard-setting to the FASB. The IASB sets IFRS internationally.' },
+    ]
+  },
+  {
     title: 'Key Vocabulary',
     color: 'from-violet-600 to-fuchsia-600',
     icon: '📖',
