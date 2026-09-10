@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable, { money } from '../../components/EntryTable'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
+import { shuffleFields } from '../../lib/shuffle'
 
 // Cedar Ridge Consulting — parallel in structure to the assigned deferral problems.
 const ITEMS = [
@@ -86,9 +87,10 @@ export default function Level13() {
   const [fuChecked, setFuChecked] = useState(false)
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
+  const [items, setItems] = useState(() => ITEMS.map(i => shuffleFields(i, ['debitOptions', 'creditOptions'])))
   const hints = useHints()
 
-  const item = ITEMS[index]
+  const item = items[index]
   const amountRight = parseAmount(amount) === item.amount
   const debitRight = debit === item.debit
   const creditRight = credit === item.credit
@@ -117,6 +119,7 @@ export default function Level13() {
   function restart() {
     setIndex(0); setAmount(''); setDebit(''); setCredit(''); setChecked(false)
     setFollowUp(''); setFuChecked(false); setResults([]); setDone(false); hints.reset()
+    setItems(ITEMS.map(i => shuffleFields(i, ['debitOptions', 'creditOptions'])))
   }
 
   if (phase === 'learn') {

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
+import { shuffleFields } from '../../lib/shuffle'
 
 const TRANSACTIONS = [
   {
@@ -79,9 +80,10 @@ export default function Level4() {
   const [answers, setAnswers] = useState({})
   const [submitted, setSubmitted] = useState({})
   const [allDone, setAllDone] = useState(false)
+  const [transactions, setTransactions] = useState(() => TRANSACTIONS.map(t => shuffleFields(t, ['debitOptions', 'creditOptions'])))
   const hints = useHints()
 
-  const tx = TRANSACTIONS[txIndex]
+  const tx = transactions[txIndex]
   const ans = answers[tx.id] || { debit: '', credit: '' }
   const isSubmitted = submitted[tx.id]
 
@@ -191,7 +193,7 @@ export default function Level4() {
            "Journal entries take practice. Review the rules and try again!"}
         </p>
         <div className="flex gap-3">
-          <button onClick={() => { setTxIndex(0); setAnswers({}); setSubmitted({}); setAllDone(false) }} className="flex-1 py-3 rounded-xl bg-white/10 text-white font-semibold hover:bg-white/20">
+          <button onClick={() => { setTxIndex(0); setAnswers({}); setSubmitted({}); setAllDone(false); setTransactions(TRANSACTIONS.map(t => shuffleFields(t, ['debitOptions', 'creditOptions']))) }} className="flex-1 py-3 rounded-xl bg-white/10 text-white font-semibold hover:bg-white/20">
             Try Again
           </button>
           <button onClick={() => navigate('/level/5')} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold hover:opacity-90">

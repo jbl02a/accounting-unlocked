@@ -30,8 +30,13 @@ export function loadExamSession(validIds) {
     for (const [id, v] of Object.entries(s.answers || {})) {
       if (ids.includes(id)) answers[id] = v
     }
+    const optionOrders = {}
+    for (const [id, order] of Object.entries(s.optionOrders || {})) {
+      if (ids.includes(id) && Array.isArray(order)) optionOrders[id] = order
+    }
     return {
       ids,
+      optionOrders,
       answers,
       revealedIds: (s.revealedIds || []).filter(id => ids.includes(id)),
       index: Math.min(Math.max(0, Number(s.index) || 0), ids.length - 1),

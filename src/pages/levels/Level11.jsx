@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
+import { shuffleOptions } from '../../lib/shuffle'
 
 // The handful of principles and assumptions a first financial accounting exam
 // actually asks about. Each one gets a plain-English rule and one concrete example.
@@ -205,6 +206,7 @@ export default function Level11() {
   const [sChosen, setSChosen] = useState(null)
   const [sResults, setSResults] = useState([])
   const [done, setDone] = useState(false)
+  const [scenarios, setScenarios] = useState(() => SCENARIOS.map(q => shuffleOptions(q)))
   const hints = useHints()
 
   useEffect(() => () => clearTimeout(flashTimer.current), [])
@@ -248,7 +250,7 @@ export default function Level11() {
 
   function restartAll() {
     resetMatching()
-    setSIndex(0); setSChosen(null); setSResults([]); setDone(false); setPhase('match')
+    setSIndex(0); setSChosen(null); setSResults([]); setDone(false); setScenarios(SCENARIOS.map(q => shuffleOptions(q))); setPhase('match')
   }
 
   // ── Lesson ──────────────────────────────────────────────────────────
@@ -499,7 +501,7 @@ export default function Level11() {
   }
 
   // ── Scenario round ──────────────────────────────────────────────────
-  const s = SCENARIOS[sIndex]
+  const s = scenarios[sIndex]
   return (
     <div className="max-w-xl mx-auto">
       <div className="flex items-center justify-between mb-5">

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable from '../../components/EntryTable'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
+import { shuffleOptions } from '../../lib/shuffle'
 
 const BASIS_ROWS = [
   { q: 'When is REVENUE recorded?', cash: 'When the cash is received.', accrual: 'When it is EARNED — the goods are delivered or the service is performed.' },
@@ -136,13 +137,14 @@ export default function Level12() {
   const [cChosen, setCChosen] = useState(null)
   const [cResults, setCResults] = useState([])
   const [done, setDone] = useState(false)
+  const [periodQs, setPeriodQs] = useState(() => PERIOD_QS.map(q => shuffleOptions(q)))
   const hints = useHints()
 
   const total = PERIOD_QS.length + CLASSIFY.length
   const earned = qResults.filter(Boolean).length + cResults.filter(Boolean).length
 
   function restart() {
-    setRound(1); setQIndex(0); setChosen(null); setQResults([])
+    setRound(1); setQIndex(0); setChosen(null); setQResults([]); setPeriodQs(PERIOD_QS.map(q => shuffleOptions(q)))
     setCIndex(0); setCChosen(null); setCResults([]); setDone(false); hints.reset()
   }
 
@@ -245,7 +247,7 @@ export default function Level12() {
   }
 
   if (round === 1) {
-    const q = PERIOD_QS[qIndex]
+    const q = periodQs[qIndex]
     return (
       <div className="max-w-xl mx-auto">
         <div className="flex items-center justify-between mb-5">

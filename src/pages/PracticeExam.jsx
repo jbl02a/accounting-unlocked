@@ -4,6 +4,7 @@ import { useProgress } from '../context/ProgressContext'
 import EntryTable from '../components/EntryTable'
 import { QUESTIONS, SECTIONS, questionsFor, shuffle } from '../data/examQuestions'
 import { saveExamSession, loadExamSession, clearExamSession, describeAge } from '../lib/examSession'
+import { shuffleOptions } from '../lib/shuffle'
 
 const SCOPES = [
   { id: 'full', label: 'Full practice exam', icon: '📝', blurb: `All ${QUESTIONS.length} questions, every topic. The real rehearsal.` },
@@ -55,13 +56,16 @@ export default function PracticeExam() {
     if (stage !== 'taking' || questions.length === 0) return
     saveExamSession({
       ids: questions.map(q => q.id),
+      optionOrders: Object.fromEntries(questions.map(q => [q.id, q.optionOrder])),
       answers, revealedIds, index, mode, scopeLabel,
     })
   }, [stage, questions, answers, revealedIds, index, mode, scopeLabel])
 
   function resume() {
     const byId = Object.fromEntries(QUESTIONS.map(q => [q.id, q]))
-    setQuestions(saved.ids.map(id => byId[id]))
+    // Re-apply the stored option order; without it the saved answer indices
+    // would point at different options than the student actually chose.
+    setQuestions(saved.ids.map(id => shuffleOptions(byId[id], saved.optionOrders?.[id])))
     setAnswers(saved.answers)
     setRevealedIds(saved.revealedIds)
     setIndex(saved.index)
@@ -76,7 +80,9 @@ export default function PracticeExam() {
   }
 
   function start(scope, label) {
-    const picked = scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor(scope))
+    const base = scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor(scope))
+    // Randomise which letter the answer sits behind, per attempt.
+    const picked = base.map(q => shuffleOptions(q))
     setQuestions(picked)
     setScopeLabel(label)
     setIndex(0)

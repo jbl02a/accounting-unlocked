@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable, { money } from '../../components/EntryTable'
 import { useHints, HintToggle, HintPanel, HintBar, hintTally } from '../../components/Hint'
+import { shuffleOptions } from '../../lib/shuffle'
 
 // Novak Consulting — one month, ten transactions, one balanced trial balance ($33,000).
 // Four entries are shown as worked examples; six are the student's to record.
@@ -221,6 +222,8 @@ export default function Level10() {
   const [aResults, setAResults] = useState([])
 
   const [done, setDone] = useState(false)
+  const [journalQuiz, setJournalQuiz] = useState(() => JOURNAL_QUIZ.map(q => shuffleOptions(q)))
+  const [analysis, setAnalysis] = useState(() => ANALYSIS.map(q => shuffleOptions(q)))
   const hints = useHints()
 
   const postingCorrect = POSTING.filter(p => parseAmount(balances[p.account] || '') === p.answer).length
@@ -237,6 +240,8 @@ export default function Level10() {
     setStep(1); setJIndex(0); setJChosen(null); setJResults([]); setBalances({}); setChecked2(false)
     setColumns({}); setDrTotal(''); setCrTotal(''); setChecked3(false); setAIndex(0); setAChosen(null); setAResults([]); setDone(false)
     hints.reset()
+    setJournalQuiz(JOURNAL_QUIZ.map(q => shuffleOptions(q)))
+    setAnalysis(ANALYSIS.map(q => shuffleOptions(q)))
   }
 
   if (phase === 'brief') {
@@ -376,7 +381,7 @@ export default function Level10() {
 
   // ── Step 1: journalize ──────────────────────────────────────────────
   if (step === 1) {
-    const q = JOURNAL_QUIZ[jIndex]
+    const q = journalQuiz[jIndex]
     return (
       <div className="max-w-xl mx-auto">
         <StepHeader title={`Journalize — entry ${jIndex + 1} of ${JOURNAL_QUIZ.length}`} />
@@ -611,7 +616,7 @@ export default function Level10() {
   }
 
   // ── Step 4: analysis ────────────────────────────────────────────────
-  const q = ANALYSIS[aIndex]
+  const q = analysis[aIndex]
   return (
     <div className="max-w-xl mx-auto">
       <StepHeader title={`Analyze — question ${aIndex + 1} of ${ANALYSIS.length}`} />

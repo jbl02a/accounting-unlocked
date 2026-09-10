@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable, { money } from '../../components/EntryTable'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
+import { shuffleOptions, shuffleFields } from '../../lib/shuffle'
 
 // Summit Analytics — parallel in structure to the assigned accrual problems.
 const ITEMS = [
@@ -135,9 +136,11 @@ export default function Level14() {
   const [eChosen, setEChosen] = useState(null)
   const [eResults, setEResults] = useState([])
   const [done, setDone] = useState(false)
+  const [items, setItems] = useState(() => ITEMS.map(i => shuffleFields(i, ['debitOptions', 'creditOptions'])))
+  const [effects, setEffects] = useState(() => EFFECTS.map(q => shuffleOptions(q)))
   const hints = useHints()
 
-  const item = ITEMS[index]
+  const item = items[index]
   const amountRight = parseAmount(amount) === item.amount
   const debitRight = debit === item.debit
   const creditRight = credit === item.credit
@@ -148,6 +151,8 @@ export default function Level14() {
   function restart() {
     setRound(1); setIndex(0); setAmount(''); setDebit(''); setCredit(''); setChecked(false)
     setEntryResults([]); setEIndex(0); setEChosen(null); setEResults([]); setDone(false); hints.reset()
+    setItems(ITEMS.map(i => shuffleFields(i, ['debitOptions', 'creditOptions'])))
+    setEffects(EFFECTS.map(q => shuffleOptions(q)))
   }
 
   if (phase === 'learn') {
@@ -308,7 +313,7 @@ export default function Level14() {
     )
   }
 
-  const e = EFFECTS[eIndex]
+  const e = effects[eIndex]
   return (
     <div className="max-w-xl mx-auto">
       <div className="flex items-center justify-between mb-5">

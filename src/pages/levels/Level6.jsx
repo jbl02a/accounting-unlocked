@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable from '../../components/EntryTable'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
+import { shuffleOptions } from '../../lib/shuffle'
 
 const DECODER = [
   { phrase: '"…on account"  /  "…on credit"', means: 'No cash moves right now. A receivable or a payable is created instead.' },
@@ -243,9 +244,10 @@ export default function Level6() {
   const [chosen, setChosen] = useState(null)
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
+  const [questions, setQuestions] = useState(() => QUESTIONS.map(q => shuffleOptions(q)))
   const hints = useHints()
 
-  const q = QUESTIONS[current]
+  const q = questions[current]
 
   function choose(i) {
     if (chosen !== null) return
@@ -265,7 +267,7 @@ export default function Level6() {
   }
 
   function restart() {
-    setCurrent(0); setChosen(null); setResults([]); setDone(false)
+    setCurrent(0); setChosen(null); setResults([]); setDone(false); setQuestions(QUESTIONS.map(q => shuffleOptions(q)))
   }
 
   if (phase === 'learn') {

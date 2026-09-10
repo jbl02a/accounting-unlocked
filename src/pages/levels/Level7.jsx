@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable, { money } from '../../components/EntryTable'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
+import { shuffleFields } from '../../lib/shuffle'
 
 // Each transaction lists the accounts the student may use (including distractors).
 // "answer" holds the correct amount and side for every account that belongs in the entry.
@@ -91,9 +92,10 @@ export default function Level7() {
   const [checked, setChecked] = useState(false)
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
+  const [transactions, setTransactions] = useState(() => TRANSACTIONS.map(t => shuffleFields(t, ['accounts'])))
   const hints = useHints()
 
-  const tx = TRANSACTIONS[index]
+  const tx = transactions[index]
 
   function setCell(account, side, value) {
     if (checked) return
@@ -134,7 +136,7 @@ export default function Level7() {
   }
 
   function restart() {
-    setIndex(0); setEntry({}); setChecked(false); setResults([]); setDone(false)
+    setIndex(0); setEntry({}); setChecked(false); setResults([]); setDone(false); setTransactions(TRANSACTIONS.map(t => shuffleFields(t, ['accounts'])))
   }
 
   if (phase === 'learn') {
