@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useProgress } from '../context/ProgressContext'
 import EntryTable from '../components/EntryTable'
 import { QUESTIONS, SECTIONS, questionsFor, shuffle } from '../data/examQuestions'
+import { saveExamSession, loadExamSession, clearExamSession, describeAge } from '../lib/examSession'
 
 const SCOPES = [
   { id: 'full', label: 'Full practice exam', icon: '📝', blurb: `All ${QUESTIONS.length} questions, every topic. The real rehearsal.` },
@@ -45,9 +46,34 @@ export default function PracticeExam() {
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [revealedIds, setRevealedIds] = useState([])
+  const [saved, setSaved] = useState(() => loadExamSession(QUESTIONS.map(q => q.id)))
 
   const best = progress.exam?.best
   const attempts = progress.exam?.attempts || []
+
+  useEffect(() => {
+    if (stage !== 'taking' || questions.length === 0) return
+    saveExamSession({
+      ids: questions.map(q => q.id),
+      answers, revealedIds, index, mode, scopeLabel,
+    })
+  }, [stage, questions, answers, revealedIds, index, mode, scopeLabel])
+
+  function resume() {
+    const byId = Object.fromEntries(QUESTIONS.map(q => [q.id, q]))
+    setQuestions(saved.ids.map(id => byId[id]))
+    setAnswers(saved.answers)
+    setRevealedIds(saved.revealedIds)
+    setIndex(saved.index)
+    setMode(saved.mode)
+    setScopeLabel(saved.scopeLabel)
+    setStage('taking')
+  }
+
+  function discardSaved() {
+    clearExamSession()
+    setSaved(null)
+  }
 
   function start(scope, label) {
     const picked = scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor(scope))
@@ -56,6 +82,7 @@ export default function PracticeExam() {
     setIndex(0)
     setAnswers({})
     setRevealedIds([])
+    setSaved(null)
     setStage('taking')
   }
 
@@ -73,6 +100,8 @@ export default function PracticeExam() {
     const correct = questions.filter(item => answers[item.id] === item.correctIndex).length
     const score = Math.round((correct / questions.length) * 100)
     recordExam({ score, correct, total: questions.length, label: scopeLabel })
+    clearExamSession()
+    setSaved(null)
     setStage('results')
   }
 
@@ -95,6 +124,28 @@ export default function PracticeExam() {
             </p>
           )}
         </div>
+
+        {saved && (
+          <div className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-5 mb-6">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">⏸️</span>
+              <div className="flex-1">
+                <p className="font-bold text-white">You have an exam in progress</p>
+                <p className="text-sm text-slate-300 mt-0.5">
+                  {saved.scopeLabel} — {saved.answeredCount} of {saved.ids.length} answered, saved {describeAge(saved.savedAt)}.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2 mt-3">
+                  <button onClick={resume} className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold hover:opacity-90">
+                    Resume where I left off →
+                  </button>
+                  <button onClick={discardSaved} className="px-4 py-2.5 rounded-xl bg-white/10 text-slate-300 text-sm font-semibold hover:bg-white/20">
+                    Discard it
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">How do you want to take it?</p>
@@ -339,9 +390,15 @@ export default function PracticeExam() {
           {questions.length - answeredCount} question{questions.length - answeredCount === 1 ? '' : 's'} still unanswered — use ← to go back.
         </p>
       )}
-      <button onClick={() => setStage('setup')} className="w-full mt-4 text-xs text-slate-600 hover:text-slate-400">
+      <button
+        onClick={() => { clearExamSession(); setSaved(null); setStage('setup') }}
+        className="w-full mt-4 text-xs text-slate-600 hover:text-slate-400"
+      >
         Quit and start over
       </button>
+      <p className="text-[10px] text-slate-600 text-center mt-2">
+        Your place is saved automatically — you can close this and come back to it.
+      </p>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ProgressProvider } from './context/ProgressContext'
 import Navbar from './components/Navbar'
+import UpdatePrompt from './components/UpdatePrompt'
 import Home from './pages/Home'
 import CheatSheet from './pages/CheatSheet'
 import PracticeExam from './pages/PracticeExam'
@@ -28,6 +29,7 @@ export default function App() {
       <BrowserRouter>
         <div className="min-h-screen bg-gradient-to-br from-[#0f0f1a] via-[#141428] to-[#0f0f1a]">
           <Navbar />
+          <UpdatePrompt />
           <main className="max-w-5xl mx-auto px-4 py-8">
             <Routes>
               <Route path="/" element={<Home />} />
