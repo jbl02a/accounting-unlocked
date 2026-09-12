@@ -108,6 +108,36 @@ export default function Home() {
         </div>
       </Link>
 
+      {/* Printable study aids */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+        <Link to="/cram" className="group block">
+          <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-emerald-400 transition-colors">
+            <div className="flex items-start gap-3">
+              <span className="text-3xl">🖨️</span>
+              <div>
+                <h2 className="font-bold text-white">Exam-Day Cram Sheet</h2>
+                <p className="text-sm text-slate-400 mt-0.5">
+                  Everything that gets tested, condensed onto two printable pages. DEALER, normal balances, the adjusting and closing entries, every formula.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Link>
+        <Link to="/worksheet" className="group block">
+          <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-emerald-400 transition-colors">
+            <div className="flex items-start gap-3">
+              <span className="text-3xl">✏️</span>
+              <div>
+                <h2 className="font-bold text-white">Printable Practice Problem</h2>
+                <p className="text-sm text-slate-400 mt-0.5">
+                  A full-cycle problem in the same worksheet layout as class — journalize, post, trial balance, adjust. Answer key included.
+                </p>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+
       {/* Levels by phase */}
       {PHASES.map(phase => {
         const donePhase = phase.levels.filter(n => progress.levels[n]?.completed).length

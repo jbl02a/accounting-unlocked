@@ -24,3 +24,64 @@
 
 /* Prevent text selection during drag */
 .no-select { user-select: none; }
+
+/* ── Printable pages (cram sheet, worksheet) ───────────────────────────
+   These render light-on-white even on screen, because their whole purpose
+   is paper. The dark app chrome is hidden when printing. */
+.cram-toolbar {
+  @apply flex items-start justify-between gap-4 mb-6;
+}
+.cram-page {
+  background: #fff;
+  color: #111827;
+  border-radius: 12px;
+  padding: 28px 30px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.cram-page h1 { font-size: 20px; font-weight: 800; margin: 0; }
+.cram-head { border-bottom: 2px solid #111827; padding-bottom: 8px; margin-bottom: 14px; }
+.cram-head p { font-size: 11px; color: #4b5563; margin: 2px 0 0; }
+.cram-section { margin-bottom: 15px; break-inside: avoid; }
+.cram-section h2 {
+  font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  background: #111827; color: #fff; padding: 3px 8px; border-radius: 4px; margin: 0 0 7px;
+}
+.cram-lead { margin: 0 0 7px; }
+.cram-note { margin: 6px 0 0; font-size: 11px; color: #374151; }
+.cram-small { font-size: 10.5px; color: #4b5563; }
+.cram-page table { width: 100%; border-collapse: collapse; }
+.cram-page th {
+  text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: .05em;
+  color: #374151; border-bottom: 1px solid #9ca3af; padding: 3px 6px;
+}
+.cram-page td { padding: 3px 6px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+.cram-page .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; }
+.cram-list { margin: 0; padding-left: 18px; }
+.cram-list li { margin-bottom: 4px; }
+.tag-dr, .tag-cr {
+  font-size: 9.5px; font-weight: 800; padding: 1px 5px; border-radius: 3px; letter-spacing: .04em;
+}
+.tag-dr { background: #e0e7ff; color: #3730a3; }
+.tag-cr { background: #d1fae5; color: #065f46; }
+.cram-foot { margin-top: 16px; padding-top: 7px; border-top: 1px solid #9ca3af; font-size: 10px; color: #6b7280; text-align: center; }
+
+/* Worksheet-specific: blank ruled forms to write into */
+.ws-blank td { height: 22px; }
+.ws-rule td { border-bottom: 1px solid #9ca3af; }
+.t-account { border: 1px solid #111827; border-radius: 3px; break-inside: avoid; }
+.t-account .t-head { text-align: center; font-weight: 700; border-bottom: 1px solid #111827; padding: 3px; font-size: 11px; }
+.t-account .t-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 72px; }
+.t-account .t-body > div:first-child { border-right: 1px solid #111827; }
+.t-account .t-body > div { padding: 3px 5px; font-size: 10px; color: #6b7280; }
+
+@media print {
+  @page { margin: 12mm; }
+  html, body { background: #fff !important; }
+  .no-print { display: none !important; }
+  nav, footer.app-foot { display: none !important; }
+  main { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+  .cram-page { border-radius: 0; padding: 0; font-size: 11px; box-shadow: none; }
+  .break-before { break-before: page; }
+  .cram-section { break-inside: avoid; }
+}

@@ -11,7 +11,7 @@ function buildDefault() {
     // Every level is unlocked. Practice is encouraged, never required.
     levels[i] = { unlocked: true, completed: false, score: null }
   }
-  return { levels, exam: { attempts: [], best: null } }
+  return { levels, exam: { attempts: [], best: null }, misses: {} }
 }
 
 // Older saves only knew about levels 1-5 and had no exam record, so fold whatever
@@ -30,7 +30,8 @@ function migrate(saved) {
   }
   const attempts = Array.isArray(saved.exam?.attempts) ? saved.exam.attempts : []
   const best = typeof saved.exam?.best === 'number' ? saved.exam.best : null
-  return { levels, exam: { attempts, best } }
+  const misses = saved.misses && typeof saved.misses === 'object' ? saved.misses : {}
+  return { levels, exam: { attempts, best }, misses }
 }
 
 export function ProgressProvider({ children }) {
@@ -69,13 +70,38 @@ export function ProgressProvider({ children }) {
     })
   }
 
-  function recordExam({ score, correct, total, label }) {
+  // `results` is [{ id, correct }] for every question in the attempt. Keeping the
+  // per-question outcome is what makes a "drill only what I got wrong" mode possible;
+  // a score alone cannot be turned back into a study list.
+  function recordExam({ score, correct, total, label, results = [] }) {
     setProgress(prev => {
       const attempt = { score, correct, total, label, date: new Date().toISOString() }
       const attempts = [attempt, ...(prev.exam?.attempts || [])].slice(0, 10)
       const best = Math.max(score, prev.exam?.best ?? 0)
-      return { ...prev, exam: { attempts, best } }
+      const misses = { ...(prev.misses || {}) }
+      const now = new Date().toISOString()
+      for (const r of results) {
+        if (!r || !r.id) continue
+        const entry = misses[r.id] || { wrong: 0, right: 0 }
+        misses[r.id] = {
+          wrong: entry.wrong + (r.correct ? 0 : 1),
+          right: entry.right + (r.correct ? 1 : 0),
+          last: r.correct ? 'right' : 'wrong',
+          at: now,
+        }
+      }
+      return { ...prev, exam: { attempts, best }, misses }
     })
+  }
+
+  // A question counts as needing work until it is answered correctly on its most
+  // recent outing, so getting it right once retires it from the drill.
+  function needsWorkIds() {
+    return Object.entries(progress.misses || {}).filter(([, m]) => m.last === 'wrong').map(([id]) => id)
+  }
+
+  function clearMisses() {
+    setProgress(prev => ({ ...prev, misses: {} }))
   }
 
   function resetProgress() {
@@ -86,7 +112,7 @@ export function ProgressProvider({ children }) {
 
   return (
     <ProgressContext.Provider
-      value={{ progress, completeLevel, recordExam, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
+      value={{ progress, completeLevel, recordExam, needsWorkIds, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
     >
       {children}
     </ProgressContext.Provider>

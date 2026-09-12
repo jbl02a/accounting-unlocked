@@ -4,6 +4,8 @@ import Navbar from './components/Navbar'
 import UpdatePrompt from './components/UpdatePrompt'
 import Home from './pages/Home'
 import CheatSheet from './pages/CheatSheet'
+import CramSheet from './pages/CramSheet'
+import Worksheet from './pages/Worksheet'
 import PracticeExam from './pages/PracticeExam'
 import Level1 from './pages/levels/Level1'
 import Level2 from './pages/levels/Level2'
@@ -34,6 +36,8 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cheatsheet" element={<CheatSheet />} />
+              <Route path="/cram" element={<CramSheet />} />
+              <Route path="/worksheet" element={<Worksheet />} />
               <Route path="/exam" element={<PracticeExam />} />
               <Route path="/level/1" element={<Level1 />} />
               <Route path="/level/2" element={<Level2 />} />

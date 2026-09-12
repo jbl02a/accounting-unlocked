@@ -39,7 +39,7 @@ function OptionButton({ q, index, chosen, revealed, onPick }) {
 }
 
 export default function PracticeExam() {
-  const { progress, recordExam } = useProgress()
+  const { progress, recordExam, needsWorkIds, clearMisses } = useProgress()
   const [stage, setStage] = useState('setup')
   const [mode, setMode] = useState('exam') // 'exam' = feedback at the end, 'practice' = instant
   const [scopeLabel, setScopeLabel] = useState('')
@@ -51,6 +51,11 @@ export default function PracticeExam() {
 
   const best = progress.exam?.best
   const attempts = progress.exam?.attempts || []
+  const weakIds = needsWorkIds().filter(id => QUESTIONS.some(q => q.id === id))
+  const weakBySection = SECTIONS.map(sec => ({
+    ...sec,
+    count: weakIds.filter(id => QUESTIONS.find(q => q.id === id)?.section === sec.id).length,
+  })).filter(w => w.count > 0)
 
   useEffect(() => {
     if (stage !== 'taking' || questions.length === 0) return
@@ -79,6 +84,16 @@ export default function PracticeExam() {
     setSaved(null)
   }
 
+  function startMisses() {
+    const ids = needsWorkIds()
+    const byId = Object.fromEntries(QUESTIONS.map(q => [q.id, q]))
+    const picked = shuffle(ids.map(id => byId[id]).filter(Boolean)).map(q => shuffleOptions(q))
+    if (picked.length === 0) return
+    setQuestions(picked)
+    setScopeLabel('Questions I got wrong')
+    setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
+  }
+
   function start(scope, label) {
     const base = scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor(scope))
     // Randomise which letter the answer sits behind, per attempt.
@@ -105,7 +120,10 @@ export default function PracticeExam() {
   function submit() {
     const correct = questions.filter(item => answers[item.id] === item.correctIndex).length
     const score = Math.round((correct / questions.length) * 100)
-    recordExam({ score, correct, total: questions.length, label: scopeLabel })
+    recordExam({
+      score, correct, total: questions.length, label: scopeLabel,
+      results: questions.map(item => ({ id: item.id, correct: answers[item.id] === item.correctIndex })),
+    })
     clearExamSession()
     setSaved(null)
     setStage('results')
@@ -130,6 +148,37 @@ export default function PracticeExam() {
             </p>
           )}
         </div>
+
+        {weakIds.length > 0 && (
+          <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-5 mb-6">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">🎯</span>
+              <div className="flex-1">
+                <p className="font-bold text-white">
+                  {weakIds.length} question{weakIds.length === 1 ? '' : 's'} to work on
+                </p>
+                <p className="text-sm text-slate-300 mt-0.5">
+                  These are the ones you missed last time you saw them. Get one right and it drops off the list.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {weakBySection.map(w => (
+                    <span key={w.id} className="text-[11px] rounded-full bg-black/30 border border-white/10 px-2 py-1 text-slate-300">
+                      {w.icon} {w.label} <span className="text-rose-300 font-semibold">{w.count}</span>
+                    </span>
+                  ))}
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2 mt-3">
+                  <button onClick={startMisses} className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold hover:opacity-90">
+                    Drill these {weakIds.length} →
+                  </button>
+                  <button onClick={clearMisses} className="px-4 py-2.5 rounded-xl bg-white/10 text-slate-300 text-sm font-semibold hover:bg-white/20">
+                    Clear list
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {saved && (
           <div className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-5 mb-6">
@@ -280,6 +329,11 @@ export default function PracticeExam() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 mb-8">
+          {correctCount < questions.length && (
+            <button onClick={startMisses} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold hover:opacity-90">
+              Drill the {questions.length - correctCount} I missed →
+            </button>
+          )}
           <button onClick={() => setStage('setup')} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold hover:opacity-90">
             Take Another →
           </button>

@@ -25,7 +25,8 @@ export default function Navbar() {
           </div>
 
           <Link to="/exam" className={linkClass('/exam')}>Practice Exam</Link>
-          <Link to="/cheatsheet" className={linkClass('/cheatsheet')}>Cheat Sheet</Link>
+          <Link to="/cram" className={linkClass('/cram')}>Cram Sheet</Link>
+          <Link to="/cheatsheet" className={`hidden sm:inline-block ${linkClass('/cheatsheet')}`}>Cheat Sheet</Link>
 
           <button
             onClick={() => {
