@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 
 // Shows a banner when a new version has been downloaded and is waiting. Nothing
@@ -15,6 +16,14 @@ export default function UpdatePrompt() {
       setInterval(() => registration.update().catch(() => {}), 60 * 60 * 1000)
     },
   })
+
+  // The offline notice is pure FYI and sits over the bottom of the page, where the
+  // primary action button usually is — so it retires itself rather than blocking taps.
+  useEffect(() => {
+    if (!offlineReady || needRefresh) return
+    const t = setTimeout(() => setOfflineReady(false), 5000)
+    return () => clearTimeout(t)
+  }, [offlineReady, needRefresh, setOfflineReady])
 
   if (!needRefresh && !offlineReady) return null
 

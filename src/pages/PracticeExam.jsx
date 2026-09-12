@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useProgress } from '../context/ProgressContext'
 import EntryTable from '../components/EntryTable'
 import { QUESTIONS, SECTIONS, questionsFor, shuffle } from '../data/examQuestions'
+import { LEVEL_QUESTIONS } from '../data/levelQuestions'
 import { saveExamSession, loadExamSession, clearExamSession, describeAge } from '../lib/examSession'
 import { shuffleOptions } from '../lib/shuffle'
 
@@ -51,11 +52,25 @@ export default function PracticeExam() {
 
   const best = progress.exam?.best
   const attempts = progress.exam?.attempts || []
-  const weakIds = needsWorkIds().filter(id => QUESTIONS.some(q => q.id === id))
-  const weakBySection = SECTIONS.map(sec => ({
-    ...sec,
-    count: weakIds.filter(id => QUESTIONS.find(q => q.id === id)?.section === sec.id).length,
-  })).filter(w => w.count > 0)
+  const ALL_QUESTIONS = [...QUESTIONS, ...LEVEL_QUESTIONS]
+  const weakIds = needsWorkIds().filter(id => ALL_QUESTIONS.some(q => q.id === id))
+  // Group by exam topic, and by level for anything missed inside a level.
+  const weakBySection = [
+    ...SECTIONS.map(sec => ({
+      ...sec,
+      count: weakIds.filter(id => ALL_QUESTIONS.find(q => q.id === id)?.section === sec.id).length,
+    })),
+    ...[...new Set(LEVEL_QUESTIONS.map(q => q.section))].map(secId => {
+      const first = LEVEL_QUESTIONS.find(q => q.section === secId)
+      return {
+        id: secId,
+        icon: first.icon,
+        label: `Level ${first.level}`,
+        count: weakIds.filter(id => ALL_QUESTIONS.find(q => q.id === id)?.section === secId).length,
+      }
+    }),
+  ].filter(w => w.count > 0)
+  const weakFromLevels = weakIds.filter(id => id.startsWith('L')).length
 
   useEffect(() => {
     if (stage !== 'taking' || questions.length === 0) return
@@ -86,7 +101,7 @@ export default function PracticeExam() {
 
   function startMisses() {
     const ids = needsWorkIds()
-    const byId = Object.fromEntries(QUESTIONS.map(q => [q.id, q]))
+    const byId = Object.fromEntries([...QUESTIONS, ...LEVEL_QUESTIONS].map(q => [q.id, q]))
     const picked = shuffle(ids.map(id => byId[id]).filter(Boolean)).map(q => shuffleOptions(q))
     if (picked.length === 0) return
     setQuestions(picked)
@@ -158,7 +173,9 @@ export default function PracticeExam() {
                   {weakIds.length} question{weakIds.length === 1 ? '' : 's'} to work on
                 </p>
                 <p className="text-sm text-slate-300 mt-0.5">
-                  These are the ones you missed last time you saw them. Get one right and it drops off the list.
+                  Everything you missed last time you saw it — from the exam, the topic drills and the level quizzes alike.
+                  {weakFromLevels > 0 && <> <span className="text-white font-semibold">{weakFromLevels}</span> came from level quizzes.</>}
+                  {' '}Get one right and it drops off the list.
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-3">
                   {weakBySection.map(w => (
@@ -285,11 +302,12 @@ export default function PracticeExam() {
   // ── Results ─────────────────────────────────────────────────────────
   if (stage === 'results') {
     const score = Math.round((correctCount / questions.length) * 100)
-    const bySection = SECTIONS.map(s => {
-      const qs = questions.filter(item => item.section === s.id)
-      if (!qs.length) return null
-      return { ...s, correct: qs.filter(item => answers[item.id] === item.correctIndex).length, total: qs.length }
-    }).filter(Boolean)
+    const presentSections = [...new Set(questions.map(q => q.section))]
+    const bySection = presentSections.map(id => {
+      const qs = questions.filter(item => item.section === id)
+      const meta = SECTIONS.find(s => s.id === id) || { icon: qs[0]?.icon, label: qs[0]?.sectionLabel }
+      return { id, ...meta, correct: qs.filter(item => answers[item.id] === item.correctIndex).length, total: qs.length }
+    })
 
     return (
       <div className="max-w-2xl mx-auto">
@@ -388,7 +406,7 @@ export default function PracticeExam() {
   // ── Taking the exam ─────────────────────────────────────────────────
   const isLast = index === questions.length - 1
   const chosen = answers[q.id]
-  const sectionMeta = SECTIONS.find(s => s.id === q.section)
+  const sectionMeta = SECTIONS.find(s => s.id === q.section) || { icon: q.icon, label: q.sectionLabel }
 
   return (
     <div className="max-w-xl mx-auto">

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { L10_JOURNAL_QUIZ as JOURNAL_QUIZ, L10_ANALYSIS_QUIZ as ANALYSIS } from '../../data/levelQuestions'
 import EntryTable, { money } from '../../components/EntryTable'
 import { useHints, HintToggle, HintPanel, HintBar, hintTally } from '../../components/Hint'
 import { shuffleOptions } from '../../lib/shuffle'
@@ -20,86 +21,6 @@ const LEDGER_STORY = [
   { date: 'Mar 31', text: 'Pays a $1,000 cash dividend to Alex.', quiz: 6 },
 ]
 
-const JOURNAL_QUIZ = [
-  {
-    n: 1, date: 'Mar 3',
-    prompt: 'Buys office equipment for $6,000, paying $2,000 cash and signing a note payable for the balance.',
-    options: [
-      [{ account: 'Equipment', dr: 6000 }, { account: 'Cash', cr: 2000 }, { account: 'Notes Payable', cr: 4000 }],
-      [{ account: 'Equipment', dr: 2000 }, { account: 'Cash', cr: 2000 }],
-      [{ account: 'Equipment', dr: 6000 }, { account: 'Cash', cr: 6000 }],
-      [{ account: 'Equipment Expense', dr: 6000 }, { account: 'Cash', cr: 2000 }, { account: 'Notes Payable', cr: 4000 }],
-    ],
-    correctIndex: 0,
-        hint: 'Two questions settle this. First: is the equipment worth $6,000 or only the $2,000 that was paid today? Second: paying partly in cash and partly with a promise means the credit side has to split into two lines.',
-    explanation: 'The equipment is worth $6,000 no matter how it was paid for, so Equipment is debited $6,000. The credits split between the $2,000 of cash that left and the $4,000 promise to pay. Equipment is an asset, not an expense — it will be used for years.',
-  },
-  {
-    n: 2, date: 'Mar 5',
-    prompt: 'Purchases $900 of supplies on account.',
-    options: [
-      [{ account: 'Supplies', dr: 900 }, { account: 'Accounts Payable', cr: 900 }],
-      [{ account: 'Supplies', dr: 900 }, { account: 'Cash', cr: 900 }],
-      [{ account: 'Supplies Expense', dr: 900 }, { account: 'Accounts Payable', cr: 900 }],
-      [{ account: 'Accounts Payable', dr: 900 }, { account: 'Supplies', cr: 900 }],
-    ],
-    correctIndex: 0,
-        hint: 'Two traps in one entry. Did any cash actually move here? And are unused supplies a thing the company owns, or a cost it has already burned through?',
-    explanation: '"On account" means no cash moved — a payable was created instead. And supplies are an asset when purchased; they only become Supplies Expense as they are consumed.',
-  },
-  {
-    n: 3, date: 'Mar 14',
-    prompt: 'Completes a $3,200 job for a client and bills them; payment is due next month.',
-    options: [
-      [{ account: 'Accounts Receivable', dr: 3200 }, { account: 'Service Revenue', cr: 3200 }],
-      [{ account: 'Cash', dr: 3200 }, { account: 'Service Revenue', cr: 3200 }],
-      [{ account: 'Accounts Payable', dr: 3200 }, { account: 'Service Revenue', cr: 3200 }],
-      [{ account: 'Service Revenue', dr: 3200 }, { account: 'Accounts Receivable', cr: 3200 }],
-    ],
-    correctIndex: 0,
-        hint: 'The job is finished, so the revenue is definitely earned today. The only question is what to put on the debit side when no cash arrived.',
-    explanation: 'The work is done, so the revenue is earned and recorded today — that is accrual accounting. Because the client has not paid, the debit goes to Accounts Receivable instead of Cash.',
-  },
-  {
-    n: 4, date: 'Mar 22',
-    prompt: 'Receives $1,800 from the client billed on March 14.',
-    options: [
-      [{ account: 'Cash', dr: 1800 }, { account: 'Accounts Receivable', cr: 1800 }],
-      [{ account: 'Cash', dr: 1800 }, { account: 'Service Revenue', cr: 1800 }],
-      [{ account: 'Accounts Receivable', dr: 1800 }, { account: 'Cash', cr: 1800 }],
-      [{ account: 'Cash', dr: 1800 }, { account: 'Accounts Payable', cr: 1800 }],
-    ],
-    correctIndex: 0,
-        hint: 'Look back at what was already recorded on March 14 before you answer. Has the company earned anything NEW today, or is one asset just turning into another?',
-    explanation: 'The revenue was already recorded on March 14. Crediting Service Revenue again would double-count it. Collecting simply turns a receivable into cash — total assets do not change.',
-  },
-  {
-    n: 5, date: 'Mar 25',
-    prompt: 'Pays $600 of the amount owed for the supplies bought on March 5.',
-    options: [
-      [{ account: 'Accounts Payable', dr: 600 }, { account: 'Cash', cr: 600 }],
-      [{ account: 'Supplies Expense', dr: 600 }, { account: 'Cash', cr: 600 }],
-      [{ account: 'Supplies', dr: 600 }, { account: 'Cash', cr: 600 }],
-      [{ account: 'Cash', dr: 600 }, { account: 'Accounts Payable', cr: 600 }],
-    ],
-    correctIndex: 0,
-        hint: 'The supplies themselves were recorded back on March 5. So today, is a new cost being created, or is an existing debt being paid down?',
-    explanation: 'The supplies were recorded when purchased. Paying only erases part of the debt: debit Accounts Payable to shrink the liability, credit Cash as it leaves.',
-  },
-  {
-    n: 6, date: 'Mar 31',
-    prompt: 'Pays a $1,000 cash dividend to Alex.',
-    options: [
-      [{ account: 'Dividends', dr: 1000 }, { account: 'Cash', cr: 1000 }],
-      [{ account: 'Dividend Expense', dr: 1000 }, { account: 'Cash', cr: 1000 }],
-      [{ account: 'Common Stock', dr: 1000 }, { account: 'Cash', cr: 1000 }],
-      [{ account: 'Cash', dr: 1000 }, { account: 'Dividends', cr: 1000 }],
-    ],
-    correctIndex: 0,
-        hint: 'Cash clearly leaves. The real question is what to call the other side: is paying the owner a cost of running the business, or is it handing profit back to him?',
-    explanation: 'Watch option B — "Dividend Expense" is not a real account. An expense is a cost incurred to GENERATE revenue; a dividend buys the business nothing, it hands profit to the owners. So it is a distribution, not a cost, and it never appears on the income statement. Both entries balance, so a trial balance would not catch it — the damage is to net income, which would be understated by $1,000.',
-  },
-]
 
 const POSTING = [
   {
@@ -160,39 +81,6 @@ const COLUMN_HINTS = {
   'Salaries Expense': 'Every expense goes the same way, whatever it was spent on.',
 }
 
-const ANALYSIS = [
-  {
-    prompt: 'What was Novak Consulting’s net income for March?',
-    options: ['$5,200', '$4,200', '$8,700', '$2,800'],
-    correctIndex: 0,
-        hint: 'Net income is revenue minus expenses. Before you compute, settle one thing: does the $1,000 dividend belong in that subtraction? Two of the answer choices differ by exactly that amount.',
-    explanation: 'Net income = Revenue − Expenses = $8,700 − ($1,100 rent + $2,400 salaries) = $5,200. Dividends are NOT an expense, so the $1,000 is not subtracted here. ($4,200 is the trap — that is what is left after the dividend, which is the change in retained earnings, not net income.)',
-  },
-  {
-    prompt: 'Retained Earnings does not even appear on this trial balance. Why?',
-    options: [
-      'March is the company’s first month, so it starts at $0 — and the closing entries that move net income into it have not happened yet',
-      'Retained Earnings only appears on the balance sheet, never on a trial balance',
-      'It was replaced by the Dividends account',
-      'The trial balance is missing an account and does not actually balance',
-    ],
-    correctIndex: 0,
-        hint: 'Ask what retained earnings actually accumulates — and then ask whether any of that has had a chance to happen yet in a company\u2019s very first month of existence.',
-    explanation: 'Retained Earnings holds profits from PRIOR periods. In a first month it is $0. This month’s profit is still sitting in the revenue and expense accounts; closing entries at period-end sweep them into Retained Earnings. After closing, Novak’s Retained Earnings would be $5,200 − $1,000 of dividends = $4,200.',
-  },
-  {
-    prompt: 'Novak’s trial balance shows $33,000 in both columns. What does that prove?',
-    options: [
-      'Only that total debits equal total credits — an entry could still be in the wrong account',
-      'That every transaction was recorded in the correct account',
-      'That the company was profitable',
-      'That no transactions were left out',
-    ],
-    correctIndex: 0,
-        hint: 'Try to invent a mistake that would still leave both columns equal. If you can think of even one, that tells you what equal columns can and cannot prove.',
-    explanation: 'A trial balance is an arithmetic check, not an accuracy check. Debiting Utilities Expense instead of Rent Expense still balances. So does forgetting an entire transaction. That is why accountants review the entries themselves, not just the totals.',
-  },
-]
 
 function parseAmount(raw) {
   const cleaned = String(raw).replace(/[^0-9.]/g, '')
@@ -201,7 +89,7 @@ function parseAmount(raw) {
 
 export default function Level10() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordQuizResult } = useProgress()
   const [phase, setPhase] = useState('brief')
   const [step, setStep] = useState(1)
 
@@ -405,6 +293,7 @@ export default function Level10() {
                   if (jChosen !== null) return
                   setJChosen(i)
                   setJResults(prev => [...prev, i === q.correctIndex])
+                  recordQuizResult(q.id, i === q.correctIndex)
                 }}
                 disabled={jChosen !== null}
                 className={`w-full text-left rounded-xl border p-3 transition-colors ${
@@ -639,6 +528,7 @@ export default function Level10() {
                 if (aChosen !== null) return
                 setAChosen(i)
                 setAResults(prev => [...prev, i === q.correctIndex])
+                recordQuizResult(q.id, i === q.correctIndex)
               }}
               disabled={aChosen !== null}
               className={`w-full text-left rounded-xl border p-3 flex items-start gap-3 transition-colors ${

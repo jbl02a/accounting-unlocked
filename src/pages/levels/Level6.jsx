@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { L6_QUIZ as QUESTIONS } from '../../data/levelQuestions'
 import EntryTable from '../../components/EntryTable'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
 import { shuffleOptions } from '../../lib/shuffle'
@@ -87,143 +88,6 @@ const NOTE_ENTRIES = [
   },
 ]
 
-const QUESTIONS = [
-  {
-    id: 1,
-    kind: 'text',
-    emoji: '🧾',
-    prompt: 'Cypress Design finishes a $3,500 logo project and sends the client an invoice. The client will pay in 30 days. What account does Cypress record?',
-    options: ['Accounts Receivable — an asset', 'Accounts Payable — a liability', 'Unearned Revenue — a liability', 'Cash — an asset'],
-    correctIndex: 0,
-        hint: 'Ask who is waiting on whom. The customer already received the finished work; Cypress is the one still waiting to be paid. Whichever side is owed money decides the account.',
-    explanation: 'The customer owes US, so it is a receivable. Receivables are assets — a legal claim to future cash.',
-  },
-  {
-    id: 2,
-    kind: 'entry',
-    emoji: '✍️',
-    prompt: 'Record that $3,500 job done on account.',
-    options: [
-      [{ account: 'Accounts Receivable', dr: 3500 }, { account: 'Service Revenue', cr: 3500 }],
-      [{ account: 'Cash', dr: 3500 }, { account: 'Service Revenue', cr: 3500 }],
-      [{ account: 'Service Revenue', dr: 3500 }, { account: 'Accounts Receivable', cr: 3500 }],
-      [{ account: 'Accounts Receivable', dr: 3500 }, { account: 'Accounts Payable', cr: 3500 }],
-    ],
-    correctIndex: 0,
-        hint: 'Two things changed: the company earned income, and it gained the right to collect money later. Nothing about cash changed. Work out which of those two goes on the debit side.',
-    explanation: 'A/R goes up (asset ⬆ = debit) and Service Revenue goes up (revenue ⬆ = credit). No cash touched this transaction.',
-  },
-  {
-    id: 3,
-    kind: 'text',
-    emoji: '🖨️',
-    prompt: 'Cypress buys $600 of printer supplies on account from a vendor. What account does Cypress record?',
-    options: ['Accounts Payable — a liability', 'Accounts Receivable — an asset', 'Notes Receivable — an asset', 'Supplies Expense — an expense'],
-    correctIndex: 0,
-        hint: 'Flip the last question around. Here Cypress is the one who received something and has not paid yet. Who is owed money now?',
-    explanation: 'WE owe the vendor, so it is a payable — a liability. Same word "account," opposite direction.',
-  },
-  {
-    id: 4,
-    kind: 'entry',
-    emoji: '✍️',
-    prompt: 'Record that $600 supply purchase on account.',
-    options: [
-      [{ account: 'Supplies', dr: 600 }, { account: 'Accounts Payable', cr: 600 }],
-      [{ account: 'Accounts Payable', dr: 600 }, { account: 'Supplies', cr: 600 }],
-      [{ account: 'Supplies', dr: 600 }, { account: 'Cash', cr: 600 }],
-      [{ account: 'Supplies', dr: 600 }, { account: 'Accounts Receivable', cr: 600 }],
-    ],
-    correctIndex: 0,
-        hint: 'Something the company owns went up — it has the supplies. Nothing was paid, so what got created on the other side to balance it?',
-    explanation: 'Supplies (asset) up with a debit; Accounts Payable (liability) up with a credit. Cash is untouched — that is the whole point of "on account."',
-  },
-  {
-    id: 5,
-    kind: 'entry',
-    emoji: '💵',
-    prompt: 'THE CLASSIC TRAP: the client from question 1 mails a check for the full $3,500. Record it.',
-    options: [
-      [{ account: 'Cash', dr: 3500 }, { account: 'Accounts Receivable', cr: 3500 }],
-      [{ account: 'Cash', dr: 3500 }, { account: 'Service Revenue', cr: 3500 }],
-      [{ account: 'Accounts Receivable', dr: 3500 }, { account: 'Cash', cr: 3500 }],
-      [{ account: 'Cash', dr: 3500 }, { account: 'Accounts Payable', cr: 3500 }],
-    ],
-    correctIndex: 0,
-        hint: 'Before picking, ask the key question: has Cypress earned anything NEW today? Or did one thing it owned simply turn into a different thing it owns?',
-    explanation: 'Crediting Service Revenue again would count the same $3,500 of income twice. The revenue was already earned and recorded — collecting only converts A/R into Cash.',
-  },
-  {
-    id: 6,
-    kind: 'entry',
-    emoji: '💸',
-    prompt: 'THE MIRROR TRAP: Cypress pays the vendor the $600 it owed. Record it.',
-    options: [
-      [{ account: 'Accounts Payable', dr: 600 }, { account: 'Cash', cr: 600 }],
-      [{ account: 'Supplies Expense', dr: 600 }, { account: 'Cash', cr: 600 }],
-      [{ account: 'Cash', dr: 600 }, { account: 'Accounts Payable', cr: 600 }],
-      [{ account: 'Supplies', dr: 600 }, { account: 'Cash', cr: 600 }],
-    ],
-    correctIndex: 0,
-        hint: 'Mirror of the last one. The supplies were recorded the day they arrived. So today, is a new cost being created — or is an existing debt being erased?',
-    explanation: 'The supplies were already recorded when purchased. Paying only removes the debt: debit A/P to shrink the liability, credit Cash as it leaves.',
-  },
-  {
-    id: 7,
-    kind: 'text',
-    emoji: '📅',
-    prompt: 'A new client pays Cypress $1,200 up front for a project that starts next month. What does Cypress credit?',
-    options: ['Unearned Revenue — a liability', 'Service Revenue — revenue', 'Accounts Receivable — an asset', 'Accounts Payable — a liability'],
-    correctIndex: 0,
-        hint: 'Cash arrived, but no work has been done. Cypress owes the client something — but is it money, or is it work? Both count as obligations.',
-    explanation: 'Cash was received but nothing has been earned yet, so Cypress owes the client WORK. That obligation is a liability called Unearned Revenue. Revenue gets recorded later, as the work is performed.',
-  },
-  {
-    id: 8,
-    kind: 'text',
-    emoji: '⚖️',
-    prompt: 'When that customer pays off the $3,500 they owed, what happens to Cypress’s TOTAL assets?',
-    options: [
-      'They stay exactly the same',
-      'They increase by $3,500',
-      'They decrease by $3,500',
-      'They increase by $7,000',
-    ],
-    correctIndex: 0,
-        hint: 'List the two accounts that change and mark whether each goes up or down. Then add those two movements together and see what the net effect on total assets is.',
-    explanation: 'Cash goes up $3,500 and Accounts Receivable goes down $3,500. One asset became another asset — the total is unchanged, and so is the accounting equation.',
-  },
-  {
-    id: 9,
-    kind: 'entry',
-    emoji: '📝',
-    prompt: 'A customer who owes Cypress $4,000 on account cannot pay by the due date. Instead they sign a 90-day promissory note at 8% interest for that amount. Record it.',
-    hint: 'Nothing was collected and nothing new was earned — the customer just replaced a casual IOU with a formal, signed one. So one asset is turning into a different asset.',
-    options: [
-      [{ account: 'Notes Receivable', dr: 4000 }, { account: 'Accounts Receivable', cr: 4000 }],
-      [{ account: 'Accounts Receivable', dr: 4000 }, { account: 'Notes Receivable', cr: 4000 }],
-      [{ account: 'Notes Receivable', dr: 4000 }, { account: 'Service Revenue', cr: 4000 }],
-      [{ account: 'Cash', dr: 4000 }, { account: 'Notes Receivable', cr: 4000 }],
-    ],
-    correctIndex: 0,
-    explanation: 'No cash moved and nothing new was earned, so there is no revenue. The casual receivable is replaced by a formal one: debit Notes Receivable to bring in the stronger asset, credit Accounts Receivable to clear the old one. The 8% interest is not recorded yet — it gets recorded as it is earned over the 90 days.',
-  },
-  {
-    id: 10,
-    kind: 'text',
-    emoji: '⚖️',
-    prompt: 'How does a NOTE payable differ from an ACCOUNT payable?',
-    hint: 'Careful — this is testing whether you think the formal paperwork changes what KIND of account it is. Ask yourself first whether both still represent money the company owes.',
-    options: [
-      'Both are liabilities. The note is a formal written promise that charges interest and often runs longer',
-      'A note payable is an asset, because a signed document has value',
-      'A note payable does not have to be repaid, unlike an account payable',
-      'A note payable is recorded as an expense on the day it is signed',
-    ],
-    correctIndex: 0,
-    explanation: 'The classification never changes: a payable is money owed, so both are liabilities, and both are credited when they grow. What changes is the paperwork (a signed promissory note), the interest (notes charge it, accounts do not), and usually the length. The same is true on the other side — Notes Receivable and Accounts Receivable are both assets.',
-  },
-]
 
 function CycleCard({ item, accent }) {
   return (
@@ -238,7 +102,7 @@ function CycleCard({ item, accent }) {
 
 export default function Level6() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordQuizResult } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [current, setCurrent] = useState(0)
   const [chosen, setChosen] = useState(null)
@@ -253,6 +117,7 @@ export default function Level6() {
     if (chosen !== null) return
     setChosen(i)
     setResults(prev => [...prev, i === q.correctIndex])
+    recordQuizResult(q.id, i === q.correctIndex)
   }
 
   function next() {

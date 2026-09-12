@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { L14_EFFECTS_QUIZ as EFFECTS } from '../../data/levelQuestions'
 import EntryTable, { money } from '../../components/EntryTable'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
 import { shuffleOptions, shuffleFields } from '../../lib/shuffle'
@@ -61,60 +62,6 @@ const ITEMS = [
   },
 ]
 
-const EFFECTS = [
-  {
-    id: 'e1',
-    prompt: 'Suppose Summit FORGOT the $6,200 accrued salaries entry. What is the effect on the 2025 financial statements?',
-    options: [
-      'Expenses understated $6,200, net income overstated $6,200, liabilities understated $6,200',
-      'Expenses overstated $6,200, net income understated $6,200, liabilities overstated $6,200',
-      'Assets understated $6,200 and revenue understated $6,200',
-      'No effect — the wages will be recorded when they are paid in January',
-    ],
-    correctIndex: 0,
-    hint: 'Write out the entry that was missed, then ask what each side would have done. A missing debit to an expense means expenses are too low — and if expenses are too low, what happens to net income?',
-    explanation: 'The missing entry would have debited an expense (raising expenses, lowering net income) and credited a liability (raising liabilities). Leaving it out means all three are wrong in the opposite direction. Equity is overstated too, because the overstated net income closes into Retained Earnings.',
-  },
-  {
-    id: 'e2',
-    prompt: 'Suppose Summit FORGOT the $28,500 accrued revenue entry. What is the effect?',
-    options: [
-      'Revenue understated, net income understated, assets understated',
-      'Revenue overstated, net income overstated, assets overstated',
-      'Liabilities understated and expenses overstated',
-      'No effect — no invoice was ever sent',
-    ],
-    correctIndex: 0,
-    hint: 'The missed entry would have debited an asset and credited a revenue. Omitting it leaves BOTH of those too low. Follow revenue through to net income.',
-    explanation: 'Both sides are understated: the receivable never went on the balance sheet and the revenue never hit the income statement. Understated revenue means understated net income, which means understated equity too.',
-  },
-  {
-    id: 'e3',
-    prompt: 'Suppose Summit FORGOT the $7,500 interest accrual. What is the effect?',
-    options: [
-      'Net income overstated $7,500 and liabilities understated $7,500',
-      'Net income understated $7,500 and liabilities overstated $7,500',
-      'Notes Payable understated $7,500',
-      'No effect until the note matures and the interest is actually paid',
-    ],
-    correctIndex: 0,
-    hint: 'Same shape as the salaries omission — a missing expense and a missing liability. And note that option about waiting until maturity: that is cash-basis thinking, which GAAP does not allow.',
-    explanation: 'A missing expense overstates net income; a missing payable understates liabilities. "Wait until it is paid" is exactly the cash-basis reasoning accrual accounting exists to prevent — the company has had the use of the money for 10 months and owes for it.',
-  },
-  {
-    id: 'e4',
-    prompt: 'An adjusting entry that debits an expense and credits a liability always:',
-    options: [
-      'Increases expenses and liabilities, and decreases net income and equity',
-      'Increases expenses and assets, and increases net income',
-      'Decreases liabilities and increases cash',
-      'Has no effect on the income statement',
-    ],
-    correctIndex: 0,
-    hint: 'Take it one side at a time. Expenses go up with a debit — what does that do to net income, and then to equity? Liabilities go up with a credit.',
-    explanation: 'That is the shape of every accrued expense. Expenses up → net income down → retained earnings (equity) down. Liabilities up. The accounting equation still balances: liabilities rise by the same amount equity falls.',
-  },
-]
 
 function parseAmount(raw) {
   const c = String(raw).replace(/[^0-9.]/g, '')
@@ -123,7 +70,7 @@ function parseAmount(raw) {
 
 export default function Level14() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordQuizResult } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [round, setRound] = useState(1)
   const [index, setIndex] = useState(0)
@@ -336,7 +283,7 @@ export default function Level14() {
           const isAnswer = eChosen !== null && i === e.correctIndex
           const isWrong = eChosen === i && i !== e.correctIndex
           return (
-            <button key={i} onClick={() => { if (eChosen !== null) return; setEChosen(i); setEResults(p => [...p, i === e.correctIndex]) }}
+            <button key={i} onClick={() => { if (eChosen !== null) return; setEChosen(i); setEResults(p => [...p, i === e.correctIndex]); recordQuizResult(e.id, i === e.correctIndex) }}
               disabled={eChosen !== null}
               className={`w-full text-left rounded-xl border p-3 flex items-start gap-3 transition-colors ${
                 isAnswer ? 'border-green-500 bg-green-900/30' : isWrong ? 'border-red-500 bg-red-900/30'

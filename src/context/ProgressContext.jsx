@@ -94,6 +94,23 @@ export function ProgressProvider({ children }) {
     })
   }
 
+  // Level quizzes call this per question as they are answered, so a question missed
+  // inside a level is tracked exactly like one missed on the exam.
+  function recordQuizResult(id, correct) {
+    if (!id) return
+    setProgress(prev => {
+      const misses = { ...(prev.misses || {}) }
+      const entry = misses[id] || { wrong: 0, right: 0 }
+      misses[id] = {
+        wrong: entry.wrong + (correct ? 0 : 1),
+        right: entry.right + (correct ? 1 : 0),
+        last: correct ? 'right' : 'wrong',
+        at: new Date().toISOString(),
+      }
+      return { ...prev, misses }
+    })
+  }
+
   // A question counts as needing work until it is answered correctly on its most
   // recent outing, so getting it right once retires it from the drill.
   function needsWorkIds() {
@@ -112,7 +129,7 @@ export function ProgressProvider({ children }) {
 
   return (
     <ProgressContext.Provider
-      value={{ progress, completeLevel, recordExam, needsWorkIds, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
+      value={{ progress, completeLevel, recordExam, recordQuizResult, needsWorkIds, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
     >
       {children}
     </ProgressContext.Provider>

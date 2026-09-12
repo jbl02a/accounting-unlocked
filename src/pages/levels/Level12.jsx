@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { L12_PERIOD_QUIZ as PERIOD_QS } from '../../data/levelQuestions'
 import EntryTable from '../../components/EntryTable'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
 import { shuffleOptions } from '../../lib/shuffle'
@@ -44,71 +45,6 @@ const TYPES = [
   },
 ]
 
-const PERIOD_QS = [
-  {
-    id: 'p1',
-    prompt: 'Cedar Ridge Consulting performs $18,000 of services in December. The client pays in January. Under ACCRUAL accounting, the revenue belongs to:',
-    options: ['December — when the service was performed', 'January — when the cash arrived', 'Split evenly between December and January', 'Neither, until the year closes'],
-    correctIndex: 0,
-    hint: 'Accrual accounting asks when the work was DONE, not when the money moved. Which month was the service performed in?',
-    explanation: 'Revenue is recognized when the performance obligation is satisfied — the service was delivered in December, so the revenue is December revenue. The January cash receipt is a separate entry: debit Cash, credit Accounts Receivable.',
-  },
-  {
-    id: 'p2',
-    prompt: 'Same facts. Under CASH-basis accounting (not GAAP), the $18,000 would be reported in:',
-    options: ['January — when the cash was received', 'December — when the service was performed', 'Both months', 'Neither month'],
-    correctIndex: 0,
-    hint: 'Cash basis has exactly one trigger, and it is in the name. Ignore when the work happened entirely.',
-    explanation: 'Cash basis records revenue only when cash moves, which is why it is not allowed under GAAP — a company could shift its reported income simply by delaying or accelerating collections.',
-  },
-  {
-    id: 'p3',
-    prompt: 'Employees earn $9,400 of wages during the last week of December. Payday is January 4. Under accrual accounting, the expense belongs to:',
-    options: ['December — when the work was performed', 'January — when the wages are paid', 'Whichever period the company chooses', 'It is not an expense until it is paid'],
-    correctIndex: 0,
-    hint: 'The mirror image of the revenue question. Expenses follow the same logic: when was the cost actually incurred?',
-    explanation: 'Expense recognition (matching): the employees worked in December and helped earn December revenue, so the expense is December’s. The unpaid amount sits in Salaries Payable until January 4.',
-  },
-  {
-    id: 'p4',
-    prompt: 'Which is NOT a legitimate adjusting entry?',
-    options: [
-      'Debit Cash $500, Credit Service Revenue $500',
-      'Debit Insurance Expense $400, Credit Prepaid Insurance $400',
-      'Debit Salaries Expense $2,000, Credit Salaries Payable $2,000',
-      'Debit Unearned Revenue $1,500, Credit Service Revenue $1,500',
-    ],
-    correctIndex: 0,
-    hint: 'One of the three rules of adjusting entries rules out an entire account. Scan the four entries for the account that can never appear.',
-    explanation: 'An adjusting entry NEVER touches Cash. Adjusting entries exist precisely because cash moved in a different period than the revenue or expense — if cash is moving right now, it is an ordinary transaction, not an adjustment.',
-  },
-  {
-    id: 'p5',
-    prompt: 'Every adjusting entry affects:',
-    options: [
-      'At least one income statement account AND at least one balance sheet account',
-      'Two balance sheet accounts',
-      'Two income statement accounts',
-      'Cash and one other account',
-    ],
-    correctIndex: 0,
-    hint: 'Look back at all four entry shapes in the lesson. In every single one, one side is a revenue or expense. What kind of account is always on the other side?',
-    explanation: 'Every adjustment moves an amount between a balance sheet account (asset or liability) and an income statement account (revenue or expense). That is what makes it an adjustment — it assigns an amount to the right period.',
-  },
-  {
-    id: 'p6',
-    prompt: 'Why do adjusting entries exist at all?',
-    options: [
-      'Because the time-period assumption forces us to cut ongoing activity into periods, and cash rarely moves in the same period as the revenue or expense',
-      'Because bookkeepers make mistakes that must be corrected at year end',
-      'Because the trial balance did not balance',
-      'Because the IRS requires them for tax returns',
-    ],
-    correctIndex: 0,
-    hint: 'This is not about errors. Think about what the time-period assumption forces a company to do, and what happens to a transaction that is only half-finished when the period ends.',
-    explanation: 'Adjusting entries record the COMPLETED PORTION of partially completed transactions. A 24-month insurance policy or a 3-year contract does not respect December 31, so at period end we record however much of it belongs to this period. Correcting mistakes is a different thing entirely.',
-  },
-]
 
 const CLASSIFY = [
   { id: 'c1', text: 'On October 1, Cedar Ridge paid $7,200 for an 18-month insurance policy and debited Prepaid Insurance.', answer: 'def-exp',
@@ -127,7 +63,7 @@ const CLASSIFY = [
 
 export default function Level12() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordQuizResult } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [round, setRound] = useState(1)
   const [qIndex, setQIndex] = useState(0)
@@ -270,7 +206,7 @@ export default function Level12() {
             const isAnswer = chosen !== null && i === q.correctIndex
             const isWrong = chosen === i && i !== q.correctIndex
             return (
-              <button key={i} onClick={() => { if (chosen !== null) return; setChosen(i); setQResults(p => [...p, i === q.correctIndex]) }}
+              <button key={i} onClick={() => { if (chosen !== null) return; setChosen(i); setQResults(p => [...p, i === q.correctIndex]); recordQuizResult(q.id, i === q.correctIndex) }}
                 disabled={chosen !== null}
                 className={`w-full text-left rounded-xl border p-3 flex items-start gap-3 transition-colors ${
                   isAnswer ? 'border-green-500 bg-green-900/30' : isWrong ? 'border-red-500 bg-red-900/30'

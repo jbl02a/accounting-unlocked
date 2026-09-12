@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { L11_SCENARIO_QUIZ as SCENARIOS } from '../../data/levelQuestions'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
 import { shuffleOptions } from '../../lib/shuffle'
 
@@ -112,71 +113,6 @@ const QUALITATIVE = {
 
 const MATCH_HINT = 'Do not read all sixteen boxes at once. Pick off the pairs you are sure about first — every one you lock in removes a wrong option from the rest. When you are stuck, look for the giveaway in the example: a gap between when the work was done and when the money moved points at revenue recognition or matching; an old purchase price still on the books points at cost; something valuable with no dollar figure points at monetary unit; the owner’s personal money points at economic entity.'
 
-const SCENARIOS = [
-  {
-    text: 'Riverbend Co. delivers $3,000 of custom cabinets to a customer in June. The customer pays in July. Riverbend records the $3,000 of revenue in June.',
-    options: ['Revenue Recognition Principle', 'Cost Principle', 'Monetary Unit Assumption', 'Full Disclosure Principle'],
-    correctIndex: 0,
-    hint: 'Two dates are in play: the month the work was finished, and the month the money arrived. Which one does accounting say the revenue belongs to?',
-    explanation: 'Revenue is recorded when it is earned — the cabinets were delivered in June. The July cash receipt is a separate entry: debit Cash, credit Accounts Receivable.',
-  },
-  {
-    text: 'The owner of Riverbend buys a jet ski for herself using her personal savings. It is not recorded anywhere in the company’s books.',
-    options: ['Economic Entity Assumption', 'Going Concern Assumption', 'Expense Recognition Principle', 'Periodicity Assumption'],
-    correctIndex: 0,
-    hint: 'Whose money paid for it, and whose books should it show up in? This principle is about keeping two things apart.',
-    explanation: 'The business and its owner are separate economic entities. Her personal purchases are not the company’s transactions — this is exactly the assumption being applied.',
-  },
-  {
-    text: 'Riverbend bought its workshop in 2018 for $180,000. A realtor says it would sell for $310,000 today. The balance sheet still shows $180,000.',
-    options: ['Cost Principle', 'Materiality', 'Revenue Recognition Principle', 'Monetary Unit Assumption'],
-    correctIndex: 0,
-    hint: 'The workshop is worth more now, but the number on the books has not moved. Which principle is what freezes that number at the original amount?',
-    explanation: 'Assets are carried at historical cost. The purchase price is objective and verifiable; an appraisal is an estimate that would change every year.',
-  },
-  {
-    text: 'Riverbend’s crew earns $4,000 of wages in the last week of December. Payday is January 3, but the $4,000 is recorded as a December expense.',
-    options: ['Expense Recognition (Matching) Principle', 'Full Disclosure Principle', 'Cost Principle', 'Going Concern Assumption'],
-    correctIndex: 0,
-    hint: 'This is the mirror image of the revenue question. The work happened in one month, the check goes out in another. Which principle decides the period for a COST?',
-    explanation: 'The work was done in December and helped earn December revenue, so the expense belongs in December. The unpaid amount sits in a liability — Salaries Payable — until January 3.',
-  },
-  {
-    text: 'Riverbend has a reputation as the most reliable cabinet shop in the state. Nothing about that appears on its balance sheet.',
-    options: ['Monetary Unit Assumption', 'Conservatism', 'Periodicity Assumption', 'Economic Entity Assumption'],
-    correctIndex: 0,
-    hint: 'Nobody doubts the reputation is valuable. Ask what accounting requires before anything can go on the books at all — what would you have to attach to it?',
-    explanation: 'Only items measurable in dollars get recorded. A reputation is real and valuable but cannot be reliably assigned a dollar figure, so it stays off the books.',
-  },
-  {
-    text: 'Riverbend is being sued for $2 million. Nothing has been paid or settled, but the situation is described in the notes to the financial statements.',
-    options: ['Full Disclosure Principle', 'Cost Principle', 'Revenue Recognition Principle', 'Monetary Unit Assumption'],
-    correctIndex: 0,
-    hint: 'No money has moved, so there is no journal entry to make. But a lender reading these statements would badly want to know. Which principle covers information that belongs in the notes rather than the numbers?',
-    explanation: 'A lawsuit that size would absolutely change how a lender or investor reads the statements, so it must be disclosed — in the notes, if not in the numbers themselves.',
-  },
-  {
-    text: 'Riverbend closes its books and issues financial statements every three months, even though the company plans to operate for decades.',
-    options: ['Periodicity (Time Period) Assumption', 'Going Concern Assumption', 'Materiality', 'Expense Recognition Principle'],
-    correctIndex: 0,
-    hint: 'This one is not about value or cash at all — it is about TIME. The company slices its ongoing life into chunks so it can report. What is that slicing called?',
-    explanation: 'Business life is divided into artificial time periods so results can be reported regularly. (Going concern is the related idea that the company will keep operating — but the quarterly reporting itself is periodicity.)',
-  },
-  {
-    text: 'Riverbend has no plans to close or sell out. Its accountant therefore reports the workshop equipment at cost less depreciation, rather than at what it would bring in an immediate liquidation sale.',
-    options: ['Going Concern Assumption', 'Cost Principle', 'Conservatism', 'Materiality'],
-    correctIndex: 0,
-    hint: 'Two of the choices are genuinely tempting. One principle explains WHICH dollar figure gets used; the other explains why using that figure makes sense at all — because the company is not about to shut its doors. The scenario stresses the second idea.',
-    explanation: 'Careful here — two principles are in play and only one is the answer. The COST principle explains the dollar figure used (what Riverbend paid). The GOING CONCERN assumption is what makes cost the right basis in the first place: the company will keep operating and use the equipment up, so liquidation value is irrelevant. If Riverbend were shutting down, everything would be restated at liquidation value.',
-  },
-  {
-    text: 'Riverbend\u2019s accountant is weighing two equally defensible estimates for uncollectible accounts: $4,000 or $9,000. Genuinely unsure which is closer to the truth, she records $9,000 so that assets and income are not overstated.',
-    options: ['Conservatism', 'Materiality', 'Full Disclosure Principle', 'Revenue Recognition Principle'],
-    correctIndex: 0,
-    hint: 'Notice that BOTH estimates are described as defensible — there is no clearly right answer. Which principle tells you which way to lean when you genuinely cannot tell?',
-    explanation: 'When two treatments are equally defensible, conservatism breaks the tie in the direction that avoids overstating assets or income. Note what it does NOT mean: it is not a license to deliberately understate results — only to avoid painting a rosier picture than the facts support.',
-  },
-]
 
 function shuffled(arr) {
   const a = [...arr]
@@ -189,7 +125,7 @@ function shuffled(arr) {
 
 export default function Level11() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordQuizResult } = useProgress()
   const [phase, setPhase] = useState('learn')
 
   // Matching round
@@ -537,6 +473,7 @@ export default function Level11() {
                 if (sChosen !== null) return
                 setSChosen(i)
                 setSResults(prev => [...prev, i === s.correctIndex])
+                recordQuizResult(s.id, i === s.correctIndex)
               }}
               disabled={sChosen !== null}
               className={`w-full text-left rounded-xl border p-3 flex items-start gap-3 transition-colors ${
