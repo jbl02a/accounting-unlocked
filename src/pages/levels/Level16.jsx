@@ -73,7 +73,7 @@ function parseAmount(raw) {
 
 export default function Level16() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [step, setStep] = useState(1)
   const [eqAnswers, setEqAnswers] = useState({})
@@ -281,7 +281,10 @@ export default function Level16() {
           })}
         </div>
         {!eqChecked ? (
-          <button onClick={() => setEqChecked(true)} disabled={!filled}
+          <button onClick={() => {
+            setEqChecked(true)
+            EQUATION_QS.forEach((q, i) => recordTask(`L16-eq${i + 1}`, parseAmount(eqAnswers[q.id] || '') === q.answer, `Accounting equation — ${q.prompt.slice(0, 46)}…`, 16))
+          }} disabled={!filled}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
             {filled ? 'Check My Answers' : 'Answer all three'}
           </button>
@@ -346,7 +349,10 @@ export default function Level16() {
           </div>
         )}
         {!checked2 ? (
-          <button onClick={() => setChecked2(true)} disabled={!allPlaced}
+          <button onClick={() => {
+            setChecked2(true)
+            IS_ACCOUNTS.forEach(a => recordTask(`L16-place-${a.name}`, placed[a.name] === a.where, `Income statement placement — ${a.name}`, 16))
+          }} disabled={!allPlaced}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
             {allPlaced ? 'Check My Answers' : 'Mark every account'}
           </button>
@@ -400,7 +406,10 @@ export default function Level16() {
           })}
         </div>
         {!checked3 ? (
-          <button onClick={() => setChecked3(true)} disabled={!filled}
+          <button onClick={() => {
+            setChecked3(true)
+            fields.forEach(f => recordTask(`L16-total-${f.k}`, parseAmount(totals[f.k]) === f.ans, f.label, 16))
+          }} disabled={!filled}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
             {filled ? 'Check My Totals' : 'Fill in all three'}
           </button>
@@ -439,7 +448,10 @@ export default function Level16() {
         )}
       </div>
       {!checked4 ? (
-        <button onClick={() => setChecked4(true)} disabled={parseAmount(reAns) === null}
+        <button onClick={() => {
+          setChecked4(true)
+          recordTask('L16-endre', reRight, 'Ending retained earnings', 16)
+        }} disabled={parseAmount(reAns) === null}
           className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
           Check My Answer
         </button>

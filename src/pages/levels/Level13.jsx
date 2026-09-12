@@ -76,7 +76,7 @@ function parseAmount(raw) {
 
 export default function Level13() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [index, setIndex] = useState(0)
   const [amount, setAmount] = useState('')
@@ -102,6 +102,7 @@ export default function Level13() {
 
   function checkEntry() {
     setChecked(true)
+    recordTask(`L13-${item.id}`, entryRight, `Deferral entry — ${item.scenario.slice(0, 50)}…`, 13)
   }
   function next() {
     const score = (entryRight ? 1 : 0) + (fuRight ? 1 : 0)
@@ -270,7 +271,7 @@ export default function Level13() {
       {checked && (
         <div className={`rounded-xl p-5 mb-5 ${entryRight ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
           <p className="font-bold text-white mb-3">{entryRight ? '✅ Correct entry' : '📖 The correct entry is:'}</p>
-          <EntryTable lines={[{ account: item.debit, dr: item.amount }, { account: item.credit, cr: item.amount }]} dense />
+          <EntryTable date="Dec 31" lines={[{ account: item.debit, dr: item.amount }, { account: item.credit, cr: item.amount }]} dense />
           <p className="text-sm text-amber-200 font-mono mt-3">{item.math}</p>
           <p className="text-sm text-slate-300 mt-2">{item.explanation}</p>
 
@@ -282,7 +283,7 @@ export default function Level13() {
               <input inputMode="numeric" value={followUp} onChange={e => !fuChecked && setFollowUp(e.target.value)} disabled={fuChecked}
                 placeholder="0" className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-amber-500 disabled:opacity-70 ${fuChecked ? selCls(fuRight, !fuRight) : 'border-slate-600'}`} />
               {!fuChecked && (
-                <button onClick={() => setFuChecked(true)} disabled={parseAmount(followUp) === null}
+                <button onClick={() => { setFuChecked(true); recordTask(`L13-${item.id}-balance`, fuRight, `Remaining balance after the ${item.id} adjustment`, 13) }} disabled={parseAmount(followUp) === null}
                   className="px-4 rounded-lg bg-white/10 text-white text-sm font-semibold hover:bg-white/20 disabled:opacity-40">Check</button>
               )}
             </div>

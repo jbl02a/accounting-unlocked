@@ -89,7 +89,7 @@ function parseAmount(raw) {
 
 export default function Level10() {
   const navigate = useNavigate()
-  const { completeLevel, recordQuizResult } = useProgress()
+  const { completeLevel, recordQuizResult, recordTask } = useProgress()
   const [phase, setPhase] = useState('brief')
   const [step, setStep] = useState(1)
 
@@ -305,7 +305,7 @@ export default function Level10() {
               >
                 <div className="flex items-start gap-3">
                   <span className="text-xs font-bold text-slate-500 mt-1">{'ABCD'[i]}</span>
-                  <div className="flex-1"><EntryTable lines={opt} dense /></div>
+                  <div className="flex-1"><EntryTable date={q.date} lines={opt} dense /></div>
                   {isAnswer && <span className="text-green-400">✓</span>}
                   {isWrongPick && <span className="text-red-400">✗</span>}
                 </div>
@@ -390,7 +390,10 @@ export default function Level10() {
 
         {!checked2 ? (
           <button
-            onClick={() => setChecked2(true)}
+            onClick={() => {
+              setChecked2(true)
+              POSTING.forEach(pp => recordTask(`L10-post-${pp.account}`, parseAmount(balances[pp.account] || '') === pp.answer, `Ledger balance — ${pp.account}`, 10))
+            }}
             disabled={!allFilled}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-fuchsia-600 to-rose-600 text-white font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
           >
@@ -489,7 +492,11 @@ export default function Level10() {
 
         {!checked3 ? (
           <button
-            onClick={() => setChecked3(true)}
+            onClick={() => {
+              setChecked3(true)
+              TRIAL_BALANCE.forEach(a => recordTask(`L10-col-${a.name}`, columns[a.name] === a.side, `Trial balance column — ${a.name}`, 10))
+              recordTask('L10-totals', drRight && crRight, 'Trial balance — column totals', 10)
+            }}
             disabled={!allPlaced || !totalsFilled}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-fuchsia-600 to-rose-600 text-white font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
           >

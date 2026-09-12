@@ -123,7 +123,7 @@ function FinishedTB() {
 
 export default function Level9() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [step, setStep] = useState(1)
 
@@ -387,7 +387,10 @@ export default function Level9() {
 
         {!checked1 ? (
           <button
-            onClick={() => setChecked1(true)}
+            onClick={() => {
+              setChecked1(true)
+              TB.forEach(a => recordTask(`L9-col-${a.name}`, placed[a.name] === a.side, `Trial balance column — ${a.name}`, 9))
+            }}
             disabled={!allPlaced}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
           >
@@ -467,7 +470,10 @@ export default function Level9() {
 
         {!checked2 ? (
           <button
-            onClick={() => setChecked2(true)}
+            onClick={() => {
+              setChecked2(true)
+              recordTask('L9-order', orderCorrect === ORDER_QUIZ.length, 'Trial balance — account order', 9)
+            }}
             disabled={ordered.length !== ORDER_QUIZ.length}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
           >
@@ -536,7 +542,10 @@ export default function Level9() {
 
       {!checked3 ? (
         <button
-          onClick={() => setChecked3(true)}
+          onClick={() => {
+            setChecked3(true)
+            recordTask('L9-totals', drRight && crRight, 'Trial balance — column totals', 9)
+          }}
           disabled={parseAmount(drTotal) === null || parseAmount(crTotal) === null}
           className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90"
         >

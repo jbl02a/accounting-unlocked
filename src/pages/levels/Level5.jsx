@@ -77,7 +77,7 @@ function Amount({ n }) {
 
 export default function Level5() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [flagged, setFlagged] = useState(new Set())
   const [submitted, setSubmitted] = useState(false)
@@ -100,6 +100,7 @@ export default function Level5() {
     // Check if they flagged the "correct total" label as an error (not actually an error item)
     setSubmitted(true)
     const correctErrors = [1, 2, 3]
+    correctErrors.forEach(e => recordTask(`L5-err${e}`, flagged.has(e), `Spot the error — ${ERRORS[e].short}`, 5))
     const score = Math.round((correctErrors.filter(e => flagged.has(e)).length / correctErrors.length) * 100)
     completeLevel(5, score)
   }

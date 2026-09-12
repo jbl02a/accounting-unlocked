@@ -44,7 +44,7 @@ const BUCKET_COLORS = {
 
 export default function Level2() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [placed, setPlaced] = useState({})
   const [dragOver, setDragOver] = useState(null)
@@ -68,6 +68,7 @@ export default function Level2() {
     let correct = 0
     CARDS.forEach(card => {
       if (placed[card.id] === card.correct) correct++
+      recordTask(`L2-${card.id}`, placed[card.id] === card.correct, `Which bucket? — ${card.label}`, 2)
     })
     const pct = Math.round((correct / CARDS.length) * 100)
     setScore(pct)

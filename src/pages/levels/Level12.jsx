@@ -63,7 +63,7 @@ const CLASSIFY = [
 
 export default function Level12() {
   const navigate = useNavigate()
-  const { completeLevel, recordQuizResult } = useProgress()
+  const { completeLevel, recordQuizResult, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [round, setRound] = useState(1)
   const [qIndex, setQIndex] = useState(0)
@@ -259,7 +259,7 @@ export default function Level12() {
           const isAnswer = cChosen !== null && t.id === c.answer
           const isWrong = cChosen === t.id && t.id !== c.answer
           return (
-            <button key={t.id} onClick={() => { if (cChosen !== null) return; setCChosen(t.id); setCResults(p => [...p, t.id === c.answer]) }}
+            <button key={t.id} onClick={() => { if (cChosen !== null) return; setCChosen(t.id); setCResults(p => [...p, t.id === c.answer]); recordTask(`L12-${c.id}`, t.id === c.answer, `Which kind of adjustment? — ${c.text.slice(0, 46)}…`, 12) }}
               disabled={cChosen !== null}
               className={`text-left rounded-xl border p-3 transition-colors ${
                 isAnswer ? 'border-green-500 bg-green-900/30' : isWrong ? 'border-red-500 bg-red-900/30'

@@ -43,9 +43,14 @@ const PHASES = [
 ]
 
 export default function Home() {
-  const { progress, totalCompleted, totalLevels } = useProgress()
+  const { progress, totalCompleted, totalLevels, tasksToReview } = useProgress()
   const quote = MOTIVATIONAL[totalCompleted % MOTIVATIONAL.length]
   const best = progress.exam?.best
+  const reviewTasks = tasksToReview()
+  const reviewTotal = reviewTasks.length
+  const reviewByLevel = [...new Set(reviewTasks.map(t => t.level))]
+    .sort((a, b) => a - b)
+    .map(level => ({ level, items: reviewTasks.filter(t => t.level === level) }))
 
   return (
     <div>
@@ -107,6 +112,47 @@ export default function Home() {
           </div>
         </div>
       </Link>
+
+      {/* What he got wrong on the hands-on drills */}
+      {reviewByLevel.length > 0 && (
+        <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 p-5 mb-10">
+          <div className="flex items-start gap-3 mb-3">
+            <span className="text-2xl">🔁</span>
+            <div className="flex-1">
+              <h2 className="font-bold text-white">Go back over these</h2>
+              <p className="text-sm text-slate-300">
+                {reviewTotal} hands-on item{reviewTotal === 1 ? '' : 's'} you got wrong last time — entries, balances, columns and sorts.
+                These live inside their level, so they are not in the exam drill. Get one right and it drops off.
+              </p>
+            </div>
+          </div>
+          <div className="space-y-3">
+            {reviewByLevel.map(group => (
+              <div key={group.level} className="rounded-xl bg-black/20 p-3">
+                <div className="flex items-center justify-between gap-3 mb-1.5">
+                  <p className="text-sm font-semibold text-white">
+                    {LEVEL_META[group.level]?.icon} Level {group.level} — {LEVEL_META[group.level]?.title}
+                  </p>
+                  <Link to={`/level/${group.level}`} className="shrink-0 text-xs font-semibold text-rose-300 hover:text-white">
+                    Redo →
+                  </Link>
+                </div>
+                <ul className="space-y-0.5">
+                  {group.items.slice(0, 6).map(t => (
+                    <li key={t.id} className="text-xs text-slate-400 flex gap-2">
+                      <span className="text-rose-400/70 shrink-0">✗</span>
+                      <span>{t.label}{t.wrong > 1 && <span className="text-rose-300"> · missed {t.wrong}×</span>}</span>
+                    </li>
+                  ))}
+                  {group.items.length > 6 && (
+                    <li className="text-xs text-slate-500">+ {group.items.length - 6} more in this level</li>
+                  )}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Printable study aids */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">

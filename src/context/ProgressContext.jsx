@@ -111,10 +111,42 @@ export function ProgressProvider({ children }) {
     })
   }
 
+  // Drills that are not multiple choice — building an entry, footing an account,
+  // placing a trial balance column — have no answer index, so they cannot be
+  // re-served by the exam drill. They are still recorded, with a label and the
+  // level they came from, so the student can be told what to go back to.
+  function recordTask(id, correct, label, level) {
+    if (!id) return
+    setProgress(prev => {
+      const misses = { ...(prev.misses || {}) }
+      const entry = misses[id] || { wrong: 0, right: 0 }
+      misses[id] = {
+        wrong: entry.wrong + (correct ? 0 : 1),
+        right: entry.right + (correct ? 1 : 0),
+        last: correct ? 'right' : 'wrong',
+        at: new Date().toISOString(),
+        task: true,
+        label,
+        level,
+      }
+      return { ...prev, misses }
+    })
+  }
+
+  // Non-multiple-choice items still needing work, newest first, for the review list.
+  function tasksToReview() {
+    return Object.entries(progress.misses || {})
+      .filter(([, m]) => m.task && m.last === 'wrong')
+      .map(([id, m]) => ({ id, ...m }))
+      .sort((a, b) => (a.level - b.level) || String(a.label).localeCompare(String(b.label)))
+  }
+
   // A question counts as needing work until it is answered correctly on its most
   // recent outing, so getting it right once retires it from the drill.
   function needsWorkIds() {
-    return Object.entries(progress.misses || {}).filter(([, m]) => m.last === 'wrong').map(([id]) => id)
+    return Object.entries(progress.misses || {})
+      .filter(([, m]) => m.last === 'wrong' && !m.task)
+      .map(([id]) => id)
   }
 
   function clearMisses() {
@@ -129,7 +161,7 @@ export function ProgressProvider({ children }) {
 
   return (
     <ProgressContext.Provider
-      value={{ progress, completeLevel, recordExam, recordQuizResult, needsWorkIds, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
+      value={{ progress, completeLevel, recordExam, recordQuizResult, recordTask, tasksToReview, needsWorkIds, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
     >
       {children}
     </ProgressContext.Provider>

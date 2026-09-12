@@ -46,6 +46,12 @@ One `localStorage` key, `accounting-unlocked-progress`:
 - `migrate()` folds any older shape into the current one. **Extend it whenever you
   add a field.**
 
+`misses` holds two kinds of entry. Multiple-choice questions (exam and level alike)
+are keyed by question ID and can be **re-served** by the exam drill. Hands-on drill
+items carry `task: true` plus a `label` and `level`; they cannot be re-served, so
+they are surfaced as a review list on the home page instead. `needsWorkIds()` returns
+only the re-servable kind; `tasksToReview()` returns the other.
+
 A second key, `accounting-unlocked-exam-session`, holds an in-progress attempt
 (question IDs, answers, position, mode, and the option permutation). It is cleared
 on submit or quit and expires after two weeks.

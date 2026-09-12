@@ -85,7 +85,7 @@ function parseAmount(raw) {
 
 export default function Level7() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [index, setIndex] = useState(0)
   const [entry, setEntry] = useState({})
@@ -121,6 +121,7 @@ export default function Level7() {
   function handleCheck() {
     setChecked(true)
     setResults(prev => [...prev, isEntryCorrect])
+    recordTask(`L7-tx${tx.id}`, isEntryCorrect, `Compound entry — ${tx.date}: ${tx.description.slice(0, 46)}…`, 7)
   }
 
   function next() {
@@ -282,7 +283,7 @@ export default function Level7() {
 
       <div className="rounded-xl border border-white/10 bg-slate-900/50 overflow-hidden mb-4">
         <div className="grid grid-cols-[1fr_7rem_7rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 py-2">
-          <span>Account</span>
+          <span>Account Description <span className="normal-case font-normal text-slate-500">· {tx.date}</span></span>
           <span className="text-center">Debit</span>
           <span className="text-center">Credit</span>
         </div>
@@ -328,6 +329,7 @@ export default function Level7() {
           {!isEntryCorrect && (
             <div className="mb-3">
               <EntryTable
+                date={tx.date}
                 lines={[
                   ...Object.entries(tx.answer).filter(([, v]) => v.dr).map(([account, v]) => ({ account, dr: v.dr })),
                   ...Object.entries(tx.answer).filter(([, v]) => v.cr).map(([account, v]) => ({ account, cr: v.cr })),

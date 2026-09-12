@@ -78,13 +78,23 @@ Ahead of the exam, ranked by what actually moves a score:
 Flashcards were considered and deliberately deferred — the drills already do active
 recall, and targeted miss-drilling is a better use of limited study time.
 
+## Phase 7 — Every drill reports what was missed (Sep 12) · `36b0bd2`
+The weak-area tracker only understood multiple choice. The hands-on drills — the
+entry builders, footing, trial balance columns, the sorts, closing entries — had no
+answer index, so nothing was recorded for them.
+
+They now record through `recordTask(id, correct, label, level)`, which stores a
+human-readable label and the level alongside the result. They cannot be re-served by
+the exam drill (they are bespoke interactions living inside their levels), so instead
+the home page lists them grouped by level with a Redo link. `needsWorkIds()` filters
+tasks out so the exam drill never tries to serve one.
+
+Also added the **Date column** to journal entry tables, matching the professor's
+Date / Account Description / Debit / Credit worksheet layout.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides
-- Non-multiple-choice drills don't feed the weak-area tracker (Level 13's numeric
-  entries, Level 7's builder, Level 9's columns, Level 15's closing entries, the
-  Level 11 matching round). They have no answer index, so they need their own design.
-- Timed exam mode — his real exam has a clock
-- A **Date column** on the in-app journal tables, to match her worksheet layout
+- Timed exam mode — deliberately deferred; the owner did not want it
 - Progress export/import, as insurance against cleared browser storage
-- Flashcards
+- Flashcards — deferred; the drills already do active recall

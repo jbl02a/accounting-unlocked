@@ -61,7 +61,7 @@ function parseAmount(raw) {
 
 export default function Level15() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [step, setStep] = useState(1)
   const [kinds, setKinds] = useState({})
@@ -299,7 +299,10 @@ export default function Level15() {
           </div>
         )}
         {!checked1 ? (
-          <button onClick={() => setChecked1(true)} disabled={!allDone}
+          <button onClick={() => {
+            setChecked1(true)
+            CLASSIFY_SET.forEach(n => recordTask(`L15-kind-${n}`, kinds[n] === ATB.find(a => a.name === n).kind, `Temporary or permanent — ${n}`, 15))
+          }} disabled={!allDone}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
             {allDone ? 'Check My Answers' : 'Mark every account'}
           </button>
@@ -351,7 +354,10 @@ export default function Level15() {
           </div>
         )}
         {!checked2 ? (
-          <button onClick={() => setChecked2(true)} disabled={!filled}
+          <button onClick={() => {
+            setChecked2(true)
+            fields.forEach(f => recordTask(`L15-close-${f.k}`, parseAmount(ce[f.k]) === f.ans, f.label, 15))
+          }} disabled={!filled}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
             {filled ? 'Check My Entries' : 'Fill in all three amounts'}
           </button>
@@ -420,7 +426,11 @@ export default function Level15() {
       </div>
 
       {!checked3 ? (
-        <button onClick={() => setChecked3(true)} disabled={parseAmount(endRe) === null || !allPc}
+        <button onClick={() => {
+          setChecked3(true)
+          recordTask('L15-endre', reRight, 'Ending retained earnings after closing', 15)
+          pcSet.forEach(n => recordTask(`L15-pc-${n}`, postClosing[n] === (ATB.find(a => a.name === n).kind === 'permanent' ? 'yes' : 'no'), `On the post-closing trial balance? — ${n}`, 15))
+        }} disabled={parseAmount(endRe) === null || !allPc}
           className="w-full py-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
           {parseAmount(endRe) === null || !allPc ? 'Answer both parts' : 'Check My Answers'}
         </button>

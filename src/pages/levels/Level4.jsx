@@ -7,6 +7,7 @@ import { shuffleFields } from '../../lib/shuffle'
 const TRANSACTIONS = [
   {
     id: 1,
+    date: 'Mar 4',
     description: 'The company buys $500 of office supplies with cash.',
     emoji: '🖊️',
     hint: 'Think: what did we receive? What did we give up?',
@@ -21,6 +22,7 @@ const TRANSACTIONS = [
   },
   {
     id: 2,
+    date: 'Mar 11',
     description: 'The company earns $1,200 by completing a consulting job. Client pays cash immediately.',
     emoji: '💼',
     hint: 'What did we gain? Cash. What increased because we earned it?',
@@ -35,6 +37,7 @@ const TRANSACTIONS = [
   },
   {
     id: 3,
+    date: 'Mar 31',
     description: 'The company pays $800 of monthly rent.',
     emoji: '🏠',
     hint: 'Paying rent creates an expense. Cash goes out. Expense goes up.',
@@ -74,7 +77,7 @@ function JournalEntryRow({ label, amount, side, isCorrect, isWrong }) {
 
 export default function Level4() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [txIndex, setTxIndex] = useState(0)
   const [answers, setAnswers] = useState({})
@@ -93,6 +96,8 @@ export default function Level4() {
 
   function handleSubmit() {
     setSubmitted(prev => ({ ...prev, [tx.id]: true }))
+    const right = ans.debit === tx.debitAccount && ans.credit === tx.creditAccount
+    recordTask(`L4-tx${tx.id}`, right, `Journal entry — ${tx.date}: ${tx.description.slice(0, 46)}…`, 4)
   }
 
   function goNext() {
@@ -223,6 +228,7 @@ export default function Level4() {
         <div className="flex items-start gap-3">
           <span className="text-3xl">{tx.emoji}</span>
           <div>
+            <p className="text-xs font-semibold text-amber-300 mb-1">{tx.date}</p>
             <p className="font-semibold text-white mb-1">{tx.description}</p>
             <p className="text-xs text-amber-400/70 italic">{tx.hint}</p>
           </div>
@@ -240,15 +246,17 @@ export default function Level4() {
 
       {/* Entry builder */}
       <div className="rounded-xl border border-white/10 bg-slate-900/50 overflow-hidden mb-6">
-        <div className="grid grid-cols-3 bg-slate-800 text-xs font-bold text-slate-400 uppercase tracking-wider px-4 py-2">
-          <span>Account</span>
-          <span className="text-center">Debit $</span>
-          <span className="text-right">Credit $</span>
+        <div className="grid grid-cols-[3.6rem_1fr_5rem_5rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 py-2">
+          <span>Date</span>
+          <span>Account Description</span>
+          <span className="text-right">Debit</span>
+          <span className="text-right">Credit</span>
         </div>
 
         {/* Debit row */}
         <div className="px-4 py-3 border-b border-white/10">
           <div className="flex items-center gap-3">
+            <span className="w-12 shrink-0 text-xs text-slate-400">{tx.date}</span>
             <select
               value={ans.debit}
               onChange={e => setAns('debit', e.target.value)}
@@ -268,6 +276,7 @@ export default function Level4() {
         {/* Credit row */}
         <div className="px-4 py-3">
           <div className="flex items-center gap-3">
+            <span className="w-12 shrink-0" />
             <div className="w-4 shrink-0" />
             <select
               value={ans.credit}

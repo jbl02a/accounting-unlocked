@@ -125,7 +125,7 @@ function shuffled(arr) {
 
 export default function Level11() {
   const navigate = useNavigate()
-  const { completeLevel, recordQuizResult } = useProgress()
+  const { completeLevel, recordQuizResult, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
 
   // Matching round
@@ -151,6 +151,8 @@ export default function Level11() {
 
   function tryPair(principleId, exampleId) {
     setAttempts(a => a + 1)
+    const target = PRINCIPLES.find(p => p.id === principleId)
+    recordTask(`L11-match-${principleId}`, principleId === exampleId, `Match to its example — ${target?.name || principleId}`, 11)
     if (principleId === exampleId) {
       setMatched(m => [...m, principleId])
       setPickedPrinciple(null)

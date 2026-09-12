@@ -64,7 +64,7 @@ function parseAmount(raw) {
 
 export default function Level17() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [step, setStep] = useState(1)
   const [placed, setPlaced] = useState({})
@@ -292,7 +292,10 @@ export default function Level17() {
           </div>
         )}
         {!checked1 ? (
-          <button onClick={() => setChecked1(true)} disabled={!allPlaced}
+          <button onClick={() => {
+            setChecked1(true)
+            BS.forEach(a => recordTask(`L17-sec-${a.name}`, placed[a.name] === a.section, `Balance sheet section — ${a.name}`, 17))
+          }} disabled={!allPlaced}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
             {allPlaced ? 'Check My Sections' : 'Place every account'}
           </button>
@@ -348,7 +351,10 @@ export default function Level17() {
           </div>
         )}
         {!checked2 ? (
-          <button onClick={() => setChecked2(true)} disabled={!filled}
+          <button onClick={() => {
+            setChecked2(true)
+            totalDefs.forEach(f => recordTask(`L17-total-${f.k}`, parseAmount(totals[f.k]) === f.ans, f.label, 17))
+          }} disabled={!filled}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
             {filled ? 'Check My Totals' : 'Fill in all four'}
           </button>
@@ -396,7 +402,11 @@ export default function Level17() {
         </div>
       )}
       {!checked3 ? (
-        <button onClick={() => setChecked3(true)} disabled={parseAmount(ratios.wc) === null || parseAmount(ratios.cr) === null}
+        <button onClick={() => {
+          setChecked3(true)
+          recordTask('L17-wc', wcRight, 'Working capital', 17)
+          recordTask('L17-cr', crRight, 'Current ratio', 17)
+        }} disabled={parseAmount(ratios.wc) === null || parseAmount(ratios.cr) === null}
           className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
           Check My Answers
         </button>

@@ -49,7 +49,7 @@ function TAccount({ account, type }) {
 
 export default function Level3() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [current, setCurrent] = useState(0)
   const [answers, setAnswers] = useState([])
@@ -66,6 +66,7 @@ export default function Level3() {
     setShowFeedback(true)
     const isCorrect = choice === q.correct
     setAnswers(prev => [...prev, isCorrect])
+    recordTask(`L3-q${current + 1}`, isCorrect, `Debit or credit? — ${q.account} ${q.action}`, 3)
   }
 
   function nextQuestion() {

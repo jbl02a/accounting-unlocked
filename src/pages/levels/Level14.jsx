@@ -70,7 +70,7 @@ function parseAmount(raw) {
 
 export default function Level14() {
   const navigate = useNavigate()
-  const { completeLevel, recordQuizResult } = useProgress()
+  const { completeLevel, recordQuizResult, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [round, setRound] = useState(1)
   const [index, setIndex] = useState(0)
@@ -236,14 +236,14 @@ export default function Level14() {
         {checked && (
           <div className={`rounded-xl p-5 mb-5 ${entryRight ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
             <p className="font-bold text-white mb-3">{entryRight ? '✅ Correct entry' : '📖 The correct entry is:'}</p>
-            <EntryTable lines={[{ account: item.debit, dr: item.amount }, { account: item.credit, cr: item.amount }]} dense />
+            <EntryTable date="Dec 31" lines={[{ account: item.debit, dr: item.amount }, { account: item.credit, cr: item.amount }]} dense />
             <p className="text-sm text-emerald-200 font-mono mt-3">{item.math}</p>
             <p className="text-sm text-slate-300 mt-2">{item.explanation}</p>
           </div>
         )}
 
         {!checked ? (
-          <button onClick={() => { setChecked(true); setEntryResults(p => [...p, entryRight]) }}
+          <button onClick={() => { setChecked(true); setEntryResults(p => [...p, entryRight]); recordTask(`L14-${item.id}`, entryRight, `Accrual entry — ${item.scenario.slice(0, 50)}…`, 14) }}
             disabled={parseAmount(amount) === null || !debit || !credit}
             className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold disabled:opacity-40 hover:opacity-90">
             {parseAmount(amount) === null || !debit || !credit ? 'Enter an amount and both accounts' : 'Check My Entry'}

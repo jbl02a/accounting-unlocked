@@ -143,7 +143,7 @@ function parseAmount(raw) {
 
 export default function Level8() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [index, setIndex] = useState(0)
   const [amount, setAmount] = useState('')
@@ -165,6 +165,7 @@ export default function Level8() {
   function handleCheck() {
     setChecked(true)
     setResults(prev => [...prev, bothRight])
+    recordTask(`L8-${acct.id}`, bothRight, `Foot the account — ${acct.name}`, 8)
   }
 
   function next() {

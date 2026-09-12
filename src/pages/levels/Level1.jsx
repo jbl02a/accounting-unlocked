@@ -67,7 +67,7 @@ function Seesaw({ assetCount, liabilityEquityCount }) {
 
 export default function Level1() {
   const navigate = useNavigate()
-  const { completeLevel } = useProgress()
+  const { completeLevel, recordTask } = useProgress()
   const [placed, setPlaced] = useState({})
   const [feedback, setFeedback] = useState({})
   const [dragOver, setDragOver] = useState(null)
@@ -106,6 +106,7 @@ export default function Level1() {
     })
     setFeedback(fb)
     setSubmitted(true)
+    ITEMS.forEach(item => recordTask(`L1-${item.id}`, fb[item.id] === 'correct', `Asset, liability or equity? — ${item.label}`, 1))
     const allCorrect = ITEMS.every(item => fb[item.id] === 'correct')
     if (allCorrect) completeLevel(1, 100)
     else {
