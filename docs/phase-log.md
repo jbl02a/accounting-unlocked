@@ -78,7 +78,7 @@ Ahead of the exam, ranked by what actually moves a score:
 Flashcards were considered and deliberately deferred — the drills already do active
 recall, and targeted miss-drilling is a better use of limited study time.
 
-## Phase 7 — Every drill reports what was missed (Sep 12) · `36b0bd2`
+## Phase 7 — Every drill reports what was missed (Sep 12) · `a3df506`
 The weak-area tracker only understood multiple choice. The hands-on drills — the
 entry builders, footing, trial balance columns, the sorts, closing entries — had no
 answer index, so nothing was recorded for them.
