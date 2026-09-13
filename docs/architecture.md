@@ -101,3 +101,17 @@ deploy is never detected in production.
 `/cram` and `/worksheet` render light-on-white on screen because their purpose is
 paper. `@media print` in `index.css` hides the nav and toolbars. Verify pagination
 by rendering to PDF (see `testing.md`) — the cram sheet is meant to stay at 2 pages.
+
+## Analytics
+
+`@vercel/analytics` is mounted once in `App.jsx`. It no-ops off Vercel, so dev and
+`npm run preview` are unaffected, and it tracks client-side route changes as page views
+without extra wiring.
+
+Numbers live in the Vercel dashboard (Project → Analytics), not in the app. Counting
+visitors requires a server, and this app has none; a page inside a static SPA can only
+read its own device's `localStorage`, so an "analytics page" here would report one
+browser and imply it was reporting a site.
+
+Web Analytics has to be enabled once per project in the Vercel dashboard — the package
+alone does not turn it on.

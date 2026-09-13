@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { ProgressProvider } from './context/ProgressContext'
 import Navbar from './components/Navbar'
 import UpdatePrompt from './components/UpdatePrompt'
@@ -32,6 +33,12 @@ export default function App() {
         <div className="min-h-screen bg-gradient-to-br from-[#0f0f1a] via-[#141428] to-[#0f0f1a]">
           <Navbar />
           <UpdatePrompt />
+          {/* Vercel Web Analytics. Cookieless and no personal data — visitors are
+              counted with a daily-rotating hash, which matters because the people
+              using this are children. It reports page views and unique visitors to
+              the Vercel dashboard; it stores nothing in the app and shows nothing to
+              the student. No-ops off Vercel, so local dev and preview are unaffected. */}
+          <Analytics />
           <main className="max-w-5xl mx-auto px-4 py-8">
             <Routes>
               <Route path="/" element={<Home />} />

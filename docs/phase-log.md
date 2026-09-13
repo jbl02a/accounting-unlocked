@@ -118,6 +118,18 @@ were missing:
 
 Both added. The sheet still prints to two pages.
 
+## Phase 10 — Visitor analytics (Sep 13)
+Added `@vercel/analytics` to `App.jsx`. Reports page views and unique visitors to the
+Vercel dashboard; nothing is shown in the app and nothing is stored in it.
+
+Deliberately not built: an in-app analytics page. The app is static with per-device
+`localStorage`, so such a page could only report the browser it was running in — which
+would look like site analytics and be nothing of the kind.
+
+Cookieless and no personal data, which matters because the users are children. Needs a
+one-time toggle in the Vercel dashboard (Project → Analytics → Enable); the package
+alone does not turn it on.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides

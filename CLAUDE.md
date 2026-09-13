@@ -50,6 +50,23 @@ These are the things most likely to be broken by accident.
    that stop one reasoning step short. Feedback text after answering is where the
    answer gets stated outright. Keep those two registers separate.
 
+## Analytics
+
+`<Analytics />` from `@vercel/analytics/react` is mounted in `App.jsx`. It reports page
+views and unique visitors to the **Vercel dashboard** — not into the app. Two things to
+keep true:
+
+- **It must stay invisible to the student.** No counters, no badges, nothing in the UI.
+  This is a study tool for one person, and turning it into a monitored experience would
+  change what it is.
+- **Cookieless, no personal data.** Vercel counts visitors with a daily-rotating hash.
+  That matters here because the users are children — do not swap in an analytics
+  product that sets identifiers or profiles users.
+
+There is deliberately **no in-app analytics page**. The app is static with per-device
+`localStorage`, so a page inside it could only ever report the device it is running on —
+which would look like site analytics and be nothing of the kind.
+
 ## Verifying changes
 
 `npm run build` catches syntax only. Anything behavioural is verified by driving
