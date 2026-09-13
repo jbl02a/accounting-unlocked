@@ -6,6 +6,7 @@
 export const SECTIONS = [
   { id: 'unit1', label: 'Unit 1 · 1491–1607', icon: '🌎', blurb: 'Native societies, contact, the Columbian Exchange, Spanish empire.' },
   { id: 'unit2', label: 'Unit 2 · 1607–1754', icon: '⚓', blurb: 'The British colonies, labour systems and the Atlantic world.' },
+  { id: 'unit3', label: 'Empire & War · 1650–1763', icon: '⚔️', blurb: 'Mercantilism, salutary neglect, the French and Indian War and 1763.' },
   { id: 'compare', label: 'Comparison & Causation', icon: '⚖️', blurb: 'Regions against each other, and why things changed.' },
   { id: 'skills', label: 'Sourcing a Document', icon: '🔍', blurb: 'Purpose, audience, point of view — the DBQ skill.' },
 ]
@@ -34,6 +35,21 @@ const PENN = {
   kind: 'excerpt',
   text: 'I purpose… to leave myself and successors no power of doing mischief; that the will of one man may not hinder the good of a whole country. Any government is free to the people under it where the laws rule and the people are a party to those laws.',
   attribution: 'William Penn, Frame of Government of Pennsylvania, 1682',
+}
+const PITT_DEBT = {
+  kind: 'data',
+  text: 'British national debt\n\n1754 (before the war) — about £75 million\n1763 (at the peace) — about £133 million\n\nAnnual cost of garrisoning North America after 1763 — roughly £300,000',
+  attribution: 'Figures as commonly given by historians of the imperial crisis; estimates vary.',
+}
+const GRENVILLE = {
+  kind: 'secondary',
+  text: 'The ministry\u2019s case ran roughly like this. The nation had run itself into an immense debt to give the colonies their protection. Now, asked to contribute a small share toward an expense arising from their own defence, the colonists called it a hardship — though they paid a fraction of what subjects in Britain paid.',
+  attribution: 'A summary of the British government\u2019s argument for colonial taxation, 1764\u201365, written for this course.',
+}
+const PROCLAMATION = {
+  kind: 'excerpt',
+  text: 'And we do hereby strictly forbid... all our loving subjects from making any purchases or settlements whatever, or taking possession of any of the lands beyond the heads or sources of any of the rivers which fall into the Atlantic Ocean from the west or northwest.',
+  attribution: 'Royal Proclamation of 1763 (adapted)',
 }
 const EDWARDS = {
   kind: 'excerpt',
@@ -518,6 +534,136 @@ export const QUESTIONS = [
     correctIndex: 0,
     hint: 'Contextualization zooms OUT. It answers "what else was going on that makes this question make sense?"',
     explanation: 'Contextualization requires broader events, developments or processes before, during or after the topic — usually several sentences, not a clause. It is one of the most commonly missed easy points on the rubric.',
+  },
+  {
+    id: 'u3-1', section: 'unit3', skill: 'Developments and processes',
+    prompt: 'Mercantilist theory held that:',
+    options: [
+      'The world\u2019s wealth was fixed, so a nation gained only by exporting more than it imported',
+      'Free trade between all nations enriched every participant',
+      'Colonies should develop independent manufacturing economies',
+      'Precious metals had no bearing on national strength',
+    ],
+    correctIndex: 0,
+    hint: 'If the pie is a fixed size, the only way to get a bigger slice is to take it from someone else.',
+    explanation: 'A zero-sum theory: wealth is finite, so empires compete for a fixed pool. Colonies existed to supply raw materials and buy finished goods, keeping the balance of trade — and the gold — at home. This is the assumption behind every Navigation Act.',
+  },
+  {
+    id: 'u3-2', section: 'unit3', skill: 'Causation',
+    prompt: 'The Navigation Acts most directly benefited which colonial industry?',
+    options: [
+      'New England shipbuilding and the carrying trade, because colonial ships counted as British',
+      'Southern textile manufacturing, which was given protected status',
+      'Colonial iron finishing, which Parliament actively encouraged',
+      'Colonial wool exports to continental Europe',
+    ],
+    correctIndex: 0,
+    hint: 'Read the definition of an "English ship" carefully — who else fits inside it?',
+    explanation: 'Because colonial-built ships and colonial crews satisfied the Acts, New England yards supplied a large share of the empire\u2019s merchant fleet. Meanwhile the Wool, Hat and Iron Acts restricted exactly the finished manufacturing the wrong answers describe.',
+  },
+  {
+    id: 'u3-3', section: 'unit3', skill: 'Continuity and change',
+    prompt: 'The practical effect of salutary neglect on colonial politics was that:',
+    options: [
+      'Colonial assemblies accumulated real power, including control of governors\u2019 salaries',
+      'Royal governors gained near-absolute authority over local affairs',
+      'Colonial assemblies were dissolved for most of the period',
+      'Parliament reviewed each colonial statute before it took effect',
+    ],
+    correctIndex: 0,
+    hint: 'When nobody in London is watching for decades, who fills the space?',
+    explanation: 'Assemblies used the power of the purse — especially over salaries — to bend royal governors to local interests. By 1763 colonists regarded self-government as a right long possessed, not a privilege recently granted, which is why reasserting control provoked so much more than grumbling.',
+  },
+  {
+    id: 'u3-4', section: 'unit3', skill: 'Analyzing sources', stimulus: PROCLAMATION,
+    prompt: 'The British government issued this measure primarily to:',
+    options: [
+      'Avoid another costly war with Native nations after Pontiac\u2019s uprising',
+      'Punish colonists for their conduct during the recent war',
+      'Return the Ohio valley to French control',
+      'Encourage rapid settlement of the western territories',
+    ],
+    correctIndex: 0,
+    hint: 'Ask what Britain had just spent money on, and what it could not afford to spend money on again.',
+    explanation: 'Britain was broke and had just watched Pontiac\u2019s coalition take most western posts. Separating settlers from Native nations was cheaper than garrisoning a frontier. Colonists read the same document as a betrayal of what they had fought for — a good example of one policy with two entirely coherent readings.',
+  },
+  {
+    id: 'u3-5', section: 'unit3', skill: 'Analyzing sources', stimulus: PITT_DEBT,
+    prompt: 'These figures are most useful for explaining:',
+    options: [
+      'Why Parliament began taxing the colonies directly in the 1760s',
+      'Why Britain withdrew its army from North America after 1763',
+      'Why the colonies were granted seats in Parliament',
+      'Why Britain returned Canada to France',
+    ],
+    correctIndex: 0,
+    hint: 'A doubled debt and a standing garrison. Who did Parliament decide should help pay?',
+    explanation: 'The debt roughly doubled and the garrison added an annual charge, so Parliament looked to the colonies that the war had defended: Sugar Act 1764, Stamp Act 1765, Quartering Act 1765. The numbers are the hinge between the war and the imperial crisis.',
+  },
+  {
+    id: 'u3-6', section: 'unit3', skill: 'Analyzing sources', stimulus: GRENVILLE,
+    prompt: 'Colonists rejected the argument summarised here mainly on the grounds that:',
+    options: [
+      'Only their own elected assemblies could tax them, whatever the sum involved',
+      'They had contributed nothing to the recent war and felt no obligation',
+      'The amounts demanded exceeded what any colony could possibly pay',
+      'They denied that Britain had fought any war in North America',
+    ],
+    correctIndex: 0,
+    hint: 'The colonial objection is about who is asking, not how much is being asked.',
+    explanation: 'Colonists paid far less tax than Britons and knew it. The objection was constitutional: taxation required the consent of a body they had elected, and Parliament was not one. Answering this question with "the taxes were too high" is the classic error.',
+  },
+  {
+    id: 'u3-7', section: 'unit3', skill: 'Causation',
+    prompt: 'The removal of France from mainland North America in 1763 weakened Britain\u2019s position with its colonies because:',
+    options: [
+      'Colonists no longer depended on British troops for protection against a rival empire',
+      'Britain lost access to colonial ports',
+      'The colonies immediately lost their most important trading partner',
+      'France had previously collected taxes on Britain\u2019s behalf',
+    ],
+    correctIndex: 0,
+    hint: 'Protection is leverage. What happens to the leverage when the danger disappears?',
+    explanation: 'For a century the French threat made British protection indispensable. With France gone, the colonies needed Britain far less at precisely the moment Britain began demanding more of them. This is the irony at the centre of the period: victory dissolved the tie it was meant to strengthen.',
+  },
+  {
+    id: 'u3-8', section: 'unit3', skill: 'Comparison',
+    prompt: 'Compared with the Albany Plan of 1754, colonial responses to the Stamp Act in 1765 showed that colonists:',
+    options: [
+      'Were far more willing to act jointly when they saw a common threat from Britain itself',
+      'Had abandoned all interest in intercolonial cooperation',
+      'Preferred to negotiate individually with the Crown rather than together',
+      'Had accepted Parliament\u2019s right to tax them internally',
+    ],
+    correctIndex: 0,
+    hint: 'Compare a plan every assembly refused with a congress nine colonies attended eleven years later.',
+    explanation: 'In 1754 no assembly would yield an inch of authority to a union for defence. In 1765 nine colonies sent delegates to the Stamp Act Congress and merchants coordinated a boycott. What changed was not colonial affection for each other but a shared antagonist.',
+  },
+  {
+    id: 'u3-9', section: 'unit3', skill: 'Contextualization',
+    prompt: 'For Native nations, the outcome of the war was disastrous chiefly because:',
+    options: [
+      'They lost the ability to play rival empires against one another, leaving only Britain to bargain with',
+      'They were formally expelled from all territory east of the Mississippi by treaty',
+      'They had taken no part in the fighting and were excluded from the peace',
+      'The French had been their only trading partners for firearms and cloth',
+    ],
+    correctIndex: 0,
+    hint: 'Their leverage had come from there being two empires. How much leverage is left with one?',
+    explanation: 'Balancing France against Britain had been the foundation of Native diplomacy for a century. In 1763 that ended: Britain cut back gift-giving, settlers pushed west, and Pontiac\u2019s War followed. No Native nation was party to the Treaty of Paris, which divided their land between two European powers.',
+  },
+  {
+    id: 'u3-10', section: 'unit3', skill: 'Causation',
+    prompt: 'A student writes: "The French and Indian War caused the American Revolution." The best refinement of that claim is that the war:',
+    options: [
+      'Created the debt and removed the threat that led Britain to make the decisions colonists rebelled against',
+      'Had no meaningful connection to the Revolution at all',
+      'Convinced colonists in 1763 that they should seek immediate independence',
+      'Left Britain too weak militarily to govern its colonies',
+    ],
+    correctIndex: 0,
+    hint: 'A cause that works through other people\u2019s decisions is still a cause — but say how it works.',
+    explanation: 'Almost nobody wanted independence in 1763. The war produced conditions — debt, a garrison, a vanished French threat, an appetite for enforcement — and Parliament\u2019s response to those conditions produced the crisis. Naming the intermediate steps is what separates a top essay from a slogan.',
   },
 ]
 

@@ -409,16 +409,230 @@ export const L6_QUIZ = [
   },
 ]
 
+// ── Level 7 · The Atlantic World ────────────────────────
+const L7_BURKE = {
+  kind: 'excerpt',
+  text: 'A wise and salutary neglect. Not having been born under the shadow of any power, the colonies have grown to a strength and a commerce that no other people ever reached in so short a space... it was the pattern of a wise and prudent conduct to let them govern themselves.',
+  attribution: 'Edmund Burke, Speech on Conciliation with America, House of Commons, 1775 (adapted). Burke coined the phrase looking back on the policy Britain had abandoned.',
+}
+const L7_NAV = {
+  kind: 'excerpt',
+  text: 'No goods shall be imported into or exported out of any colony or plantation belonging to His Majesty... but in such ships as do truly belong to the people of England, Ireland or the plantations, and whereof the master and three fourths of the mariners at least are English.',
+  attribution: 'Navigation Act, 1660 (adapted)',
+}
+
+export const L7_QUIZ = [
+  {
+    id: 'L7-q1', skill: 'Analyzing sources', stimulus: L7_NAV,
+    prompt: 'The requirement described here served British mercantilist policy primarily by:',
+    options: [
+      'Reserving colonial trade and the shipping profits from it for British subjects rather than foreign rivals',
+      'Forbidding the colonies to trade with one another',
+      'Guaranteeing colonists the same prices as merchants in London',
+      'Ending all taxation of colonial goods',
+    ],
+    correctIndex: 0,
+    hint: 'Ask who is excluded by the rule, not who is included. Which nation\u2019s merchants lose the business?',
+    explanation: 'Mercantilism treats wealth as finite: every cargo carried in a Dutch ship is wealth leaving the empire. Requiring English ships and crews kept the freight, the insurance and the middleman\u2019s cut inside the empire. Note it also built the New England shipbuilding industry, since colonial ships counted as English.',
+  },
+  {
+    id: 'L7-q2', skill: 'Developments and processes',
+    prompt: 'Under mercantilism, the colonies were expected to:',
+    options: [
+      'Supply raw materials to Britain and buy finished British manufactures in return',
+      'Develop their own manufacturing to compete with Britain',
+      'Trade freely with whichever European power offered the best price',
+      'Pay for their own defence without any British military support',
+    ],
+    correctIndex: 0,
+    hint: 'Draw the arrows. What flows toward London, and what flows back?',
+    explanation: 'Raw materials out, manufactured goods in — with Britain capturing the profitable processing step. Parliament reinforced this by restricting colonial manufacturing directly (the Wool Act, Hat Act and Iron Act), which is worth naming as evidence rather than just asserting the theory.',
+  },
+  {
+    id: 'L7-q3', skill: 'Analyzing sources', stimulus: L7_BURKE,
+    prompt: 'Burke uses the phrase "salutary neglect" to describe a policy in which Britain:',
+    options: [
+      'Left the colonies largely to govern and trade as they pleased, enforcing its own laws only loosely',
+      'Deliberately abandoned the colonies to foreign invasion',
+      'Governed the colonies more tightly than any other European power governed its own',
+      'Granted the colonies formal independence in matters of trade',
+    ],
+    correctIndex: 0,
+    hint: '"Salutary" means beneficial. Beneficial neglect — neglect of what, and good for whom?',
+    explanation: 'For decades Britain left the Navigation Acts loosely enforced and colonial assemblies largely alone, because the arrangement was profitable and the colonies were prospering. Colonists came to treat self-government and cheap smuggled goods as normal — which is exactly why enforcement after 1763 felt like a new tyranny rather than an old law.',
+  },
+  {
+    id: 'L7-q4', skill: 'Causation',
+    prompt: 'Smuggling was widespread in the colonies before 1763 chiefly because:',
+    options: [
+      'Enforcement was lax and colonial juries rarely convicted their neighbours, so the profit outweighed the risk',
+      'The Navigation Acts had been formally repealed',
+      'Britain had no navy capable of reaching North America',
+      'Colonial merchants were forbidden to trade in any legal goods',
+    ],
+    correctIndex: 0,
+    hint: 'The law existed. What was missing was the second half of any law.',
+    explanation: 'Molasses from the French West Indies was cheaper than the British article, customs officials were few and often bribed, and local juries acquitted. When Britain later tried vice-admiralty courts without juries to fix this, colonists read it as a denial of the right to trial by jury.',
+  },
+  {
+    id: 'L7-q5', skill: 'Comparison',
+    prompt: 'Historians debate whether mercantilism helped or hurt the colonies. The strongest answer notes that it:',
+    options: [
+      'Did both — guaranteed markets, naval protection and a shipbuilding boom, while restricting manufacturing and forcing trade through British middlemen',
+      'Hurt every colony equally and provided no benefit of any kind',
+      'Was purely beneficial, which is why colonists never objected to it',
+      'Had no measurable economic effect on the colonies at all',
+    ],
+    correctIndex: 0,
+    hint: 'A question that says "historians debate" is asking you to hold two things at once.',
+    explanation: 'Protected markets, Royal Navy protection and the fact that colonial ships counted as British were real benefits — New England\u2019s merchant fleet grew on them. The costs were restricted manufacturing, compelled middlemen and prices set elsewhere. Say both, then weigh them; that is what earns complexity.',
+  },
+  {
+    id: 'L7-q6', skill: 'Continuity and change',
+    prompt: 'The Dominion of New England (1686–89) matters to this story because it showed that:',
+    options: [
+      'When Britain did try to govern the colonies directly, colonists resisted and reasserted their assemblies',
+      'Colonists preferred royal governors to their own elected assemblies',
+      'Britain had permanently abandoned the idea of colonial self-government',
+      'New England colonies had never possessed representative government',
+    ],
+    correctIndex: 0,
+    hint: 'It consolidated the New England colonies, suspended their assemblies — and then what happened to it?',
+    explanation: 'James II merged the northern colonies, suspended their assemblies and enforced the Navigation Acts. When the Glorious Revolution deposed him in 1688, colonists overthrew Governor Andros and the Dominion collapsed. Britain reverted to neglect — a rehearsal, eighty years early, for the crisis after 1763.',
+  },
+]
+
+// ── Level 8 · The French & Indian War ───────────────────
+const L8_PROCLAMATION = {
+  kind: 'excerpt',
+  text: 'And we do hereby strictly forbid... all our loving subjects from making any purchases or settlements whatever, or taking possession of any of the lands beyond the heads or sources of any of the rivers which fall into the Atlantic Ocean from the west or northwest... and we do hereby command all persons who have seated themselves upon such lands forthwith to remove themselves.',
+  attribution: 'Royal Proclamation of 1763 (adapted)',
+}
+const L8_FRANKLIN = {
+  kind: 'excerpt',
+  text: 'That the said general government be administered by a President-General, to be appointed and supported by the crown; and a Grand Council, to be chosen by the representatives of the people of the several Colonies... who shall meet to consider matters of general concern, particularly defence and relations with the Indian nations.',
+  attribution: 'Benjamin Franklin, the Albany Plan of Union, 1754 (adapted)',
+}
+
+export const L8_QUIZ = [
+  {
+    id: 'L8-q1', skill: 'Causation',
+    prompt: 'The immediate cause of the French and Indian War was:',
+    options: [
+      'A collision between British colonial and French claims to the Ohio River valley',
+      'A French invasion of New England towns',
+      'Britain\u2019s attempt to tax the colonies to pay for earlier wars',
+      'A dispute between Spain and Britain over Florida',
+    ],
+    correctIndex: 0,
+    hint: 'Follow the land speculators and fur traders west. Where do the two empires actually touch?',
+    explanation: 'Virginians (Washington among them) wanted the Ohio valley; France was building forts to link Canada to Louisiana; the Native nations living there wanted neither. Washington\u2019s defeat at Fort Necessity in 1754 started a war that spread to Europe as the Seven Years\u2019 War — a colonial dispute that grew into a global one.',
+  },
+  {
+    id: 'L8-q2', skill: 'Analyzing sources', stimulus: L8_FRANKLIN,
+    prompt: 'The Albany Plan of 1754 is significant chiefly because it:',
+    options: [
+      'Proposed intercolonial union for defence — and was rejected by every colonial assembly',
+      'Was adopted immediately and governed the colonies through the war',
+      'Called for immediate independence from Britain',
+      'Was written by Parliament to tighten control over the colonies',
+    ],
+    correctIndex: 0,
+    hint: 'Note who wrote it, what it asked for, and what happened to it. The last part is the point.',
+    explanation: 'Franklin proposed a common council for defence and Indian relations; every assembly refused to surrender any of its own authority. The rejection shows how separate the colonies still felt in 1754 — which is the baseline that makes their cooperation a decade later so striking.',
+  },
+  {
+    id: 'L8-q3', skill: 'Causation',
+    prompt: 'Most Native nations that took sides in the war allied with France because:',
+    options: [
+      'France wanted trade and posts, while British colonists wanted farmland their settlement would take',
+      'France had a far larger colonial population than Britain',
+      'Britain had refused to trade with any Native nation',
+      'France promised to grant them representation in the French government',
+    ],
+    correctIndex: 0,
+    hint: 'Same logic as Level 3. Which empire\u2019s victory costs you your land?',
+    explanation: 'Fur traders are neighbours; farm families are a front line. Most nations backed France, while the Iroquois Confederacy mostly leaned British or stayed neutral. Native nations acted on their own strategic interests — never write them as pawns of either empire.',
+  },
+  {
+    id: 'L8-q4', skill: 'Developments and processes',
+    prompt: 'By the Treaty of Paris of 1763, France:',
+    options: [
+      'Surrendered Canada and its claims east of the Mississippi, effectively ending its North American empire',
+      'Gained Canada while ceding the Caribbean to Britain',
+      'Kept the Ohio valley but lost Louisiana to Spain',
+      'Was expelled from the Americas entirely, including the Caribbean',
+    ],
+    correctIndex: 0,
+    hint: 'Britain took the mainland. France kept its sugar islands, which it valued more than furs.',
+    explanation: 'Britain took Canada and everything east of the Mississippi; Spain (France\u2019s ally) gave up Florida and received Louisiana in compensation. France retained its profitable Caribbean sugar islands. The strategic consequence is the one that matters: with France gone from the mainland, the colonists no longer needed British protection.',
+  },
+  {
+    id: 'L8-q5', skill: 'Analyzing sources', stimulus: L8_PROCLAMATION,
+    prompt: 'Colonists objected to this proclamation mainly because it:',
+    options: [
+      'Closed to settlement the western land many had just fought a war to secure',
+      'Imposed a direct tax on land purchases in the colonies',
+      'Handed the Ohio valley back to France',
+      'Required colonial assemblies to be dissolved',
+    ],
+    correctIndex: 0,
+    hint: 'Ask what a Virginia veteran or land speculator expected as the reward for winning.',
+    explanation: 'Britain drew the line to prevent another costly Native war after Pontiac\u2019s uprising — a defensible aim. But colonists had understood the war as opening the west, and speculators (Washington included) held claims beyond the line. Most simply ignored it, which taught them that British authority could be ignored.',
+  },
+  {
+    id: 'L8-q6', skill: 'Causation',
+    prompt: 'The most important long-term consequence of the war for Britain\u2019s relationship with its colonies was that:',
+    options: [
+      'An enormous war debt ended salutary neglect, as Britain began taxing and enforcing in earnest',
+      'Britain granted the colonies representation in Parliament',
+      'Britain withdrew all troops from North America',
+      'The colonies were left with no defence against Native nations',
+    ],
+    correctIndex: 0,
+    hint: 'Britain won. What does winning a world war cost, and who did Parliament think should help pay?',
+    explanation: 'The national debt roughly doubled, and keeping ten thousand troops in America cost more still. Parliament concluded the colonies should contribute: Sugar Act 1764, Stamp Act 1765, and real customs enforcement. To colonists used to running themselves, that was not a new bill — it was an attack on rights they already held.',
+  },
+  {
+    id: 'L8-q7', skill: 'Continuity and change',
+    prompt: 'The war also changed how colonists and British officials saw each other, in that:',
+    options: [
+      'Colonists gained military confidence and a sense of common cause, while British officers came away contemptuous of colonial troops',
+      'Both sides emerged with a deepened respect for one another',
+      'Colonists concluded they could not survive without British troops',
+      'British officials decided colonial assemblies should be given more power',
+    ],
+    correctIndex: 0,
+    hint: 'Two impressions formed, and they pointed in opposite directions.',
+    explanation: 'Colonists fought together, saw British regulars up close and grew confident; British officers thought colonial militia undisciplined and colonial merchants disloyal for trading with the enemy. Mutual contempt plus a debt plus a removed French threat is the combination that makes 1765 explosive.',
+  },
+  {
+    id: 'L8-q8', skill: 'Contextualization',
+    prompt: 'Pontiac\u2019s War (1763) is best understood as:',
+    options: [
+      'Native resistance to British occupation of former French posts and to colonial settlement pressing west',
+      'A French attempt to reconquer Canada',
+      'A revolt of colonial settlers against the Proclamation Line',
+      'A conflict between the Iroquois and the Cherokee over hunting grounds',
+    ],
+    correctIndex: 0,
+    hint: 'When France left, the balance Native nations had played between two empires disappeared. What follows?',
+    explanation: 'With France gone, Britain stopped the gift-giving diplomacy Native nations expected and settlers pushed west. A coalition under Pontiac took most British posts west of the Appalachians. The Proclamation of 1763 was Britain\u2019s response — which is why the war and the line belong in the same sentence.',
+  },
+]
+
 const LEVEL_META = {
   1: { section: 'L1', icon: '🌽', label: 'Before Contact' },
   2: { section: 'L2', icon: '⛵', label: 'Contact & the Columbian Exchange' },
   3: { section: 'L3', icon: '🏴', label: 'Three Empires' },
   4: { section: 'L4', icon: '🚬', label: 'The Chesapeake' },
   5: { section: 'L5', icon: '⛪', label: 'New England' },
-  6: { section: 'L6', icon: '🌾', label: 'Middle Colonies & Lower South' }
+  6: { section: 'L6', icon: '🌾', label: 'Middle Colonies & Lower South' },
+  7: { section: 'L7', icon: '🧭', label: 'The Atlantic World' },
+  8: { section: 'L8', icon: '⚔️', label: 'The French & Indian War' }
 }
 
-const BY_LEVEL = { 1: L1_QUIZ, 2: L2_QUIZ, 3: L3_QUIZ, 4: L4_QUIZ, 5: L5_QUIZ, 6: L6_QUIZ }
+const BY_LEVEL = { 1: L1_QUIZ, 2: L2_QUIZ, 3: L3_QUIZ, 4: L4_QUIZ, 5: L5_QUIZ, 6: L6_QUIZ, 7: L7_QUIZ, 8: L8_QUIZ }
 
 // Flattened and tagged, which is the shape the practice exam consumes.
 export const LEVEL_QUESTIONS = Object.entries(BY_LEVEL).flatMap(([level, qs]) =>

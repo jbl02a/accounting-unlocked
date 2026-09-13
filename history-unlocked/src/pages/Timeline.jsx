@@ -8,6 +8,7 @@ const ERAS = [
   { id: 'contact', label: 'Contact', range: '1491–1607' },
   { id: 'settle', label: 'Settlement', range: '1607–1700' },
   { id: 'mature', label: 'Maturing colonies', range: '1700–1754' },
+  { id: 'war', label: 'Empire & war', range: '1754–1765' },
 ]
 
 const ENTRIES = [
@@ -85,9 +86,30 @@ const ENTRIES = [
   { year: '1739', era: 'mature', level: 6, title: 'Stono Rebellion',
     what: 'About sixty enslaved people march toward Spanish Florida, which had promised freedom. The uprising is crushed.',
     why: 'Followed by the Negro Act of 1740. The pattern repeats: resistance produced repression, not reform.' },
-  { year: '1754', era: 'mature', level: null, title: 'French and Indian War; Albany Plan',
-    what: 'War begins in the Ohio valley; Franklin proposes colonial union and every colony refuses.',
-    why: 'The hinge into Period 3 — the war’s debts and the end of salutary neglect set up the imperial crisis.' },
+  { year: '1651–1733', era: 'mature', level: 7, title: 'The Navigation Acts',
+    what: 'A series of laws requiring colonial trade to move in British ships and routing "enumerated" goods through Britain first.',
+    why: 'Mercantilism in legal form. Loosely enforced for a century, which is the whole point — the laws were old; the enforcement after 1763 was new.' },
+  { year: '1686–89', era: 'mature', level: 7, title: 'Dominion of New England',
+    what: 'James II merges the northern colonies, suspends their assemblies and enforces the trade laws; the Glorious Revolution topples him and colonists overthrow Governor Andros.',
+    why: 'A full rehearsal for 1763–65, eighty years early: tighten control, meet resistance, revert to neglect.' },
+  { year: '1754', era: 'war', level: 8, title: 'Fort Necessity; the Albany Plan',
+    what: 'Washington surrenders in the Ohio valley, starting the French and Indian War. Franklin proposes colonial union for defence and every assembly refuses.',
+    why: 'A frontier skirmish becomes a world war — and the refusal shows how separate the colonies still were in 1754.' },
+  { year: '1755', era: 'war', level: 8, title: 'Braddock’s defeat',
+    what: 'A British regular army is destroyed near Fort Duquesne.',
+    why: 'Early British disasters — and a lesson colonists drew about the invincibility of regular troops.' },
+  { year: '1757–59', era: 'war', level: 8, title: 'Pitt takes over; Quebec falls',
+    what: 'William Pitt pours money and troops into North America; Quebec falls in 1759.',
+    why: 'The turning point. Britain wins the continent — and borrows enormously to do it.' },
+  { year: '1763', era: 'war', level: 8, title: 'Treaty of Paris',
+    what: 'France cedes Canada and everything east of the Mississippi; Spain gives up Florida and takes Louisiana; France keeps its sugar islands.',
+    why: 'France leaves the mainland, so the colonies no longer need British protection — at the exact moment Britain starts asking more of them.' },
+  { year: '1763', era: 'war', level: 8, title: 'Pontiac’s War; the Proclamation Line',
+    what: 'A Native coalition takes most British posts beyond the Appalachians; Britain then forbids settlement west of the mountains.',
+    why: 'For Native nations, the end of playing two empires off each other. For colonists, a betrayal of what they thought they had won.' },
+  { year: '1764–65', era: 'war', level: 8, title: 'Sugar Act, Stamp Act, Quartering Act',
+    what: 'Parliament taxes the colonies directly and enforces customs in earnest; nine colonies send delegates to the Stamp Act Congress.',
+    why: 'The end of salutary neglect. Compare that joint response with the flat refusal of the Albany Plan eleven years earlier.' },
 ]
 
 export default function Timeline() {
@@ -99,7 +121,7 @@ export default function Timeline() {
       <div className="mb-6">
         <h1 className="text-3xl font-extrabold text-white mb-2">Colonial Timeline</h1>
         <p className="text-slate-400">
-          1491 to 1754. Dates by themselves earn nothing on this exam — the line that matters is{' '}
+          1491 to 1765. Dates by themselves earn nothing on this exam — the line that matters is{' '}
           <span className="text-amber-300">why it matters</span>. Read those first.
         </p>
       </div>
@@ -108,7 +130,7 @@ export default function Timeline() {
         <button onClick={() => setEra('all')}
           className={`px-3 py-1.5 rounded-lg text-sm font-semibold border transition-colors ${
             era === 'all' ? 'border-amber-500 bg-amber-900/40 text-white' : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-amber-400'}`}>
-          All · 1491–1754
+          All · 1491–1765
         </button>
         {ERAS.map(x => (
           <button key={x.id} onClick={() => setEra(x.id)}
@@ -144,7 +166,7 @@ export default function Timeline() {
       </ol>
 
       <p className="text-xs text-slate-600 mt-8 text-center">
-        {shown.length} of {ENTRIES.length} entries · Periods 1 and 2
+        {shown.length} of {ENTRIES.length} entries · Periods 1–2 and the opening of Period 3
       </p>
     </div>
   )

@@ -40,7 +40,33 @@ const DATES = [
   ['1730s–40s', 'First Great Awakening — Edwards, Whitefield; New Lights vs Old Lights'],
   ['1732', 'Georgia chartered — buffer against Spanish Florida; slavery banned at first'],
   ['1739', 'Stono Rebellion → Negro Act of 1740'],
-  ['1754', 'French and Indian War begins; Albany Plan of Union proposed and rejected'],
+  ['1754', 'Fort Necessity: the French and Indian War begins. Albany Plan of Union proposed and rejected by every assembly'],
+  ['1755', 'Braddock\u2019s army destroyed near Fort Duquesne'],
+  ['1757–59', 'Pitt takes charge; Quebec falls in 1759'],
+  ['1763', 'Treaty of Paris: France leaves the mainland. Pontiac\u2019s War. Proclamation Line closes the west'],
+  ['1764–65', 'Sugar Act, Stamp Act, Quartering Act; Stamp Act Congress — nine colonies act together'],
+]
+
+const EMPIRE = [
+  ['Mercantilism', 'Wealth is finite: colonies supply cheap raw materials and buy finished British goods, keeping the balance of trade at home.'],
+  ['Navigation Acts (from 1651)', 'Colonial trade in British or colonial ships with mostly British crews; "enumerated" goods (tobacco, sugar, indigo, later rice) to Britain first; foreign goods routed through Britain.'],
+  ['Helped the colonies', 'Guaranteed buyers and bounties · Royal Navy protection at British expense · colonial ships counted as British, which built New England\u2019s merchant fleet.'],
+  ['Hurt the colonies', 'Wool, Hat and Iron Acts capped manufacturing · compelled middlemen took a cut · no representation in the Parliament writing the rules.'],
+  ['Salutary neglect', 'Britain had the laws and barely enforced them, roughly 1690s–1763. Assemblies gained real power (they paid the governors); smuggling was routine. The laws were old — the ENFORCEMENT after 1763 was new.'],
+  ['Dominion of New England (1686–89)', 'The one attempt at direct rule before 1763: assemblies suspended, trade laws enforced. Colonists overthrew Governor Andros after the Glorious Revolution. A rehearsal for 1765.'],
+  ['Triangular trades', 'No single triangle. Rum and goods to West Africa · enslaved people on the Middle Passage to the West Indies and mainland · sugar and molasses north to be distilled. Every region was tied to slavery, including those with little of it.'],
+]
+
+const WAR = [
+  ['The two names', 'French and Indian War = the North American fighting, 1754–63, against the French AND their Native allies. Seven Years\u2019 War = the same conflict globally, 1756–63. Same war, wider frame.'],
+  ['Why it started', 'British colonial and French claims collided in the Ohio valley. Washington\u2019s surrender at Fort Necessity (1754) began it.'],
+  ['Albany Plan (1754)', 'Franklin\u2019s proposal for colonial union for defence — rejected by every assembly. The baseline that makes 1765 cooperation striking.'],
+  ['Native nations', 'Most allied with France (traders, not settlers); the Iroquois mostly leaned British or stayed neutral. They acted on their own interests — never as pawns.'],
+  ['How it turned', 'Braddock destroyed near Fort Duquesne (1755) → Pitt pours in money and troops (1757) → Quebec falls (1759).'],
+  ['Treaty of Paris (1763)', 'France cedes Canada and everything east of the Mississippi; Spain gives up Florida and receives Louisiana; France keeps its sugar islands.'],
+  ['Pontiac\u2019s War (1763)', 'With France gone, gift-giving diplomacy ended and settlers pushed west. A Native coalition took most western posts.'],
+  ['Proclamation of 1763', 'No settlement west of the Appalachians — cheaper than another frontier war. Colonists thought they had just fought for that land, and largely ignored the line.'],
+  ['The bill', 'Debt roughly doubled (about £75m → £133m) plus a garrison to pay for → Sugar Act 1764, Stamp Act 1765, Quartering Act 1765, real customs enforcement.'],
 ]
 
 const EXCHANGE = [
@@ -53,6 +79,7 @@ const CHAINS = [
   ['Why the Atlantic slave trade?', 'Sugar (an Old World crop) planted in the Americas → immense labour demand → Native labour force destroyed by disease → Europeans turn to enslaved Africans → trade scales up.'],
   ['Why did New England build towns and schools?', 'Covenant theology makes the congregation self-governing → town meeting. Salvation requires reading Scripture yourself → Harvard 1636, school law 1647, highest literacy in the English-speaking world.'],
   ['Why was France least violent toward Native peoples?', 'Furs required Native trappers and allies → cooperation served French interests. England wanted the land itself → displacement was structural. Explain by interest, never by character.'],
+  ['Why did winning the war cost Britain the colonies?', 'Debt roughly doubles → Parliament decides the colonies must contribute → salutary neglect ends and enforcement begins → meanwhile France is gone, so the colonies no longer need protection → demands rise exactly as dependence falls → resistance is constitutional, about who may tax, not about the amount.'],
   ['Why did colonial self-government develop?', 'Private charters and distance → weak royal supervision → assemblies fill the gap (Burgesses 1619) → salutary neglect after 1688 lets the habit harden → enforcement after 1763 feels like a violation of rights already held.'],
 ]
 
@@ -82,6 +109,9 @@ const TRAPS = [
   'The town meeting was not democracy — church membership and property limited the franchise.',
   'Bacon was not a liberator. His rebellion attacked Native peoples as well as the governor.',
   'Direction matters in the Columbian Exchange: horses and sugar went west; potatoes and tobacco went east.',
+  'The war did not cause the Revolution on its own. It produced the debt and removed the French threat; Parliament\u2019s decisions turned that into a crisis. Write the chain, not a leap.',
+  'The taxes were not crushing — colonists paid far less than Britons. The objection was constitutional: taxation required consent from a body they had elected.',
+  '"French and Indian War" means the war against the French AND their Native allies — not a war between the French and Native nations.',
   'The Great Awakening was religious, not political — but it taught colonists to question authority, which had political effects.',
 ]
 
@@ -108,7 +138,7 @@ export default function CramSheet() {
         <div>
           <h1 className="text-2xl font-extrabold text-white">Colonial Cram Sheet</h1>
           <p className="text-sm text-slate-400">
-            Periods 1 and 2 only — 1491 to 1754. Prints clean on two sides; the dark theme is dropped automatically.
+            Periods 1 and 2, through the French & Indian War — 1491 to 1765. Prints clean on two sides; the dark theme is dropped automatically.
           </p>
         </div>
         <button onClick={() => window.print()} className="shrink-0 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold hover:opacity-90">
@@ -119,7 +149,7 @@ export default function CramSheet() {
       <div className="cram-page">
         <header className="cram-head">
           <h1>AP U.S. History — Colonial Cram Sheet</h1>
-          <p>Periods 1–2 · 1491–1754 · contact, three empires, four colonial regions, slavery, the Atlantic world</p>
+          <p>Periods 1–2 and into 3 · 1491–1765 · contact, three empires, four regions, the imperial system, and the French & Indian War</p>
         </header>
 
         <Section title="The four colonial regions">
@@ -167,7 +197,32 @@ export default function CramSheet() {
           </p>
         </Section>
 
-        <Section title="Causal chains worth memorising" className="break-before">
+        <Section title="Running the empire: mercantilism and salutary neglect" className="break-before">
+          <table>
+            <tbody>
+              {EMPIRE.map(([k, d]) => (
+                <tr key={k}><td className="w-44"><strong>{k}</strong></td><td>{d}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </Section>
+
+        <Section title="The French & Indian War, 1754–1763">
+          <table>
+            <tbody>
+              {WAR.map(([k, d]) => (
+                <tr key={k}><td className="w-44"><strong>{k}</strong></td><td>{d}</td></tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="cram-note">
+            <strong>The sentence to write:</strong> Britain won the war, and the victory is what broke the relationship —{' '}
+            <strong>debt</strong> (so Parliament taxes), <strong>threat removed</strong> (so the colonies stop needing protection),{' '}
+            <strong>enforcement</strong> (so old laws suddenly bite).
+          </p>
+        </Section>
+
+        <Section title="Causal chains worth memorising">
           <table>
             <tbody>
               {CHAINS.map(([q, a]) => (

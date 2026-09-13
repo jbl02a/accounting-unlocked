@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useProgress } from '../context/ProgressContext'
 import LevelCard, { LEVEL_META } from '../components/LevelCard'
 
-const BUILT = [1, 2, 3, 4, 5, 6]
+const BUILT = [1, 2, 3, 4, 5, 6, 7, 8]
 
 const PHASES = [
   {
@@ -16,6 +16,12 @@ const PHASES = [
     label: 'Unit 2 — The English Colonies · 1607–1754',
     blurb: 'Four regions with four economies, four labour systems and four societies. This is where most colonial-era exam questions live.',
     levels: [4, 5, 6],
+  },
+  {
+    id: 3,
+    label: 'Unit 3 opener — Empire & War · 1650–1763',
+    blurb: 'How Britain ran its empire, how little it bothered to enforce that, and how winning the French and Indian War ended the arrangement and set up the Revolution.',
+    levels: [7, 8],
   },
 ]
 
@@ -162,8 +168,8 @@ export default function Home() {
 
       <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
         <p className="text-sm text-slate-400">
-          <span className="text-white font-semibold">Still to come:</span> slavery in British North America, the Atlantic world,
-          colonial minds, a capstone, and the document-sourcing skill — then Units 3–9 through to the exam.
+          <span className="text-white font-semibold">Still to come:</span> slavery in British North America, colonial minds, a
+          capstone, and the document-sourcing skill — then the imperial crisis and Units 4–9 through to the exam.
         </p>
       </div>
 

@@ -7,11 +7,12 @@ export const LEVEL_META = {
   4:  { title: 'The Chesapeake', icon: '🚬', color: 'from-amber-700 to-orange-700', desc: 'Jamestown, tobacco, servitude and Bacon’s Rebellion', phase: 2, era: '1607–1700' },
   5:  { title: 'New England', icon: '⛪', color: 'from-indigo-700 to-blue-800', desc: 'Puritans, covenant, town meeting and dissent', phase: 2, era: '1620–1700' },
   6:  { title: 'Middle Colonies & Lower South', icon: '🌾', color: 'from-lime-700 to-green-700', desc: 'Pennsylvania, New York, the Carolinas and Georgia', phase: 2, era: '1650–1750' },
-  7:  { title: 'Slavery in British North America', icon: '⛓️', color: 'from-stone-600 to-neutral-700', desc: 'How chattel slavery hardened, and how people resisted', phase: 2, era: '1619–1750' },
-  8:  { title: 'The Atlantic World', icon: '🧭', color: 'from-cyan-700 to-sky-800', desc: 'Mercantilism, Navigation Acts and salutary neglect', phase: 2, era: '1650–1754' },
-  9:  { title: 'Colonial Minds', icon: '🕯️', color: 'from-rose-700 to-pink-800', desc: 'Great Awakening, Enlightenment and self-government', phase: 2, era: '1700–1754' },
-  10: { title: 'Colonial Capstone', icon: '🏛️', color: 'from-fuchsia-700 to-rose-700', desc: 'Compare the regions, then argue a thesis', phase: 3, era: '1491–1754' },
-  11: { title: 'Sourcing a Document', icon: '🔍', color: 'from-teal-700 to-emerald-800', desc: 'HIPP — the skill every DBQ point depends on', phase: 4, era: 'Skill' },
+  7:  { title: 'The Atlantic World', icon: '🧭', color: 'from-cyan-700 to-sky-800', desc: 'Mercantilism, the Navigation Acts and salutary neglect', phase: 3, era: '1650–1754' },
+  8:  { title: 'The French & Indian War', icon: '⚔️', color: 'from-red-800 to-rose-900', desc: 'The Seven Years\u2019 War, 1763, and the end of neglect', phase: 3, era: '1754–1763' },
+  9:  { title: 'Slavery in British North America', icon: '⛓️', color: 'from-stone-600 to-neutral-700', desc: 'How chattel slavery hardened, and how people resisted', phase: 4, era: '1619–1750' },
+  10: { title: 'Colonial Minds', icon: '🕯️', color: 'from-rose-700 to-pink-800', desc: 'Great Awakening, Enlightenment and self-government', phase: 4, era: '1700–1754' },
+  11: { title: 'Colonial Capstone', icon: '🏛️', color: 'from-fuchsia-700 to-rose-700', desc: 'Compare the regions, then argue a thesis', phase: 5, era: '1491–1763' },
+  12: { title: 'Sourcing a Document', icon: '🔍', color: 'from-teal-700 to-emerald-800', desc: 'HIPP — the skill every DBQ point depends on', phase: 5, era: 'Skill' },
 }
 
 export default function LevelCard({ levelNum, levelData }) {

@@ -43,6 +43,13 @@
 .cram-head { border-bottom: 2px solid #111827; padding-bottom: 8px; margin-bottom: 14px; }
 .cram-head p { font-size: 11px; color: #4b5563; margin: 2px 0 0; }
 .cram-section { margin-bottom: 15px; break-inside: avoid; }
+/* A printable page is wider than a phone. Let each section scroll its own table
+   on screen rather than pushing the whole document sideways. */
+.cram-section { overflow-x: auto; }
+@media (max-width: 640px) {
+  .cram-page { padding: 16px 14px; font-size: 12px; }
+  .cram-page td, .cram-page th { padding: 3px 4px; }
+}
 .cram-section h2 {
   font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
   background: #111827; color: #fff; padding: 3px 8px; border-radius: 4px; margin: 0 0 7px;
@@ -81,7 +88,10 @@
   .no-print { display: none !important; }
   nav, footer.app-foot { display: none !important; }
   main { max-width: none !important; padding: 0 !important; margin: 0 !important; }
-  .cram-page { border-radius: 0; padding: 0; font-size: 11px; box-shadow: none; }
+  .cram-page { border-radius: 0; padding: 0; font-size: 10px; box-shadow: none; line-height: 1.32; }
+  .cram-page td { padding: 2px 5px; }
+  .cram-section { margin-bottom: 11px; overflow: visible; }
+  .cram-section h2 { margin-bottom: 5px; }
   .break-before { break-before: page; }
   .cram-section { break-inside: avoid; }
 }
