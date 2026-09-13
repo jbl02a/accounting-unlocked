@@ -7,6 +7,7 @@ export const SECTIONS = [
   { id: 'unit1', label: 'Unit 1 · 1491–1607', icon: '🌎', blurb: 'Native societies, contact, the Columbian Exchange, Spanish empire.' },
   { id: 'unit2', label: 'Unit 2 · 1607–1754', icon: '⚓', blurb: 'The British colonies, labour systems and the Atlantic world.' },
   { id: 'unit3', label: 'Empire & War · 1650–1763', icon: '⚔️', blurb: 'Mercantilism, salutary neglect, the French and Indian War and 1763.' },
+  { id: 'revolution', label: 'Road to Independence · 1763–1776', icon: '🔔', blurb: 'Stamp Act to the Declaration — taxation, resistance and the break.' },
   { id: 'compare', label: 'Comparison & Causation', icon: '⚖️', blurb: 'Regions against each other, and why things changed.' },
   { id: 'skills', label: 'Sourcing a Document', icon: '🔍', blurb: 'Purpose, audience, point of view — the DBQ skill.' },
 ]
@@ -50,6 +51,21 @@ const PROCLAMATION = {
   kind: 'excerpt',
   text: 'And we do hereby strictly forbid... all our loving subjects from making any purchases or settlements whatever, or taking possession of any of the lands beyond the heads or sources of any of the rivers which fall into the Atlantic Ocean from the west or northwest.',
   attribution: 'Royal Proclamation of 1763 (adapted)',
+}
+const DICKINSON = {
+  kind: 'excerpt',
+  text: 'Let these truths be indelibly impressed on our minds: that we cannot be happy without being free; that we cannot be free without being secure in our property; that we cannot be secure in our property if without our consent others may take it away... Upon the whole, the single question is whether Parliament can legally take money out of our pockets without our consent.',
+  attribution: 'John Dickinson, Letters from a Farmer in Pennsylvania, 1768 (adapted)',
+}
+const CONTINENTAL_CONGRESS = {
+  kind: 'excerpt',
+  text: 'That the inhabitants of the English colonies in North America, by the immutable laws of nature, the principles of the English constitution, and the several charters, are entitled to life, liberty and property; and they have never ceded to any sovereign power whatever a right to dispose of either without their consent... that the foundation of English liberty, and of all free government, is a right in the people to participate in their legislative council.',
+  attribution: 'Declaration and Resolves of the First Continental Congress, October 1774 (adapted)',
+}
+const JEFFERSON = {
+  kind: 'excerpt',
+  text: 'We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness. That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed.',
+  attribution: 'The Declaration of Independence, 4 July 1776',
 }
 const EDWARDS = {
   kind: 'excerpt',
@@ -664,6 +680,162 @@ export const QUESTIONS = [
     correctIndex: 0,
     hint: 'A cause that works through other people\u2019s decisions is still a cause — but say how it works.',
     explanation: 'Almost nobody wanted independence in 1763. The war produced conditions — debt, a garrison, a vanished French threat, an appetite for enforcement — and Parliament\u2019s response to those conditions produced the crisis. Naming the intermediate steps is what separates a top essay from a slogan.',
+  },
+  {
+    id: 'r-1', section: 'revolution', skill: 'Analyzing sources', stimulus: DICKINSON,
+    prompt: 'Dickinson\u2019s argument here rests on linking:',
+    options: [
+      'Property and consent — taxation without consent is a loss of liberty, whatever the amount',
+      'Independence and prosperity — the colonies would be richer once free',
+      'Religion and government — Parliament had violated colonial religious liberty',
+      'Trade and empire — the colonies should be permitted to trade with France',
+    ],
+    correctIndex: 0,
+    hint: 'He builds a chain: happy \u2192 free \u2192 secure in property \u2192 consent. Where does it end?',
+    explanation: 'Dickinson made the case that would carry the decade: property taken without consent is not taxation but confiscation, and a people whose property is insecure is not free. He also argued the internal/external tax distinction was meaningless if the purpose was revenue — while still writing as a loyal subject seeking redress.',
+  },
+  {
+    id: 'r-2', section: 'revolution', skill: 'Developments and processes',
+    prompt: 'The Stamp Act differed from earlier colonial taxes because it was:',
+    options: [
+      'A direct tax on goods and documents used inside the colonies, rather than a duty on trade',
+      'The first tax Parliament had ever passed',
+      'Levied only on merchants engaged in the West Indies trade',
+      'Collected by colonial assemblies on Parliament\u2019s behalf',
+    ],
+    correctIndex: 0,
+    hint: 'Trade duties are paid at the water\u2019s edge. Where was this one paid?',
+    explanation: 'Earlier revenue came from duties on trade; the Stamp Act reached inside the colonies to tax newspapers, licences, deeds and playing cards. That made it visible to everyone and sharpened the constitutional objection — Parliament was no longer regulating an empire\u2019s commerce but taxing a people who had not elected it.',
+  },
+  {
+    id: 'r-3', section: 'revolution', skill: 'Causation',
+    prompt: 'Parliament repealed the Stamp Act in 1766 primarily because:',
+    options: [
+      'Colonial boycotts hurt British merchants, who lobbied hard for repeal',
+      'It accepted the colonial argument that it had no right to tax them',
+      'The King ordered the repeal over Parliament\u2019s objection',
+      'The tax had already raised more revenue than expected',
+    ],
+    correctIndex: 0,
+    hint: 'Who in Britain had both a grievance and a vote?',
+    explanation: 'Non-importation turned British merchants into an interest group for repeal. Parliament conceded the tax while passing the Declaratory Act the same day, asserting authority to bind the colonies "in all cases whatsoever" — so the principle remained exactly where it had been.',
+  },
+  {
+    id: 'r-4', section: 'revolution', skill: 'Causation',
+    prompt: 'The Coercive Acts of 1774 produced intercolonial unity because they:',
+    options: [
+      'Showed every colony that Parliament could rewrite a colonial charter at will',
+      'Imposed new taxes on all thirteen colonies simultaneously',
+      'Closed every colonial port to trade',
+      'Required all colonies to send representatives to Parliament',
+    ],
+    correctIndex: 0,
+    hint: 'The acts hit one colony. Why did the other twelve take it personally?',
+    explanation: 'Rewriting the Massachusetts charter and closing Boston\u2019s port demonstrated that self-government was revocable. Colonies with their own charters drew the obvious conclusion, sent delegates to the First Continental Congress and organised the Continental Association. Punishing one colony created twelve allies for it.',
+  },
+  {
+    id: 'r-5', section: 'revolution', skill: 'Analyzing sources', stimulus: CONTINENTAL_CONGRESS,
+    prompt: 'This document shows that as late as October 1774, the assembled colonies were:',
+    options: [
+      'Claiming rights within the British constitutional order rather than seeking independence',
+      'Formally declaring the colonies independent of Britain',
+      'Rejecting the idea that colonists possessed any inherited English rights',
+      'Requesting seats in the British Parliament',
+    ],
+    correctIndex: 0,
+    hint: 'Look at what they appeal to: nature, the English constitution, and their charters. Is that the language of leaving?',
+    explanation: 'They ground their claims in the English constitution and their own charters — arguments for rights inside the empire. Independence is nearly two years away, and reading it backwards into 1774 is the standard error in this unit.',
+  },
+  {
+    id: 'r-6', section: 'revolution', skill: 'Causation',
+    prompt: 'Common Sense (1776) contributed to the decision for independence chiefly by:',
+    options: [
+      'Attacking hereditary monarchy itself, in plain language aimed at ordinary readers',
+      'Providing the first detailed plan for a federal constitution',
+      'Persuading France to enter the war on the American side',
+      'Documenting the financial cost of British taxation',
+    ],
+    correctIndex: 0,
+    hint: 'Before Paine, who did colonists blame — and who did they still profess loyalty to?',
+    explanation: 'Colonists had blamed Parliament and bad ministers while remaining loyal to the King. Paine argued monarchy itself was absurd and that an island could not sensibly govern a continent, in language written for taverns rather than courts. It sold in enormous numbers and made separation thinkable within months.',
+  },
+  {
+    id: 'r-7', section: 'revolution', skill: 'Analyzing sources', stimulus: JEFFERSON,
+    prompt: 'The political theory in this passage derives most directly from:',
+    options: [
+      'John Locke\u2019s natural rights and the idea that government rests on the consent of the governed',
+      'Thomas Hobbes\u2019s argument that subjects may never resist a sovereign',
+      'Calvinist covenant theology as practised in New England',
+      'Mercantilist theories of national wealth',
+    ],
+    correctIndex: 0,
+    hint: 'Life, liberty and property — with the third term swapped for something broader.',
+    explanation: 'Locke held that government exists by consent to protect natural rights and may be replaced when it fails to. Jefferson substitutes "the pursuit of Happiness" for Locke\u2019s "property." The grievances that follow are addressed to the King, not Parliament, because by 1776 colonists denied Parliament had any authority over them at all.',
+  },
+  {
+    id: 'r-8', section: 'revolution', skill: 'Continuity and change',
+    prompt: 'Which best describes colonial opinion on independence across this period?',
+    options: [
+      'Almost nonexistent before 1775, then growing rapidly after fighting began and the King refused to negotiate',
+      'A settled goal from the Stamp Act crisis onward',
+      'Universal by the time of the First Continental Congress',
+      'Confined to Massachusetts until after the Declaration was signed',
+    ],
+    correctIndex: 0,
+    hint: 'Track the petitions. When do colonists stop asking the King for anything?',
+    explanation: 'Colonists petitioned in 1765, 1774 and again in July 1775 after Lexington. The King\u2019s refusal of the Olive Branch Petition, the Prohibitory Act and Common Sense together closed the middle ground. Treating independence as the goal all along is the most common distortion of this unit.',
+  },
+  {
+    id: 'r-9', section: 'revolution', skill: 'Comparison',
+    prompt: 'Most Native nations that took sides in the Revolutionary War supported Britain because:',
+    options: [
+      'Britain had tried to limit colonial settlement west of the Appalachians, while independent colonists would not',
+      'Britain had promised them representation in Parliament',
+      'They had been allied with Britain against France in the previous war',
+      'Colonial assemblies had already granted them full citizenship',
+    ],
+    correctIndex: 0,
+    hint: 'Ask which outcome threatened their land more.',
+    explanation: 'The Proclamation of 1763 was feeble in practice but pointed in the right direction, and a victorious settler republic clearly meant unchecked expansion. As in every earlier conflict, Native nations chose by their own strategic interest — not out of loyalty to either side.',
+  },
+  {
+    id: 'r-10', section: 'revolution', skill: 'Causation',
+    prompt: 'Lord Dunmore\u2019s Proclamation (1775) is best characterised as:',
+    options: [
+      'A wartime measure offering freedom to enslaved men of rebel masters who would fight for the Crown',
+      'Britain\u2019s formal abolition of slavery in its colonies',
+      'A general emancipation of all enslaved people in the thirteen colonies',
+      'A colonial law restricting the movement of enslaved people',
+    ],
+    correctIndex: 0,
+    hint: 'Read the conditions: whose enslaved people, and what must they do?',
+    explanation: 'It applied only to those held by rebels and only to men who would bear arms — a military measure, not a moral one. Thousands still risked everything to reach British lines, and it hardened Virginia planters against the Crown while exposing the contradiction at the centre of the Patriot cause.',
+  },
+  {
+    id: 'r-11', section: 'revolution', skill: 'Contextualization',
+    prompt: 'The phrase "all men are created equal" is best analysed by noting that:',
+    options: [
+      'It was written in a society holding roughly half a million people in slavery, and was immediately invoked by those excluded from it',
+      'It was understood in 1776 to include all inhabitants of the colonies',
+      'It had no influence on later American reform movements',
+      'It was added to the Declaration in the nineteenth century',
+    ],
+    correctIndex: 0,
+    hint: 'Two things are true at once: who was excluded, and what they then did with the sentence.',
+    explanation: 'The men who wrote and signed it largely meant propertied white men, and many enslaved people. But the words outran their authors immediately — enslaved petitioners in Massachusetts, Abigail Adams, and later abolitionists and suffragists all turned the sentence back on the republic. Say both halves.',
+  },
+  {
+    id: 'r-12', section: 'revolution', skill: 'Comparison',
+    prompt: 'Compared with the colonial response to the Stamp Act in 1765, the response to the Coercive Acts in 1774 showed:',
+    options: [
+      'Far more developed intercolonial organisation, built on committees of correspondence and a continental congress',
+      'Much weaker coordination between the colonies',
+      'A complete abandonment of economic boycotts as a tactic',
+      'A new willingness to accept parliamentary taxation',
+    ],
+    correctIndex: 0,
+    hint: 'In 1765 nine colonies sent delegates to one congress. By 1774 what permanent machinery existed?',
+    explanation: 'The Stamp Act Congress was ad hoc; by 1774 committees of correspondence linked the colonies continuously, and the Continental Association enforced a boycott through local committees. The institutions built during the argument became the institutions that fought the war.',
   },
 ]
 

@@ -60,7 +60,7 @@ await page.emulateMedia({ media: 'print' })
 await page.pdf({ path: 'cram.pdf', format: 'Letter', printBackground: true })
 ```
 
-Then check the page count with `pypdf`. The cram sheet currently runs to 4 pages.
+Then check the page count with `pypdf`. The cram sheet currently runs to 5 pages.
 The printable pages are the ones most likely to break the phone-width check, since
 they are laid out for paper — test `/cram` at 390px whenever you add a table to it.
 

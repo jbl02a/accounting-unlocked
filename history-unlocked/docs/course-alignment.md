@@ -6,8 +6,8 @@ Read this before changing content. The decisions below look arbitrary and are no
 
 A high-school student taking AP U.S. History, sitting the national exam in May. The
 build order follows her class tests rather than a proportional sweep of all nine
-units: Periods 1 and 2 first, then the French and Indian War and salutary neglect,
-which is what the next test covers.
+units: Periods 1 and 2 first, then the French and Indian War, salutary neglect and the
+road to independence through 1776, which is what her next test covers.
 
 ## What the AP exam actually rewards
 
@@ -31,7 +31,7 @@ The course is built around this, not around recall:
 |---|---|---|
 | 1 | 1491–1607 | Built — Levels 1–3 |
 | 2 | 1607–1754 | Built — Levels 4–7; Levels 9–10 planned |
-| 3 | 1754–1800 | Opened — Level 8 covers 1754–63; the crisis after 1765 is not yet built |
+| 3 | 1754–1800 | Built to 1776 — Levels 8–10; the war itself and the 1780s not yet built |
 | 4–9 | 1800–present | Not started |
 
 Levels 9–12 (slavery, colonial minds, a capstone, and the sourcing skill) are specified
@@ -72,6 +72,18 @@ in `curriculum.md` and appear on the home page as a roadmap.
 - **Mercantilism is argued both ways.** Level 7's card sort has genuine entries in both
   columns, because "it helped and it hurt, and here is the weighing" is the answer that
   earns complexity.
+- **"The imperial crisis" is not used as a label to memorise.** The student had not met
+  the phrase, and it explains nothing on its own. The levels describe what it was: a
+  twelve-year argument over who had the right to tax and govern the colonies.
+- **Independence was not the goal until very late.** 1774 is a petition; even after
+  Lexington, Congress petitioned the King. The app treats reading 1776 backwards into
+  the 1760s as the signature error of this unit.
+- **Colonists did not want seats in Parliament.** They wanted their own assemblies
+  recognised as the only bodies that could tax them.
+- **The Revolution was never unanimous.** Loyalists at perhaps 15–20%, many neutrals,
+  most Native nations with Britain, and enslaved people with whoever offered freedom.
+- **"All men are created equal" is taught with both halves**: who it excluded, and how
+  quickly the excluded turned the sentence back on the republic.
 - **The Great Awakening is religious, with political consequences.** Not a political
   movement. The distinction is worth a point.
 

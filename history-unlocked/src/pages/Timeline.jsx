@@ -9,6 +9,7 @@ const ERAS = [
   { id: 'settle', label: 'Settlement', range: '1607–1700' },
   { id: 'mature', label: 'Maturing colonies', range: '1700–1754' },
   { id: 'war', label: 'Empire & war', range: '1754–1765' },
+  { id: 'road', label: 'Road to independence', range: '1765–1776' },
 ]
 
 const ENTRIES = [
@@ -107,9 +108,36 @@ const ENTRIES = [
   { year: '1763', era: 'war', level: 8, title: 'Pontiac’s War; the Proclamation Line',
     what: 'A Native coalition takes most British posts beyond the Appalachians; Britain then forbids settlement west of the mountains.',
     why: 'For Native nations, the end of playing two empires off each other. For colonists, a betrayal of what they thought they had won.' },
-  { year: '1764–65', era: 'war', level: 8, title: 'Sugar Act, Stamp Act, Quartering Act',
-    what: 'Parliament taxes the colonies directly and enforces customs in earnest; nine colonies send delegates to the Stamp Act Congress.',
-    why: 'The end of salutary neglect. Compare that joint response with the flat refusal of the Albany Plan eleven years earlier.' },
+  { year: '1764', era: 'war', level: 9, title: 'Sugar Act',
+    what: 'A duty on molasses — lower than the old rate, but enforced for the first time, with smuggling tried in courts without juries.',
+    why: 'The end of salutary neglect. The shock was the enforcement, not the rate.' },
+  { year: '1765', era: 'road', level: 9, title: 'Stamp Act; Stamp Act Congress',
+    what: 'A direct tax on newspapers, deeds, licences and playing cards. Nine colonies send delegates to New York; the Sons of Liberty make the law unenforceable.',
+    why: 'The first tax that touched everyone, and the first time the colonies answered as one. "No taxation without representation" starts here.' },
+  { year: '1766', era: 'road', level: 9, title: 'Stamp Act repealed; Declaratory Act',
+    what: 'Parliament repeals the tax under pressure from British merchants — and the same day claims the power to bind the colonies "in all cases whatsoever."',
+    why: 'Nothing is settled. Britain concedes the tax and not one inch of the principle.' },
+  { year: '1767', era: 'road', level: 9, title: 'Townshend Acts',
+    what: 'Duties on glass, lead, paint, paper and tea, plus writs of assistance. Dickinson’s Letters from a Farmer answer them; non-importation resumes.',
+    why: 'Colonists reject the internal/external tax distinction: what matters is whether the purpose is revenue.' },
+  { year: '1770', era: 'road', level: 9, title: 'Boston Massacre',
+    what: 'Soldiers fire into a jeering crowd in King Street; five die. John Adams defends the soldiers and most are acquitted. Revere’s engraving travels everywhere.',
+    why: 'The best example in the course of an event and its propaganda being two different sources.' },
+  { year: '1772', era: 'road', level: 10, title: 'Committees of correspondence',
+    what: 'Samuel Adams and others build a standing network linking towns and colonies.',
+    why: 'The machinery that makes the response to 1774 so fast — institutions built during the argument end up fighting the war.' },
+  { year: '1773', era: 'road', level: 10, title: 'Tea Act; the Boston Tea Party',
+    what: 'Cheaper tea, with the tax still attached and a monopoly for the East India Company. In December a shipload is destroyed in Boston harbour.',
+    why: 'Refusing cheap tea only makes sense once you see the principle being conceded along with it.' },
+  { year: '1774', era: 'road', level: 10, title: 'Coercive Acts; First Continental Congress',
+    what: 'Boston’s port closed, the Massachusetts charter rewritten, trials moved to England. Twelve colonies meet in Philadelphia, petition the King and organise a boycott.',
+    why: 'Britain tried to isolate one colony and created twelve allies for it — and the Congress still wants redress inside the empire.' },
+  { year: '1775', era: 'road', level: 10, title: 'Lexington and Concord; the door closes',
+    what: 'Troops sent to seize colonial arms meet militia in April. Congress raises an army under Washington and still petitions for peace; the King refuses and declares the colonies in rebellion. Dunmore offers freedom to enslaved men who join the Crown.',
+    why: 'The argument becomes a war, and reconciliation loses its last advocates.' },
+  { year: '1776', era: 'road', level: 10, title: 'Common Sense; the Declaration of Independence',
+    what: 'Paine attacks monarchy itself in January and sells enormously. In July, Congress adopts Jefferson’s Declaration — Lockean natural rights, consent, and grievances aimed at the King.',
+    why: 'Independence was unthinkable in 1770 and obvious by mid-1776. The turning points are specific, and mostly Britain’s own doing.' },
 ]
 
 export default function Timeline() {
@@ -121,7 +149,7 @@ export default function Timeline() {
       <div className="mb-6">
         <h1 className="text-3xl font-extrabold text-white mb-2">Colonial Timeline</h1>
         <p className="text-slate-400">
-          1491 to 1765. Dates by themselves earn nothing on this exam — the line that matters is{' '}
+          1491 to 1776. Dates by themselves earn nothing on this exam — the line that matters is{' '}
           <span className="text-amber-300">why it matters</span>. Read those first.
         </p>
       </div>
@@ -130,7 +158,7 @@ export default function Timeline() {
         <button onClick={() => setEra('all')}
           className={`px-3 py-1.5 rounded-lg text-sm font-semibold border transition-colors ${
             era === 'all' ? 'border-amber-500 bg-amber-900/40 text-white' : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-amber-400'}`}>
-          All · 1491–1765
+          All · 1491–1776
         </button>
         {ERAS.map(x => (
           <button key={x.id} onClick={() => setEra(x.id)}
@@ -166,7 +194,7 @@ export default function Timeline() {
       </ol>
 
       <p className="text-xs text-slate-600 mt-8 text-center">
-        {shown.length} of {ENTRIES.length} entries · Periods 1–2 and the opening of Period 3
+        {shown.length} of {ENTRIES.length} entries · Periods 1–2 and the road to independence
       </p>
     </div>
   )

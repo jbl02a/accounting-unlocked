@@ -5,7 +5,7 @@ const ProgressContext = createContext(null)
 // Levels that actually exist. LEVEL_META in components/LevelCard.jsx carries the
 // full 11-level roadmap; bump this as the remaining levels are built, or the navbar
 // counts lessons nobody can open yet.
-export const TOTAL_LEVELS = 8
+export const TOTAL_LEVELS = 10
 const STORAGE_KEY = 'history-unlocked-progress'
 
 function buildDefault() {

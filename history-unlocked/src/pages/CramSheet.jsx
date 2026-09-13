@@ -44,7 +44,16 @@ const DATES = [
   ['1755', 'Braddock\u2019s army destroyed near Fort Duquesne'],
   ['1757–59', 'Pitt takes charge; Quebec falls in 1759'],
   ['1763', 'Treaty of Paris: France leaves the mainland. Pontiac\u2019s War. Proclamation Line closes the west'],
-  ['1764–65', 'Sugar Act, Stamp Act, Quartering Act; Stamp Act Congress — nine colonies act together'],
+  ['1764', 'Sugar Act — a duty finally enforced, smuggling tried without juries'],
+  ['1765', 'Stamp Act (first direct tax); Stamp Act Congress; Sons of Liberty; Quartering Act'],
+  ['1766', 'Stamp Act repealed — and the Declaratory Act claims authority "in all cases whatsoever"'],
+  ['1767', 'Townshend Acts; Dickinson\u2019s Letters from a Farmer; non-importation'],
+  ['1770', 'Boston Massacre (5 dead); Townshend duties repealed except on tea'],
+  ['1772', 'Committees of correspondence organised'],
+  ['1773', 'Tea Act; Boston Tea Party'],
+  ['1774', 'Coercive/Intolerable Acts; First Continental Congress — petition, rights, boycott, NOT independence'],
+  ['1775', 'Lexington and Concord; Second Continental Congress; Olive Branch Petition rejected; Dunmore\u2019s Proclamation'],
+  ['1776', 'Common Sense (January); Declaration of Independence (4 July)'],
 ]
 
 const EMPIRE = [
@@ -69,6 +78,23 @@ const WAR = [
   ['The bill', 'Debt roughly doubled (about £75m → £133m) plus a garrison to pay for → Sugar Act 1764, Stamp Act 1765, Quartering Act 1765, real customs enforcement.'],
 ]
 
+const ACTS = [
+  ['Sugar Act, 1764', 'Duty on molasses — lower rate, but enforced, with smuggling tried in vice-admiralty courts without juries.', 'Protests by merchants; the jury issue begins.'],
+  ['Stamp Act, 1765', 'Direct tax on paper: newspapers, deeds, licences, cards. Touched everyone; hit printers and lawyers hardest.', 'Stamp Act Congress (9 colonies), Sons of Liberty, non-importation. Repealed 1766.'],
+  ['Declaratory Act, 1766', 'Parliament may bind the colonies "in all cases whatsoever."', 'Largely ignored in the celebration over repeal — but nothing had been conceded.'],
+  ['Townshend Acts, 1767', 'Duties on glass, lead, paint, paper, tea; writs of assistance; NY assembly suspended.', 'Dickinson\u2019s Letters; Massachusetts Circular Letter; non-importation, led in households by women. Repealed 1770 except tea.'],
+  ['Troops to Boston, 1768', 'Regulars stationed in a city at peace; soldiers competed for local jobs.', 'Two years of friction → the Boston Massacre, 1770 (5 dead; Adams defends the soldiers; Revere\u2019s print).'],
+  ['Tea Act, 1773', 'Cheaper tea, tax retained, monopoly to the East India Company.', 'Boston Tea Party, December 1773.'],
+  ['Coercive (Intolerable) Acts, 1774', 'Boston port closed; Massachusetts charter rewritten; some trials moved to England; quartering.', 'First Continental Congress: Declaration and Resolves, petition to the King, Continental Association boycott.'],
+  ['War and the break, 1775–76', 'Lexington and Concord (April 1775); King rejects the Olive Branch Petition; Prohibitory Act; Dunmore\u2019s Proclamation.', 'Second Continental Congress; Common Sense (Jan 1776); Declaration of Independence (July 1776).'],
+]
+
+const ARGUMENTS = [
+  ['Britain', 'Virtual representation: MPs represent every subject whether or not they voted · the colonies were defended at enormous expense · Parliament is sovereign "in all cases whatsoever" · colonists pay a fraction of British tax rates (true, and beside the point).'],
+  ['The colonists', 'Taxes require consent through representatives actually elected · colonial assemblies have taxed the colonies for a century · trials without juries deny the rights of Englishmen · a standing army in peacetime threatens liberty.'],
+  ['The pattern', 'Britain taxes → colonists petition → colonists boycott → British merchants complain → Parliament repeals, conceding nothing. It runs twice (1766, 1770). In 1774 Britain stops repealing and starts punishing.'],
+]
+
 const EXCHANGE = [
   ['Old World → Americas', 'Smallpox, measles, influenza · horses, cattle, pigs, sheep · wheat, rice, sugarcane, coffee · guns, Christianity, encomienda'],
   ['Americas → Old World', 'Maize, potatoes (→ European population boom) · tomatoes, cacao, chili, vanilla · tobacco · silver'],
@@ -80,6 +106,7 @@ const CHAINS = [
   ['Why did New England build towns and schools?', 'Covenant theology makes the congregation self-governing → town meeting. Salvation requires reading Scripture yourself → Harvard 1636, school law 1647, highest literacy in the English-speaking world.'],
   ['Why was France least violent toward Native peoples?', 'Furs required Native trappers and allies → cooperation served French interests. England wanted the land itself → displacement was structural. Explain by interest, never by character.'],
   ['Why did winning the war cost Britain the colonies?', 'Debt roughly doubles → Parliament decides the colonies must contribute → salutary neglect ends and enforcement begins → meanwhile France is gone, so the colonies no longer need protection → demands rise exactly as dependence falls → resistance is constitutional, about who may tax, not about the amount.'],
+  ['Why did protest turn into independence?', 'Britain stops repealing and starts punishing (Coercive Acts 1774) → colonies build common institutions (committees of correspondence, Continental Congress, Association) → fighting begins at Lexington (April 1775) → the King rejects the Olive Branch Petition and declares rebellion → Common Sense moves the blame from Parliament to monarchy itself → Declaration, July 1776. Escalation, not destiny.'],
   ['Why did colonial self-government develop?', 'Private charters and distance → weak royal supervision → assemblies fill the gap (Burgesses 1619) → salutary neglect after 1688 lets the habit harden → enforcement after 1763 feels like a violation of rights already held.'],
 ]
 
@@ -112,6 +139,10 @@ const TRAPS = [
   'The war did not cause the Revolution on its own. It produced the debt and removed the French threat; Parliament\u2019s decisions turned that into a crisis. Write the chain, not a leap.',
   'The taxes were not crushing — colonists paid far less than Britons. The objection was constitutional: taxation required consent from a body they had elected.',
   '"French and Indian War" means the war against the French AND their Native allies — not a war between the French and Native nations.',
+  'Independence was not the goal until very late. 1774 is a petition; even after Lexington, Congress asked the King for peace. Do not read 1776 backwards.',
+  'Colonists did not want seats in Parliament — offered them, most would have refused. They wanted their own assemblies recognised as the only bodies that could tax them.',
+  'The Declaration lists grievances against the KING, not Parliament: by 1776 colonists denied Parliament had any authority over them at all.',
+  '"All men are created equal" was written in a society holding roughly half a million people in slavery — and enslaved petitioners, Abigail Adams and later reformers turned the sentence back on the republic immediately. Say both halves.',
   'The Great Awakening was religious, not political — but it taught colonists to question authority, which had political effects.',
 ]
 
@@ -136,9 +167,9 @@ export default function CramSheet() {
     <div className="cram">
       <div className="cram-toolbar no-print">
         <div>
-          <h1 className="text-2xl font-extrabold text-white">Colonial Cram Sheet</h1>
+          <h1 className="text-2xl font-extrabold text-white">Colonial &amp; Revolution Cram Sheet</h1>
           <p className="text-sm text-slate-400">
-            Periods 1 and 2, through the French & Indian War — 1491 to 1765. Prints clean on two sides; the dark theme is dropped automatically.
+            Periods 1 and 2 and the road to independence — 1491 to 1776. Prints clean on two sides; the dark theme is dropped automatically.
           </p>
         </div>
         <button onClick={() => window.print()} className="shrink-0 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold hover:opacity-90">
@@ -149,7 +180,7 @@ export default function CramSheet() {
       <div className="cram-page">
         <header className="cram-head">
           <h1>AP U.S. History — Colonial Cram Sheet</h1>
-          <p>Periods 1–2 and into 3 · 1491–1765 · contact, three empires, four regions, the imperial system, and the French & Indian War</p>
+          <p>Periods 1–3 · 1491–1776 · contact, three empires, four regions, the imperial system, the French & Indian War and the road to independence</p>
         </header>
 
         <Section title="The four colonial regions">
@@ -219,6 +250,31 @@ export default function CramSheet() {
             <strong>The sentence to write:</strong> Britain won the war, and the victory is what broke the relationship —{' '}
             <strong>debt</strong> (so Parliament taxes), <strong>threat removed</strong> (so the colonies stop needing protection),{' '}
             <strong>enforcement</strong> (so old laws suddenly bite).
+          </p>
+        </Section>
+
+        <Section title="The road to independence: act by act, 1764–1776">
+          <table>
+            <thead><tr><th>Measure</th><th>What it did</th><th>Colonial response</th></tr></thead>
+            <tbody>
+              {ACTS.map(([a, w, r]) => (
+                <tr key={a}><td className="w-40"><strong>{a}</strong></td><td>{w}</td><td>{r}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </Section>
+
+        <Section title="The constitutional argument">
+          <table>
+            <tbody>
+              {ARGUMENTS.map(([k, d]) => (
+                <tr key={k}><td className="w-28"><strong>{k}</strong></td><td>{d}</td></tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="cram-note">
+            <strong>Never</strong> answer with &ldquo;the taxes were too high.&rdquo; Colonists paid far less than Britons and knew
+            it. The objection was about <em>who</em> was doing the taxing.
           </p>
         </Section>
 

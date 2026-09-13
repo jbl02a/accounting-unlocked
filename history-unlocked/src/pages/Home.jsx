@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useProgress } from '../context/ProgressContext'
 import LevelCard, { LEVEL_META } from '../components/LevelCard'
 
-const BUILT = [1, 2, 3, 4, 5, 6, 7, 8]
+const BUILT = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 const PHASES = [
   {
@@ -22,6 +22,12 @@ const PHASES = [
     label: 'Unit 3 opener — Empire & War · 1650–1763',
     blurb: 'How Britain ran its empire, how little it bothered to enforce that, and how winning the French and Indian War ended the arrangement and set up the Revolution.',
     levels: [7, 8],
+  },
+  {
+    id: 4,
+    label: 'Unit 3 — The Road to Independence · 1763–1776',
+    blurb: 'Twelve years of argument over who had the right to tax and govern the colonies — and how a quarrel about rights inside the empire turned into a war to leave it.',
+    levels: [9, 10],
   },
 ]
 
@@ -169,7 +175,7 @@ export default function Home() {
       <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
         <p className="text-sm text-slate-400">
           <span className="text-white font-semibold">Still to come:</span> slavery in British North America, colonial minds, a
-          capstone, and the document-sourcing skill — then the imperial crisis and Units 4–9 through to the exam.
+          capstone, and the document-sourcing skill — then the war itself and Units 4–9 through to the exam.
         </p>
       </div>
 

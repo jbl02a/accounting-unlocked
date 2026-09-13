@@ -70,12 +70,41 @@ position after shuffling 25.0 / 25.0 / 25.1 / 25.0; all eight levels driven thro
 every round in a browser with an always-A run scoring 22–54%; no console errors beyond
 the sandbox's blocked Google Fonts request; no horizontal overflow at 390px.
 
+## Phase 3 — The road to independence
+
+Her test turned out to run through 1776 and the Stamp Act, so this went in next. She
+had not met the phrase "imperial crisis", so it is not used as a label anywhere: the
+levels describe what it was instead.
+
+- **Level 9 · No Taxation Without Representation (1763–1770)** — Sugar through the
+  Boston Massacre, organised around the cycle that runs twice: tax → petition → boycott
+  → merchant pressure → repeal conceding nothing. The card sort puts Britain's
+  constitutional case beside the colonists', because both were serious arguments.
+- **Level 10 · From Protest to Independence (1770–1776)** — committees of
+  correspondence, Tea Act, Coercive Acts, First Continental Congress, Lexington,
+  the Olive Branch Petition, Dunmore's Proclamation, Common Sense, the Declaration.
+- **12 new exam questions** in a new section, *Road to Independence · 1763–1776*, with
+  Dickinson, the Declaration and Resolves and the Declaration of Independence as
+  stimuli. A described (not reproduced) Revere engraving carries the propaganda
+  question in Level 9.
+- Timeline extended to 1776 with a fifth era filter; cram sheet gained an act-by-act
+  table and a two-column summary of the constitutional argument.
+- Roadmap renumbered again: slavery, colonial minds, capstone and sourcing are now
+  levels 11–14. Nothing had shipped at those numbers.
+
+**Verified:** 111 questions across both banks, no duplicate IDs, none malformed, answer
+position after shuffling 25.0 / 25.0 / 24.9 / 25.1; all ten levels driven through every
+round in a browser with always-A runs scoring 11–46%; no console errors; no horizontal
+overflow at 390px on any page; cram sheet prints to five pages.
+
+**Caught in review:** a lesson heading claimed the tax-protest-repeal cycle "repeated
+three times" while the text beneath it described two. Fixed.
+
 ## Next
 
-1. Levels 9–10 — slavery in British North America, colonial minds.
-2. Levels 11–12 — the colonial capstone and HIPP sourcing.
-3. The imperial crisis after 1765 (Stamp Act through Lexington), which Level 8 sets up
-   but stops short of.
+1. Levels 11–12 — slavery in British North America, colonial minds.
+2. Levels 13–14 — the colonial capstone and HIPP sourcing.
+3. The war itself (1776–1783) and the Articles of Confederation.
 4. Lift `history-unlocked/` into its own repository and deploy it — see
    `docs/forking.md`; the only blocked step is creating the empty repo.
 5. Then Units 4–9, and DBQ/LEQ practice with rubric feedback.

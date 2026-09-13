@@ -14,6 +14,8 @@ import Level5 from './pages/levels/Level5'
 import Level6 from './pages/levels/Level6'
 import Level7 from './pages/levels/Level7'
 import Level8 from './pages/levels/Level8'
+import Level9 from './pages/levels/Level9'
+import Level10 from './pages/levels/Level10'
 
 export default function App() {
   return (
@@ -36,6 +38,8 @@ export default function App() {
               <Route path="/level/6" element={<Level6 />} />
               <Route path="/level/7" element={<Level7 />} />
               <Route path="/level/8" element={<Level8 />} />
+              <Route path="/level/9" element={<Level9 />} />
+              <Route path="/level/10" element={<Level10 />} />
             </Routes>
           </main>
         </div>

@@ -621,6 +621,241 @@ export const L8_QUIZ = [
   },
 ]
 
+// ── Level 9 · No Taxation Without Representation ────────
+const L9_STAMP_CONGRESS = {
+  kind: 'excerpt',
+  text: 'That His Majesty’s subjects in these colonies are entitled to all the inherent rights and liberties of his natural born subjects within the kingdom of Great Britain.\nThat it is inseparably essential to the freedom of a people, and the undoubted right of Englishmen, that no taxes be imposed on them but with their own consent, given personally or by their representatives.',
+  attribution: 'Declarations of the Stamp Act Congress, New York, October 1765 (adapted)',
+}
+const L9_DECLARATORY = {
+  kind: 'excerpt',
+  text: 'That the said colonies and plantations in America have been, are, and of right ought to be, subordinate unto and dependent upon the imperial crown and parliament of Great Britain; and that the King’s Majesty... had, hath, and of right ought to have, full power and authority to make laws and statutes of sufficient force and validity to bind the colonies and people of America in all cases whatsoever.',
+  attribution: 'The Declaratory Act, passed by Parliament in 1766 on the same day the Stamp Act was repealed (adapted)',
+}
+const L9_REVERE = {
+  kind: 'image',
+  text: 'Description of the print (the image itself is not reproduced here): a line of British soldiers stands in formation, firing in unison on the command of an officer whose sword is raised. Facing them is a loose crowd of unarmed townspeople; several lie bleeding on the ground. A dog stands in the foreground. Above the soldiers, a building is labelled "Butcher’s Hall." Verses beneath describe "fierce barbarians grinning o’er their prey."',
+  attribution: 'Paul Revere, "The Bloody Massacre perpetrated in King Street," engraving, Boston, 1770',
+}
+
+export const L9_QUIZ = [
+  {
+    id: 'L9-q1', skill: 'Analyzing sources', stimulus: L9_STAMP_CONGRESS,
+    prompt: 'The delegates’ argument rests on the claim that:',
+    options: [
+      'As Englishmen they could be taxed only by representatives they had actually elected',
+      'Colonists owed no obedience to any act of Parliament',
+      'The colonies should be granted immediate independence',
+      'Taxes were acceptable so long as the rates remained low',
+    ],
+    correctIndex: 0,
+    hint: 'Read the second sentence twice. What exactly is "inseparably essential"?',
+    explanation: 'This is the whole colonial case in two sentences: we are Englishmen, and Englishmen are not taxed without consent given through their own representatives. Note what it does not say — not independence, not even a refusal to obey Parliament generally. In 1765 colonists were claiming rights inside the empire, not leaving it.',
+  },
+  {
+    id: 'L9-q2', skill: 'Developments and processes',
+    prompt: 'The Stamp Act of 1765 provoked far more resistance than the Sugar Act of 1764 mainly because it:',
+    options: [
+      'Was a direct tax on everyday paper goods, falling visibly on nearly everyone including printers and lawyers',
+      'Raised far more revenue than any previous measure',
+      'Applied only to the New England colonies',
+      'Had been passed without the King’s approval',
+    ],
+    correctIndex: 0,
+    hint: 'Who has to buy stamped paper? And which of those people own a printing press or argue for a living?',
+    explanation: 'A duty on imported sugar is paid by merchants and hidden in a price; a stamp tax is paid at the counter by anyone buying a newspaper, a deed, a licence or a deck of cards. It also fell hardest on printers and lawyers — the two groups best placed to organise a protest and publicise it.',
+  },
+  {
+    id: 'L9-q3', skill: 'Comparison',
+    prompt: 'Parliament defended taxing the colonies with the doctrine of "virtual representation," which held that:',
+    options: [
+      'Members of Parliament represented the interests of all British subjects, whether or not those subjects could vote for them',
+      'Colonies would be granted their own seats in Parliament once the debt was repaid',
+      'Colonial assemblies were legally part of Parliament',
+      'Only property owners anywhere in the empire needed representation',
+    ],
+    correctIndex: 0,
+    hint: 'Large English cities like Manchester elected nobody either. How did Parliament explain that?',
+    explanation: 'Whole English cities had no members, so Parliament argued that members served the interests of the entire empire regardless of who elected them. Colonists rejected this flatly: representation meant someone you chose and could vote out. Watch for the trap of writing that colonists wanted seats in Parliament — most did not; they wanted their own assemblies recognised.',
+  },
+  {
+    id: 'L9-q4', skill: 'Analyzing sources', stimulus: L9_DECLARATORY,
+    prompt: 'Passing this act alongside the repeal of the Stamp Act shows that Parliament:',
+    options: [
+      'Retreated on the particular tax while insisting its authority over the colonies was unlimited',
+      'Accepted that it had no right to legislate for the colonies',
+      'Had decided to grant the colonies representation in Parliament',
+      'Intended never to tax the colonies again in any form',
+    ],
+    correctIndex: 0,
+    hint: 'One act gives something up; the other gives nothing up at all. Which one describes the principle?',
+    explanation: 'Colonists celebrated the repeal and largely ignored the Declaratory Act — which had conceded nothing and claimed the power to bind them "in all cases whatsoever." The constitutional gap was never closed, only papered over, which is why the Townshend duties reopened it a year later.',
+  },
+  {
+    id: 'L9-q5', skill: 'Causation',
+    prompt: 'Non-importation agreements were an effective form of colonial protest chiefly because they:',
+    options: [
+      'Hurt British merchants, who then pressured Parliament to repeal the taxes',
+      'Prevented the Royal Navy from entering colonial ports',
+      'Deprived the British government of its main source of revenue',
+      'Were enforced by colonial courts with heavy penalties',
+    ],
+    correctIndex: 0,
+    hint: 'Colonists could not vote in Britain. What pressure could they apply on people who could?',
+    explanation: 'Boycotts turned British merchants and manufacturers into a lobby for repeal — and both the Stamp Act and most Townshend duties were repealed under that pressure. They also politicised colonial households, since refusing British cloth and tea made women’s decisions part of the resistance.',
+  },
+  {
+    id: 'L9-q6', skill: 'Analyzing sources', stimulus: L9_REVERE,
+    prompt: 'This print is most useful to a historian as evidence of:',
+    options: [
+      'How Patriot leaders shaped public opinion, rather than as an accurate record of the event',
+      'The precise sequence of events on the night of 5 March 1770',
+      'British military tactics used in colonial cities',
+      'Widespread colonial support for independence in 1770',
+    ],
+    correctIndex: 0,
+    hint: 'Ask what the picture leaves out: the snowballs, the shouting crowd, the disorder. Why would the artist leave those out?',
+    explanation: 'The engraving shows disciplined troops firing on command into defenceless civilians. The reality was a chaotic confrontation with a jeering crowd throwing snowballs and debris — John Adams defended the soldiers in court and most were acquitted. Revere’s print is superb evidence of propaganda and of how the event was used, which is exactly the sourcing distinction the DBQ tests.',
+  },
+  {
+    id: 'L9-q7', skill: 'Continuity and change',
+    prompt: 'Between 1765 and 1770 the usual colonial response to a new tax moved through which sequence?',
+    options: [
+      'Petition and constitutional argument, then organised boycott, then crowd action and intimidation',
+      'Armed rebellion first, followed by petitions once fighting failed',
+      'Immediate demands for independence, then negotiation',
+      'Quiet compliance, followed by appeals to the French for support',
+    ],
+    correctIndex: 0,
+    hint: 'Stamp Act Congress, then non-importation, then tarred-and-feathered stamp distributors. What is the pattern?',
+    explanation: 'Colonists escalated: resolutions and petitions claiming the rights of Englishmen, then economic pressure through non-importation, then the Sons of Liberty making it physically impossible to enforce the law. Independence is not on this list — in 1770 almost nobody wanted it.',
+  },
+]
+
+// ── Level 10 · From Protest to Independence ─────────────
+const L10_COMMON_SENSE = {
+  kind: 'excerpt',
+  text: 'Everything that is right or reasonable pleads for separation. The blood of the slain, the weeping voice of nature cries, TIS TIME TO PART... There is something absurd in supposing a continent to be perpetually governed by an island. In England a king hath little more to do than to make war and give away places; which in plain terms is to impoverish the nation and set it together by the ears.',
+  attribution: 'Thomas Paine, Common Sense, January 1776 (adapted)',
+}
+const L10_DECLARATION = {
+  kind: 'excerpt',
+  text: 'We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness. That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed. That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it.',
+  attribution: 'The Declaration of Independence, 4 July 1776',
+}
+const L10_DUNMORE = {
+  kind: 'excerpt',
+  text: 'I do hereby further declare all indented servants, Negroes, or others (appertaining to Rebels) free, that are able and willing to bear arms, they joining His Majesty’s troops, as soon as may be, for the more speedily reducing this colony to a proper sense of their duty to His Majesty’s crown and dignity.',
+  attribution: 'Lord Dunmore, royal governor of Virginia, November 1775 (adapted)',
+}
+
+export const L10_QUIZ = [
+  {
+    id: 'L10-q1', skill: 'Causation',
+    prompt: 'Colonists objected to the Tea Act of 1773 even though it made tea cheaper, because the act:',
+    options: [
+      'Preserved the tax on tea and handed the East India Company a monopoly on selling it',
+      'Banned the drinking of tea in the colonies',
+      'Imposed the first direct tax ever levied on the colonies',
+      'Required all tea to be purchased from French merchants',
+    ],
+    correctIndex: 0,
+    hint: 'Cheap tea with a tax attached is still a tax — and accepting the bargain concedes something. What?',
+    explanation: 'Buying the cheap tea meant paying the Townshend duty and conceding Parliament’s right to levy it; the monopoly also cut out colonial merchants and smugglers. This is a favourite exam question precisely because the cheaper price makes the protest look irrational until you see the principle.',
+  },
+  {
+    id: 'L10-q2', skill: 'Causation',
+    prompt: 'Britain’s response to the Boston Tea Party — the Coercive Acts of 1774 — backfired because the acts:',
+    options: [
+      'Punished Massachusetts so harshly that other colonies saw a threat to their own charters and rallied to its defence',
+      'Were too mild to be taken seriously anywhere in the colonies',
+      'Applied equally to every colony, so no colony felt singled out',
+      'Granted Massachusetts a new elected government',
+    ],
+    correctIndex: 0,
+    hint: 'Britain meant to isolate one colony. What did the other twelve conclude could be done to them next?',
+    explanation: 'Closing Boston’s port, gutting the Massachusetts charter and moving trials to England showed every colony that its own government could be dissolved by Parliament. Instead of isolating Massachusetts, the acts produced the First Continental Congress — colonists called them the Intolerable Acts.',
+  },
+  {
+    id: 'L10-q3', skill: 'Developments and processes',
+    prompt: 'The First Continental Congress (1774) chose to:',
+    options: [
+      'Petition the King, assert colonial rights, and organise a comprehensive boycott — while stopping well short of independence',
+      'Declare independence from Great Britain',
+      'Raise a standing army and appoint Washington as its commander',
+      'Accept the Coercive Acts in exchange for the reopening of Boston harbour',
+    ],
+    correctIndex: 0,
+    hint: '1774, not 1776. What were delegates still hoping would happen?',
+    explanation: 'The Congress issued a Declaration and Resolves, petitioned the King and created the Continental Association to enforce non-importation. Delegates still wanted redress within the empire. Reading 1776 backwards into 1774 is one of the most common errors in this unit.',
+  },
+  {
+    id: 'L10-q4', skill: 'Analyzing sources', stimulus: L10_COMMON_SENSE,
+    prompt: 'Common Sense changed the debate in 1776 principally because it:',
+    options: [
+      'Attacked monarchy itself in plain language, making independence thinkable for ordinary readers',
+      'Was the first publication to object to parliamentary taxation',
+      'Proposed a detailed constitution for a future United States',
+      'Argued that reconciliation with Britain remained possible',
+    ],
+    correctIndex: 0,
+    hint: 'Earlier writers blamed Parliament or the ministers. Who does Paine blame?',
+    explanation: 'Until Paine, colonists blamed Parliament and bad ministers while professing loyalty to the King. Common Sense attacked hereditary monarchy as absurd on principle, in language written for a tavern rather than a courtroom, and sold enormously. It moved independence from unthinkable to obvious in six months.',
+  },
+  {
+    id: 'L10-q5', skill: 'Analyzing sources', stimulus: L10_DECLARATION,
+    prompt: 'The passage draws most directly on the political philosophy of:',
+    options: [
+      'John Locke, particularly natural rights and government by consent, with a right of revolution when consent is violated',
+      'Thomas Hobbes, who argued that subjects could never lawfully resist a sovereign',
+      'Mercantilist economic writers of the seventeenth century',
+      'Puritan covenant theology as practised in Massachusetts Bay',
+    ],
+    correctIndex: 0,
+    hint: 'Life, liberty and property — with one word swapped. Whose formula is that?',
+    explanation: 'Locke argued that government exists by consent to protect natural rights and may be replaced when it fails. Jefferson’s "pursuit of Happiness" adapts Locke’s "property." The Declaration then lists grievances against the King, not Parliament — by 1776 the argument had moved past Parliament entirely.',
+  },
+  {
+    id: 'L10-q6', skill: 'Analyzing sources', stimulus: L10_DUNMORE,
+    prompt: 'Dunmore’s proclamation is best understood as:',
+    options: [
+      'A military measure to weaken Patriot planters, which also exposed the contradiction between Patriot liberty and slavery',
+      'An early British commitment to abolishing slavery throughout the empire',
+      'An offer of freedom to every enslaved person in the colonies',
+      'A policy that enslaved Virginians almost entirely ignored',
+    ],
+    correctIndex: 0,
+    hint: 'Read the conditions closely: whose enslaved people, and on what terms?',
+    explanation: 'The offer applied only to those held by rebels and only to men able to bear arms — a war measure, not abolition. Thousands nonetheless risked everything to reach British lines. It also enraged planters and sharpened the question that hangs over the Declaration: what "all men are created equal" meant in a society holding half a million people in slavery.',
+  },
+  {
+    id: 'L10-q7', skill: 'Continuity and change',
+    prompt: 'Colonial opinion shifted decisively toward independence between April 1775 and July 1776 because:',
+    options: [
+      'Fighting had already begun, the King rejected the Olive Branch Petition and declared the colonies in rebellion, and Common Sense reframed the argument',
+      'France had promised an alliance if the colonies declared independence first',
+      'The Continental Congress had always intended to declare independence in 1776',
+      'Parliament repealed the Coercive Acts, which colonists read as weakness',
+    ],
+    correctIndex: 0,
+    hint: 'Three things stack up in fifteen months: blood, a royal refusal, and a pamphlet.',
+    explanation: 'Lexington and Concord made it a war; the King’s rejection of the Olive Branch Petition and the Prohibitory Act closed off reconciliation; Common Sense made separation seem natural rather than treasonous. Moderates who wanted redress in 1775 had run out of alternatives by mid-1776.',
+  },
+  {
+    id: 'L10-q8', skill: 'Comparison',
+    prompt: 'During the Revolution, colonists divided roughly into:',
+    options: [
+      'Patriots, Loyalists (perhaps a fifth of the population) and a large body of the uncommitted',
+      'Patriots and Loyalists only, in almost equal halves',
+      'A unanimous population that supported independence',
+      'Loyalists in the North and Patriots in the South',
+    ],
+    correctIndex: 0,
+    hint: 'A revolution is never unanimous. And most people, most of the time, try to stay out of it.',
+    explanation: 'Historians usually estimate Loyalists at 15–20%, committed Patriots a larger minority, and many colonists trying to stay out of it or shifting with whichever army was nearby. Most Native nations sided with Britain, which had tried to limit settlement; enslaved people sided with whoever offered freedom. "The colonists" is never one group.',
+  },
+]
+
 const LEVEL_META = {
   1: { section: 'L1', icon: '🌽', label: 'Before Contact' },
   2: { section: 'L2', icon: '⛵', label: 'Contact & the Columbian Exchange' },
@@ -629,10 +864,12 @@ const LEVEL_META = {
   5: { section: 'L5', icon: '⛪', label: 'New England' },
   6: { section: 'L6', icon: '🌾', label: 'Middle Colonies & Lower South' },
   7: { section: 'L7', icon: '🧭', label: 'The Atlantic World' },
-  8: { section: 'L8', icon: '⚔️', label: 'The French & Indian War' }
+  8: { section: 'L8', icon: '⚔️', label: 'The French & Indian War' },
+  9: { section: 'L9', icon: '📜', label: 'No Taxation Without Representation' },
+  10: { section: 'L10', icon: '🔔', label: 'From Protest to Independence' }
 }
 
-const BY_LEVEL = { 1: L1_QUIZ, 2: L2_QUIZ, 3: L3_QUIZ, 4: L4_QUIZ, 5: L5_QUIZ, 6: L6_QUIZ, 7: L7_QUIZ, 8: L8_QUIZ }
+const BY_LEVEL = { 1: L1_QUIZ, 2: L2_QUIZ, 3: L3_QUIZ, 4: L4_QUIZ, 5: L5_QUIZ, 6: L6_QUIZ, 7: L7_QUIZ, 8: L8_QUIZ, 9: L9_QUIZ, 10: L10_QUIZ }
 
 // Flattened and tagged, which is the shape the practice exam consumes.
 export const LEVEL_QUESTIONS = Object.entries(BY_LEVEL).flatMap(([level, qs]) =>

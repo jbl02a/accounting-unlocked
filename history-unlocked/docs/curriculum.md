@@ -1,6 +1,6 @@
 # Curriculum
 
-Twelve levels planned; eight built. `LEVEL_META` in `src/components/LevelCard.jsx` is the
+Fourteen levels planned; ten built. `LEVEL_META` in `src/components/LevelCard.jsx` is the
 single source of truth for titles, eras and ordering — keep this file in step with it.
 
 ## Phase 1 · Contact (Period 1, 1491–1607)
@@ -51,24 +51,45 @@ a cause/result sort, then 8 questions.
 The organising claim of both levels: **Britain won the war, and the victory is what
 broke the relationship** — debt, threat removed, enforcement.
 
+## Phase 4 · The road to independence (1763–1776)
+
+Built next because her class test runs through 1776 and the Stamp Act. Deliberately
+avoids the phrase "imperial crisis" as a label to be memorised — the levels describe
+what it was instead: a twelve-year argument over who had the right to tax and govern.
+
+**Level 9 · No Taxation Without Representation (1763–1770)** — Sugar, Stamp, the Stamp
+Act Congress, repeal with the Declaratory Act, Townshend, troops in Boston, the
+Massacre. Built around the cycle that runs twice: tax → petition → boycott → merchant
+pressure → repeal conceding nothing. Drills: chronology, a "whose argument is this?"
+sort that puts Britain's case and the colonists' case side by side, then 7 questions.
+
+**Level 10 · From Protest to Independence (1770–1776)** — committees of correspondence,
+the Tea Act and Tea Party, the Coercive Acts, the First Continental Congress, Lexington
+and Concord, the Olive Branch Petition, Dunmore's Proclamation, Common Sense, the
+Declaration. Drills: chronology, a British-move/colonial-response sort, then 8
+questions.
+
+The organising claim: **escalation, not destiny.** Independence was unthinkable in 1770
+and obvious by mid-1776, and each step is datable.
+
 ### Planned, not yet built
 
-**Level 9 · Slavery in British North America (1619–1750)** — the Middle Passage, chattel
+**Level 11 · Slavery in British North America (1619–1750)** — the Middle Passage, chattel
 slavery against indentured servitude, regional variation (gang vs task), and resistance
 from Stono to everyday refusal. Needs care: resistance is the part usually left out.
 
-**Level 10 · Colonial Minds (1700–1754)** — the First Great Awakening, the
+**Level 12 · Colonial Minds (1700–1754)** — the First Great Awakening, the
 Enlightenment, the Zenger trial, and how self-government became an expectation.
 
-**Level 11 · Colonial Capstone (1491–1763)** — compare the four regions, then build a
+**Level 13 · Colonial Capstone (1491–1776)** — compare the four regions, then build a
 thesis. The first level that asks for argument rather than recognition.
 
-**Level 12 · Sourcing a Document (skill)** — HIPP, drilled against sources the student
+**Level 14 · Sourcing a Document (skill)** — HIPP, drilled against sources the student
 has already met, so the skill is the only new thing.
 
 ## After this
 
-The rest of the imperial crisis (1765–1775), then Units 4–9, in exam order of
+The war itself (1776–1783) and the Articles of Confederation, then Units 4–9, in exam order of
 usefulness rather than strict chronology, plus DBQ and LEQ practice with rubric-based
 feedback. See `course-alignment.md` for what is deliberately
 deferred and why.
