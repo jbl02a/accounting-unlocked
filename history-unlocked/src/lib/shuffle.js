@@ -21,14 +21,20 @@ export function shuffled(arr, rand = Math.random) {
 
 // Multiple-choice: reorder options and move correctIndex to follow its option.
 // Pass a stored `order` to reproduce an earlier layout (used when resuming an exam).
+//
+// `optionWhy` is index-aligned with `options` — the per-option rationale shown after
+// answering — so it MUST be permuted with them. Forget that and every wrong answer
+// gets explained as though it were a different wrong answer.
 export function shuffleOptions(q, order) {
   const perm = order && order.length === q.options.length ? order : permutation(q.options.length)
-  return {
+  const out = {
     ...q,
     options: applyPermutation(q.options, perm),
     correctIndex: perm.indexOf(q.correctIndex),
     optionOrder: perm,
   }
+  if (Array.isArray(q.optionWhy)) out.optionWhy = applyPermutation(q.optionWhy, perm)
+  return out
 }
 
 // Dropdown lists and account pools are compared by NAME, not index, so they can be

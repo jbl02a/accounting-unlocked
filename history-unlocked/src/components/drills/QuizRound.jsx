@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useProgress } from '../../context/ProgressContext'
-import { useHints, HintBar } from '../Hint'
+import { useStagedHints, StagedHint, OptionAutopsy } from '../Hint'
 import { shuffleOptions } from '../../lib/shuffle'
 import SourceCard from '../SourceCard'
 
@@ -12,7 +12,7 @@ export default function QuizRound({ questions, title = 'Answer the question', on
   const [index, setIndex] = useState(0)
   const [chosen, setChosen] = useState(null)
   const [results, setResults] = useState([])
-  const hints = useHints()
+  const hints = useStagedHints()
   const q = qs[index]
 
   function pick(i) {
@@ -26,7 +26,12 @@ export default function QuizRound({ questions, title = 'Answer the question', on
   function next() {
     const finalResults = [...results]
     if (index + 1 >= qs.length) {
-      onDone({ correct: finalResults.filter(Boolean).length, total: qs.length, hintsUsed: hints.usedCount })
+      onDone({
+        correct: finalResults.filter(Boolean).length,
+        total: qs.length,
+        hintSteps: hints.totalRevealed,
+        hintQuestions: hints.questionsHinted,
+      })
     } else {
       setIndex(i => i + 1); setChosen(null)
     }
@@ -54,8 +59,9 @@ export default function QuizRound({ questions, title = 'Answer the question', on
         <p className="font-semibold text-white">{q.prompt}</p>
       </div>
 
-      {chosen === null && q.hint && (
-        <HintBar open={hints.isOpen(q.id)} onToggle={() => hints.toggle(q.id)} text={q.hint} className="mb-5" />
+      {chosen === null && (q.hints || q.hint) && (
+        <StagedHint id={q.id} hints={q.hints || q.hint} shown={hints.revealed(q.id)}
+          onReveal={() => hints.reveal(q.id)} onClose={() => hints.close(q.id)} className="mb-5" />
       )}
 
       <div className="space-y-3 mb-5">
@@ -80,10 +86,19 @@ export default function QuizRound({ questions, title = 'Answer the question', on
 
       {chosen !== null && (
         <>
-          <div className={`rounded-xl p-5 mb-5 ${chosen === q.correctIndex ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
+          <div className={`rounded-xl p-5 mb-4 ${chosen === q.correctIndex ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
             <p className="font-bold text-white mb-2">{chosen === q.correctIndex ? '✅ Correct' : '📖 Not quite'}</p>
             <p className="text-sm text-slate-300">{q.explanation}</p>
           </div>
+
+          {q.trap && (
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 mb-4">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-amber-300 mb-1">Why people miss this one</p>
+              <p className="text-sm text-slate-300">{q.trap}</p>
+            </div>
+          )}
+
+          <OptionAutopsy q={q} chosen={chosen} className="mb-5" />
           <button onClick={next} className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold hover:opacity-90">
             {index + 1 < qs.length ? 'Next Question →' : 'See Results →'}
           </button>

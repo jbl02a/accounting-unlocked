@@ -6,9 +6,13 @@ import { QUESTIONS, SECTIONS, questionsFor, shuffle } from '../data/examQuestion
 import { LEVEL_QUESTIONS } from '../data/levelQuestions'
 import { saveExamSession, loadExamSession, clearExamSession, describeAge } from '../lib/examSession'
 import { shuffleOptions } from '../lib/shuffle'
+import { useStagedHints, StagedHint, OptionAutopsy } from '../components/Hint'
+
+const HARD_COUNT = QUESTIONS.filter(q => q.hard).length
 
 const SCOPES = [
   { id: 'full', label: 'Full practice exam', icon: '📝', blurb: `All ${QUESTIONS.length} questions, every topic. The real rehearsal.` },
+  { id: 'hard', label: 'Hard mode', icon: '🔥', blurb: `The ${HARD_COUNT} hardest questions — the ones where three options are true and only one answers what was asked.` },
   { id: 'quick', label: 'Quick 15', icon: '⚡', blurb: '15 questions pulled at random. Good for a five-minute review.' },
 ]
 
@@ -49,6 +53,7 @@ export default function PracticeExam() {
   const [answers, setAnswers] = useState({})
   const [revealedIds, setRevealedIds] = useState([])
   const [saved, setSaved] = useState(() => loadExamSession([...QUESTIONS, ...LEVEL_QUESTIONS].map(q => q.id)))
+  const hints = useStagedHints()
 
   const best = progress.exam?.best
   const attempts = progress.exam?.attempts || []
@@ -391,6 +396,16 @@ export default function PracticeExam() {
                   )}
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">{item.explanation}</p>
+                {!right && item.trap && (
+                  <p className="text-xs text-amber-200/90 leading-relaxed mt-2">
+                    <span className="font-semibold text-amber-300">Why people miss it: </span>{item.trap}
+                  </p>
+                )}
+                {!right && Array.isArray(item.optionWhy) && chosen !== undefined && (
+                  <p className="text-xs text-slate-300 leading-relaxed mt-2 rounded-lg bg-red-900/15 border border-red-600/30 p-2.5">
+                    <span className="font-semibold text-red-300">Your answer: </span>{item.optionWhy[chosen]}
+                  </p>
+                )}
               </div>
             )
           })}
@@ -435,11 +450,25 @@ export default function PracticeExam() {
         ))}
       </div>
 
+      {mode === 'practice' && !revealed && (q.hints || q.hint) && (
+        <StagedHint id={q.id} hints={q.hints || q.hint} shown={hints.revealed(q.id)}
+          onReveal={() => hints.reveal(q.id)} onClose={() => hints.close(q.id)} className="mb-5" />
+      )}
+
       {revealed && (
-        <div className={`rounded-xl p-5 mb-5 ${chosen === q.correctIndex ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
-          <p className="font-bold text-white mb-2">{chosen === q.correctIndex ? '✅ Correct' : '📖 Not quite'}</p>
-          <p className="text-sm text-slate-300">{q.explanation}</p>
-        </div>
+        <>
+          <div className={`rounded-xl p-5 mb-4 ${chosen === q.correctIndex ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
+            <p className="font-bold text-white mb-2">{chosen === q.correctIndex ? '✅ Correct' : '📖 Not quite'}</p>
+            <p className="text-sm text-slate-300">{q.explanation}</p>
+          </div>
+          {q.trap && (
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 mb-4">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-amber-300 mb-1">Why people miss this one</p>
+              <p className="text-sm text-slate-300">{q.trap}</p>
+            </div>
+          )}
+          <OptionAutopsy q={q} chosen={chosen} className="mb-5" />
+        </>
       )}
 
       <div className="flex gap-3">

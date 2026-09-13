@@ -9,6 +9,25 @@ build order follows her class tests rather than a proportional sweep of all nine
 units: Periods 1 and 2 first, then the French and Indian War, salutary neglect and the
 road to independence through 1776, which is what her next test covers.
 
+## Difficulty is deliberate
+
+Her teacher reads and scores AP essays and has said plainly that his aim is the May
+exam and readiness for college, so his own tests are harder than students expect —
+they feel prepared and then do badly. That is the design target for this app, and the
+reason for three specific features:
+
+- **Questions are written so several options are true.** The skill being tested is
+  responsiveness to the prompt, not recall. See the "Writing a hard question" section
+  of `adding-content.md` for the patterns.
+- **Hard mode** (`hard: true`, its own exam scope) collects the most demanding
+  questions in one place.
+- **Staged hints** replace the single nudge. Three fixed steps — what is being asked,
+  the rule that decides it, the trap in the room — so the same procedure becomes
+  automatic. They never state the answer.
+- **Every option is explained after answering**, not just the right one, plus a `trap`
+  note naming why students pick the wrong one. Learning why a tempting answer is
+  tempting is the thing that transfers to the next question.
+
 ## What the AP exam actually rewards
 
 The course is built around this, not around recall:

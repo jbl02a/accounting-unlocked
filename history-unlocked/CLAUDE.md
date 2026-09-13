@@ -58,10 +58,34 @@ These are the things most likely to be broken by accident.
 8. **Hints guide, they don't answer.** Every drill takes optional per-item hints that
    stop one reasoning step short. The `why`/`explanation` text shown after answering
    is where the answer gets stated outright. Keep those two registers separate.
-9. **Sources are adapted, and say so.** Stimulus excerpts are drawn from public-domain
+9. **`optionWhy` is index-aligned with `options`, so `shuffleOptions` must permute it.**
+   It already does. If you add another index-aligned field, permute that too, or every
+   wrong answer gets explained as though it were a different wrong answer. There is a
+   property test for this — see `docs/testing.md`.
+10. **Staged hints teach a fixed procedure.** `hints` is an array of up to three
+   strings and the labels are fixed in `Hint.jsx`: *what is being asked* → *the rule
+   that decides it* → *the trap in the room*. Author in that order. The point is that
+   the same three moves work on every hard question, so they become automatic.
+11. **Sources are adapted, and say so.** Stimulus excerpts are drawn from public-domain
    documents and lightly modernised; the attribution line carries "(adapted)" when the
    wording has been touched. Never invent a quotation or attach real words to the
    wrong author.
+
+## Difficulty
+
+The student's teacher is an AP essay reader who sets deliberately hard tests: students
+feel prepared, then fail. The failure mode is not missing content — it is questions
+where three options are factually true and only one answers what was asked.
+
+So questions are authored against that, not against recall:
+
+- **Every wrong option should be attractive**, ideally true in itself. A distractor
+  nobody would pick teaches nothing.
+- **Prompts do work**: *most directly*, *best supported by*, *would most weaken*,
+  *LEAST reliable*. Being true is not being responsive, and the wording is what decides.
+- **`hard: true`** marks a question for the exam's Hard mode scope.
+- Hard questions carry the full kit: three staged `hints`, an `optionWhy` for every
+  option, and a `trap` naming why students miss it.
 
 ## Content rules that are about history, not code
 

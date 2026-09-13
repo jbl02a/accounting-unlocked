@@ -18,12 +18,51 @@ Questions live in `src/data/examQuestions.js` (exam) or `src/data/levelQuestions
 }
 ```
 
+Optional fields that make a question teach rather than merely test:
+
+```js
+{
+  hints: ['what is being asked', 'the rule that decides it', 'the trap in the room'],
+  optionWhy: ['why this is right', 'why this is tempting and wrong', '…', '…'],
+  trap: 'the specific reason students miss this one',
+  hard: true,   // collects it into the exam's Hard mode
+}
+```
+
+`hints` replaces the single `hint` string (which still works, as a one-step hint). The
+three step labels are fixed in `Hint.jsx` — author in that order, because the whole
+point is that the same procedure works every time.
+
+`optionWhy` is **index-aligned with `options`** and is permuted along with them by
+`shuffleOptions`. Write it in authored order, correct answer first.
+
 Exam questions also carry `section` (one of `SECTIONS`). Level questions get `section`,
 `icon`, `label` and `level` added automatically by `levelQuestions.js`.
 
 Write four plausible options. A distractor nobody would pick teaches nothing; the good
 ones are the errors students actually make — reversed causation, the right fact
 attached to the wrong region, the oversimplified version.
+
+### Writing a hard question
+
+The target is the real failure mode: three options that are **true**, one that is
+**responsive**. Patterns worth reusing:
+
+- **True but unresponsive.** Every option is a fact about the period; only one answers
+  the prompt. (`h-1`)
+- **Weaken / strengthen.** Options that share the argument's topic but point the wrong
+  way — an option about money usually props up an argument about money. (`h-2`, `h-6`)
+- **Evidence reach.** Given a source, which claim does it actually support? Distractors
+  overreach, compare with nothing to compare to, or claim something was the only
+  option. (`h-3`)
+- **Reversed pairs.** Real associations written backwards. Familiarity makes them feel
+  right. (`h-4`, `h-7`)
+- **LEAST / EXCEPT.** A biased source is excellent evidence — for the bias. (`h-5`)
+- **Right body, wrong year.** Things the *Second* Continental Congress did, offered as
+  the First. (`h-8`)
+
+Then write the `trap` as the sentence you would say to a student who just got it
+wrong — not a restatement of the answer, but the reason the wrong one appealed.
 
 ## A new stimulus
 

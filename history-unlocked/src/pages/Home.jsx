@@ -121,7 +121,9 @@ export default function Home() {
                 )}
               </div>
               <p className="text-sm text-slate-400">
-                Stimulus-based questions in the AP format — read the source, then reason about it. Drill a unit, or only what you got wrong.
+                Stimulus-based questions in the AP format — read the source, then reason about it. Drill a unit, only what you got
+                wrong, or <span className="text-amber-300 font-semibold">Hard mode</span>: the questions where three options are
+                true and one answers what was asked.
               </p>
             </div>
             <span className="text-amber-400 font-bold text-lg group-hover:translate-x-1 transition-transform">→</span>

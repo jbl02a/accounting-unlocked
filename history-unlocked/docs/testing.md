@@ -19,6 +19,13 @@ What is worth asserting, and has been:
 - After `shuffleOptions`, the correct answer lands on each position ~25% of the time,
   and `options[correctIndex]` still equals the originally authored answer.
 - Every card-sort item's `correct` matches a bucket id; sequence years are unique.
+- **`optionWhy` survives shuffling.** For thousands of shuffles, every option still
+  sits beside the rationale written for it, and `optionWhy[correctIndex]` is the
+  authored first entry. Re-running `shuffleOptions` with a stored `optionOrder`
+  reproduces the same pairing, so a resumed exam explains the right options.
+  This is the same class of bug as the fixed-answer-position one: silent, plausible
+  on screen, and wrong.
+- Every `hard: true` question carries three hints, a trap and a full set of rationales.
 
 ## Browser testing
 

@@ -100,6 +100,42 @@ overflow at 390px on any page; cram sheet prints to five pages.
 **Caught in review:** a lesson heading claimed the tax-protest-repeal cycle "repeated
 three times" while the text beneath it described two. Fixed.
 
+## Phase 4 — Make it hard
+
+Prompted by what the student's father learned about the class: the teacher is an AP
+essay reader whose tests are deliberately harder than students expect. The failure
+mode is not missing content — it is questions where three options are true and only
+one answers what was asked.
+
+**Engine changes**
+- `hints` (array) replaces the single hint string, rendered by a new `StagedHint`
+  component with three fixed steps: what is being asked → the rule that decides it →
+  the trap in the room. Revealed one at a time; never states the answer.
+- `optionWhy` — a rationale for *every* option, shown after answering by a new
+  `OptionAutopsy` panel, so a student learns why the tempting wrong answer was
+  tempting. It is index-aligned with `options` and permuted by `shuffleOptions`.
+- `trap` — a short note on why students miss the question, shown after answering and
+  in the exam's review panel next to anything missed.
+- `hard: true` and a **Hard mode** exam scope.
+- Level results now report hint steps used, framed as "run the three-step ones cold
+  later" rather than as a penalty.
+
+**Content**
+- 12 new hard questions, fully equipped, across Unit 2, the war, the road to
+  independence, comparison and sourcing. Patterns: true-but-unresponsive, weaken /
+  strengthen, evidence reach, reversed causal pairs, LEAST/EXCEPT, right-body-wrong-year.
+- All 15 Level 9 and 10 questions retrofitted with staged hints, per-option rationales
+  and traps — that is the material for her next test.
+
+**Verified**
+- 123 questions; 27 now carry per-option rationales; answer position 25.1/24.9/24.9/25.1.
+- New property test: across 5,000 shuffles, every option stays beside its own rationale
+  and `optionWhy[correctIndex]` is always the authored entry — and replaying a stored
+  `optionOrder` reproduces the same pairing, so a resumed exam explains the right
+  options. Same class of bug as the fixed-answer-position one, caught before shipping.
+- Browser: all three hint steps reveal in order with the exhausted-state message, the
+  trap and autopsy panels render after answering, Hard mode starts a 12-question exam.
+
 ## Next
 
 1. Levels 11–12 — slavery in British North America, colonial minds.

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
+import { stepTally } from '../Hint'
 
 // Every level has the same spine: a lesson you can skip, one or more drills, a
 // result. This holds that spine so each level file is almost entirely content.
@@ -14,6 +15,8 @@ export default function LevelShell({ level, meta, lesson, rounds, nextLevel }) {
   const totalCorrect = scores.reduce((s, r) => s + r.correct, 0)
   const totalQuestions = scores.reduce((s, r) => s + r.total, 0)
   const pct = totalQuestions ? Math.round((totalCorrect / totalQuestions) * 100) : 0
+  const hintSteps = scores.reduce((s, r) => s + (r.hintSteps || 0), 0)
+  const hintQuestions = scores.reduce((s, r) => s + (r.hintQuestions || 0), 0)
 
   function finishRound(result) {
     const next = [...scores, result]
@@ -68,6 +71,10 @@ export default function LevelShell({ level, meta, lesson, rounds, nextLevel }) {
             : pct >= 70 ? 'Good grasp — check the ones you missed on the home page and come back to them.'
             : 'Worth another pass. Re-read the lesson, then run it again.'}
         </p>
+        {hintSteps > 0 && (
+          <p className="text-xs text-slate-500 mb-6 -mt-4">{stepTally(hintSteps, hintQuestions)}</p>
+        )}
+
         <div className="flex flex-col sm:flex-row gap-3">
           <button onClick={restart} className="flex-1 py-3 rounded-xl bg-white/10 text-white font-semibold hover:bg-white/20">Try Again</button>
           <button onClick={() => setPhase('learn')} className="flex-1 py-3 rounded-xl bg-white/10 text-white font-semibold hover:bg-white/20">Review Lesson</button>

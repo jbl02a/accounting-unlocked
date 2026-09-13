@@ -649,7 +649,18 @@ export const L9_QUIZ = [
       'Taxes were acceptable so long as the rates remained low',
     ],
     correctIndex: 0,
-    hint: 'Read the second sentence twice. What exactly is "inseparably essential"?',
+    hints: [
+      "The question asks what the delegates’ argument RESTS ON — its foundation, not its tone or its consequences.",
+      "Their claim is conditional on identity: we are Englishmen, therefore English constitutional rules apply to us. Find the option that keeps both halves.",
+      "One option overstates into refusing Parliament entirely, and one drifts into independence. In 1765 colonists are claiming rights INSIDE the empire — anything stronger is a later position read backwards.",
+    ],
+    optionWhy: [
+      "Exactly the two-step argument in the text: we hold the rights of natural-born Englishmen, and one of those rights is that taxes require consent through elected representatives.",
+      "Too strong. The delegates accepted Parliament’s authority to regulate imperial trade; it was taxation without consent they denied. Overstating the colonial position is the classic error here.",
+      "Eleven years too early. These delegates petitioned the King as loyal subjects; nothing in the text points toward separation.",
+      "The opposite of what they argue. Their objection is constitutional and is indifferent to the rate — which is why a cheaper tax two years later provoked the same response.",
+    ],
+    trap: "Students pick the strongest-sounding anti-British option. In 1765 the colonial argument was narrow and legalistic on purpose — the delegates wanted to be recognised as Englishmen, not to be released from the empire.",
     explanation: 'This is the whole colonial case in two sentences: we are Englishmen, and Englishmen are not taxed without consent given through their own representatives. Note what it does not say — not independence, not even a refusal to obey Parliament generally. In 1765 colonists were claiming rights inside the empire, not leaving it.',
   },
   {
@@ -662,7 +673,18 @@ export const L9_QUIZ = [
       'Had been passed without the King’s approval',
     ],
     correctIndex: 0,
-    hint: 'Who has to buy stamped paper? And which of those people own a printing press or argue for a living?',
+    hints: [
+      "Both acts raised revenue, so the answer is about the FORM the tax took and who felt it, not about which raised more money.",
+      "A trade duty is paid by importers at the water’s edge and buried in a price. A stamp tax is paid at the counter by whoever buys the paper. Who notices each one?",
+      "One option is about revenue totals — a plausible-sounding measure that has nothing to do with why people took to the streets.",
+    ],
+    optionWhy: [
+      "Visibility plus reach. Everyone buying a newspaper, deed, licence or pack of cards paid it — and printers and lawyers, who paid most, were the people best equipped to organise and publicise resistance.",
+      "False, and beside the point: the Stamp Act was not projected to raise the largest sums. Amount was never the driver of the protest.",
+      "False. It applied to all the colonies, which is precisely why nine of them could send delegates to a common congress.",
+      "False. Royal assent was given as usual — and a procedural irregularity was never the colonial complaint.",
+    ],
+    trap: "\"It raised more money\" feels like a serious answer because it sounds quantitative. The Stamp Act mattered because of who paid it and how visibly — a distributional fact, not a fiscal one.",
     explanation: 'A duty on imported sugar is paid by merchants and hidden in a price; a stamp tax is paid at the counter by anyone buying a newspaper, a deed, a licence or a deck of cards. It also fell hardest on printers and lawyers — the two groups best placed to organise a protest and publicise it.',
   },
   {
@@ -675,7 +697,18 @@ export const L9_QUIZ = [
       'Only property owners anywhere in the empire needed representation',
     ],
     correctIndex: 0,
-    hint: 'Large English cities like Manchester elected nobody either. How did Parliament explain that?',
+    hints: [
+      "Define the doctrine before judging the options: whose interests did Parliament claim to represent, and did electing anyone matter to that claim?",
+      "Britain’s own system is the key: whole cities like Manchester elected no member at all, and Parliament still claimed to represent them.",
+      "One option describes what colonists supposedly wanted — seats at Westminster. Most did not want that, and it was never what \"virtual representation\" meant.",
+    ],
+    optionWhy: [
+      "The doctrine exactly: a member sat for the whole empire’s interests, so colonists were represented whether or not any of them had voted.",
+      "Never offered and never the doctrine. Actual colonial seats were floated only at the margins and wanted by almost nobody on either side.",
+      "False. Colonial assemblies were separate bodies — the colonial argument was that they, not Parliament, held the taxing power.",
+      "A description of the property franchise, not of virtual representation. Related vocabulary, different concept.",
+    ],
+    trap: "Students remember that colonists said \"no taxation without representation\" and conclude they wanted representation in Parliament. They wanted the opposite: their own assemblies recognised as the only bodies that could tax them.",
     explanation: 'Whole English cities had no members, so Parliament argued that members served the interests of the entire empire regardless of who elected them. Colonists rejected this flatly: representation meant someone you chose and could vote out. Watch for the trap of writing that colonists wanted seats in Parliament — most did not; they wanted their own assemblies recognised.',
   },
   {
@@ -688,7 +721,18 @@ export const L9_QUIZ = [
       'Intended never to tax the colonies again in any form',
     ],
     correctIndex: 0,
-    hint: 'One act gives something up; the other gives nothing up at all. Which one describes the principle?',
+    hints: [
+      "Two acts pass on the same day. The question asks what passing BOTH reveals about Parliament’s position.",
+      "Separate the specific measure from the underlying claim of authority. Which one did Parliament give up, and which did it restate?",
+      "The tempting wrong answer treats repeal as surrender. Read what the second act actually claims before deciding who conceded what.",
+    ],
+    optionWhy: [
+      "Precisely the manoeuvre: withdraw the tax under commercial pressure, and simultaneously enact a claim to unlimited legislative authority so that nothing of principle is conceded.",
+      "The reverse of the text. The Declaratory Act asserts full authority \"in all cases whatsoever\" — it concedes nothing.",
+      "Not on the table. Representation at Westminster was never Parliament’s offer nor the colonies’ demand.",
+      "Contradicted within two years by the Townshend duties — and nothing in the Declaratory Act promises restraint.",
+    ],
+    trap: "Repeal looks like a colonial victory, and colonists celebrated it as one. The act passed the same day is the reason the quarrel resumed almost immediately — reading only the good news is the trap.",
     explanation: 'Colonists celebrated the repeal and largely ignored the Declaratory Act — which had conceded nothing and claimed the power to bind them "in all cases whatsoever." The constitutional gap was never closed, only papered over, which is why the Townshend duties reopened it a year later.',
   },
   {
@@ -701,7 +745,18 @@ export const L9_QUIZ = [
       'Were enforced by colonial courts with heavy penalties',
     ],
     correctIndex: 0,
-    hint: 'Colonists could not vote in Britain. What pressure could they apply on people who could?',
+    hints: [
+      "Ask what leverage colonists actually possessed. They could not vote in Britain and could not lobby Parliament directly.",
+      "A boycott works by creating a domestic constituency for repeal inside Britain. Who in Britain lost money, and what could those people do that colonists could not?",
+      "Two options describe effects boycotts did not have — on the navy and on government revenue. Check whether each mechanism is even plausible before judging its importance.",
+    ],
+    optionWhy: [
+      "The mechanism exactly: lost colonial orders hurt British merchants and manufacturers, who then petitioned Parliament — supplying the political pressure colonists themselves could not apply.",
+      "Confuses a boycott with a blockade. Non-importation was a refusal to buy, not a closing of ports, and the Royal Navy came and went freely.",
+      "False. Colonial duties were a small share of British revenue; the pressure was political, not fiscal.",
+      "Backwards. Enforcement came from committees, crowds and public shaming, not from courts — colonial courts had no authority over a private decision not to buy.",
+    ],
+    trap: "The question is about MECHANISM. Several options describe impressive-sounding damage; only one describes a chain that actually connects a colonial decision to a vote in Parliament.",
     explanation: 'Boycotts turned British merchants and manufacturers into a lobby for repeal — and both the Stamp Act and most Townshend duties were repealed under that pressure. They also politicised colonial households, since refusing British cloth and tea made women’s decisions part of the resistance.',
   },
   {
@@ -714,7 +769,18 @@ export const L9_QUIZ = [
       'Widespread colonial support for independence in 1770',
     ],
     correctIndex: 0,
-    hint: 'Ask what the picture leaves out: the snowballs, the shouting crowd, the disorder. Why would the artist leave those out?',
+    hints: [
+      "Note the phrasing: \"most useful as evidence OF.\" A source can be inaccurate and still be first-rate evidence — of something else.",
+      "The rule: a distorted source is excellent evidence for the distortion, and poor evidence for the events it distorts.",
+      "The trap is answering as though \"biased\" meant \"useless.\" Ask instead what this object proves simply by existing and circulating.",
+    ],
+    optionWhy: [
+      "The print is a masterpiece of persuasion and a poor record of events — so it is most useful for how Patriots shaped opinion, which is what it directly demonstrates.",
+      "The weakest use of this source. Adams defended the soldiers successfully; the courtroom evidence and the engraving do not match.",
+      "Not what the image shows. There were no tactics on display worth studying — that framing treats propaganda as documentation.",
+      "False as history: in 1770 support for independence was negligible, and a print about a street confrontation could not establish it anyway.",
+    ],
+    trap: "Sourcing questions are not asking whether a document is reliable in general. They are asking what THIS document is good evidence for — and a piece of propaganda is superb evidence about the propagandist.",
     explanation: 'The engraving shows disciplined troops firing on command into defenceless civilians. The reality was a chaotic confrontation with a jeering crowd throwing snowballs and debris — John Adams defended the soldiers in court and most were acquitted. Revere’s print is superb evidence of propaganda and of how the event was used, which is exactly the sourcing distinction the DBQ tests.',
   },
   {
@@ -727,7 +793,18 @@ export const L9_QUIZ = [
       'Quiet compliance, followed by appeals to the French for support',
     ],
     correctIndex: 0,
-    hint: 'Stamp Act Congress, then non-importation, then tarred-and-feathered stamp distributors. What is the pattern?',
+    hints: [
+      "You are being asked for a PATTERN across five years, not for the single most dramatic event in them.",
+      "Trace the tools colonists reached for in order: words first, then money, then bodies. Each step came after the previous one failed.",
+      "One option inserts independence into a decade when almost nobody wanted it. Check any option that mentions independence against the date.",
+    ],
+    optionWhy: [
+      "The actual escalation: resolutions and petitions claiming English rights, then non-importation, then crowds making enforcement impossible. Each step follows the failure of the one before.",
+      "Inverted. Armed rebellion is 1775; the petitions came first and continued right through the fighting.",
+      "False on the chronology. Independence had almost no support before 1775, and there was no negotiation to follow it.",
+      "False on both halves. There was no quiet compliance, and the French alliance is 1778 — after independence, not before.",
+    ],
+    trap: "Two options sound revolutionary and one of them may feel right because you know how the story ends. The pattern question rewards putting yourself in 1767, when nobody knew.",
     explanation: 'Colonists escalated: resolutions and petitions claiming the rights of Englishmen, then economic pressure through non-importation, then the Sons of Liberty making it physically impossible to enforce the law. Independence is not on this list — in 1770 almost nobody wanted it.',
   },
 ]
@@ -760,7 +837,18 @@ export const L10_QUIZ = [
       'Required all tea to be purchased from French merchants',
     ],
     correctIndex: 0,
-    hint: 'Cheap tea with a tax attached is still a tax — and accepting the bargain concedes something. What?',
+    hints: [
+      "Start from the fact that makes this question famous: the Tea Act made tea CHEAPER. Any answer resting on cost is already gone.",
+      "Ask what buying the cheap tea would have meant in practice. The duty was still attached to it — so what does paying it concede?",
+      "The trap is assuming a protest must be about price. Here the protest is precisely against an attractive offer, because accepting it settles the constitutional question by default.",
+    ],
+    optionWhy: [
+      "Both halves matter: the Townshend duty stayed attached, so buying conceded the right to tax; and the monopoly cut colonial merchants and smugglers out of the trade entirely.",
+      "False — no such ban existed, and colonists went on drinking smuggled tea throughout.",
+      "False. The first direct tax was the Stamp Act, eight years earlier, and the tea duty was an external trade duty.",
+      "False, and backwards: the act favoured the British East India Company, not French merchants.",
+    ],
+    trap: "\"They dumped the tea because it was too expensive\" is the single most common misconception about 1773. The tea was cheap, and that was the problem — a bargain that would have been accepted, and acceptance would have conceded the principle.",
     explanation: 'Buying the cheap tea meant paying the Townshend duty and conceding Parliament’s right to levy it; the monopoly also cut out colonial merchants and smugglers. This is a favourite exam question precisely because the cheaper price makes the protest look irrational until you see the principle.',
   },
   {
@@ -773,7 +861,18 @@ export const L10_QUIZ = [
       'Granted Massachusetts a new elected government',
     ],
     correctIndex: 0,
-    hint: 'Britain meant to isolate one colony. What did the other twelve conclude could be done to them next?',
+    hints: [
+      "The question asks why the acts BACKFIRED. Britain had a goal; name it, then ask what actually happened instead.",
+      "The acts fell on one colony. Work out what the other twelve concluded about their own charters from watching Massachusetts lose its.",
+      "One option claims the acts applied everywhere. Check that against what they actually did — the punishment was targeted, and that targeting is the point.",
+    ],
+    optionWhy: [
+      "Rewriting the Massachusetts charter showed every colony that self-government was revocable by Parliament. A threat to one charter was a threat to all of them — so twelve colonies sent delegates.",
+      "The opposite of the record. Colonists renamed them the Intolerable Acts and sent food and money to Boston; nobody thought them mild.",
+      "False. They targeted Massachusetts specifically, which is exactly why the other colonies read them as a precedent rather than a shared burden.",
+      "Backwards. The Massachusetts Government Act gutted the elected government — appointed council, restricted town meetings.",
+    ],
+    trap: "Students know these acts were harsh and grab the harshest-sounding option. The question is about the MECHANISM of unity: not that the punishment was severe, but that it was a precedent every other colony could see being set.",
     explanation: 'Closing Boston’s port, gutting the Massachusetts charter and moving trials to England showed every colony that its own government could be dissolved by Parliament. Instead of isolating Massachusetts, the acts produced the First Continental Congress — colonists called them the Intolerable Acts.',
   },
   {
@@ -786,7 +885,18 @@ export const L10_QUIZ = [
       'Accept the Coercive Acts in exchange for the reopening of Boston harbour',
     ],
     correctIndex: 0,
-    hint: '1774, not 1776. What were delegates still hoping would happen?',
+    hints: [
+      "Date discipline first. This is 1774 — before Lexington, before Common Sense, before the Declaration.",
+      "The Congress did two kinds of thing: it made constitutional claims and petitioned, and it built an enforcement apparatus. The best answer will contain both, and stop short of independence.",
+      "Two options describe things the SECOND Continental Congress did in 1775. Check which Congress each belongs to before choosing.",
+    ],
+    optionWhy: [
+      "Exactly 1774: the Declaration and Resolves, a petition to the King, and the Continental Association enforcing non-importation through local committees — loyal language, serious machinery, no independence.",
+      "Two years early. Independence is July 1776, and by then a great deal had changed.",
+      "Belongs to the Second Continental Congress in 1775, which created the Continental Army under Washington.",
+      "Backwards — and the Congress had no power to accept anything of the kind. It demanded repeal.",
+    ],
+    trap: "The two Continental Congresses blur together under one remembered name. Anchor them separately: First (1774) = resolves, petition, boycott. Second (1775) = army, Olive Branch Petition, then the Declaration.",
     explanation: 'The Congress issued a Declaration and Resolves, petitioned the King and created the Continental Association to enforce non-importation. Delegates still wanted redress within the empire. Reading 1776 backwards into 1774 is one of the most common errors in this unit.',
   },
   {
@@ -799,7 +909,18 @@ export const L10_QUIZ = [
       'Argued that reconciliation with Britain remained possible',
     ],
     correctIndex: 0,
-    hint: 'Earlier writers blamed Parliament or the ministers. Who does Paine blame?',
+    hints: [
+      "The question asks how Common Sense changed the DEBATE — what argument became available that had not been before.",
+      "Until January 1776 colonists blamed Parliament and the ministers while professing loyalty to the King. Paine moved the target. To what?",
+      "Two options are simply false about the pamphlet — it was neither a constitutional blueprint nor an argument for reconciliation. Beware options that sound like reasonable things a famous pamphlet might contain.",
+    ],
+    optionWhy: [
+      "Paine attacked hereditary monarchy itself, in prose written for a tavern rather than a courtroom, and sold in enormous numbers. That made separation thinkable to people who had never questioned the King.",
+      "False. Objections to parliamentary taxation had been in print since 1764 — Dickinson’s Letters alone predate Paine by eight years.",
+      "False. Common Sense is a polemic, not a plan of government; constitution-drafting comes later.",
+      "The opposite of its argument. Paine held reconciliation to be absurd — \"TIS TIME TO PART.\"",
+    ],
+    trap: "Students remember Common Sense as \"important\" without remembering its specific move. The move was shifting blame from Parliament to monarchy as an institution — which is what made independence, rather than redress, the obvious remedy.",
     explanation: 'Until Paine, colonists blamed Parliament and bad ministers while professing loyalty to the King. Common Sense attacked hereditary monarchy as absurd on principle, in language written for a tavern rather than a courtroom, and sold enormously. It moved independence from unthinkable to obvious in six months.',
   },
   {
@@ -812,7 +933,18 @@ export const L10_QUIZ = [
       'Puritan covenant theology as practised in Massachusetts Bay',
     ],
     correctIndex: 0,
-    hint: 'Life, liberty and property — with one word swapped. Whose formula is that?',
+    hints: [
+      "The question asks whose political philosophy the passage draws on, so work from the ideas in the text, not from the document’s fame.",
+      "Rights that exist before government, government created by consent to protect them, and a right to replace it when it fails — that combination belongs to one thinker.",
+      "One option names a philosopher who argued the exact opposite about resistance. Recognising a name is not the same as recognising an argument.",
+    ],
+    optionWhy: [
+      "Locke throughout: natural rights, government by consent, and dissolution when government turns destructive. Jefferson substitutes \"the pursuit of Happiness\" for Locke’s \"property.\"",
+      "Hobbes argued subjects could not lawfully resist a sovereign — the reverse of this passage’s conclusion.",
+      "Covenant theology binds a community to God and to each other; it is not a theory of natural rights held by individuals against a government.",
+      "Mercantilism is an economic doctrine about trade and national wealth. Nothing in this passage concerns either.",
+    ],
+    trap: "Hobbes and Locke sit together in memory as \"the social contract philosophers,\" and students pick whichever name surfaces first. They reached opposite conclusions about the right to resist — which is the whole point of the passage.",
     explanation: 'Locke argued that government exists by consent to protect natural rights and may be replaced when it fails. Jefferson’s "pursuit of Happiness" adapts Locke’s "property." The Declaration then lists grievances against the King, not Parliament — by 1776 the argument had moved past Parliament entirely.',
   },
   {
@@ -825,7 +957,18 @@ export const L10_QUIZ = [
       'A policy that enslaved Virginians almost entirely ignored',
     ],
     correctIndex: 0,
-    hint: 'Read the conditions closely: whose enslaved people, and on what terms?',
+    hints: [
+      "Read the conditions in the proclamation closely before judging its meaning: whose enslaved people, and what must they do to qualify?",
+      "A measure that frees only the enslaved people of your ENEMIES, and only those who will fight for you, is a weapon of war rather than a policy about slavery.",
+      "The trap is treating a limited wartime offer as either abolition or an empty gesture. Both overshoot — hold the two truths together.",
+    ],
+    optionWhy: [
+      "Both halves are right: militarily it aimed to strip rebel planters of labour, and rhetorically it forced the contradiction in the Patriot cause into the open.",
+      "False. Britain did not abolish the slave trade until 1807 or slavery in most colonies until the 1830s, and this document is about Virginia in wartime.",
+      "False on the text. It covered those held by rebels, not Loyalists, and only men able to bear arms.",
+      "False. Thousands took the risk — some reaching British lines, many dying of disease in the attempt. Treating them as passive misses the most important thing here.",
+    ],
+    trap: "The two easy readings are \"Britain freed the slaves\" and \"it was meaningless propaganda.\" Both are wrong. It was a narrow war measure with enormous consequences for the people who acted on it and for the rhetoric of liberty.",
     explanation: 'The offer applied only to those held by rebels and only to men able to bear arms — a war measure, not abolition. Thousands nonetheless risked everything to reach British lines. It also enraged planters and sharpened the question that hangs over the Declaration: what "all men are created equal" meant in a society holding half a million people in slavery.',
   },
   {
@@ -838,7 +981,18 @@ export const L10_QUIZ = [
       'Parliament repealed the Coercive Acts, which colonists read as weakness',
     ],
     correctIndex: 0,
-    hint: 'Three things stack up in fifteen months: blood, a royal refusal, and a pamphlet.',
+    hints: [
+      "The window is April 1775 to July 1776 — fifteen months. The answer must be about what happened INSIDE that window.",
+      "Three things stack up: blood is shed, the King refuses the last petition and declares rebellion, and Paine reframes the target. Find the option holding all three.",
+      "One option claims Congress intended independence all along, which contradicts the Olive Branch Petition of July 1775. Check every option against the documents colonists actually wrote.",
+    ],
+    optionWhy: [
+      "The three causes together: fighting made neutrality untenable, the King’s refusal closed off redress, and Common Sense supplied a way to think about separation.",
+      "Reversed. The French alliance follows independence — France signed in 1778, once there was a plausible winner to back.",
+      "Contradicted by the Olive Branch Petition, which Congress sent in July 1775 asking for peace. Delegates were still hoping for redress after Lexington.",
+      "False. Parliament did not repeal the Coercive Acts; it passed the Prohibitory Act, cutting off colonial trade.",
+    ],
+    trap: "Knowing that independence arrived makes it feel like it was always coming. The documents say otherwise, and the exam rewards students who can name the specific events that closed the middle ground.",
     explanation: 'Lexington and Concord made it a war; the King’s rejection of the Olive Branch Petition and the Prohibitory Act closed off reconciliation; Common Sense made separation seem natural rather than treasonous. Moderates who wanted redress in 1775 had run out of alternatives by mid-1776.',
   },
   {
@@ -851,7 +1005,18 @@ export const L10_QUIZ = [
       'Loyalists in the North and Patriots in the South',
     ],
     correctIndex: 0,
-    hint: 'A revolution is never unanimous. And most people, most of the time, try to stay out of it.',
+    hints: [
+      "The question asks how colonists DIVIDED — so the answer is about proportions, and about whether everyone chose a side at all.",
+      "In most revolutions, a committed minority acts, a smaller minority opposes, and a large number try to keep their heads down. Which option allows for that third group?",
+      "Two options assume everyone had a position. One also assumes the split ran along regional lines — test that against what you know about Loyalist strongholds.",
+    ],
+    optionWhy: [
+      "The standard estimate, and it leaves room for the largest group of all: people who shifted with whichever army was nearby, or stayed out of it entirely.",
+      "Overstates Loyalist numbers and, more importantly, erases the uncommitted — the group that made the war so bitter and so local.",
+      "False. Loyalists were numerous enough to raise regiments, and tens of thousands left for Canada and Britain after 1783.",
+      "False. Loyalist strength was concentrated in New York, the Carolina backcountry and among recent immigrants and officeholders — not neatly by region.",
+    ],
+    trap: "\"The colonists\" invites you to imagine one people making one decision. The safest habit for this whole unit is to ask, every time: which colonists, where, and what did the people who disagreed do?",
     explanation: 'Historians usually estimate Loyalists at 15–20%, committed Patriots a larger minority, and many colonists trying to stay out of it or shifting with whichever army was nearby. Most Native nations sided with Britain, which had tried to limit settlement; enslaved people sided with whoever offered freedom. "The colonists" is never one group.',
   },
 ]

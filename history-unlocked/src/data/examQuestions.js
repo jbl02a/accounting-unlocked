@@ -67,6 +67,16 @@ const JEFFERSON = {
   text: 'We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness. That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed.',
   attribution: 'The Declaration of Independence, 4 July 1776',
 }
+const DECLARATORY_HARD = {
+  kind: 'excerpt',
+  text: 'That the said colonies and plantations in America have been, are, and of right ought to be, subordinate unto and dependent upon the imperial crown and parliament of Great Britain; and that the King\u2019s Majesty... had, hath, and of right ought to have, full power and authority to make laws and statutes of sufficient force and validity to bind the colonies and people of America in all cases whatsoever.',
+  attribution: 'The Declaratory Act, 1766 — passed on the same day the Stamp Act was repealed (adapted)',
+}
+const REVERE_HARD = {
+  kind: 'image',
+  text: 'Description of the print (the image itself is not reproduced here): a line of British soldiers stands in formation, firing in unison on the command of an officer whose sword is raised. Facing them is a loose crowd of unarmed townspeople; several lie bleeding on the ground. A building behind the soldiers is labelled "Butcher\u2019s Hall." Verses beneath describe "fierce barbarians grinning o\u2019er their prey."',
+  attribution: 'Paul Revere, "The Bloody Massacre perpetrated in King Street," engraving, Boston, 1770',
+}
 const EDWARDS = {
   kind: 'excerpt',
   text: 'The God that holds you over the pit of hell, much as one holds a spider or some loathsome insect over the fire, abhors you, and is dreadfully provoked… and yet it is nothing but his hand that holds you from falling into the fire.',
@@ -837,10 +847,304 @@ export const QUESTIONS = [
     hint: 'In 1765 nine colonies sent delegates to one congress. By 1774 what permanent machinery existed?',
     explanation: 'The Stamp Act Congress was ad hoc; by 1774 committees of correspondence linked the colonies continuously, and the Continental Association enforced a boycott through local committees. The institutions built during the argument became the institutions that fought the war.',
   },
+  // ── Hard mode ──────────────────────────────────────────────────────────
+  // Questions where more than one option is factually true and only one answers
+  // the question asked. Every one carries three-step hints, a rationale for each
+  // option, and a note on why students miss it. This is the section built for a
+  // teacher who grades AP essays and writes tests students think they have passed.
+  {
+    id: 'h-1', section: 'revolution', hard: true, skill: 'Analyzing sources', stimulus: DECLARATORY_HARD,
+    prompt: 'Which of the following is the strongest evidence that repealing the Stamp Act settled nothing?',
+    options: [
+      'Parliament asserted in the same breath that it could legislate for the colonies in every case without exception',
+      'Colonists in New York erected a statue honouring William Pitt, who had argued for repeal',
+      'Repeal came only after British merchants petitioned Parliament about lost trade',
+      'Colonial assemblies continued to meet and legislate as they had before the crisis',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'The Declaratory Act conceded the tax and kept the principle — the exact question in dispute was left exactly where it had been. That is what "settled nothing" means.',
+      'True, and it happened — but statues of Pitt are evidence that colonists thought the dispute WAS over. It points the opposite way.',
+      'True, and it explains WHY repeal happened. But the cause of a repeal is a different question from whether the underlying dispute was resolved.',
+      'True, and entirely unremarkable — assemblies had been meeting for a century. A fact that would be true either way cannot be evidence for either way.',
+    ],
+    hints: [
+      'The question is not "why was the Stamp Act repealed" and not "how did colonists react." It asks for evidence that the underlying disagreement survived the repeal.',
+      'The disagreement was about authority: may Parliament tax and legislate for colonies that did not elect it? Evidence that it survived must be about that claim of authority, not about taxes or celebrations.',
+      'Three of these are true statements about 1766. Being true is not the same as being responsive — ask of each one, "does this show the dispute continuing?"',
+    ],
+    trap: 'Students eliminate on truth rather than on relevance. All four options are accurate; three of them answer a question that was not asked. On a stimulus question, keep returning to the exact wording of the prompt.',
+    explanation: 'The Declaratory Act claimed authority to bind the colonies "in all cases whatsoever" — the whole matter in dispute, restated as a parliamentary statute on the day the tax was withdrawn. Colonists were too busy celebrating to notice, which is precisely why the Townshend duties reopened the wound a year later.',
+  },
+  {
+    id: 'h-2', section: 'revolution', hard: true, skill: 'Argumentation',
+    prompt: 'A student argues: "Colonists opposed the Stamp Act mainly because it cost them money." Which fact most weakens that argument?',
+    options: [
+      'They objected just as fiercely to the Townshend duties, which were lower and levied as ordinary trade duties',
+      'The Stamp Act taxed newspapers, licences and legal documents used by nearly everyone',
+      'Parliament repealed the Stamp Act after British merchants complained of lost colonial trade',
+      'Many colonial merchants had grown wealthy smuggling goods in defiance of the Navigation Acts',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'If the objection tracked the cost, a cheaper tax should have provoked a milder response. It did not — which points at principle rather than expense.',
+      'True, and it explains why the protest was broad. But breadth of cost is an economic explanation; this option supports the student rather than weakening them.',
+      'True, and it shows the boycott worked. It says nothing about the colonists\u2019 own motive, which is what the argument is about.',
+      'True, and if anything it strengthens the economic reading — smugglers had money at stake. Wrong direction.',
+    ],
+    hints: [
+      'You are being asked to weaken a claim about MOTIVE, not to judge whether the claim is popular or whether the tax was costly.',
+      'To weaken a "because it cost money" claim, find a case where the cost changed but the reaction did not. That pattern breaks the proposed link.',
+      'Two options here are about money and quietly support the student. Watch for options that feel relevant because they share a topic with the argument.',
+    ],
+    trap: 'Weaken/strengthen questions are answered by direction, not by topic. An option about money feels connected to an argument about money — and half the time it props the argument up.',
+    explanation: 'The Townshend duties were lighter and took the form colonists had supposedly accepted, yet met the same resistance; Dickinson said outright that what mattered was whether the purpose was revenue, not what the tax was called. Cost cannot explain a reaction that stays constant while the cost falls.',
+  },
+  {
+    id: 'h-3', section: 'unit3', hard: true, skill: 'Analyzing sources', stimulus: PITT_DEBT,
+    prompt: 'These figures support which conclusion most directly?',
+    options: [
+      'The British government had a powerful fiscal reason to seek new sources of revenue after 1763',
+      'The colonies had refused to contribute anything to their own defence during the war',
+      'North America was the most expensive territory Britain governed anywhere in the world',
+      'Parliament had no alternative available to it other than taxing the colonies',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'A debt that nearly doubles, plus a standing annual charge, is exactly a fiscal motive. It is the most the numbers show — and the question asks what they support.',
+      'Colonial assemblies did vote men and money during the war, and in any case these figures say nothing about colonial contributions. The data do not reach this claim.',
+      'The table gives one garrison cost with nothing to compare it against. You cannot rank an expense you have only measured once.',
+      '"No alternative" is a claim about British politics — Parliament could have taxed at home, cut the garrison or borrowed more. Numbers alone never establish that something was the only option.',
+    ],
+    hints: [
+      'The question is what the DATA support, not what you happen to know about the period. Read only what is in the table.',
+      'Evidence supports a claim when the claim cannot be much larger than the evidence. Test each option by asking: could I prove this using only these four numbers?',
+      'One option is a true statement about the period but is not shown here; one is a comparison with nothing to compare to; one is an "only possible" claim. Overreach is the trap in every data question.',
+    ],
+    trap: 'Students answer from memory instead of from the source. An option can be historically defensible and still be unsupported by the evidence in front of you — on the AP exam that is a wrong answer.',
+    explanation: 'Stimulus questions test the distance between evidence and claim. These figures establish motive and nothing more: not colonial behaviour, not a comparison with other territories, and certainly not that taxation was inevitable.',
+  },
+  {
+    id: 'h-4', section: 'revolution', hard: true, skill: 'Causation',
+    prompt: 'Which pair is both in the correct chronological order and genuinely causally linked?',
+    options: [
+      'Coercive Acts → First Continental Congress',
+      'Declaratory Act → Stamp Act',
+      'Common Sense → Lexington and Concord',
+      'Boston Massacre → Townshend Acts',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'The Coercive Acts (spring 1774) produced the Congress that September — colonies met precisely because Massachusetts had been punished. Order right, causation real.',
+      'Reversed. The Stamp Act came in 1765; the Declaratory Act was passed in 1766 alongside its repeal.',
+      'Reversed. Lexington and Concord were April 1775; Common Sense appeared in January 1776. The fighting helped create the audience for the pamphlet, not the other way round.',
+      'Reversed. The Townshend Acts came in 1767 and helped bring troops to Boston; the Massacre followed in 1770.',
+    ],
+    hints: [
+      'Two things are being tested at once: did A happen before B, and did A actually bring B about? An option fails if either half fails.',
+      'Fix the anchor dates first — 1765 Stamp, 1766 Declaratory, 1767 Townshend, 1770 Massacre, 1773 Tea, 1774 Coercive and Congress, 1775 Lexington, 1776 Common Sense and Declaration.',
+      'Three of these are familiar pairings that students have seen together, written backwards. Familiarity is what makes a reversed pair feel right.',
+    ],
+    trap: 'Recognising that two events belong together is not the same as knowing which came first. Reversed pairs read as correct because the association is real — check the direction before the association.',
+    explanation: 'Causal claims have a direction, and the AP exam tests it constantly. If you cannot place these eight moments on a line from memory, that is the highest-value thing to fix before this test.',
+  },
+  {
+    id: 'h-5', section: 'skills', hard: true, skill: 'Analyzing sources', stimulus: REVERE_HARD,
+    prompt: 'This print is LEAST reliable as evidence for which of the following?',
+    options: [
+      'What actually happened in King Street on the night of 5 March 1770',
+      'How Patriot leaders wished the confrontation to be understood',
+      'The techniques colonial printers used to shape public opinion',
+      'The existence of serious hostility between Bostonians and British troops',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'The image is demonstrably inaccurate as reportage: an orderly volley on command, unarmed victims, no snowballs, no shouting crowd. As a record of events it is the weakest thing in the room.',
+      'It is excellent evidence for this. What an author wanted believed is exactly what a piece of propaganda proves.',
+      'Also excellent evidence — the print IS an example of the technique, so it demonstrates the method directly.',
+      'Reliable enough: nobody makes propaganda like this about a city at peace. The hostility is attested by the print\u2019s existence and reception.',
+    ],
+    hints: [
+      'Note the word LEAST. You are looking for the claim the source is worst at supporting, not the claim that is false.',
+      'A biased source is still strong evidence — for the bias. Ask of each option: is this about the event, or about how the event was being used?',
+      'Three options are about persuasion and one is about facts on the ground. A distorted picture is nearly useless for the second and nearly ideal for the first.',
+    ],
+    trap: 'Students treat "biased" as "worthless" and eliminate everything. Bias narrows what a source proves; it does not empty it. Misreading LEAST/EXCEPT costs more points on this exam than any single fact.',
+    explanation: 'John Adams defended the soldiers and most were acquitted, which tells you how far the engraving sits from the evidence presented in court. It remains a superb source — for Patriot persuasion, not for the sequence of events.',
+  },
+  {
+    id: 'h-6', section: 'unit2', hard: true, skill: 'Argumentation',
+    prompt: 'Which finding would most weaken the argument that racial ideology in Virginia came first and produced chattel slavery, rather than developing alongside it?',
+    options: [
+      'Records from the 1640s and 1650s showing some Africans completing terms of service, acquiring land and winning lawsuits',
+      'The 1662 statute providing that a child\u2019s status followed that of the mother',
+      'The 1705 slave codes barring marriage between white and Black Virginians',
+      'Evidence that enslaved Africans outnumbered indentured servants in Virginia by 1700',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'If Africans could become free, hold property and sue successfully, then the rigid racial order cannot have been fully in place beforehand. It shows the ideology hardening over time.',
+      'Strengthens the opposite side — it is a legal step in building racial slavery, and it comes after the period in question.',
+      'Also on the other side, and later still. 1705 is the culmination of the process, not evidence about its origin.',
+      'A fact about labour numbers, with nothing to say about when racial ideology took hold. Chronology of population, not of ideas.',
+    ],
+    hints: [
+      'The claim under attack is about SEQUENCE: ideology first, then slavery. To weaken it, you need evidence about what the early period actually looked like.',
+      'Evidence from AFTER the system hardened cannot settle a dispute about what came before it. Check the date on every option before judging its content.',
+      'Two options are real evidence — for the other side of this argument. An option that is important and relevant can still be pointed the wrong way.',
+    ],
+    trap: 'Students pick the option that is most clearly about race, and the most clearly racial evidence here is the evidence that the argument was RIGHT. For weaken questions, direction beats topical fit every time.',
+    explanation: 'Anthony Johnson and others in early Virginia held land and went to law; the law had not yet closed. That fluidity is the historian\u2019s main reason for saying slavery hardened between roughly 1640 and 1705 rather than arriving fully formed — and the reason the app never says slavery "began" in 1619.',
+  },
+  {
+    id: 'h-7', section: 'unit3', hard: true, skill: 'Comparison',
+    prompt: 'Which comparison between the Navigation Acts before 1763 and British policy after 1763 is most accurate?',
+    options: [
+      'The laws changed less than the enforcement did, which is why old arrangements suddenly felt like new tyranny',
+      'Parliament repealed the Navigation Acts after 1763 and replaced them with direct taxes',
+      'Before 1763 the Acts were rigorously enforced, and after 1763 enforcement collapsed',
+      'The Acts had applied only to New England, and after 1763 they were extended to every colony',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'This is the heart of the period: mercantilist law was a century old, but customs enforcement, vice-admiralty courts and new revenue acts made it bite for the first time.',
+      'False. The Navigation Acts stayed in force; the Sugar and Stamp Acts were added to them, not substituted for them.',
+      'Exactly backwards. Loose enforcement before 1763 is the definition of salutary neglect.',
+      'False. The Acts applied empire-wide from the start; New England was affected distinctively because of shipping, not because it was singled out.',
+    ],
+    hints: [
+      'The question asks what CHANGED in 1763. Separate two different things: the rules on the books, and whether anyone was made to follow them.',
+      'Salutary neglect means the law existed and was not enforced. Whatever you answer must be consistent with that definition.',
+      'One option is the right idea stated backwards. Reversed options are the most tempting kind, because every word in them is familiar.',
+    ],
+    trap: 'A reversal reads as correct because all the vocabulary matches. Before eliminating, say each option out loud as a claim about direction: did enforcement go up or down after 1763?',
+    explanation: 'Colonists were not objecting to novel laws — they were objecting to laws they had spent a lifetime ignoring being enforced against them, along with new revenue acts and juryless courts. "What changed was enforcement, not the statute book" is the sentence to carry into the essay.',
+  },
+  {
+    id: 'h-8', section: 'revolution', hard: true, skill: 'Contextualization',
+    prompt: 'The First Continental Congress is best described as a body that:',
+    options: [
+      'Claimed rights under the English constitution while building machinery capable of coordinated resistance',
+      'Declared the colonies independent and began raising a continental army',
+      'Rejected the idea of economic coercion in favour of purely legal petitions',
+      'Represented all thirteen colonies in a formal union with binding legislative authority',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'Exactly the tension of 1774: the language is loyal and constitutional, while the Continental Association created local committees that could enforce a boycott — the apparatus of a government in waiting.',
+      'Two years early. Independence is July 1776, and the Continental Army is created by the SECOND Congress in 1775.',
+      'The Congress did petition — and it also created the Association, a comprehensive boycott. "Purely legal" misses half of what it did.',
+      'Georgia sent no delegates, and the Congress had no legal authority to bind anyone. It worked through persuasion and local committees.',
+    ],
+    hints: [
+      'Ask what the Congress SAID and what it BUILT. The best answer will account for both, because they pointed in different directions.',
+      'Date discipline: 1774 is petition and boycott; 1775 is army and one last petition; 1776 is independence. Anything that collapses those years is wrong.',
+      'Two options are true of a Continental Congress — just not this one. The exam relies on students remembering "Continental Congress" without remembering which.',
+    ],
+    trap: 'The First and Second Congresses blur together in revision. Anchor them: First = Declaration and Resolves, petition, Association, twelve colonies. Second = Washington, the army, the Olive Branch Petition, then the Declaration.',
+    explanation: 'The Congress asserted rights "by the immutable laws of nature, the principles of the English constitution, and the several charters" — while its Association put enforcement in the hands of local committees. Loyal words, revolutionary infrastructure.',
+  },
+  {
+    id: 'h-9', section: 'revolution', hard: true, skill: 'Causation',
+    prompt: 'Which best explains why the Tea Act provoked destruction of property when earlier taxes had produced petitions and boycotts?',
+    options: [
+      'Landing the tea would itself have conceded the tax, so preventing it from being unloaded became the whole point',
+      'The Tea Act raised the price of tea beyond what most colonists could afford',
+      'The Tea Act was the first tax Parliament had imposed without any colonial consultation',
+      'Colonists had by 1773 already committed themselves to seeking independence',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'Once the cargo was landed and duty paid, the principle was surrendered in practice. Boycotting cheap tea was unreliable, so the tea could not be allowed ashore at all.',
+      'False, and it is the famous inversion: the Tea Act made tea cheaper. If you answered this, the question has caught the right misconception.',
+      'False. No revenue act had been passed with colonial consultation — that was the entire grievance since 1764.',
+      'False, and it fails the chronology. In 1773 independence was still a fringe position.',
+    ],
+    hints: [
+      'Start from the fact that trips most people: the tea was CHEAPER. Any answer resting on expense is already out.',
+      'A boycott works when refusing to buy is easy. What happens to a boycott when the boycotted product becomes the cheapest on the market?',
+      'The response escalated because the usual weapon had been blunted — think about what tactics remained once buying the tea was attractive.',
+    ],
+    trap: 'Nearly everyone remembers the Boston Tea Party as a protest against expensive tea. It was a protest against cheap tea, because cheap tea would have been bought, and buying it would have conceded Parliament\u2019s right to tax.',
+    explanation: 'The Tea Act undercut smugglers and made the legal, taxed article the best deal in the market — which would have made the constitutional point moot in practice. Destroying the cargo was the only way to stop a concession by consumption.',
+  },
+  {
+    id: 'h-10', section: 'compare', hard: true, skill: 'Comparison',
+    prompt: 'Both Bacon\u2019s Rebellion (1676) and the Stamp Act crisis (1765) involved colonists resisting authority. The most significant difference is that:',
+    options: [
+      'Bacon\u2019s followers demanded a share of what the colonial elite held, while the Stamp Act protests united colonists across class against an external authority',
+      'Bacon\u2019s Rebellion was peaceful, while the Stamp Act crisis involved violence',
+      'Bacon\u2019s Rebellion was directed at Parliament, while the Stamp Act crisis targeted the colonial governor',
+      'Bacon\u2019s Rebellion produced no lasting consequences, while the Stamp Act crisis changed colonial policy',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'One is conflict inside colonial society — frontier freedmen against the tidewater elite. The other is colonial society, elite very much included, against London. Different axis entirely.',
+      'Backwards on both counts. Bacon burned Jamestown; the Stamp Act protests included crowds destroying officials\u2019 houses.',
+      'Both halves are wrong. Bacon\u2019s target was Governor Berkeley; the Stamp Act protests were aimed at Parliament and its stamp distributors.',
+      'Bacon\u2019s Rebellion had enormous consequences — it is the standard explanation for the turn toward enslaved labour. Saying otherwise contradicts Level 4.',
+    ],
+    hints: [
+      'Both were resistance. Ask a sharper question: in each case, who was resisting WHOM?',
+      'Draw the line of conflict. Does it run between colonists, or between the colonies and Britain? That is the axis the best answer names.',
+      'Three options make factual claims you can test against what you know. Test them — two are simply reversed.',
+    ],
+    trap: 'Comparison questions reward naming the dimension of difference, not listing details. "One was internal conflict, the other external" is the kind of sentence that earns points; a pile of facts about each is not.',
+    explanation: 'This is the comparison an essay prompt is really asking for. Bacon\u2019s Rebellion exposed class fracture within Virginia and pushed elites toward slavery and racial solidarity; the Stamp Act crisis, by contrast, temporarily bound merchants, lawyers, artisans and crowds together against Parliament.',
+  },
+  {
+    id: 'h-11', section: 'revolution', hard: true, skill: 'Continuity and change',
+    prompt: 'Which statement about colonial aims between 1765 and 1775 is best supported by the documents colonists themselves produced?',
+    options: [
+      'They consistently claimed the rights of Englishmen and sought redress within the empire, even after fighting began',
+      'They demanded independence from the Stamp Act crisis onward but concealed it for tactical reasons',
+      'They sought representation in the House of Commons as their primary objective',
+      'They rejected the authority of the King while accepting that of Parliament',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'The Stamp Act Congress resolutions, the Declaration and Resolves and the Olive Branch Petition all argue from English rights and ask for redress — the last of them in July 1775, after Lexington.',
+      'A conspiracy reading with no documentary support. Historians work from what people wrote, and what they wrote was petitions.',
+      'The reverse of the colonial position: most colonists did not want seats at Westminster, they wanted their own assemblies recognised as the only bodies able to tax them.',
+      'Precisely backwards. Colonists denied Parliament\u2019s authority while professing loyalty to the King — which is why the Declaration\u2019s grievances are addressed to him.',
+    ],
+    hints: [
+      'Note the qualifier: "best supported by the documents." Base the answer on what colonists actually wrote, not on how the story ends.',
+      'Line up the three big petitions — 1765, 1774, July 1775 — and ask what all three have in common.',
+      'One option inverts King and Parliament. That inversion is the single most common error on the Declaration, so check the direction carefully.',
+    ],
+    trap: 'Knowing the outcome makes the earlier evidence look like it was heading there. Historians call it hindsight bias, the AP exam tests it constantly, and the fix is to date every document and read it as its author meant it.',
+    explanation: 'Right up to mid-1775 the documentary record is a record of subjects asking for their rights. That is what makes 1776 a genuine rupture rather than the end of a plan — and saying so with evidence is what a high-scoring essay does.',
+  },
+  {
+    id: 'h-12', section: 'unit3', hard: true, skill: 'Causation',
+    prompt: 'Which claim about the French and Indian War and the Revolution is most defensible?',
+    options: [
+      'The war created the conditions — debt, a garrison and a vanished French threat — within which British ministers made the decisions colonists rebelled against',
+      'The war caused the Revolution directly, since colonists resolved on independence as soon as peace was signed',
+      'The war was irrelevant to the Revolution, which arose entirely from the ideas of the Enlightenment',
+      'The war prevented revolution for a decade by uniting colonists and British troops in a common cause',
+    ],
+    correctIndex: 0,
+    optionWhy: [
+      'It names the mechanism and leaves room for human choice: conditions plus decisions. That structure is what "most defensible" is asking for.',
+      'Too strong, and false in fact. In 1763 colonists were celebrating a British victory; independence had almost no constituency.',
+      'Too weak. The debt and the removal of France are causally central, and Enlightenment ideas had circulated for decades without producing a revolution.',
+      'Half-true and misleading: the war did produce shared service, and also mutual contempt. Either way, "prevented revolution" makes a claim the decade does not support.',
+    ],
+    hints: [
+      'The words "most defensible" mean the answer should be the one you could hold against a sharp challenge — not the boldest and not the most cautious.',
+      'A strong causal claim names the mechanism between cause and effect. Check whether each option says HOW the war led to anything.',
+      'Two options fail by overstatement, one by understatement. Extremes are usually wrong on a "most defensible" question — but only usually, so test the mechanism rather than trusting the pattern.',
+    ],
+    trap: 'Students learn "the French and Indian War caused the Revolution" as a slogan and then choose the option that states it most forcefully. The exam rewards the version with the intermediate steps in it.',
+    explanation: 'Debt → taxation, threat removed → reduced dependence, victory → an appetite for enforcement. Parliament then chose the Sugar Act, the Stamp Act and real customs enforcement. Conditions did not compel those choices, which is exactly why the causal claim needs its middle terms.',
+  },
 ]
 
 export function questionsFor(scope) {
   if (scope === 'full') return QUESTIONS
+  if (scope === 'hard') return QUESTIONS.filter(q => q.hard)
   if (scope === 'quick') return shuffle(QUESTIONS).slice(0, 15)
   return QUESTIONS.filter(q => q.section === scope)
 }
