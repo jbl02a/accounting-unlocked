@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { L14_EFFECTS_QUIZ as EFFECTS } from '../../data/levelQuestions'
@@ -85,6 +86,7 @@ export default function Level14() {
   const [done, setDone] = useState(false)
   const [items, setItems] = useState(() => ITEMS.map(i => shuffleFields(i, ['debitOptions', 'creditOptions'])))
   const [effects, setEffects] = useState(() => EFFECTS.map(q => shuffleOptions(q)))
+  useScrollTop([phase, index])
   const hints = useHints()
 
   const item = items[index]

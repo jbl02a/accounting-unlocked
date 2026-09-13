@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable, { money } from '../../components/EntryTable'
@@ -88,6 +89,7 @@ export default function Level13() {
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
   const [items, setItems] = useState(() => ITEMS.map(i => shuffleFields(i, ['debitOptions', 'creditOptions'])))
+  useScrollTop([phase, index])
   const hints = useHints()
 
   const item = items[index]

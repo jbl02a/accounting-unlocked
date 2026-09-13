@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { money } from '../../components/EntryTable'
@@ -85,6 +86,7 @@ export default function Level16() {
   const [reAns, setReAns] = useState('')
   const [checked4, setChecked4] = useState(false)
   const [done, setDone] = useState(false)
+  useScrollTop([phase])
   const hints = useHints()
 
   const eqCorrect = EQUATION_QS.filter(q => parseAmount(eqAnswers[q.id] || '') === q.answer).length

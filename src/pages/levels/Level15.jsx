@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import EntryTable, { money } from '../../components/EntryTable'
@@ -72,6 +73,7 @@ export default function Level15() {
   const [postClosing, setPostClosing] = useState({})
   const [checked3, setChecked3] = useState(false)
   const [done, setDone] = useState(false)
+  useScrollTop([phase])
   const hints = useHints()
 
   const kindCorrect = CLASSIFY_SET.filter(n => kinds[n] === ATB.find(a => a.name === n).kind).length

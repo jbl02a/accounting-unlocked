@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { money } from '../../components/EntryTable'
@@ -74,6 +75,7 @@ export default function Level17() {
   const [ratios, setRatios] = useState({ wc: '', cr: '' })
   const [checked3, setChecked3] = useState(false)
   const [done, setDone] = useState(false)
+  useScrollTop([phase])
   const hints = useHints()
 
   const placeCorrect = BS.filter(a => placed[a.name] === a.section).length

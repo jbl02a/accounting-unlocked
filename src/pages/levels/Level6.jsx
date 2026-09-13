@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { L6_QUIZ as QUESTIONS } from '../../data/levelQuestions'
@@ -109,6 +110,7 @@ export default function Level6() {
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
   const [questions, setQuestions] = useState(() => QUESTIONS.map(q => shuffleOptions(q)))
+  useScrollTop([phase])
   const hints = useHints()
 
   const q = questions[current]

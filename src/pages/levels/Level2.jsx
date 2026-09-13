@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { useHints, HintToggle, HintPanel, hintTally } from '../../components/Hint'
@@ -50,6 +51,7 @@ export default function Level2() {
   const [dragOver, setDragOver] = useState(null)
   const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
+  useScrollTop([phase])
   const hints = useHints()
 
   function placeCard(cardId, bucketId) {

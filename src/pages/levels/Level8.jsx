@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { money } from '../../components/EntryTable'
@@ -151,6 +152,7 @@ export default function Level8() {
   const [checked, setChecked] = useState(false)
   const [results, setResults] = useState([])
   const [done, setDone] = useState(false)
+  useScrollTop([phase, index])
   const hints = useHints()
 
   const acct = ACCOUNTS[index]

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { useHints, HintBar } from '../../components/Hint'
@@ -82,6 +83,7 @@ export default function Level5() {
   const [flagged, setFlagged] = useState(new Set())
   const [submitted, setSubmitted] = useState(false)
   const [wrongFlags, setWrongFlags] = useState(new Set())
+  useScrollTop([phase])
   const hints = useHints()
 
   // Clickable items that could be errors

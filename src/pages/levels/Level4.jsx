@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
@@ -84,6 +85,7 @@ export default function Level4() {
   const [submitted, setSubmitted] = useState({})
   const [allDone, setAllDone] = useState(false)
   const [transactions, setTransactions] = useState(() => TRANSACTIONS.map(t => shuffleFields(t, ['debitOptions', 'creditOptions'])))
+  useScrollTop([phase])
   const hints = useHints()
 
   const tx = transactions[txIndex]

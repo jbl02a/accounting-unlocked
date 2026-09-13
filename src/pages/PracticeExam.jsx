@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useScrollTop } from '../lib/useScrollTop'
 import { Link } from 'react-router-dom'
 import { useProgress } from '../context/ProgressContext'
 import EntryTable from '../components/EntryTable'
@@ -46,6 +47,7 @@ export default function PracticeExam() {
   const [scopeLabel, setScopeLabel] = useState('')
   const [questions, setQuestions] = useState([])
   const [index, setIndex] = useState(0)
+  useScrollTop([stage, index])
   const [answers, setAnswers] = useState({})
   const [revealedIds, setRevealedIds] = useState([])
   const [saved, setSaved] = useState(() => loadExamSession([...QUESTIONS, ...LEVEL_QUESTIONS].map(q => q.id)))

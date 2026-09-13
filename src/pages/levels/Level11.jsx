@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { L11_SCENARIO_QUIZ as SCENARIOS } from '../../data/levelQuestions'
@@ -127,6 +128,7 @@ export default function Level11() {
   const navigate = useNavigate()
   const { completeLevel, recordQuizResult, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
+  useScrollTop([phase])
 
   // Matching round
   const [examples, setExamples] = useState(() => shuffled(PRINCIPLES))

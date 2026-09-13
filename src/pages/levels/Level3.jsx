@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { useHints, HintBar, hintTally } from '../../components/Hint'
@@ -56,6 +57,7 @@ export default function Level3() {
   const [chosen, setChosen] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
   const [done, setDone] = useState(false)
+  useScrollTop([phase])
   const hints = useHints()
 
   const q = QUESTIONS[current]

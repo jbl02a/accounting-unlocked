@@ -130,6 +130,25 @@ Cookieless and no personal data, which matters because the users are children. N
 one-time toggle in the Vercel dashboard (Project → Analytics → Enable); the package
 alone does not turn it on.
 
+## Phase 11 — Start every page at the top (Sep 13)
+Reported from the live site: tapping a lesson or the cram sheet from the bottom of the
+home page landed at the bottom of the new page. A browser preserves the scroll offset
+across a route change, which is right for a document and wrong for an app.
+
+`ScrollToTop` handles navigation. The bigger half was in-page: a level runs
+lesson → drill → results behind one URL, and the exam runs setup → question → results,
+none of which change the path. `useScrollTop(deps)` is called in all 17 levels and the
+exam, keyed to whatever state marks a new screen (`phase`, plus `index` or `step` where
+those exist).
+
+Two bugs in the scripted edit itself, both caught by driving the app rather than by the
+build:
+- The hook was inserted before `index` was declared in PracticeExam, so the exam page
+  crashed with a temporal-dead-zone error. Every call is now placed after all of its
+  dependencies.
+- Level 11's React import is spelled differently, so the import insert missed it and the
+  level threw "useScrollTop is not defined" — while the build stayed green.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { useHints, HintToggle, HintPanel } from '../../components/Hint'
@@ -73,6 +74,7 @@ export default function Level1() {
   const [dragOver, setDragOver] = useState(null)
   const [submitted, setSubmitted] = useState(false)
   const [phase, setPhase] = useState('learn') // 'learn' | 'play'
+  useScrollTop([phase])
   const hints = useHints()
 
   const assetCount = Object.values(placed).filter(v => v === 'asset').length

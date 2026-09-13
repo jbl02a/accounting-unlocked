@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { L12_PERIOD_QUIZ as PERIOD_QS } from '../../data/levelQuestions'
@@ -74,6 +75,7 @@ export default function Level12() {
   const [cResults, setCResults] = useState([])
   const [done, setDone] = useState(false)
   const [periodQs, setPeriodQs] = useState(() => PERIOD_QS.map(q => shuffleOptions(q)))
+  useScrollTop([phase])
   const hints = useHints()
 
   const total = PERIOD_QS.length + CLASSIFY.length

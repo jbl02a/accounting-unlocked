@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { money } from '../../components/EntryTable'
@@ -126,6 +127,7 @@ export default function Level9() {
   const { completeLevel, recordTask } = useProgress()
   const [phase, setPhase] = useState('learn')
   const [step, setStep] = useState(1)
+  useScrollTop([phase])
 
   // Step 1 — column placement
   const [placed, setPlaced] = useState({})

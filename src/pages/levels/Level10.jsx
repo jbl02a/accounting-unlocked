@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useScrollTop } from '../../lib/useScrollTop'
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../../context/ProgressContext'
 import { L10_JOURNAL_QUIZ as JOURNAL_QUIZ, L10_ANALYSIS_QUIZ as ANALYSIS } from '../../data/levelQuestions'
@@ -92,6 +93,7 @@ export default function Level10() {
   const { completeLevel, recordQuizResult, recordTask } = useProgress()
   const [phase, setPhase] = useState('brief')
   const [step, setStep] = useState(1)
+  useScrollTop([phase, step])
 
   const [jIndex, setJIndex] = useState(0)
   const [jChosen, setJChosen] = useState(null)
