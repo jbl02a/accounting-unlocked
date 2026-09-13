@@ -136,6 +136,44 @@ one answers what was asked.
 - Browser: all three hint steps reveal in order with the exhausted-state message, the
   trap and autopsy panels render after answering, Hard mode starts a 12-question exam.
 
+## Phase 5 — Choose your difficulty
+
+The one Hard mode button was too blunt: it was all-or-nothing and only touched the
+practice exam. This makes difficulty a property of the whole course.
+
+- **Every question tiered** `difficulty` 1–3 by how it behaves, not by how obscure the
+  fact is — 27 foundations, 75 class-test, 21 reader's-cut at the point of writing.
+- **Three tiers** in `src/lib/difficulty.js`: Foundations, Class test, Reader's cut.
+  A tier changes the pool *and* the support — Reader's cut turns hints off and holds
+  all feedback until the round is submitted, then shows the whole round with
+  explanations, traps and full option autopsies.
+- **Chosen once, applied everywhere.** Stored in `ProgressContext`, so it governs level
+  quizzes and the exam alike, and survives a reload. Switchable from the home page or
+  the exam start screen. The "questions I got wrong" drill deliberately ignores the
+  tier.
+- **Graded widening.** Level banks are small, so `tierSelection` walks successively
+  wider pools and reports which one it settled on; Reader's cut reaches down to
+  mid-level questions before it gives up, and never silently serves the tier-1 gimmes.
+  `relaxNote()` prints an honest line on screen when it widens.
+- **One hard question added to each of Levels 1–8**, fully equipped, so the hardest tier
+  is meaningful in the levels and not just the exam. Patterns: refuting a claim about
+  population with the only option about population, strengthening one explanation
+  against a rival rather than merely damaging the rival, weakening a "turning point"
+  claim with a trend line, and picking the administrative change over the dramatic
+  religious event as evidence of fading Puritan intensity.
+- The redundant Hard mode scope was removed from the exam; unit drills with nothing at
+  the chosen tier are disabled rather than silently empty.
+
+**Caught by the browser walk:** renaming the tier field `pool` → `pools` left one call
+site behind in `PracticeExam.jsx`. The build was clean and the exam page was white.
+A difficulty walk that drives all three tiers is now part of the routine.
+
+**Verified:** 131 questions, no duplicate IDs, answer position 25.0/25.0/25.0/25.0;
+tier selection never serves outside its settled pool and Reader's cut never leaks a
+tier-1 question; all three tiers driven end to end in a browser (question counts differ,
+hints absent at the top tier, feedback held, end-of-round review renders, choice
+remembered after reload); no page errors; no overflow at 390px.
+
 ## Next
 
 1. Levels 11–12 — slavery in British North America, colonial minds.

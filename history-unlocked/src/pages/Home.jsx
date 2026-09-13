@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useProgress } from '../context/ProgressContext'
 import LevelCard, { LEVEL_META } from '../components/LevelCard'
+import { TIERS, tierById } from '../lib/difficulty'
 
 const BUILT = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -38,7 +39,8 @@ const QUOTES = [
 ]
 
 export default function Home() {
-  const { progress, totalCompleted, tasksToReview } = useProgress()
+  const { progress, totalCompleted, tasksToReview, difficulty, setDifficulty } = useProgress()
+  const tier = tierById(difficulty)
   const built = BUILT.length
   const done = BUILT.filter(n => progress.levels[n]?.completed).length
   const quote = QUOTES[done % QUOTES.length]
@@ -72,6 +74,27 @@ export default function Home() {
         <div className="h-2.5 rounded-full bg-white/10 overflow-hidden">
           <div className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-700" style={{ width: `${(done / built) * 100}%` }} />
         </div>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-8">
+        <div className="flex items-baseline justify-between gap-3 mb-3">
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Difficulty</p>
+          <p className="text-[11px] text-slate-500">Changes the questions in every level and exam</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          {TIERS.map(t => {
+            const active = difficulty === t.id
+            return (
+              <button key={t.id} onClick={() => setDifficulty(t.id)}
+                className={`text-left rounded-xl border p-3 transition-colors ${
+                  active ? 'border-amber-500 bg-amber-900/30' : 'border-white/10 bg-white/5 hover:border-amber-400'}`}>
+                <p className="font-bold text-white text-sm">{t.icon} {t.label} {active && <span className="text-amber-400">✓</span>}</p>
+                <p className="text-xs text-slate-400 mt-0.5">{t.blurb}</p>
+              </button>
+            )
+          })}
+        </div>
+        <p className="text-xs text-slate-500 mt-3">{tier.detail}</p>
       </div>
 
       {reviewByLevel.length > 0 && (

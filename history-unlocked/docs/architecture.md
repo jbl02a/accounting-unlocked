@@ -12,6 +12,7 @@ src/
   context/ProgressContext.jsx all persisted state
   lib/
     shuffle.js                option permutation
+    difficulty.js             the three tiers, and how a bank is filtered to one
     examSession.js            save/load/expire an in-progress exam
   data/
     examQuestions.js          exam bank, grouped into SECTIONS
@@ -59,6 +60,30 @@ moved with it. **Anything that renders `q.options` must render a shuffled copy.*
 
 The exam stores the permutation it used (`optionOrders`) alongside the saved answers,
 so a resumed attempt shows the same layout the answers were chosen against.
+
+## Difficulty
+
+Every question carries `difficulty` 1–3. `src/lib/difficulty.js` defines three tiers,
+each with an ordered list of pools and its own support settings:
+
+| Tier | Pools | Hints | Feedback |
+|---|---|---|---|
+| Foundations | `[1,2]` → all | yes | after each question |
+| Class test | `[2,3]` → all | yes | after each question |
+| Reader's cut | `[3]` → `[3,2]` → all | **no** | **held until the round is submitted** |
+
+`tierSelection(questions, tierId)` walks the pools and returns the first that yields at
+least `MIN_SERVED` questions, along with `relaxed` and the pool it settled on. Level
+banks are small, so widening is graded: the hardest tier reaches down to mid-level
+questions before it gives up and serves everything, and never silently returns the
+tier-1 gimmes. `relaxNote()` gives the UI an honest one-line explanation when it widens.
+
+The chosen tier lives in `ProgressContext` (`difficulty`, `setDifficulty`) and therefore
+persists, applying to level quizzes and the practice exam alike. Held feedback is
+implemented inside `QuizRound` as a review stage that renders the whole round — every
+question, its explanation, its trap and the full option autopsy — before the score is
+handed back. One deliberate exception: the exam's "questions I got wrong" drill ignores
+the tier, because something you missed is worth re-serving whatever its difficulty.
 
 ## The lesson/drill spine
 

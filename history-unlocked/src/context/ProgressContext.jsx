@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import { DEFAULT_TIER, TIERS } from '../lib/difficulty'
 
 const ProgressContext = createContext(null)
 
@@ -14,7 +15,7 @@ function buildDefault() {
     // Every level is unlocked. Practice is encouraged, never required.
     levels[i] = { unlocked: true, completed: false, score: null }
   }
-  return { levels, exam: { attempts: [], best: null }, misses: {} }
+  return { levels, exam: { attempts: [], best: null }, misses: {}, difficulty: DEFAULT_TIER }
 }
 
 // Older saves only knew about levels 1-5 and had no exam record, so fold whatever
@@ -34,7 +35,9 @@ function migrate(saved) {
   const attempts = Array.isArray(saved.exam?.attempts) ? saved.exam.attempts : []
   const best = typeof saved.exam?.best === 'number' ? saved.exam.best : null
   const misses = saved.misses && typeof saved.misses === 'object' ? saved.misses : {}
-  return { levels, exam: { attempts, best }, misses }
+  // Saves written before difficulty existed have no tier; give them the default.
+  const difficulty = TIERS.some(t => t.id === saved.difficulty) ? saved.difficulty : DEFAULT_TIER
+  return { levels, exam: { attempts, best }, misses, difficulty }
 }
 
 export function ProgressProvider({ children }) {
@@ -152,6 +155,11 @@ export function ProgressProvider({ children }) {
       .map(([id]) => id)
   }
 
+  function setDifficulty(id) {
+    if (!TIERS.some(t => t.id === id)) return
+    setProgress(prev => ({ ...prev, difficulty: id }))
+  }
+
   function clearMisses() {
     setProgress(prev => ({ ...prev, misses: {} }))
   }
@@ -164,7 +172,7 @@ export function ProgressProvider({ children }) {
 
   return (
     <ProgressContext.Provider
-      value={{ progress, completeLevel, recordExam, recordQuizResult, recordTask, tasksToReview, needsWorkIds, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
+      value={{ progress, completeLevel, recordExam, recordQuizResult, recordTask, tasksToReview, needsWorkIds, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS, difficulty: progress.difficulty || DEFAULT_TIER, setDifficulty }}
     >
       {children}
     </ProgressContext.Provider>

@@ -62,11 +62,15 @@ These are the things most likely to be broken by accident.
    It already does. If you add another index-aligned field, permute that too, or every
    wrong answer gets explained as though it were a different wrong answer. There is a
    property test for this — see `docs/testing.md`.
-10. **Staged hints teach a fixed procedure.** `hints` is an array of up to three
+10. **Never let a tier serve easier questions without saying so.** `tierSelection`
+   widens the pool in graded steps when a level bank is too small, and returns
+   `relaxed` plus a `relaxNote` the UI prints. Silently handing back tier-1 questions
+   to someone who chose Reader's cut is the failure mode to avoid.
+11. **Staged hints teach a fixed procedure.** `hints` is an array of up to three
    strings and the labels are fixed in `Hint.jsx`: *what is being asked* → *the rule
    that decides it* → *the trap in the room*. Author in that order. The point is that
    the same three moves work on every hard question, so they become automatic.
-11. **Sources are adapted, and say so.** Stimulus excerpts are drawn from public-domain
+12. **Sources are adapted, and say so.** Stimulus excerpts are drawn from public-domain
    documents and lightly modernised; the attribution line carries "(adapted)" when the
    wording has been touched. Never invent a quotation or attach real words to the
    wrong author.
@@ -83,7 +87,13 @@ So questions are authored against that, not against recall:
   nobody would pick teaches nothing.
 - **Prompts do work**: *most directly*, *best supported by*, *would most weaken*,
   *LEAST reliable*. Being true is not being responsive, and the wording is what decides.
-- **`hard: true`** marks a question for the exam's Hard mode scope.
+- **Every question carries `difficulty` 1–3**, and the student picks a tier:
+  Foundations (1–2), Class test (2–3), Reader's cut (3, widening to 2 on small level
+  banks). The tier changes the pool *and* the support: Reader's cut turns hints off and
+  holds all feedback until the round is submitted. Stored in `ProgressContext`, so it
+  applies to levels and the exam alike.
+- **`hard: true`** is legacy shorthand for the hardest questions; every one of them is
+  also `difficulty: 3`, which is what the tier system reads.
 - Hard questions carry the full kit: three staged `hints`, an `optionWhy` for every
   option, and a `trap` naming why students miss it.
 

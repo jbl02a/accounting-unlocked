@@ -25,9 +25,21 @@ Optional fields that make a question teach rather than merely test:
   hints: ['what is being asked', 'the rule that decides it', 'the trap in the room'],
   optionWhy: ['why this is right', 'why this is tempting and wrong', '…', '…'],
   trap: 'the specific reason students miss this one',
-  hard: true,   // collects it into the exam's Hard mode
+  difficulty: 3,  // 1 = foundations, 2 = class test, 3 = reader's cut
 }
 ```
+
+`difficulty` is **required in practice** — an untagged question is treated as a 2. Tier
+it by how the question behaves, not by how obscure the fact is:
+
+- **1** — one concept, distractors clearly wrong. Recall or a single definition.
+- **2** — analysis with plausible distractors: causation, comparison, reading a source.
+- **3** — several options true and only one responsive; weaken/strengthen; evidence
+  reach; LEAST/EXCEPT. Tier 3 questions should carry the full kit (three hints,
+  `optionWhy` for every option, and a `trap`).
+
+Aim for at least two tier-3 questions in a level bank, or the hardest tier has to widen
+its pool and will say so on screen.
 
 `hints` replaces the single `hint` string (which still works, as a one-step hint). The
 three step labels are fixed in `Hint.jsx` — author in that order, because the whole

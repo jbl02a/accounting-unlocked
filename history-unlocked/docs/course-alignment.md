@@ -19,8 +19,10 @@ reason for three specific features:
 - **Questions are written so several options are true.** The skill being tested is
   responsiveness to the prompt, not recall. See the "Writing a hard question" section
   of `adding-content.md` for the patterns.
-- **Hard mode** (`hard: true`, its own exam scope) collects the most demanding
-  questions in one place.
+- **The student chooses a difficulty** — Foundations, Class test, Reader's cut — and it
+  applies to levels and the exam alike. Reader's cut is not just harder questions: hints
+  are off and all feedback is held until the round is submitted, because finding out at
+  the end whether you actually knew it is the experience this course exists to rehearse.
 - **Staged hints** replace the single nudge. Three fixed steps — what is being asked,
   the rule that decides it, the trap in the room — so the same procedure becomes
   automatic. They never state the answer.

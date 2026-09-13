@@ -106,7 +106,7 @@ const HEADRIGHT = {
 export const QUESTIONS = [
   // ── Unit 1 ──────────────────────────────────────────────────────────
   {
-    id: 'u1-1', section: 'unit1', skill: 'Contextualization', stimulus: LAS_CASAS,
+    id: 'u1-1', difficulty: 2, section: 'unit1', skill: 'Contextualization', stimulus: LAS_CASAS,
     prompt: 'Las Casas wrote this account primarily in order to:',
     options: [
       'Persuade the Spanish Crown to reform its treatment of Native peoples',
@@ -119,7 +119,7 @@ export const QUESTIONS = [
     explanation: 'Las Casas was a reforming friar arguing to the Crown against the encomienda. His campaign contributed to the New Laws of 1542. Note the giveaway: an author this graphic about Spanish cruelty is not writing to recruit settlers — he is writing to provoke royal action.',
   },
   {
-    id: 'u1-2', section: 'unit1', skill: 'Causation', stimulus: LAS_CASAS,
+    id: 'u1-2', difficulty: 2, section: 'unit1', skill: 'Causation', stimulus: LAS_CASAS,
     prompt: 'The labour conditions Las Casas describes were most directly a consequence of:',
     options: [
       'The encomienda system, which granted colonists the labour of Native peoples',
@@ -132,7 +132,7 @@ export const QUESTIONS = [
     explanation: 'The encomienda granted Spanish colonists the labour of Native peoples in a given area in return for nominal protection and Christianization. African slavery expanded in Spanish America partly BECAUSE Native populations collapsed — so it is the consequence, not the cause, of what Las Casas describes.',
   },
   {
-    id: 'u1-3', section: 'unit1', skill: 'Continuity and change',
+    id: 'u1-3', difficulty: 1, section: 'unit1', skill: 'Continuity and change',
     prompt: 'Which was the most significant demographic consequence of contact between Europe and the Americas?',
     options: [
       'Epidemic disease killed a large majority of the Native population within roughly a century',
@@ -145,7 +145,7 @@ export const QUESTIONS = [
     explanation: 'Smallpox, measles, influenza and typhus devastated populations with no acquired immunity — estimates commonly run to 80–90% mortality in the worst-hit regions. This demographic collapse is the precondition for almost everything else in the colonial period, including the demand for African labour.',
   },
   {
-    id: 'u1-4', section: 'unit1', skill: 'Developments and processes',
+    id: 'u1-4', difficulty: 1, section: 'unit1', skill: 'Developments and processes',
     prompt: 'Maize, potatoes and tomatoes moved from the Americas to Europe; horses, cattle, wheat and smallpox moved the other way. This exchange most directly contributed to:',
     options: [
       'Substantial population growth in Europe, Asia and Africa from new high-calorie crops',
@@ -158,7 +158,7 @@ export const QUESTIONS = [
     explanation: 'American crops — especially the potato and maize — raised caloric yields per acre and supported sustained population growth across the Old World. The exchange ran both ways, but the demographic effects were opposite: growth in the Old World, catastrophe in the New.',
   },
   {
-    id: 'u1-5', section: 'unit1', skill: 'Comparison',
+    id: 'u1-5', difficulty: 1, section: 'unit1', skill: 'Comparison',
     prompt: 'Before European contact, Native societies in the Southwest such as the Pueblo differed from those of the Great Plains chiefly in that the Pueblo:',
     options: [
       'Built permanent settlements supported by irrigated maize agriculture',
@@ -171,7 +171,7 @@ export const QUESTIONS = [
     explanation: 'Pueblo peoples irrigated maize in an arid environment and built permanent adobe settlements. Plains peoples were largely nomadic — and the horseback bison hunting we picture came only AFTER the Spanish reintroduced horses. Environment shaping social structure is a favourite AP theme (GEO).',
   },
   {
-    id: 'u1-6', section: 'unit1', skill: 'Causation',
+    id: 'u1-6', difficulty: 2, section: 'unit1', skill: 'Causation',
     prompt: 'The Pueblo Revolt of 1680 is best understood as:',
     options: [
       'A successful Native rebellion that expelled the Spanish from New Mexico for over a decade',
@@ -186,7 +186,7 @@ export const QUESTIONS = [
 
   // ── Unit 2 · Chesapeake ─────────────────────────────────────────────
   {
-    id: 'u2-1', section: 'unit2', skill: 'Sourcing', stimulus: POWHATAN,
+    id: 'u2-1', difficulty: 2, section: 'unit2', skill: 'Sourcing', stimulus: POWHATAN,
     prompt: 'Powhatan’s argument rests most directly on the claim that:',
     options: [
       'Trade and cooperation would serve the English better than violence would',
@@ -199,7 +199,7 @@ export const QUESTIONS = [
     explanation: 'He offers exchange and warns that violence destroys the very people feeding the English — a pragmatic argument aimed at English self-interest. Early Jamestown depended heavily on Powhatan food supplies, which is exactly why the argument had force.',
   },
   {
-    id: 'u2-2', section: 'unit2', skill: 'Causation', stimulus: HEADRIGHT,
+    id: 'u2-2', difficulty: 2, section: 'unit2', skill: 'Causation', stimulus: HEADRIGHT,
     prompt: 'The system described most directly contributed to which development in seventeenth-century Virginia?',
     options: [
       'Growing tension between landless freed servants and established planters',
@@ -212,7 +212,7 @@ export const QUESTIONS = [
     explanation: 'Headrights concentrated land among planters who imported labour, while freed servants faced a crowded frontier. That resentment is the fuel behind Bacon’s Rebellion in 1676 — a causal chain the exam asks about constantly.',
   },
   {
-    id: 'u2-3', section: 'unit2', skill: 'Causation', stimulus: BACON,
+    id: 'u2-3', difficulty: 2, section: 'unit2', skill: 'Causation', stimulus: BACON,
     prompt: 'Bacon’s central grievance against Governor Berkeley was that Berkeley:',
     options: [
       'Refused to wage aggressive war against Native peoples on the frontier',
@@ -225,7 +225,7 @@ export const QUESTIONS = [
     explanation: 'Bacon accused Berkeley of protecting Native peoples — Berkeley wanted to preserve the fur trade and avoid costly war — while frontier settlers demanded land and protection. The rebellion burned Jamestown and frightened the planter elite badly.',
   },
   {
-    id: 'u2-4', section: 'unit2', skill: 'Continuity and change', stimulus: BACON,
+    id: 'u2-4', difficulty: 2, section: 'unit2', skill: 'Continuity and change', stimulus: BACON,
     prompt: 'Historians often connect the rebellion described here to which longer-term change?',
     options: [
       'An accelerating shift from indentured servitude to African chattel slavery',
@@ -238,7 +238,7 @@ export const QUESTIONS = [
     explanation: 'Bacon’s Rebellion demonstrated the danger of a large class of armed, landless former servants. Enslaved Africans never became free competitors for land, and racial division split poor whites from enslaved Blacks. This is a causal claim to state carefully — historians debate its weight — but it is the standard AP connection.',
   },
   {
-    id: 'u2-5', section: 'unit2', skill: 'Developments and processes', stimulus: VA_LAW,
+    id: 'u2-5', difficulty: 1, section: 'unit2', skill: 'Developments and processes', stimulus: VA_LAW,
     prompt: 'This 1662 statute is most significant because it:',
     options: [
       'Made slave status hereditary through the mother, turning slavery into a permanent, inheritable condition',
@@ -253,7 +253,7 @@ export const QUESTIONS = [
 
   // ── Unit 2 · New England ────────────────────────────────────────────
   {
-    id: 'u2-6', section: 'unit2', skill: 'Sourcing', stimulus: WINTHROP,
+    id: 'u2-6', difficulty: 1, section: 'unit2', skill: 'Sourcing', stimulus: WINTHROP,
     prompt: 'Winthrop’s speech reflects the Puritan belief that the colony:',
     options: [
       'Was bound by a covenant with God and would be judged by its success or failure',
@@ -266,7 +266,7 @@ export const QUESTIONS = [
     explanation: 'The covenant idea — a binding agreement with God, with communal consequences for failure — shaped New England law, town organization and the sense of mission. "City upon a hill" is a warning about being watched, not simply a boast.',
   },
   {
-    id: 'u2-7', section: 'unit2', skill: 'Comparison', stimulus: WINTHROP,
+    id: 'u2-7', difficulty: 2, section: 'unit2', skill: 'Comparison', stimulus: WINTHROP,
     prompt: 'Compared with the Chesapeake colonies in the same decades, New England settlement was distinguished by:',
     options: [
       'Migration in family groups, producing balanced sex ratios and rapid natural population growth',
@@ -279,7 +279,7 @@ export const QUESTIONS = [
     explanation: 'New England migrants came as families seeking religious community, giving balanced sex ratios, long life expectancy and fast natural increase. The Chesapeake drew mostly young single male servants into a disease-ridden staple economy with high mortality. This regional comparison is among the most frequently tested items in the whole course.',
   },
   {
-    id: 'u2-8', section: 'unit2', skill: 'Causation',
+    id: 'u2-8', difficulty: 1, section: 'unit2', skill: 'Causation',
     prompt: 'Roger Williams and Anne Hutchinson were both banished from Massachusetts Bay primarily because they:',
     options: [
       'Challenged the authority of the colony’s Puritan leadership',
@@ -292,7 +292,7 @@ export const QUESTIONS = [
     explanation: 'Williams argued for separation of church and state and that the colony had no valid title to Native land; Hutchinson taught that salvation came through grace without clerical mediation, and did so as a woman in mixed gatherings. Both threatened the leadership’s authority — which shows the limits of a colony founded on religious liberty for itself.',
   },
   {
-    id: 'u2-9', section: 'unit2', skill: 'Causation',
+    id: 'u2-9', difficulty: 2, section: 'unit2', skill: 'Causation',
     prompt: 'King Philip’s War (1675–76) is best characterised as:',
     options: [
       'A devastating conflict that broke organised Native resistance in southern New England',
@@ -307,7 +307,7 @@ export const QUESTIONS = [
 
   // ── Unit 2 · Middle & Lower South ───────────────────────────────────
   {
-    id: 'u2-10', section: 'unit2', skill: 'Sourcing', stimulus: PENN,
+    id: 'u2-10', difficulty: 1, section: 'unit2', skill: 'Sourcing', stimulus: PENN,
     prompt: 'Penn’s Frame of Government reflects which distinctive feature of Pennsylvania?',
     options: [
       'A Quaker commitment to limited government, religious toleration and rule by law',
@@ -320,7 +320,7 @@ export const QUESTIONS = [
     explanation: 'Quaker beliefs about the inner light and the equality of souls produced unusual religious toleration and deliberately limited executive power. Pennsylvania’s toleration also attracted diverse migration — Germans, Scots-Irish — making it the most ethnically mixed of the colonies.',
   },
   {
-    id: 'u2-11', section: 'unit2', skill: 'Comparison',
+    id: 'u2-11', difficulty: 1, section: 'unit2', skill: 'Comparison',
     prompt: 'By the early eighteenth century, South Carolina differed from every other British mainland colony in that it:',
     options: [
       'Had a Black majority population, largely enslaved and concentrated on rice plantations',
@@ -333,7 +333,7 @@ export const QUESTIONS = [
     explanation: 'Rice cultivation — drawing on West African agricultural knowledge — and the Barbadian planter model produced a Black majority in South Carolina by around 1708. That demographic fact shaped its brutal slave codes and the fear behind reactions to the Stono Rebellion in 1739.',
   },
   {
-    id: 'u2-12', section: 'unit2', skill: 'Developments and processes',
+    id: 'u2-12', difficulty: 1, section: 'unit2', skill: 'Developments and processes',
     prompt: 'Georgia was founded in 1732 with which original purpose?',
     options: [
       'As a buffer against Spanish Florida and a refuge for debtors, initially banning slavery',
@@ -348,7 +348,7 @@ export const QUESTIONS = [
 
   // ── Unit 2 · Slavery and the Atlantic world ─────────────────────────
   {
-    id: 'u2-13', section: 'unit2', skill: 'Sourcing', stimulus: EQUIANO,
+    id: 'u2-13', difficulty: 2, section: 'unit2', skill: 'Sourcing', stimulus: EQUIANO,
     prompt: 'A historian evaluating this source for evidence about the Middle Passage should note that it:',
     options: [
       'Was published decades later as part of the British abolitionist campaign, which shaped how it was written',
@@ -361,7 +361,7 @@ export const QUESTIONS = [
     explanation: 'Equiano published in 1789 in support of abolition. That does not make it false — it is among the few first-person accounts we have — but purpose and audience shaped its emphases. Recognising that is exactly the sourcing point on the DBQ rubric.',
   },
   {
-    id: 'u2-14', section: 'unit2', skill: 'Causation', stimulus: NAV_ACTS,
+    id: 'u2-14', difficulty: 1, section: 'unit2', skill: 'Causation', stimulus: NAV_ACTS,
     prompt: 'The Navigation Acts were intended primarily to:',
     options: [
       'Ensure colonial trade enriched England under mercantilist principles',
@@ -374,7 +374,7 @@ export const QUESTIONS = [
     explanation: 'Mercantilism treated colonies as sources of raw materials and captive markets, with trade carried in English ships to keep wealth within the empire. Revenue-raising is the later story — the Sugar and Stamp Acts of the 1760s — and confusing the two eras is a common error.',
   },
   {
-    id: 'u2-15', section: 'unit2', skill: 'Continuity and change', stimulus: NAV_ACTS,
+    id: 'u2-15', difficulty: 1, section: 'unit2', skill: 'Continuity and change', stimulus: NAV_ACTS,
     prompt: 'Before 1763, enforcement of these laws was characterised by:',
     options: [
       'Salutary neglect — loose enforcement that let colonial self-government and smuggling flourish',
@@ -387,7 +387,7 @@ export const QUESTIONS = [
     explanation: 'Loose enforcement — later named salutary neglect — allowed colonial assemblies real power and made smuggling routine. The shock of the 1760s comes precisely from the contrast: Britain began enforcing rules colonists had long evaded.',
   },
   {
-    id: 'u2-16', section: 'unit2', skill: 'Causation',
+    id: 'u2-16', difficulty: 1, section: 'unit2', skill: 'Causation',
     prompt: 'The Stono Rebellion of 1739 led most directly to:',
     options: [
       'Harsher slave codes in South Carolina restricting movement, assembly and literacy',
@@ -402,7 +402,7 @@ export const QUESTIONS = [
 
   // ── Unit 2 · Colonial minds ─────────────────────────────────────────
   {
-    id: 'u2-17', section: 'unit2', skill: 'Sourcing', stimulus: EDWARDS,
+    id: 'u2-17', difficulty: 1, section: 'unit2', skill: 'Sourcing', stimulus: EDWARDS,
     prompt: 'This sermon is most characteristic of which development?',
     options: [
       'The First Great Awakening, an emotional religious revival emphasising personal conversion',
@@ -415,7 +415,7 @@ export const QUESTIONS = [
     explanation: 'Edwards is the classic Great Awakening text: emotional, conversion-focused preaching. The Awakening split congregations into New Lights and Old Lights, undermined deference to established clergy, and — because it crossed colonial boundaries — is often read as an early shared intercolonial experience.',
   },
   {
-    id: 'u2-18', section: 'unit2', skill: 'Comparison',
+    id: 'u2-18', difficulty: 2, section: 'unit2', skill: 'Comparison',
     prompt: 'The Great Awakening and the Enlightenment differed most fundamentally in that the Awakening emphasised:',
     options: [
       'Emotional religious experience, while the Enlightenment emphasised reason and observation',
@@ -428,7 +428,7 @@ export const QUESTIONS = [
     explanation: 'Different methods, overlapping political effect: both encouraged individuals to judge for themselves rather than defer to established authority. That shared consequence is what makes them useful together in an essay on the roots of revolutionary thinking.',
   },
   {
-    id: 'u2-19', section: 'unit2', skill: 'Developments and processes',
+    id: 'u2-19', difficulty: 2, section: 'unit2', skill: 'Developments and processes',
     prompt: 'The 1735 trial of John Peter Zenger is significant because it:',
     options: [
       'Advanced the principle that truthful criticism of officials was not libel, strengthening press freedom',
@@ -441,7 +441,7 @@ export const QUESTIONS = [
     explanation: 'The jury acquitted despite the law as it then stood, advancing the idea that truth is a defence against libel. It is a milestone in press freedom and an example of colonial juries asserting themselves against royal officials.',
   },
   {
-    id: 'u2-20', section: 'unit2', skill: 'Continuity and change',
+    id: 'u2-20', difficulty: 2, section: 'unit2', skill: 'Continuity and change',
     prompt: 'Colonial assemblies such as the Virginia House of Burgesses mattered in the long run chiefly because they:',
     options: [
       'Gave colonists extensive practice in representative self-government',
@@ -456,7 +456,7 @@ export const QUESTIONS = [
 
   // ── Comparison & causation ──────────────────────────────────────────
   {
-    id: 'c-1', section: 'compare', skill: 'Comparison',
+    id: 'c-1', difficulty: 2, section: 'compare', skill: 'Comparison',
     prompt: 'Compared with English colonization, French colonization in North America was distinguished by:',
     options: [
       'Fewer settlers, a focus on the fur trade, and more extensive alliances with Native peoples',
@@ -469,7 +469,7 @@ export const QUESTIONS = [
     explanation: 'The fur trade needed Native partners rather than their land, so the French built alliances and intermarried, with far fewer settlers. English agricultural settlement needed land, which made displacement and conflict structural. Economy drives the relationship — that is the analytical move to make.',
   },
   {
-    id: 'c-2', section: 'compare', skill: 'Comparison',
+    id: 'c-2', difficulty: 2, section: 'compare', skill: 'Comparison',
     prompt: 'Spanish colonization differed from both French and English patterns most clearly in its:',
     options: [
       'Coerced labour of large Native populations under encomienda, and a rigid racial caste system',
@@ -482,7 +482,7 @@ export const QUESTIONS = [
     explanation: 'Spain conquered populous societies and extracted labour through the encomienda, organising society by the casta system based on descent. The differing Native population densities each empire encountered largely explain the differing colonial models.',
   },
   {
-    id: 'c-3', section: 'compare', skill: 'Causation',
+    id: 'c-3', difficulty: 2, section: 'compare', skill: 'Causation',
     prompt: 'Which best explains why enslaved African labour became central to the southern colonies but not to New England?',
     options: [
       'Southern staple crops demanded large year-round labour forces that the southern climate and soil made profitable',
@@ -495,7 +495,7 @@ export const QUESTIONS = [
     explanation: 'Tobacco and rice rewarded large coerced workforces; New England’s mixed farming, fishing and shipping did not. But note the trap in the last option — New England merchants were deeply tied to the slave economy through shipping, rum and provisioning the West Indies. Slavery existed in New England; it simply was not the basis of production.',
   },
   {
-    id: 'c-4', section: 'compare', skill: 'Comparison',
+    id: 'c-4', difficulty: 2, section: 'compare', skill: 'Comparison',
     prompt: 'Which statement best compares the Chesapeake and New England colonies in the seventeenth century?',
     options: [
       'The Chesapeake was shaped by staple-crop profit and high mortality; New England by religious community and family migration',
@@ -510,7 +510,7 @@ export const QUESTIONS = [
 
   // ── Sourcing skill ──────────────────────────────────────────────────
   {
-    id: 's-1', section: 'skills', skill: 'HIPP — purpose', stimulus: WINTHROP,
+    id: 's-1', difficulty: 2, section: 'skills', skill: 'HIPP — purpose', stimulus: WINTHROP,
     prompt: 'Identifying the PURPOSE of this source would involve noting that Winthrop:',
     options: [
       'Sought to bind the colonists to a shared religious mission before they landed',
@@ -523,7 +523,7 @@ export const QUESTIONS = [
     explanation: 'Purpose is what the author wanted to accomplish, distinct from what the source says. Winthrop was shaping a community before it existed. On the DBQ, sourcing earns a point only when you explain HOW purpose, audience, point of view or context affects the document’s meaning — not merely that it has one.',
   },
   {
-    id: 's-2', section: 'skills', skill: 'HIPP — audience', stimulus: PENN,
+    id: 's-2', difficulty: 2, section: 'skills', skill: 'HIPP — audience', stimulus: PENN,
     prompt: 'Penn’s intended AUDIENCE for the Frame of Government most plausibly included:',
     options: [
       'Prospective settlers deciding whether to migrate, as well as the colony’s own governing class',
@@ -536,7 +536,7 @@ export const QUESTIONS = [
     explanation: 'Penn was recruiting. Promises of toleration and limited government were both sincere Quaker conviction and effective advertising — and Pennsylvania did attract unusually diverse migration. Recognising a document doing two jobs at once is strong analysis.',
   },
   {
-    id: 's-3', section: 'skills', skill: 'HIPP — point of view',
+    id: 's-3', difficulty: 2, section: 'skills', skill: 'HIPP — point of view',
     prompt: 'Why does an author’s point of view matter when using a source as evidence?',
     options: [
       'It shapes what the author noticed, emphasised or omitted, which affects what the source can reliably show',
@@ -549,7 +549,7 @@ export const QUESTIONS = [
     explanation: 'Point of view limits and directs a source; it does not invalidate it. Equiano’s abolitionist purpose does not make the Middle Passage less brutal — it tells you what he emphasised and why. Treating bias as disqualifying is the most common misuse of this skill.',
   },
   {
-    id: 's-4', section: 'skills', skill: 'Contextualization',
+    id: 's-4', difficulty: 1, section: 'skills', skill: 'Contextualization',
     prompt: 'On the DBQ, the contextualization point is earned by:',
     options: [
       'Situating the argument within broader historical developments beyond the immediate topic',
@@ -562,7 +562,7 @@ export const QUESTIONS = [
     explanation: 'Contextualization requires broader events, developments or processes before, during or after the topic — usually several sentences, not a clause. It is one of the most commonly missed easy points on the rubric.',
   },
   {
-    id: 'u3-1', section: 'unit3', skill: 'Developments and processes',
+    id: 'u3-1', difficulty: 1, section: 'unit3', skill: 'Developments and processes',
     prompt: 'Mercantilist theory held that:',
     options: [
       'The world\u2019s wealth was fixed, so a nation gained only by exporting more than it imported',
@@ -575,7 +575,7 @@ export const QUESTIONS = [
     explanation: 'A zero-sum theory: wealth is finite, so empires compete for a fixed pool. Colonies existed to supply raw materials and buy finished goods, keeping the balance of trade — and the gold — at home. This is the assumption behind every Navigation Act.',
   },
   {
-    id: 'u3-2', section: 'unit3', skill: 'Causation',
+    id: 'u3-2', difficulty: 2, section: 'unit3', skill: 'Causation',
     prompt: 'The Navigation Acts most directly benefited which colonial industry?',
     options: [
       'New England shipbuilding and the carrying trade, because colonial ships counted as British',
@@ -588,7 +588,7 @@ export const QUESTIONS = [
     explanation: 'Because colonial-built ships and colonial crews satisfied the Acts, New England yards supplied a large share of the empire\u2019s merchant fleet. Meanwhile the Wool, Hat and Iron Acts restricted exactly the finished manufacturing the wrong answers describe.',
   },
   {
-    id: 'u3-3', section: 'unit3', skill: 'Continuity and change',
+    id: 'u3-3', difficulty: 2, section: 'unit3', skill: 'Continuity and change',
     prompt: 'The practical effect of salutary neglect on colonial politics was that:',
     options: [
       'Colonial assemblies accumulated real power, including control of governors\u2019 salaries',
@@ -601,7 +601,7 @@ export const QUESTIONS = [
     explanation: 'Assemblies used the power of the purse — especially over salaries — to bend royal governors to local interests. By 1763 colonists regarded self-government as a right long possessed, not a privilege recently granted, which is why reasserting control provoked so much more than grumbling.',
   },
   {
-    id: 'u3-4', section: 'unit3', skill: 'Analyzing sources', stimulus: PROCLAMATION,
+    id: 'u3-4', difficulty: 2, section: 'unit3', skill: 'Analyzing sources', stimulus: PROCLAMATION,
     prompt: 'The British government issued this measure primarily to:',
     options: [
       'Avoid another costly war with Native nations after Pontiac\u2019s uprising',
@@ -614,7 +614,7 @@ export const QUESTIONS = [
     explanation: 'Britain was broke and had just watched Pontiac\u2019s coalition take most western posts. Separating settlers from Native nations was cheaper than garrisoning a frontier. Colonists read the same document as a betrayal of what they had fought for — a good example of one policy with two entirely coherent readings.',
   },
   {
-    id: 'u3-5', section: 'unit3', skill: 'Analyzing sources', stimulus: PITT_DEBT,
+    id: 'u3-5', difficulty: 2, section: 'unit3', skill: 'Analyzing sources', stimulus: PITT_DEBT,
     prompt: 'These figures are most useful for explaining:',
     options: [
       'Why Parliament began taxing the colonies directly in the 1760s',
@@ -627,7 +627,7 @@ export const QUESTIONS = [
     explanation: 'The debt roughly doubled and the garrison added an annual charge, so Parliament looked to the colonies that the war had defended: Sugar Act 1764, Stamp Act 1765, Quartering Act 1765. The numbers are the hinge between the war and the imperial crisis.',
   },
   {
-    id: 'u3-6', section: 'unit3', skill: 'Analyzing sources', stimulus: GRENVILLE,
+    id: 'u3-6', difficulty: 2, section: 'unit3', skill: 'Analyzing sources', stimulus: GRENVILLE,
     prompt: 'Colonists rejected the argument summarised here mainly on the grounds that:',
     options: [
       'Only their own elected assemblies could tax them, whatever the sum involved',
@@ -640,7 +640,7 @@ export const QUESTIONS = [
     explanation: 'Colonists paid far less tax than Britons and knew it. The objection was constitutional: taxation required the consent of a body they had elected, and Parliament was not one. Answering this question with "the taxes were too high" is the classic error.',
   },
   {
-    id: 'u3-7', section: 'unit3', skill: 'Causation',
+    id: 'u3-7', difficulty: 2, section: 'unit3', skill: 'Causation',
     prompt: 'The removal of France from mainland North America in 1763 weakened Britain\u2019s position with its colonies because:',
     options: [
       'Colonists no longer depended on British troops for protection against a rival empire',
@@ -653,7 +653,7 @@ export const QUESTIONS = [
     explanation: 'For a century the French threat made British protection indispensable. With France gone, the colonies needed Britain far less at precisely the moment Britain began demanding more of them. This is the irony at the centre of the period: victory dissolved the tie it was meant to strengthen.',
   },
   {
-    id: 'u3-8', section: 'unit3', skill: 'Comparison',
+    id: 'u3-8', difficulty: 2, section: 'unit3', skill: 'Comparison',
     prompt: 'Compared with the Albany Plan of 1754, colonial responses to the Stamp Act in 1765 showed that colonists:',
     options: [
       'Were far more willing to act jointly when they saw a common threat from Britain itself',
@@ -666,7 +666,7 @@ export const QUESTIONS = [
     explanation: 'In 1754 no assembly would yield an inch of authority to a union for defence. In 1765 nine colonies sent delegates to the Stamp Act Congress and merchants coordinated a boycott. What changed was not colonial affection for each other but a shared antagonist.',
   },
   {
-    id: 'u3-9', section: 'unit3', skill: 'Contextualization',
+    id: 'u3-9', difficulty: 2, section: 'unit3', skill: 'Contextualization',
     prompt: 'For Native nations, the outcome of the war was disastrous chiefly because:',
     options: [
       'They lost the ability to play rival empires against one another, leaving only Britain to bargain with',
@@ -679,7 +679,7 @@ export const QUESTIONS = [
     explanation: 'Balancing France against Britain had been the foundation of Native diplomacy for a century. In 1763 that ended: Britain cut back gift-giving, settlers pushed west, and Pontiac\u2019s War followed. No Native nation was party to the Treaty of Paris, which divided their land between two European powers.',
   },
   {
-    id: 'u3-10', section: 'unit3', skill: 'Causation',
+    id: 'u3-10', difficulty: 3, section: 'unit3', skill: 'Causation',
     prompt: 'A student writes: "The French and Indian War caused the American Revolution." The best refinement of that claim is that the war:',
     options: [
       'Created the debt and removed the threat that led Britain to make the decisions colonists rebelled against',
@@ -692,7 +692,7 @@ export const QUESTIONS = [
     explanation: 'Almost nobody wanted independence in 1763. The war produced conditions — debt, a garrison, a vanished French threat, an appetite for enforcement — and Parliament\u2019s response to those conditions produced the crisis. Naming the intermediate steps is what separates a top essay from a slogan.',
   },
   {
-    id: 'r-1', section: 'revolution', skill: 'Analyzing sources', stimulus: DICKINSON,
+    id: 'r-1', difficulty: 2, section: 'revolution', skill: 'Analyzing sources', stimulus: DICKINSON,
     prompt: 'Dickinson\u2019s argument here rests on linking:',
     options: [
       'Property and consent — taxation without consent is a loss of liberty, whatever the amount',
@@ -705,7 +705,7 @@ export const QUESTIONS = [
     explanation: 'Dickinson made the case that would carry the decade: property taken without consent is not taxation but confiscation, and a people whose property is insecure is not free. He also argued the internal/external tax distinction was meaningless if the purpose was revenue — while still writing as a loyal subject seeking redress.',
   },
   {
-    id: 'r-2', section: 'revolution', skill: 'Developments and processes',
+    id: 'r-2', difficulty: 2, section: 'revolution', skill: 'Developments and processes',
     prompt: 'The Stamp Act differed from earlier colonial taxes because it was:',
     options: [
       'A direct tax on goods and documents used inside the colonies, rather than a duty on trade',
@@ -718,7 +718,7 @@ export const QUESTIONS = [
     explanation: 'Earlier revenue came from duties on trade; the Stamp Act reached inside the colonies to tax newspapers, licences, deeds and playing cards. That made it visible to everyone and sharpened the constitutional objection — Parliament was no longer regulating an empire\u2019s commerce but taxing a people who had not elected it.',
   },
   {
-    id: 'r-3', section: 'revolution', skill: 'Causation',
+    id: 'r-3', difficulty: 2, section: 'revolution', skill: 'Causation',
     prompt: 'Parliament repealed the Stamp Act in 1766 primarily because:',
     options: [
       'Colonial boycotts hurt British merchants, who lobbied hard for repeal',
@@ -731,7 +731,7 @@ export const QUESTIONS = [
     explanation: 'Non-importation turned British merchants into an interest group for repeal. Parliament conceded the tax while passing the Declaratory Act the same day, asserting authority to bind the colonies "in all cases whatsoever" — so the principle remained exactly where it had been.',
   },
   {
-    id: 'r-4', section: 'revolution', skill: 'Causation',
+    id: 'r-4', difficulty: 2, section: 'revolution', skill: 'Causation',
     prompt: 'The Coercive Acts of 1774 produced intercolonial unity because they:',
     options: [
       'Showed every colony that Parliament could rewrite a colonial charter at will',
@@ -744,7 +744,7 @@ export const QUESTIONS = [
     explanation: 'Rewriting the Massachusetts charter and closing Boston\u2019s port demonstrated that self-government was revocable. Colonies with their own charters drew the obvious conclusion, sent delegates to the First Continental Congress and organised the Continental Association. Punishing one colony created twelve allies for it.',
   },
   {
-    id: 'r-5', section: 'revolution', skill: 'Analyzing sources', stimulus: CONTINENTAL_CONGRESS,
+    id: 'r-5', difficulty: 2, section: 'revolution', skill: 'Analyzing sources', stimulus: CONTINENTAL_CONGRESS,
     prompt: 'This document shows that as late as October 1774, the assembled colonies were:',
     options: [
       'Claiming rights within the British constitutional order rather than seeking independence',
@@ -757,7 +757,7 @@ export const QUESTIONS = [
     explanation: 'They ground their claims in the English constitution and their own charters — arguments for rights inside the empire. Independence is nearly two years away, and reading it backwards into 1774 is the standard error in this unit.',
   },
   {
-    id: 'r-6', section: 'revolution', skill: 'Causation',
+    id: 'r-6', difficulty: 2, section: 'revolution', skill: 'Causation',
     prompt: 'Common Sense (1776) contributed to the decision for independence chiefly by:',
     options: [
       'Attacking hereditary monarchy itself, in plain language aimed at ordinary readers',
@@ -770,7 +770,7 @@ export const QUESTIONS = [
     explanation: 'Colonists had blamed Parliament and bad ministers while remaining loyal to the King. Paine argued monarchy itself was absurd and that an island could not sensibly govern a continent, in language written for taverns rather than courts. It sold in enormous numbers and made separation thinkable within months.',
   },
   {
-    id: 'r-7', section: 'revolution', skill: 'Analyzing sources', stimulus: JEFFERSON,
+    id: 'r-7', difficulty: 2, section: 'revolution', skill: 'Analyzing sources', stimulus: JEFFERSON,
     prompt: 'The political theory in this passage derives most directly from:',
     options: [
       'John Locke\u2019s natural rights and the idea that government rests on the consent of the governed',
@@ -783,7 +783,7 @@ export const QUESTIONS = [
     explanation: 'Locke held that government exists by consent to protect natural rights and may be replaced when it fails to. Jefferson substitutes "the pursuit of Happiness" for Locke\u2019s "property." The grievances that follow are addressed to the King, not Parliament, because by 1776 colonists denied Parliament had any authority over them at all.',
   },
   {
-    id: 'r-8', section: 'revolution', skill: 'Continuity and change',
+    id: 'r-8', difficulty: 2, section: 'revolution', skill: 'Continuity and change',
     prompt: 'Which best describes colonial opinion on independence across this period?',
     options: [
       'Almost nonexistent before 1775, then growing rapidly after fighting began and the King refused to negotiate',
@@ -796,7 +796,7 @@ export const QUESTIONS = [
     explanation: 'Colonists petitioned in 1765, 1774 and again in July 1775 after Lexington. The King\u2019s refusal of the Olive Branch Petition, the Prohibitory Act and Common Sense together closed the middle ground. Treating independence as the goal all along is the most common distortion of this unit.',
   },
   {
-    id: 'r-9', section: 'revolution', skill: 'Comparison',
+    id: 'r-9', difficulty: 2, section: 'revolution', skill: 'Comparison',
     prompt: 'Most Native nations that took sides in the Revolutionary War supported Britain because:',
     options: [
       'Britain had tried to limit colonial settlement west of the Appalachians, while independent colonists would not',
@@ -809,7 +809,7 @@ export const QUESTIONS = [
     explanation: 'The Proclamation of 1763 was feeble in practice but pointed in the right direction, and a victorious settler republic clearly meant unchecked expansion. As in every earlier conflict, Native nations chose by their own strategic interest — not out of loyalty to either side.',
   },
   {
-    id: 'r-10', section: 'revolution', skill: 'Causation',
+    id: 'r-10', difficulty: 2, section: 'revolution', skill: 'Causation',
     prompt: 'Lord Dunmore\u2019s Proclamation (1775) is best characterised as:',
     options: [
       'A wartime measure offering freedom to enslaved men of rebel masters who would fight for the Crown',
@@ -822,7 +822,7 @@ export const QUESTIONS = [
     explanation: 'It applied only to those held by rebels and only to men who would bear arms — a military measure, not a moral one. Thousands still risked everything to reach British lines, and it hardened Virginia planters against the Crown while exposing the contradiction at the centre of the Patriot cause.',
   },
   {
-    id: 'r-11', section: 'revolution', skill: 'Contextualization',
+    id: 'r-11', difficulty: 3, section: 'revolution', skill: 'Contextualization',
     prompt: 'The phrase "all men are created equal" is best analysed by noting that:',
     options: [
       'It was written in a society holding roughly half a million people in slavery, and was immediately invoked by those excluded from it',
@@ -835,7 +835,7 @@ export const QUESTIONS = [
     explanation: 'The men who wrote and signed it largely meant propertied white men, and many enslaved people. But the words outran their authors immediately — enslaved petitioners in Massachusetts, Abigail Adams, and later abolitionists and suffragists all turned the sentence back on the republic. Say both halves.',
   },
   {
-    id: 'r-12', section: 'revolution', skill: 'Comparison',
+    id: 'r-12', difficulty: 2, section: 'revolution', skill: 'Comparison',
     prompt: 'Compared with the colonial response to the Stamp Act in 1765, the response to the Coercive Acts in 1774 showed:',
     options: [
       'Far more developed intercolonial organisation, built on committees of correspondence and a continental congress',
@@ -853,7 +853,7 @@ export const QUESTIONS = [
   // option, and a note on why students miss it. This is the section built for a
   // teacher who grades AP essays and writes tests students think they have passed.
   {
-    id: 'h-1', section: 'revolution', hard: true, skill: 'Analyzing sources', stimulus: DECLARATORY_HARD,
+    id: 'h-1', difficulty: 3, section: 'revolution', hard: true, skill: 'Analyzing sources', stimulus: DECLARATORY_HARD,
     prompt: 'Which of the following is the strongest evidence that repealing the Stamp Act settled nothing?',
     options: [
       'Parliament asserted in the same breath that it could legislate for the colonies in every case without exception',
@@ -877,7 +877,7 @@ export const QUESTIONS = [
     explanation: 'The Declaratory Act claimed authority to bind the colonies "in all cases whatsoever" — the whole matter in dispute, restated as a parliamentary statute on the day the tax was withdrawn. Colonists were too busy celebrating to notice, which is precisely why the Townshend duties reopened the wound a year later.',
   },
   {
-    id: 'h-2', section: 'revolution', hard: true, skill: 'Argumentation',
+    id: 'h-2', difficulty: 3, section: 'revolution', hard: true, skill: 'Argumentation',
     prompt: 'A student argues: "Colonists opposed the Stamp Act mainly because it cost them money." Which fact most weakens that argument?',
     options: [
       'They objected just as fiercely to the Townshend duties, which were lower and levied as ordinary trade duties',
@@ -901,7 +901,7 @@ export const QUESTIONS = [
     explanation: 'The Townshend duties were lighter and took the form colonists had supposedly accepted, yet met the same resistance; Dickinson said outright that what mattered was whether the purpose was revenue, not what the tax was called. Cost cannot explain a reaction that stays constant while the cost falls.',
   },
   {
-    id: 'h-3', section: 'unit3', hard: true, skill: 'Analyzing sources', stimulus: PITT_DEBT,
+    id: 'h-3', difficulty: 3, section: 'unit3', hard: true, skill: 'Analyzing sources', stimulus: PITT_DEBT,
     prompt: 'These figures support which conclusion most directly?',
     options: [
       'The British government had a powerful fiscal reason to seek new sources of revenue after 1763',
@@ -925,7 +925,7 @@ export const QUESTIONS = [
     explanation: 'Stimulus questions test the distance between evidence and claim. These figures establish motive and nothing more: not colonial behaviour, not a comparison with other territories, and certainly not that taxation was inevitable.',
   },
   {
-    id: 'h-4', section: 'revolution', hard: true, skill: 'Causation',
+    id: 'h-4', difficulty: 3, section: 'revolution', hard: true, skill: 'Causation',
     prompt: 'Which pair is both in the correct chronological order and genuinely causally linked?',
     options: [
       'Coercive Acts → First Continental Congress',
@@ -949,7 +949,7 @@ export const QUESTIONS = [
     explanation: 'Causal claims have a direction, and the AP exam tests it constantly. If you cannot place these eight moments on a line from memory, that is the highest-value thing to fix before this test.',
   },
   {
-    id: 'h-5', section: 'skills', hard: true, skill: 'Analyzing sources', stimulus: REVERE_HARD,
+    id: 'h-5', difficulty: 3, section: 'skills', hard: true, skill: 'Analyzing sources', stimulus: REVERE_HARD,
     prompt: 'This print is LEAST reliable as evidence for which of the following?',
     options: [
       'What actually happened in King Street on the night of 5 March 1770',
@@ -973,7 +973,7 @@ export const QUESTIONS = [
     explanation: 'John Adams defended the soldiers and most were acquitted, which tells you how far the engraving sits from the evidence presented in court. It remains a superb source — for Patriot persuasion, not for the sequence of events.',
   },
   {
-    id: 'h-6', section: 'unit2', hard: true, skill: 'Argumentation',
+    id: 'h-6', difficulty: 3, section: 'unit2', hard: true, skill: 'Argumentation',
     prompt: 'Which finding would most weaken the argument that racial ideology in Virginia came first and produced chattel slavery, rather than developing alongside it?',
     options: [
       'Records from the 1640s and 1650s showing some Africans completing terms of service, acquiring land and winning lawsuits',
@@ -997,7 +997,7 @@ export const QUESTIONS = [
     explanation: 'Anthony Johnson and others in early Virginia held land and went to law; the law had not yet closed. That fluidity is the historian\u2019s main reason for saying slavery hardened between roughly 1640 and 1705 rather than arriving fully formed — and the reason the app never says slavery "began" in 1619.',
   },
   {
-    id: 'h-7', section: 'unit3', hard: true, skill: 'Comparison',
+    id: 'h-7', difficulty: 3, section: 'unit3', hard: true, skill: 'Comparison',
     prompt: 'Which comparison between the Navigation Acts before 1763 and British policy after 1763 is most accurate?',
     options: [
       'The laws changed less than the enforcement did, which is why old arrangements suddenly felt like new tyranny',
@@ -1021,7 +1021,7 @@ export const QUESTIONS = [
     explanation: 'Colonists were not objecting to novel laws — they were objecting to laws they had spent a lifetime ignoring being enforced against them, along with new revenue acts and juryless courts. "What changed was enforcement, not the statute book" is the sentence to carry into the essay.',
   },
   {
-    id: 'h-8', section: 'revolution', hard: true, skill: 'Contextualization',
+    id: 'h-8', difficulty: 3, section: 'revolution', hard: true, skill: 'Contextualization',
     prompt: 'The First Continental Congress is best described as a body that:',
     options: [
       'Claimed rights under the English constitution while building machinery capable of coordinated resistance',
@@ -1045,7 +1045,7 @@ export const QUESTIONS = [
     explanation: 'The Congress asserted rights "by the immutable laws of nature, the principles of the English constitution, and the several charters" — while its Association put enforcement in the hands of local committees. Loyal words, revolutionary infrastructure.',
   },
   {
-    id: 'h-9', section: 'revolution', hard: true, skill: 'Causation',
+    id: 'h-9', difficulty: 3, section: 'revolution', hard: true, skill: 'Causation',
     prompt: 'Which best explains why the Tea Act provoked destruction of property when earlier taxes had produced petitions and boycotts?',
     options: [
       'Landing the tea would itself have conceded the tax, so preventing it from being unloaded became the whole point',
@@ -1069,7 +1069,7 @@ export const QUESTIONS = [
     explanation: 'The Tea Act undercut smugglers and made the legal, taxed article the best deal in the market — which would have made the constitutional point moot in practice. Destroying the cargo was the only way to stop a concession by consumption.',
   },
   {
-    id: 'h-10', section: 'compare', hard: true, skill: 'Comparison',
+    id: 'h-10', difficulty: 3, section: 'compare', hard: true, skill: 'Comparison',
     prompt: 'Both Bacon\u2019s Rebellion (1676) and the Stamp Act crisis (1765) involved colonists resisting authority. The most significant difference is that:',
     options: [
       'Bacon\u2019s followers demanded a share of what the colonial elite held, while the Stamp Act protests united colonists across class against an external authority',
@@ -1093,7 +1093,7 @@ export const QUESTIONS = [
     explanation: 'This is the comparison an essay prompt is really asking for. Bacon\u2019s Rebellion exposed class fracture within Virginia and pushed elites toward slavery and racial solidarity; the Stamp Act crisis, by contrast, temporarily bound merchants, lawyers, artisans and crowds together against Parliament.',
   },
   {
-    id: 'h-11', section: 'revolution', hard: true, skill: 'Continuity and change',
+    id: 'h-11', difficulty: 3, section: 'revolution', hard: true, skill: 'Continuity and change',
     prompt: 'Which statement about colonial aims between 1765 and 1775 is best supported by the documents colonists themselves produced?',
     options: [
       'They consistently claimed the rights of Englishmen and sought redress within the empire, even after fighting began',
@@ -1117,7 +1117,7 @@ export const QUESTIONS = [
     explanation: 'Right up to mid-1775 the documentary record is a record of subjects asking for their rights. That is what makes 1776 a genuine rupture rather than the end of a plan — and saying so with evidence is what a high-scoring essay does.',
   },
   {
-    id: 'h-12', section: 'unit3', hard: true, skill: 'Causation',
+    id: 'h-12', difficulty: 3, section: 'unit3', hard: true, skill: 'Causation',
     prompt: 'Which claim about the French and Indian War and the Revolution is most defensible?',
     options: [
       'The war created the conditions — debt, a garrison and a vanished French threat — within which British ministers made the decisions colonists rebelled against',

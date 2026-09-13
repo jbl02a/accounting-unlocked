@@ -26,6 +26,10 @@ What is worth asserting, and has been:
   This is the same class of bug as the fixed-answer-position one: silent, plausible
   on screen, and wrong.
 - Every `hard: true` question carries three hints, a trap and a full set of rationales.
+- **Tier selection never serves outside the pool it settled on**, and Reader's cut never
+  serves a tier-1 question unless the whole bank had to be opened. Check every level at
+  every tier — the banks are small enough that one re-tiered question changes the
+  outcome.
 
 ## Browser testing
 
@@ -48,6 +52,12 @@ The exact path is environment-specific — check `ls /opt/pw-browsers` if it fai
 A walk that has earned its keep: load every level, click through every round to the
 results screen, and assert that a run which always picks option A does **not** score
 100%.
+
+For difficulty, drive each tier end to end and assert the differences you expect:
+question count changes, the hint button is absent at Reader's cut, "Answer locked in"
+appears instead of feedback, and the end-of-round review renders. That walk caught a
+crash on the exam page after a field was renamed (`pool` → `pools`) and one call site
+was left behind — the build was clean and the page was white.
 
 ### Things that bite
 

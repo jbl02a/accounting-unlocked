@@ -7,12 +7,10 @@ import { LEVEL_QUESTIONS } from '../data/levelQuestions'
 import { saveExamSession, loadExamSession, clearExamSession, describeAge } from '../lib/examSession'
 import { shuffleOptions } from '../lib/shuffle'
 import { useStagedHints, StagedHint, OptionAutopsy } from '../components/Hint'
-
-const HARD_COUNT = QUESTIONS.filter(q => q.hard).length
+import { TIERS, tierById, selectByTier } from '../lib/difficulty'
 
 const SCOPES = [
-  { id: 'full', label: 'Full practice exam', icon: '📝', blurb: `All ${QUESTIONS.length} questions, every topic. The real rehearsal.` },
-  { id: 'hard', label: 'Hard mode', icon: '🔥', blurb: `The ${HARD_COUNT} hardest questions — the ones where three options are true and only one answers what was asked.` },
+  { id: 'full', label: 'Full practice exam', icon: '📝', blurb: 'Every question at your difficulty, across every topic. The real rehearsal.' },
   { id: 'quick', label: 'Quick 15', icon: '⚡', blurb: '15 questions pulled at random. Good for a five-minute review.' },
 ]
 
@@ -44,7 +42,7 @@ function OptionButton({ q, index, chosen, revealed, onPick }) {
 }
 
 export default function PracticeExam() {
-  const { progress, recordExam, needsWorkIds, clearMisses } = useProgress()
+  const { progress, recordExam, needsWorkIds, clearMisses, difficulty, setDifficulty } = useProgress()
   const [stage, setStage] = useState('setup')
   const [mode, setMode] = useState('exam') // 'exam' = feedback at the end, 'practice' = instant
   const [scopeLabel, setScopeLabel] = useState('')
@@ -54,6 +52,7 @@ export default function PracticeExam() {
   const [revealedIds, setRevealedIds] = useState([])
   const [saved, setSaved] = useState(() => loadExamSession([...QUESTIONS, ...LEVEL_QUESTIONS].map(q => q.id)))
   const hints = useStagedHints()
+  const tier = tierById(difficulty)
 
   const best = progress.exam?.best
   const attempts = progress.exam?.attempts || []
@@ -106,6 +105,8 @@ export default function PracticeExam() {
   }
 
   function startMisses() {
+    // Deliberately NOT filtered by tier: something you got wrong is worth
+    // re-serving whatever its difficulty.
     const ids = needsWorkIds()
     const byId = Object.fromEntries(ALL_QUESTIONS.map(q => [q.id, q]))
     const picked = shuffle(ids.map(id => byId[id]).filter(Boolean)).map(q => shuffleOptions(q))
@@ -116,7 +117,11 @@ export default function PracticeExam() {
   }
 
   function start(scope, label) {
-    const base = scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor(scope))
+    const pool = selectByTier(QUESTIONS, difficulty)
+    const scoped = scope === 'full' ? pool
+      : scope === 'quick' ? shuffle(pool).slice(0, 15)
+      : pool.filter(q => q.section === scope)
+    const base = scope === 'quick' ? scoped : shuffle(scoped)
     // Randomise which letter the answer sits behind, per attempt.
     const picked = base.map(q => shuffleOptions(q))
     setQuestions(picked)
@@ -129,13 +134,16 @@ export default function PracticeExam() {
   }
 
   const q = questions[index]
-  const revealed = mode === 'practice' && revealedIds.includes(q?.id)
+  // The top tier holds all feedback to the end, whichever mode is selected —
+  // finding out at the end is the point of it.
+  const effectiveMode = tier.instantFeedback ? mode : 'exam'
+  const revealed = effectiveMode === 'practice' && revealedIds.includes(q?.id)
   const answeredCount = Object.keys(answers).length
   const correctCount = questions.filter(item => answers[item.id] === item.correctIndex).length
 
   function pick(i) {
     setAnswers(prev => ({ ...prev, [q.id]: i }))
-    if (mode === 'practice') setRevealedIds(prev => [...prev, q.id])
+    if (effectiveMode === 'practice') setRevealedIds(prev => [...prev, q.id])
   }
 
   function submit() {
@@ -225,8 +233,43 @@ export default function PracticeExam() {
         )}
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
+          <div className="flex items-baseline justify-between gap-3 mb-1">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Choose your difficulty</p>
+            <p className="text-[11px] text-slate-500">Applies to the levels too, and is remembered</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-3 mt-3">
+            {TIERS.map(t => {
+              const count = selectByTier(QUESTIONS, t.id).length
+              const active = difficulty === t.id
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => setDifficulty(t.id)}
+                  className={`text-left rounded-xl border p-4 transition-colors ${
+                    active ? 'border-amber-500 bg-amber-900/30' : 'border-white/10 bg-white/5 hover:border-amber-400'
+                  }`}
+                >
+                  <p className="font-bold text-white text-sm mb-1">
+                    {t.icon} {t.label} {active && <span className="text-amber-400">✓</span>}
+                  </p>
+                  <p className="text-xs text-slate-400 mb-2">{t.blurb}</p>
+                  <p className="text-[11px] text-slate-500">{count} questions</p>
+                </button>
+              )
+            })}
+          </div>
+          <p className="text-xs text-slate-400 mt-3 leading-relaxed">{tier.detail}</p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
           <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">How do you want to take it?</p>
-          <div className="grid sm:grid-cols-2 gap-3">
+          {!tier.instantFeedback && (
+            <p className="text-xs text-amber-200/80 mb-3">
+              {tier.icon} {tier.label} holds every answer until you submit, so this choice is made for you. Drop to Class test if you
+              want the reasoning as you go.
+            </p>
+          )}
+          <div className={`grid sm:grid-cols-2 gap-3 ${!tier.instantFeedback ? 'opacity-40 pointer-events-none' : ''}`}>
             {[
               { id: 'exam', title: 'Exam mode', desc: 'No feedback until you submit. Closest to the real thing.' },
               { id: 'practice', title: 'Practice mode', desc: 'Shows the answer and the reason after every question.' },
@@ -267,19 +310,24 @@ export default function PracticeExam() {
         <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Or drill one unit</p>
         <div className="grid sm:grid-cols-2 gap-3 mb-8">
           {SECTIONS.map(s => {
-            const count = QUESTIONS.filter(qq => qq.section === s.id).length
+            const count = selectByTier(QUESTIONS, difficulty).filter(qq => qq.section === s.id).length
             return (
               <button
                 key={s.id}
-                onClick={() => start(s.id, s.label)}
-                className="text-left rounded-xl border border-white/10 bg-white/5 p-4 hover:border-amber-400 hover:bg-white/10 transition-colors"
+                onClick={() => count > 0 && start(s.id, s.label)}
+                disabled={count === 0}
+                className={`text-left rounded-xl border border-white/10 bg-white/5 p-4 transition-colors ${
+                  count === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:border-amber-400 hover:bg-white/10'
+                }`}
               >
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xl">{s.icon}</span>
                   <p className="font-semibold text-white text-sm">{s.label}</p>
                   <span className="ml-auto text-xs text-slate-500">{count} Q</span>
                 </div>
-                <p className="text-xs text-slate-400">{s.blurb}</p>
+                <p className="text-xs text-slate-400">
+                  {count === 0 ? `Nothing in this unit at ${tier.label} yet — drop a level to drill it.` : s.blurb}
+                </p>
               </button>
             )
           })}
@@ -450,7 +498,7 @@ export default function PracticeExam() {
         ))}
       </div>
 
-      {mode === 'practice' && !revealed && (q.hints || q.hint) && (
+      {tier.hints && effectiveMode === 'practice' && !revealed && (q.hints || q.hint) && (
         <StagedHint id={q.id} hints={q.hints || q.hint} shown={hints.revealed(q.id)}
           onReveal={() => hints.reveal(q.id)} onClose={() => hints.close(q.id)} className="mb-5" />
       )}
