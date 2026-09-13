@@ -12,6 +12,15 @@ next chapter without re-deriving decisions or re-discovering traps.
 | [`testing.md`](testing.md) | How changes are verified, and the bugs that got through when they weren't. |
 | [`phase-log.md`](phase-log.md) | What was built, in order, and why. |
 
+## Scope of these docs
+
+Everything here is about **this** app — the accounting course. A sibling project,
+History Unlocked, was prototyped in this repository for a few days and now lives in its
+own (`jbl02a/history-unlocked`). The two share no code: the pieces that transferred
+(`shuffle.js`, `examSession.js`, `Hint.jsx`, `ProgressContext`, the print stylesheet)
+were copied, not imported, and have since diverged. Nothing in this repository depends
+on it, and nothing here needs to be kept in step with it.
+
 ## The project in one paragraph
 
 A single student — a college freshman — was about to take his first financial

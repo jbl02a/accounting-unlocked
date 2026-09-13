@@ -92,6 +92,16 @@ tasks out so the exam drill never tries to serve one.
 Also added the **Date column** to journal entry tables, matching the professor's
 Date / Account Description / Debit / Credit worksheet layout.
 
+## Phase 8 — Resuming a misses round (Sep 13) · `b7ef8ed`
+A latent bug, found while building a sibling project on the same spine. Resuming a
+saved exam validated question IDs against the exam bank only (`QUESTIONS`), so a saved
+"questions I got wrong" round that contained level questions (`L6-q1` and friends)
+would have been silently truncated on resume — or dropped entirely, if every ID in it
+came from a level.
+
+`loadExamSession` is now passed both banks, and `resume()` rebuilds its lookup from
+`ALL_QUESTIONS`. Nothing else changed.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides
