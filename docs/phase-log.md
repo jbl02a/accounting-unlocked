@@ -102,6 +102,22 @@ came from a level.
 `loadExamSession` is now passed both banks, and `resume()` rebuilds its lookup from
 `ALL_QUESTIONS`. Nothing else changed.
 
+## Phase 9 — Two gaps on the cram sheet (Sep 13)
+Checked the sheet against the actual content of Levels 12–15 rather than assuming.
+Adjusting and closing entries were both well covered — the seven adjustment types with
+their entries and computations, temporary vs permanent, the three closing entries, the
+Income Summary variant, the post-closing trial balance. Two things taught in the levels
+were missing:
+
+- **Cash basis vs accrual basis** — the idea Level 12 opens with, and the reason
+  adjusting entries exist at all. The deferral/accrual rule was on the sheet; the
+  distinction underneath it was not.
+- **The three trial balances as a sequence** — unadjusted, adjusted, post-closing. The
+  sheet named the post-closing one inside the closing section but never laid out the
+  order, which is how Levels 12 and 15 frame it.
+
+Both added. The sheet still prints to two pages.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides

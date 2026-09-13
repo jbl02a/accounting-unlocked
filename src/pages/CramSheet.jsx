@@ -104,9 +104,22 @@ export default function CramSheet() {
             Each account sits in the column of its normal balance. Some worksheets place Dividends last, after the expenses —
             either is accepted, but it is always a DEBIT.
           </p>
+          <p className="cram-note">
+            <strong>You prepare three of these, in this order.</strong>{' '}
+            <strong>Unadjusted</strong> — straight from the ledger, before any adjusting entries ·{' '}
+            <strong>Adjusted</strong> — after the adjustments, and the one the financial statements are built from ·{' '}
+            <strong>Post-closing</strong> — after closing, so <em>permanent accounts only</em>, with Retained Earnings at its
+            new balance. All three must balance, and a balanced trial balance still does not prove the entries are right.
+          </p>
         </Section>
 
         <Section title="Adjusting entries — never touch Cash">
+          <p className="cram-lead">
+            <strong>Why adjustments exist at all:</strong> under <strong>cash basis</strong> you record when cash moves; under{' '}
+            <strong>accrual basis</strong> you record revenue when it is <em>earned</em> and expenses when they are{' '}
+            <em>incurred</em>, whenever the cash happens to move. GAAP requires accrual — revenue recognition and matching —
+            and adjusting entries are what drags the books from one to the other at period end.
+          </p>
           <p className="cram-lead">
             Cash moved <strong>first</strong> = DEFERRAL. Cash comes <strong>later</strong> = ACCRUAL.
             Every adjustment hits one income-statement account and one balance-sheet account.
