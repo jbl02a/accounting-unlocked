@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useProgress } from '../context/ProgressContext'
-import EntryTable from '../components/EntryTable'
+import SourceCard from '../components/SourceCard'
 import { QUESTIONS, SECTIONS, questionsFor, shuffle } from '../data/examQuestions'
 import { LEVEL_QUESTIONS } from '../data/levelQuestions'
 import { saveExamSession, loadExamSession, clearExamSession, describeAge } from '../lib/examSession'
@@ -19,8 +19,8 @@ function OptionButton({ q, index, chosen, revealed, onPick }) {
   const state = isAnswer ? 'border-green-500 bg-green-900/30'
     : isWrongPick ? 'border-red-500 bg-red-900/30'
     : revealed ? 'border-white/10 bg-white/5 opacity-60'
-    : selected ? 'border-indigo-500 bg-indigo-900/30'
-    : 'border-white/10 bg-white/5 hover:border-indigo-400 hover:bg-white/10'
+    : selected ? 'border-amber-500 bg-amber-900/30'
+    : 'border-white/10 bg-white/5 hover:border-amber-400 hover:bg-white/10'
   return (
     <button
       onClick={() => onPick(index)}
@@ -28,9 +28,9 @@ function OptionButton({ q, index, chosen, revealed, onPick }) {
       className={`w-full text-left rounded-xl border p-3 transition-colors ${state}`}
     >
       <div className="flex items-start gap-3">
-        <span className={`text-xs font-bold mt-1 shrink-0 ${selected && !revealed ? 'text-indigo-300' : 'text-slate-500'}`}>{'ABCD'[index]}</span>
+        <span className={`text-xs font-bold mt-1 shrink-0 ${selected && !revealed ? 'text-amber-300' : 'text-slate-500'}`}>{'ABCD'[index]}</span>
         <div className="flex-1">
-          {q.kind === 'entry' ? <EntryTable lines={q.options[index]} dense /> : <span className="text-sm text-white">{q.options[index]}</span>}
+          <span className="text-sm text-white">{q.options[index]}</span>
         </div>
         {isAnswer && <span className="text-green-400">✓</span>}
         {isWrongPick && <span className="text-red-400">✗</span>}
@@ -150,13 +150,12 @@ export default function PracticeExam() {
     return (
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-4 py-1.5 text-sm text-indigo-300 font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 rounded-full px-4 py-1.5 text-sm text-amber-300 font-medium mb-4">
             <span>📝</span><span>Optional — but this is the one that matters</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Practice Exam</h1>
           <p className="text-slate-400">
-            Transactions in plain English. You pick the right account, the right entry, the right column.
-            Every question tells you why afterward.
+            Stimulus-based questions in the AP format — read the source, then answer. Every question tells you why afterward.
           </p>
           {best !== null && best !== undefined && (
             <p className="mt-4 inline-block rounded-full bg-green-500/10 border border-green-500/20 px-4 py-1.5 text-sm text-green-300 font-semibold">
@@ -174,7 +173,7 @@ export default function PracticeExam() {
                   {weakIds.length} question{weakIds.length === 1 ? '' : 's'} to work on
                 </p>
                 <p className="text-sm text-slate-300 mt-0.5">
-                  Everything you missed last time you saw it — from the exam, the topic drills and the level quizzes alike.
+                  Everything you missed last time you saw it — from the practice exam, the unit drills and the level quizzes alike.
                   {weakFromLevels > 0 && <> <span className="text-white font-semibold">{weakFromLevels}</span> came from level quizzes.</>}
                   {' '}Get one right and it drops off the list.
                 </p>
@@ -231,10 +230,10 @@ export default function PracticeExam() {
                 key={m.id}
                 onClick={() => setMode(m.id)}
                 className={`text-left rounded-xl border p-4 transition-colors ${
-                  mode === m.id ? 'border-indigo-500 bg-indigo-900/30' : 'border-white/10 bg-white/5 hover:border-indigo-400'
+                  mode === m.id ? 'border-amber-500 bg-amber-900/30' : 'border-white/10 bg-white/5 hover:border-amber-400'
                 }`}
               >
-                <p className="font-bold text-white text-sm mb-1">{m.title} {mode === m.id && <span className="text-indigo-400">✓</span>}</p>
+                <p className="font-bold text-white text-sm mb-1">{m.title} {mode === m.id && <span className="text-amber-400">✓</span>}</p>
                 <p className="text-xs text-slate-400">{m.desc}</p>
               </button>
             ))}
@@ -246,7 +245,7 @@ export default function PracticeExam() {
             <button
               key={s.id}
               onClick={() => start(s.id, s.label)}
-              className="w-full text-left rounded-2xl border border-white/10 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 p-5 hover:border-indigo-400 transition-colors"
+              className="w-full text-left rounded-2xl border border-white/10 bg-gradient-to-br from-amber-600/20 to-orange-600/20 p-5 hover:border-amber-400 transition-colors"
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">{s.icon}</span>
@@ -254,13 +253,13 @@ export default function PracticeExam() {
                   <p className="font-bold text-white">{s.label}</p>
                   <p className="text-sm text-slate-400">{s.blurb}</p>
                 </div>
-                <span className="text-indigo-400 font-bold">→</span>
+                <span className="text-amber-400 font-bold">→</span>
               </div>
             </button>
           ))}
         </div>
 
-        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Or drill one topic</p>
+        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Or drill one unit</p>
         <div className="grid sm:grid-cols-2 gap-3 mb-8">
           {SECTIONS.map(s => {
             const count = QUESTIONS.filter(qq => qq.section === s.id).length
@@ -268,7 +267,7 @@ export default function PracticeExam() {
               <button
                 key={s.id}
                 onClick={() => start(s.id, s.label)}
-                className="text-left rounded-xl border border-white/10 bg-white/5 p-4 hover:border-indigo-400 hover:bg-white/10 transition-colors"
+                className="text-left rounded-xl border border-white/10 bg-white/5 p-4 hover:border-amber-400 hover:bg-white/10 transition-colors"
               >
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xl">{s.icon}</span>
@@ -315,7 +314,7 @@ export default function PracticeExam() {
         <div className="text-center mb-8">
           <div className="text-5xl mb-3">{score === 100 ? '🏆' : score >= 80 ? '🎉' : score >= 60 ? '📈' : '📚'}</div>
           <h1 className="text-3xl font-extrabold text-white mb-1">{scopeLabel}</h1>
-          <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 my-3">{score}%</p>
+          <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 my-3">{score}%</p>
           <p className="text-slate-400">{correctCount} of {questions.length} correct</p>
           <p className="text-slate-400 text-sm mt-3 max-w-md mx-auto">
             {score === 100 ? 'Flawless. Walk into that exam.'
@@ -353,7 +352,7 @@ export default function PracticeExam() {
               Drill the {questions.length - correctCount} I missed →
             </button>
           )}
-          <button onClick={() => setStage('setup')} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold hover:opacity-90">
+          <button onClick={() => setStage('setup')} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold hover:opacity-90">
             Take Another →
           </button>
           <Link to="/cheatsheet" className="flex-1 py-3 rounded-xl bg-white/10 text-white font-semibold hover:bg-white/20 text-center">
@@ -378,9 +377,7 @@ export default function PracticeExam() {
                   <div className="flex gap-2">
                     <span className="text-slate-500 shrink-0 text-xs pt-0.5">Correct:</span>
                     <div className="flex-1">
-                      {item.kind === 'entry'
-                        ? <EntryTable lines={item.options[item.correctIndex]} dense />
-                        : <span className="text-green-300">{item.options[item.correctIndex]}</span>}
+                      <span className="text-green-300">{item.options[item.correctIndex]}</span>
                     </div>
                   </div>
                   {!right && (
@@ -388,9 +385,7 @@ export default function PracticeExam() {
                       <span className="text-slate-500 shrink-0 text-xs pt-0.5">You said:</span>
                       <div className="flex-1">
                         {chosen === undefined ? <span className="text-slate-500 italic">skipped</span>
-                          : item.kind === 'entry'
-                            ? <EntryTable lines={item.options[chosen]} dense />
-                            : <span className="text-red-300">{item.options[chosen]}</span>}
+                          : <span className="text-red-300">{item.options[chosen]}</span>}
                       </div>
                     </div>
                   )}
@@ -413,16 +408,24 @@ export default function PracticeExam() {
     <div className="max-w-xl mx-auto">
       <div className="mb-4">
         <div className="flex items-center justify-between text-sm mb-2">
-          <span className="text-indigo-400 font-semibold">Question {index + 1} of {questions.length}</span>
+          <span className="text-amber-400 font-semibold">Question {index + 1} of {questions.length}</span>
           <span className="text-slate-500">{answeredCount} answered</span>
         </div>
         <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
-          <div className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-300" style={{ width: `${((index + 1) / questions.length) * 100}%` }} />
+          <div className="h-full rounded-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-300" style={{ width: `${((index + 1) / questions.length) * 100}%` }} />
         </div>
       </div>
 
+      {q.stimulus && (
+        <div className="mb-4">
+          <SourceCard {...q.stimulus} />
+        </div>
+      )}
+
       <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-5">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">{sectionMeta?.icon} {sectionMeta?.label}</p>
+        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">
+          {sectionMeta?.icon} {sectionMeta?.label}{q.skill && <span className="text-amber-500/70"> · {q.skill}</span>}
+        </p>
         <p className="font-semibold text-white">{q.prompt}</p>
       </div>
 
@@ -450,7 +453,7 @@ export default function PracticeExam() {
         {!isLast ? (
           <button
             onClick={() => setIndex(i => i + 1)}
-            className="flex-1 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold hover:opacity-90"
+            className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold hover:opacity-90"
           >
             {chosen === undefined ? 'Skip for now →' : 'Next Question →'}
           </button>
