@@ -5,7 +5,7 @@ import { useProgress } from '../context/ProgressContext'
 import EntryTable from '../components/EntryTable'
 import { QUESTIONS, SECTIONS, questionsFor, shuffle } from '../data/examQuestions'
 import { LEVEL_QUESTIONS } from '../data/levelQuestions'
-import { ALL_EXAM_QUESTIONS, questionsForTopic, weakSections, buildFocusTest } from '../lib/focus'
+import { ALL_EXAM_QUESTIONS, questionsForTopic, weakSections, buildFocusTest, dedupeByPrompt } from '../lib/focus'
 import { saveExamSession, loadExamSession, clearExamSession, describeAge } from '../lib/examSession'
 import { shuffleOptions } from '../lib/shuffle'
 
@@ -46,6 +46,9 @@ export default function PracticeExam() {
   const [stage, setStage] = useState('setup')
   const [mode, setMode] = useState('exam') // 'exam' = feedback at the end, 'practice' = instant
   const [scopeLabel, setScopeLabel] = useState('')
+  // 'exam' only for the full 79-question run — the one whose score is comparable
+  // across attempts. Everything else is a drill and must not move the best score.
+  const [scopeKind, setScopeKind] = useState('drill')
   const [questions, setQuestions] = useState([])
   const [index, setIndex] = useState(0)
   useScrollTop([stage, index])
@@ -83,9 +86,9 @@ export default function PracticeExam() {
     saveExamSession({
       ids: questions.map(q => q.id),
       optionOrders: Object.fromEntries(questions.map(q => [q.id, q.optionOrder])),
-      answers, revealedIds, index, mode, scopeLabel,
+      answers, revealedIds, index, mode, scopeLabel, scopeKind,
     })
-  }, [stage, questions, answers, revealedIds, index, mode, scopeLabel])
+  }, [stage, questions, answers, revealedIds, index, mode, scopeLabel, scopeKind])
 
   function resume() {
     // Both banks: a saved "questions I got wrong" round can contain level questions.
@@ -98,6 +101,7 @@ export default function PracticeExam() {
     setIndex(saved.index)
     setMode(saved.mode)
     setScopeLabel(saved.scopeLabel)
+    setScopeKind(saved.scopeKind)
     setStage('taking')
   }
 
@@ -109,10 +113,11 @@ export default function PracticeExam() {
   function startMisses() {
     const ids = needsWorkIds()
     const byId = Object.fromEntries(ALL_QUESTIONS.map(q => [q.id, q]))
-    const picked = shuffle(ids.map(id => byId[id]).filter(Boolean)).map(q => shuffleOptions(q))
+    const picked = dedupeByPrompt(shuffle(ids.map(id => byId[id]).filter(Boolean))).map(q => shuffleOptions(q))
     if (picked.length === 0) return
     setQuestions(picked)
     setScopeLabel('Questions I got wrong')
+    setScopeKind('drill')
     // Always instant feedback. A drill exists to fix a misunderstanding, so the
     // reason has to arrive at the question that exposed it — not on a results
     // screen twenty questions later. The Exam/Practice toggle governs the graded
@@ -123,10 +128,11 @@ export default function PracticeExam() {
 
   function startReviewed() {
     const byId = Object.fromEntries(ALL_QUESTIONS.map(q => [q.id, q]))
-    const picked = shuffle(reviewed.map(id => byId[id]).filter(Boolean)).map(q => shuffleOptions(q))
+    const picked = dedupeByPrompt(shuffle(reviewed.map(id => byId[id]).filter(Boolean))).map(q => shuffleOptions(q))
     if (picked.length === 0) return
     setQuestions(picked)
     setScopeLabel('Reviewed — a second look')
+    setScopeKind('drill')
     setMode('practice')
     setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
   }
@@ -137,6 +143,7 @@ export default function PracticeExam() {
     if (picked.length === 0) return
     setQuestions(picked)
     setScopeLabel('Focus test — weak topics')
+    setScopeKind('drill')
     setMode('practice')   // same reasoning as startMisses
     setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
   }
@@ -151,6 +158,7 @@ export default function PracticeExam() {
     const picked = base.map(q => shuffleOptions(q))
     setQuestions(picked)
     setScopeLabel(label)
+    setScopeKind(scope === 'full' ? 'exam' : 'drill')
     setIndex(0)
     setAnswers({})
     setRevealedIds([])
@@ -172,7 +180,7 @@ export default function PracticeExam() {
     const correct = questions.filter(item => answers[item.id] === item.correctIndex).length
     const score = Math.round((correct / questions.length) * 100)
     recordExam({
-      score, correct, total: questions.length, label: scopeLabel,
+      score, correct, total: questions.length, label: scopeLabel, kind: scopeKind,
       results: questions.map(item => ({ id: item.id, correct: answers[item.id] === item.correctIndex })),
     })
     clearExamSession()
@@ -195,7 +203,7 @@ export default function PracticeExam() {
           </p>
           {best !== null && best !== undefined && (
             <p className="mt-4 inline-block rounded-full bg-green-500/10 border border-green-500/20 px-4 py-1.5 text-sm text-green-300 font-semibold">
-              Best score so far: {best}%
+              Best on the full exam: {best}%
             </p>
           )}
         </div>
@@ -401,7 +409,10 @@ export default function PracticeExam() {
               {attempts.slice(0, 5).map((a, i) => (
                 <div key={i} className="py-2 flex items-center gap-3 text-sm">
                   <span className={`font-bold w-12 ${a.score >= 80 ? 'text-green-400' : a.score >= 60 ? 'text-amber-400' : 'text-red-400'}`}>{a.score}%</span>
-                  <span className="text-slate-300 flex-1">{a.label}</span>
+                  <span className="text-slate-300 flex-1">
+                    {a.label}
+                    {a.kind === 'exam' && <span className="ml-1.5 text-[10px] text-indigo-300 font-semibold">GRADED</span>}
+                  </span>
                   <span className="text-slate-500 text-xs">{a.correct}/{a.total}</span>
                   <span className="text-slate-600 text-xs hidden sm:inline">{new Date(a.date).toLocaleDateString()}</span>
                 </div>

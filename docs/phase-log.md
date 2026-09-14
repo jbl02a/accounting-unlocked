@@ -218,6 +218,34 @@ The trap: all three `misses` writers rebuilt the entry as a fresh object literal
 entry — asserted directly by finishing a whole drill after setting a hold and
 checking the flag is still there.
 
+### Follow-up: regression audit (same day)
+Asked whether the near-miss on `hold` warranted a wider audit. It did — testing the
+instance is not testing the class. Four layers: static bank properties, dedupe,
+persisted state, and every route. Three real findings, none of which the existing
+suites would have caught:
+
+1. **A two-question drill set "Best score so far" to 100%.** `recordExam` applied
+   `Math.max` to every attempt regardless of size. Confirmed live before fixing:
+   best went 77 → 100 off a 2-question reviewed drill. Attempts now carry a `kind`,
+   and only the full 79-question run moves the best score. The banner reads "Best on
+   the full exam" so the number says what it measures.
+2. **Short drills evicted the graded exam from history.** One list capped at 10 —
+   reachable in a single sitting now that there are four drill types. Exams and
+   drills are now capped separately, and the history marks graded runs.
+3. **Two prompts appear verbatim in both the exam bank and a level bank** (`r7` /
+   `L6-q10`, `a10` / `L12-p5`). The misses drill is the only mode drawing on both,
+   so it could serve the same question twice. Deduped on the assembled round rather
+   than by retiring an ID — dropping one permanently would strand it on the "to work
+   on" list forever, since a question only leaves that list by being answered.
+
+`completeLevel` and `migrate` rebuild level entries as fresh object literals too.
+No live bug (level entries have exactly the three fields they rebuild), but it is
+the same latent shape as the `hold` near-miss — noted in rule 9.
+
+The migration was verified by diffing `localStorage` field by field before and
+after: one field added (`kind` on the legacy attempt), nothing changed, nothing
+removed.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides

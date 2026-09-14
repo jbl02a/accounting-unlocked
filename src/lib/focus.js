@@ -82,6 +82,26 @@ export function pickForSection(sectionId, misses = {}, count) {
   return picked
 }
 
+// A handful of prompts exist in both the exam bank and a level bank (same question,
+// independently worded options, deliberately separate IDs so each keeps its own
+// history). The misses drill is the only mode that draws on both banks at once, and
+// there it would serve the same question twice in one round.
+//
+// Deduping is done on the assembled round, never by retiring an ID: dropping one
+// permanently would leave it stuck on the "to work on" list forever, because a
+// question only comes off that list by being answered. The caller shuffles first,
+// so which twin survives varies per round and both get their turn.
+export function dedupeByPrompt(questions) {
+  const seen = new Set()
+  return questions.filter(q => {
+    const key = String(q.prompt || '').replace(/\s+/g, ' ').trim().toLowerCase()
+    if (!key) return true
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
 export const FOCUS_TARGET = 24
 const MIN_PER_SECTION = 5
 const MAX_PER_SECTION = 10

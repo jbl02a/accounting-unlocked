@@ -59,5 +59,31 @@ be right.
 | The offline toast swallowed taps on the button beneath it | Only surfaced because a Playwright click timed out with an interception log. Nothing was checking that overlays don't block. |
 | Level quizzes never fed the weak-area tracker | The feature was built for the exam page and assumed to cover "quizzes". Nobody asserted it end-to-end from a level. |
 
+| Best score inflated by a two-question drill | `recordExam` applied `Math.max` to every attempt regardless of size. Never caught because no test compared a drill's effect on `best` against a full exam's. Found by auditing the *class* of bug rather than re-running the suite. |
+| A run of drills evicted the graded 79-question attempt from history | The attempts array was one list capped at 10. Adding more drill types made it reachable in a single sitting. |
+
 The pattern in all three: the check confirmed the happy path instead of asserting
 the property that actually mattered.
+
+## The audit suite
+
+Living in the scratch directory rather than the repo, but worth recreating when
+touching the progress model. Four layers, in order of what they can prove:
+
+1. **Static** — ID uniqueness across all three banks, `correctIndex: 0`, four
+   distinct options, an explanation on every question, and the shuffle properties
+   over thousands of rounds: the answer never lost, every position used, a stored
+   permutation replaying identically.
+2. **Dedupe** — two prompts exist in both the exam bank and a level bank. A served
+   round must contain only one twin, and *both* must still get served across many
+   rounds, or one is stranded on the "to work on" list forever.
+3. **State** — seed a real save, load the new build, and diff `localStorage`
+   field by field: the migration must be purely **additive**, never altering or
+   removing anything. Then assert the fields the grader does not own (`hold`,
+   `task`, `label`, `level`) survive a full re-grade, that a drill cannot raise
+   `best` or evict a graded exam, and that a resumed run keeps its `scopeKind`.
+4. **Routes** — all 22 pages render, no console errors, no horizontal overflow at
+   desktop or 390px.
+
+The always-A property is asserted in *every* mode, not just one: full exam, Quick
+15, focus test and misses drill each have to score far below 100%.

@@ -61,6 +61,13 @@ These are the things most likely to be broken by accident.
    entry** before overwriting `wrong`/`right`/`last`/`at`, or answering a question
    again silently discards them. Nothing is ever deleted from `misses`: a question
    answered correctly moves to the reviewed pile, it does not disappear.
+10. **Only the full exam moves the best score.** `recordExam` takes a `kind`
+    (`'exam'` for the 79-question run, `'drill'` for everything else). A drill has a
+    much smaller denominator, so 100% on two questions is not a better result than
+    77% on seventy-nine. Attempt history keeps the two kinds capped separately so a
+    run of short drills can never evict a graded exam. `scopeKind` is part of the
+    saved session — drop it from `loadExamSession` and a resumed exam is demoted to
+    a drill.
 
 ## Analytics
 

@@ -28,7 +28,10 @@ function migrate(saved) {
       score: typeof data?.score === 'number' ? data.score : null,
     }
   }
-  const attempts = Array.isArray(saved.exam?.attempts) ? saved.exam.attempts : []
+  const attempts = (Array.isArray(saved.exam?.attempts) ? saved.exam.attempts : []).map(a => ({
+    ...a,
+    kind: a?.kind === 'exam' || a?.kind === 'drill' ? a.kind : (a?.label === 'Full practice exam' ? 'exam' : 'drill'),
+  }))
   const best = typeof saved.exam?.best === 'number' ? saved.exam.best : null
   const misses = saved.misses && typeof saved.misses === 'object' ? saved.misses : {}
   return { levels, exam: { attempts, best }, misses }
@@ -73,11 +76,21 @@ export function ProgressProvider({ children }) {
   // `results` is [{ id, correct }] for every question in the attempt. Keeping the
   // per-question outcome is what makes a "drill only what I got wrong" mode possible;
   // a score alone cannot be turned back into a study list.
-  function recordExam({ score, correct, total, label, results = [] }) {
+  function recordExam({ score, correct, total, label, kind = 'drill', results = [] }) {
     setProgress(prev => {
-      const attempt = { score, correct, total, label, date: new Date().toISOString() }
-      const attempts = [attempt, ...(prev.exam?.attempts || [])].slice(0, 10)
-      const best = Math.max(score, prev.exam?.best ?? 0)
+      const attempt = { score, correct, total, label, kind, date: new Date().toISOString() }
+      const all = [attempt, ...(prev.exam?.attempts || [])]
+      // Keep the two histories separately capped. A run of two-question drills
+      // must never push the graded 79-question attempts out of the record.
+      const exams = all.filter(a => a.kind === 'exam').slice(0, 10)
+      const drills = all.filter(a => a.kind !== 'exam').slice(0, 10)
+      const attempts = [...exams, ...drills].sort((a, b) => String(b.date).localeCompare(String(a.date)))
+      // Only the full exam moves the best score. A drill has a different, much
+      // smaller denominator, so 100% on two questions is not a better result than
+      // 77% on seventy-nine — and showing it as one would be a lie to the student.
+      const best = kind === 'exam'
+        ? Math.max(score, prev.exam?.best ?? 0)
+        : (prev.exam?.best ?? null)
       const misses = { ...(prev.misses || {}) }
       const now = new Date().toISOString()
       for (const r of results) {
