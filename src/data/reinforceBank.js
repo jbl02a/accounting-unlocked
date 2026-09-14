@@ -460,15 +460,15 @@ export const REINFORCE = [
   // versions, so the focus test can re-serve the idea without the whole problem.
   {
     id: 'xt12', section: 'trial', kind: 'text',
-    prompt: 'A trial balance worksheet lists Common Stock, but no transaction during the year issued any stock. The debit and credit columns already agree without it. What do you do?',
+    prompt: 'A company in its FIRST month prints a T-account for Retained Earnings, but no transaction all month touches it. On the trial balance, Retained Earnings should show:',
     options: [
-      'Leave it blank — an account with no activity has no balance to report',
-      'Enter a figure large enough to make the columns agree',
-      'Move an equity amount across to fill it',
-      'Delete the line, because a blank row means the trial balance is wrong',
+      'Nothing — Retained Earnings does not move until the books are closed',
+      'The net income for the month',
+      'The amount of common stock issued',
+      'Whatever figure makes the two columns agree',
     ],
     correctIndex: 0,
-    explanation: 'A printed worksheet lists the accounts that MIGHT be used, not the ones that were. If nothing was posted to Common Stock it has no balance, and the columns balance anyway because every entry you made already put equal amounts on both sides. Plugging a number to "make it balance" invents a transaction that never happened.',
+    explanation: 'Revenues, expenses and dividends sit in their own accounts all period and only reach Retained Earnings through the closing entries. So on a first-period trial balance it is genuinely empty. A printed worksheet lists the accounts that MIGHT be used, not the ones that were — and plugging a figure to force the columns to agree invents a transaction that never happened.',
   },
   {
     id: 'xt13', section: 'trial', kind: 'text',

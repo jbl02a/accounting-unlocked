@@ -266,9 +266,8 @@ so the focus test can re-serve the ideas without the whole problem. Topic drills
 accordingly — principles 25, adjusting 27, trial 22, debits and credits 21.
 
 Three findings from working the problems:
-- **Copperline never issues stock.** The worksheet lists Common Stock; no transaction
-  creates any; the columns foot to $1,451,400 without it. The app says so outright,
-  because plugging a figure to force a balance is exactly the instinct being tested.
+- **The Copperline handout is missing its opening transaction** — see the correction
+  below. First read as a deliberate trap; it was not.
 - **Ridgeline's unearned revenue is $12,500, not the $15,000 straight-line gives.**
   The problem states what was performed, and performance governs.
 - **The app already had a "Copperline Freight Co."** in the printable worksheet — a
@@ -291,6 +290,27 @@ sheet and the worksheet as well. Caught by grepping the extracted PDF text for
 on-screen furniture — a page-count check would never have found it. Both toasts are
 now `no-print`, verified across all three printable pages, and the cram sheet is
 still exactly 2 pages.
+
+### Correction: Copperline's missing first transaction (same day)
+The app shipped telling the student that Copperline never issues stock and that the
+Common Stock line should be left blank. That was wrong.
+
+The owner checked the TA's answer key: it opens with **January 2 — Dr Cash $150,000
+/ Cr Common Stock $150,000** and carries the $150,000 to the trial balance. The
+printed handout starts at January 5. Re-examined the PDF to be sure the extraction
+had not dropped it — no hidden text, no images, seven pages — so the handout really
+is missing its first transaction, and the key is right.
+
+Why the error was plausible and still wrong: omitting a whole entry removes equal
+amounts from both columns, so the trial balance still balanced perfectly at
+$1,451,400. Internal consistency was taken as evidence of completeness. It is not.
+
+Fixed: the entry is now step 1 of the Copperline set, flagged as absent from the
+printed sheet so he is not confused when he compares. Cash becomes **$495,400** and
+both columns **$1,601,400**. The step was given a new ID (`P3-0`) rather than
+renumbering, so no saved history moved. The reinforcement question built on the bad
+reading was rewritten around Boonville's Retained Earnings, which genuinely is a
+printed T-account that never gets used in a first period.
 
 ## Open items
 

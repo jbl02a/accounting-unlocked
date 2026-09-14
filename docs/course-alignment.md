@@ -29,11 +29,22 @@ Four worksheets from the course TA, now in `src/data/problemSets.js`:
 
 Every figure was recomputed before being written down. Two things to know:
 
-- **Copperline never issues stock.** Common Stock is a line on the TA's worksheet,
-  but no transaction in the problem issues any, and the columns foot to $1,451,400
-  on both sides without it. The line stays blank. The app says so explicitly rather
-  than quietly omitting the account, because "plug a number to make it balance" is
-  the instinct being tested. Worth confirming with the TA whether it is deliberate.
+- **The Copperline handout is missing its first transaction.** The printed problem
+  opens at January 5, but the TA's answer key starts with **January 2: Dr Cash
+  $150,000 / Cr Common Stock $150,000**, and carries that $150,000 through to the
+  trial balance. A company that "began business operations during 2025" has to be
+  capitalised first, so the key is right and the handout is incomplete.
+
+  The app supplies the missing entry as step 1 of the Copperline set, flagged as
+  absent from the printed sheet. With it, Cash is **$495,400** and both columns
+  foot to **$1,601,400**. Without it they foot to $1,451,400 — and still balance,
+  because leaving out a whole entry drops equal amounts from both sides. That is
+  exactly why the omission is easy to miss.
+
+  This was initially read the other way round: the app briefly told the student to
+  leave Common Stock blank. It was corrected once the TA's key was checked. If a
+  worksheet account looks unused, confirm against the key before concluding it is
+  a deliberate trap.
 - **Ridgeline's unearned revenue is $12,500, not $15,000.** A $120,000 four-year
   contract prepaid on 1 July straight-lines to $15,000 for six months, but the
   problem states that $12,500 of services were actually provided. Performance

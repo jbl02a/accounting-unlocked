@@ -171,7 +171,7 @@ the site. It prints to 7 pages under a denser `.key-page` ruleset.
 **The data file is not its own source of truth.** A node check re-posts every
 journal entry in `problemSets.js` into a ledger and compares the result against the
 stated trial-balance totals, net income and closing figures. Copperline foots to
-$1,451,400, Boonville to $80,800, Bulldog's net income is $42,500 and its ending
+$1,601,400, Boonville to $80,800, Bulldog's net income is $42,500 and its ending
 retained earnings $111,150. Re-run it after any content edit.
 
 ## Conventions worth keeping

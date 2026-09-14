@@ -268,6 +268,18 @@ const COPPERLINE = {
   intro: 'Copperline Event Productions began operations during 2025. Each event below aggregates many individual transactions. Journalize each one, then foot the unadjusted trial balance at 12/31/25.',
   steps: [
     {
+      // The handout PDF skips straight to January 5, but the TA's answer key opens
+      // with this entry and carries $150,000 of Common Stock through to the trial
+      // balance. A company that "began operations" has to be capitalised first, so
+      // the key is right and the handout is missing its first transaction.
+      id: 'P3-0', kind: 'entry', date: 'January 2, 2025',
+      prompt: 'Copperline Event Productions issued common stock to its investors for $150,000 cash to capitalise the business.',
+      answer: { debits: [['Cash', 150000]], credits: [['Common Stock', 150000]] },
+      why: 'Cash comes in, so debit Cash. The investors receive an ownership stake, so credit Common Stock. Equity increases with credits, and this is what funds everything that follows.',
+      watchFor: 'This transaction is missing from the printed handout — it starts at January 5 — but it is in the TA\'s answer key and it carries $150,000 of Common Stock onto the trial balance. If your totals come out $150,000 light, this is why.',
+      hint: 'A company that has just begun operations needs money before it can spend any. Where does the first money come from?',
+    },
+    {
       id: 'P3-1', kind: 'entry', date: 'January 5, 2025',
       prompt: 'Copperline issued a note receivable, lending $75,000 to a business partner. Principal and interest are due in six months.',
       answer: { debits: [['Notes Receivable', 75000]], credits: [['Cash', 75000]] },
@@ -376,10 +388,10 @@ const COPPERLINE = {
     {
       id: 'P3-15', kind: 'numeric',
       prompt: 'What is the balance of CASH at 12/31/25?',
-      answer: 345400,
-      why: 'Running the twelve entries that touched Cash: −75,000 + 450,000 − 54,000 − 410,000 − 85,000 − 18,000 + 120,000 − 268,000 + 128,000 + 610,000 − 24,600 − 28,000 = $345,400.',
-      watchFor: 'Cash dips deeply negative in the middle of the year and is rescued by the December collections. Do not assume a running balance is wrong just because it goes red part-way.',
-      hint: 'Twelve of the fourteen entries touch Cash. Take them in date order and keep a running total.',
+      answer: 495400,
+      why: 'Running the thirteen entries that touched Cash: 150,000 − 75,000 + 450,000 − 54,000 − 410,000 − 85,000 − 18,000 + 120,000 − 268,000 + 128,000 + 610,000 − 24,600 − 28,000 = $495,400.',
+      watchFor: 'Miss the January 2 stock issuance — the one the handout leaves out — and every figure from here on is $150,000 light.',
+      hint: 'Thirteen of the fifteen entries touch Cash. Take them in date order and keep a running total.',
     },
     {
       id: 'P3-16', kind: 'numeric',
@@ -391,10 +403,10 @@ const COPPERLINE = {
     {
       id: 'P3-17', kind: 'numeric',
       prompt: 'What is the total of the trial balance (each column) at 12/31/25?',
-      answer: 1451400,
-      why: 'Both columns foot to $1,451,400. Debits: Cash 345,400 + Notes Receivable 75,000 + A/R 132,000 + Supplies 96,400 + Prepaid Insurance 18,000 + Equipment 410,000 + Wages 268,000 + Rent 54,000 + Utilities 24,600 + Dividends 28,000. Credits: A/P 11,400 + Notes Payable 450,000 + Unearned Revenue 120,000 + Service Revenue 870,000.',
-      watchFor: 'COMMON STOCK IS ZERO. The worksheet has a line for it, but no transaction in this problem ever issues stock — and the columns balance perfectly without it. Leave it blank. Plugging a number in to "make it balance" is exactly the wrong instinct, and it is worth asking your TA whether the omission is deliberate.',
-      hint: 'Total the debit column first. Then check: does any account on the worksheet have no entries at all?',
+      answer: 1601400,
+      why: 'Both columns foot to $1,601,400. Debits: Cash 495,400 + Notes Receivable 75,000 + A/R 132,000 + Supplies 96,400 + Prepaid Insurance 18,000 + Equipment 410,000 + Wages 268,000 + Rent 54,000 + Utilities 24,600 + Dividends 28,000. Credits: A/P 11,400 + Notes Payable 450,000 + Unearned Revenue 120,000 + Common Stock 150,000 + Service Revenue 870,000.',
+      watchFor: 'Common Stock is $150,000, from the January 2 issuance that the printed handout omits. If your columns agree with each other at $1,451,400, you have simply left out that one transaction — both sides, which is why it still balanced.',
+      hint: 'Total the debit column first, then the credit column. Every account on the worksheet carries a balance.',
     },
   ],
 }
