@@ -105,6 +105,14 @@ The full exam and the Quick 15 stay inside `examQuestions.js`. Single-topic dril
 and the focus test use `ALL_EXAM_QUESTIONS` (both banks), which is why a topic drill
 is now roughly twice the length of that topic's share of the exam.
 
+Both the focus test and the "questions I got wrong" drill force
+`mode = 'practice'`, so the verdict, the correct option and the explanation appear
+the moment an answer is picked. The Exam/Practice toggle governs the full exam, the
+Quick 15 and the topic drills only — it deliberately does not apply to the two
+drills, because a drill exists to correct a misunderstanding and the reason has to
+arrive at the question that exposed it. `mode` is part of the saved session, so a
+resumed drill keeps instant feedback.
+
 `ALL_EXAM_QUESTIONS` is also what `loadExamSession` validates against — a focus test
 interrupted halfway would otherwise be discarded on reload, because its `x`-prefixed
 IDs are not in the exam bank.

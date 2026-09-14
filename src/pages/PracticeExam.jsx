@@ -112,6 +112,11 @@ export default function PracticeExam() {
     if (picked.length === 0) return
     setQuestions(picked)
     setScopeLabel('Questions I got wrong')
+    // Always instant feedback. A drill exists to fix a misunderstanding, so the
+    // reason has to arrive at the question that exposed it — not on a results
+    // screen twenty questions later. The Exam/Practice toggle governs the graded
+    // exam and the topic drills; it does not apply here.
+    setMode('practice')
     setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
   }
 
@@ -121,6 +126,7 @@ export default function PracticeExam() {
     if (picked.length === 0) return
     setQuestions(picked)
     setScopeLabel('Focus test — weak topics')
+    setMode('practice')   // same reasoning as startMisses
     setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
   }
 
@@ -192,7 +198,8 @@ export default function PracticeExam() {
                 <p className="text-sm text-slate-300 mt-0.5">
                   {focusCount} questions drawn only from the topics you are scoring under 80% on, across everything
                   you have answered so far. Mostly examples you have not seen before, plus the ones you actually
-                  missed — so it tests the idea, not your memory of one question.
+                  missed — so it tests the idea, not your memory of one question. It gives you the
+                  answer and the reason straight after every question.
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-3">
                   {weakTopics.map(t => (
@@ -230,7 +237,8 @@ export default function PracticeExam() {
                 <p className="text-sm text-slate-300 mt-0.5">
                   Everything you missed last time you saw it — from the exam, the topic drills and the level quizzes alike.
                   {weakFromLevels > 0 && <> <span className="text-white font-semibold">{weakFromLevels}</span> came from level quizzes.</>}
-                  {' '}Get one right and it drops off the list.
+                  {' '}You get the answer and the reason straight after each one, and getting one
+                  right drops it off the list.
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-3">
                   {weakBySection.map(w => (
@@ -275,7 +283,11 @@ export default function PracticeExam() {
         )}
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">How do you want to take it?</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">How do you want to take it?</p>
+          <p className="text-xs text-slate-500 mb-3">
+            This sets the full exam, the Quick 15 and the topic drills. The focus test and the
+            “questions I got wrong” drill always explain as you go.
+          </p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
               { id: 'exam', title: 'Exam mode', desc: 'No feedback until you submit. Closest to the real thing.' },

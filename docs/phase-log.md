@@ -177,6 +177,19 @@ levels, the 77% attempt, all 79 `misses` entries) was seeded into `localStorage`
 new build loaded over it, and levels, best score, attempt history and the missed list
 were asserted byte-identical on disk afterwards — including after taking a focus test.
 
+### Follow-up: drills explain as you go (same day)
+Asked whether the drill actually explains *why* an answer is right. It did not,
+reliably: `mode` defaults to `'exam'` (feedback withheld until submit) and neither
+`startMisses` nor `startFocus` set it, while the Exam/Practice toggle renders *below*
+both drill cards — so the likely path was to tap "Drill these 18" at the top and get
+no reasoning until the results screen.
+
+Both drills now force practice mode, and the two cards and the toggle say so. All 161
+drillable questions were confirmed to carry a substantive explanation (none missing,
+none under 40 characters). Verified in a browser: every one of a 24-question focus
+test explained itself in-flight, wrong answers and right ones alike; the graded exam
+still reveals nothing mid-run; a resumed drill keeps instant feedback.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides
