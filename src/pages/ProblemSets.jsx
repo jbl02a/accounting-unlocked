@@ -31,8 +31,12 @@ export function ProblemSetsIndex() {
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Problem Sets</h1>
         <p className="text-slate-400">
-          The TA's practice problems, worked one step at a time. Every answer is marked instantly, with
+          Your TA's practice problems, worked one step at a time. Every answer is marked instantly, with
           the reason it is right and the trap it was built around.
+        </p>
+        <p className="text-slate-500 text-sm mt-2">
+          These are separate from the levels and the practice exam — nothing here repeats work you have
+          already done.
         </p>
       </div>
 
@@ -55,13 +59,21 @@ export function ProblemSetsIndex() {
                     <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-slate-400">{set.source}</span>
                     <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-slate-400">{set.steps.length} steps</span>
                     <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-slate-400">~{set.minutes} min</span>
-                    {s.attempted > 0 && (
+                    {s.attempted === 0 ? (
+                      <span className="rounded-full px-2 py-0.5 font-semibold border bg-emerald-500/15 border-emerald-500/40 text-emerald-300">
+                        Not started
+                      </span>
+                    ) : s.attempted < s.total ? (
+                      <span className="rounded-full px-2 py-0.5 font-semibold border bg-sky-500/15 border-sky-500/40 text-sky-300">
+                        {s.attempted}/{s.total} worked · {s.right} right
+                      </span>
+                    ) : (
                       <span className={`rounded-full px-2 py-0.5 font-semibold border ${
                         pct >= 80 ? 'bg-green-500/15 border-green-500/40 text-green-300'
                           : pct >= 60 ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
                           : 'bg-red-500/15 border-red-500/40 text-red-300'
                       }`}>
-                        {s.right}/{s.total} right
+                        Done · {s.right}/{s.total} right
                       </span>
                     )}
                   </div>
