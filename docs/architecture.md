@@ -105,6 +105,13 @@ The full exam and the Quick 15 stay inside `examQuestions.js`. Single-topic dril
 and the focus test use `ALL_EXAM_QUESTIONS` (both banks), which is why a topic drill
 is now roughly twice the length of that topic's share of the exam.
 
+The exam screen presents the two in a deliberate order: the misses drill first
+("Start here"), the focus test below it ("Then this"). Fixing the questions he
+already got wrong, with the reason attached, comes before testing the same ideas on
+unseen examples — the focus test's job is to show the fix stuck. The step labels and
+the cross-reference only render while both cards are on screen; once the drill list
+empties, the focus test stands alone with no stale instruction pointing at it.
+
 Both the focus test and the "questions I got wrong" drill force
 `mode = 'practice'`, so the verdict, the correct option and the explanation appear
 the moment an answer is picked. The Exam/Practice toggle governs the full exam, the

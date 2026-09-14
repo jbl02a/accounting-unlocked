@@ -189,11 +189,51 @@ export default function PracticeExam() {
           )}
         </div>
 
+        {weakIds.length > 0 && (
+          <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-5 mb-6">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">🎯</span>
+              <div className="flex-1">
+                {weakTopics.length > 0 && (
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-rose-300 mb-1">Start here</p>
+                )}
+                <p className="font-bold text-white">
+                  {weakIds.length} question{weakIds.length === 1 ? '' : 's'} to work on
+                </p>
+                <p className="text-sm text-slate-300 mt-0.5">
+                  Everything you missed last time you saw it — from the exam, the topic drills and the level quizzes alike.
+                  {weakFromLevels > 0 && <> <span className="text-white font-semibold">{weakFromLevels}</span> came from level quizzes.</>}
+                  {' '}You get the answer and the reason straight after each one, and getting one
+                  right drops it off the list.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {weakBySection.map(w => (
+                    <span key={w.id} className="text-[11px] rounded-full bg-black/30 border border-white/10 px-2 py-1 text-slate-300">
+                      {w.icon} {w.label} <span className="text-rose-300 font-semibold">{w.count}</span>
+                    </span>
+                  ))}
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2 mt-3">
+                  <button onClick={startMisses} className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold hover:opacity-90">
+                    Drill these {weakIds.length} →
+                  </button>
+                  <button onClick={clearMisses} className="px-4 py-2.5 rounded-xl bg-white/10 text-slate-300 text-sm font-semibold hover:bg-white/20">
+                    Clear list
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {weakTopics.length > 0 && (
           <div className="rounded-2xl border border-cyan-500/40 bg-cyan-500/10 p-5 mb-6">
             <div className="flex items-start gap-3">
               <span className="text-2xl">🔬</span>
               <div className="flex-1">
+                {weakIds.length > 0 && (
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-cyan-300 mb-1">Then this</p>
+                )}
                 <p className="font-bold text-white">Focus test — your weak topics</p>
                 <p className="text-sm text-slate-300 mt-0.5">
                   {focusCount} questions drawn only from the topics you are scoring under 80% on, across everything
@@ -219,42 +259,10 @@ export default function PracticeExam() {
                   Start focus test ({focusCount}) →
                 </button>
                 <p className="text-[11px] text-slate-400 mt-2">
-                  It does not replace the full exam — that one stays {QUESTIONS.length} questions so your scores stay comparable.
+                  {weakIds.length > 0
+                    ? `Worth doing after the ${weakIds.length} above — that drill fixes the ones you got wrong, this one checks the idea stuck on questions you have not seen.`
+                    : `It does not replace the full exam — that one stays ${QUESTIONS.length} questions so your scores stay comparable.`}
                 </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {weakIds.length > 0 && (
-          <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-5 mb-6">
-            <div className="flex items-start gap-3">
-              <span className="text-2xl">🎯</span>
-              <div className="flex-1">
-                <p className="font-bold text-white">
-                  {weakIds.length} question{weakIds.length === 1 ? '' : 's'} to work on
-                </p>
-                <p className="text-sm text-slate-300 mt-0.5">
-                  Everything you missed last time you saw it — from the exam, the topic drills and the level quizzes alike.
-                  {weakFromLevels > 0 && <> <span className="text-white font-semibold">{weakFromLevels}</span> came from level quizzes.</>}
-                  {' '}You get the answer and the reason straight after each one, and getting one
-                  right drops it off the list.
-                </p>
-                <div className="flex flex-wrap gap-1.5 mt-3">
-                  {weakBySection.map(w => (
-                    <span key={w.id} className="text-[11px] rounded-full bg-black/30 border border-white/10 px-2 py-1 text-slate-300">
-                      {w.icon} {w.label} <span className="text-rose-300 font-semibold">{w.count}</span>
-                    </span>
-                  ))}
-                </div>
-                <div className="flex flex-col sm:flex-row gap-2 mt-3">
-                  <button onClick={startMisses} className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold hover:opacity-90">
-                    Drill these {weakIds.length} →
-                  </button>
-                  <button onClick={clearMisses} className="px-4 py-2.5 rounded-xl bg-white/10 text-slate-300 text-sm font-semibold hover:bg-white/20">
-                    Clear list
-                  </button>
-                </div>
               </div>
             </div>
           </div>

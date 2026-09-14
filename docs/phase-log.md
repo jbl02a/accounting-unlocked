@@ -190,6 +190,14 @@ none under 40 characters). Verified in a browser: every one of a 24-question foc
 test explained itself in-flight, wrong answers and right ones alike; the graded exam
 still reveals nothing mid-run; a resumed drill keeps instant feedback.
 
+### Follow-up: drill first, then the new examples (same day)
+The focus test card was rendering *above* the misses drill, which recommends the
+wrong order. Correcting a mistake with its explanation has to come before being
+re-tested on fresh examples of the same idea — otherwise the focus test is just a
+second cold test. Swapped, with "Start here" / "Then this" labels and a line on the
+focus card pointing back at the drill. Both only appear while both cards are on
+screen. The results screen already ordered its buttons this way.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides
