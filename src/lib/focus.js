@@ -60,7 +60,9 @@ export function pickForSection(sectionId, misses = {}, count) {
   const stateOf = q => {
     const entry = misses[q.id]
     if (!entry) return 'fresh'
-    return entry.last === 'wrong' ? 'wrong' : 'known'
+    // A held question counts as unfinished business even though the last answer
+    // was right — that is the whole point of the student holding it.
+    return entry.last === 'wrong' || entry.hold ? 'wrong' : 'known'
   }
   const wrong = shuffle(pool.filter(q => stateOf(q) === 'wrong'))
   const fresh = shuffle(pool.filter(q => stateOf(q) === 'fresh'))

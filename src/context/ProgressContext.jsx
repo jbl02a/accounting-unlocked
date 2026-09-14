@@ -83,7 +83,10 @@ export function ProgressProvider({ children }) {
       for (const r of results) {
         if (!r || !r.id) continue
         const entry = misses[r.id] || { wrong: 0, right: 0 }
+        // Spread the existing entry: `hold` is set by the student, not by grading,
+        // and rebuilding the object from scratch would silently discard it.
         misses[r.id] = {
+          ...entry,
           wrong: entry.wrong + (r.correct ? 0 : 1),
           right: entry.right + (r.correct ? 1 : 0),
           last: r.correct ? 'right' : 'wrong',
@@ -102,6 +105,7 @@ export function ProgressProvider({ children }) {
       const misses = { ...(prev.misses || {}) }
       const entry = misses[id] || { wrong: 0, right: 0 }
       misses[id] = {
+        ...entry,
         wrong: entry.wrong + (correct ? 0 : 1),
         right: entry.right + (correct ? 1 : 0),
         last: correct ? 'right' : 'wrong',
@@ -121,6 +125,7 @@ export function ProgressProvider({ children }) {
       const misses = { ...(prev.misses || {}) }
       const entry = misses[id] || { wrong: 0, right: 0 }
       misses[id] = {
+        ...entry,
         wrong: entry.wrong + (correct ? 0 : 1),
         right: entry.right + (correct ? 1 : 0),
         last: correct ? 'right' : 'wrong',
@@ -141,11 +146,39 @@ export function ProgressProvider({ children }) {
       .sort((a, b) => (a.level - b.level) || String(a.label).localeCompare(String(b.label)))
   }
 
-  // A question counts as needing work until it is answered correctly on its most
-  // recent outing, so getting it right once retires it from the drill.
+  // `hold` is the student saying "I got that right but I am not confident yet."
+  // It is deliberately independent of whether the answer was correct: being right
+  // once is weak evidence of understanding, and he is a better judge of that than
+  // the scoreboard is. Setting it puts the question back on the active list;
+  // clearing it retires the question the way a correct answer normally would.
+  function setHold(id, hold) {
+    if (!id) return
+    setProgress(prev => {
+      const misses = { ...(prev.misses || {}) }
+      const entry = misses[id] || { wrong: 0, right: 0, last: 'right', at: new Date().toISOString() }
+      misses[id] = { ...entry, hold: Boolean(hold) }
+      return { ...prev, misses }
+    })
+  }
+
+  function isHeld(id) {
+    return Boolean(progress.misses?.[id]?.hold)
+  }
+
+  // A question needs work while its most recent answer was wrong, OR while the
+  // student has asked to keep it. Getting it right retires it only if he has not.
   function needsWorkIds() {
     return Object.entries(progress.misses || {})
-      .filter(([, m]) => m.last === 'wrong' && !m.task)
+      .filter(([, m]) => !m.task && (m.last === 'wrong' || m.hold))
+      .map(([id]) => id)
+  }
+
+  // Questions that used to trip him up and are now answered right, with no hold —
+  // the "you fixed these" pile. Nothing is ever deleted, so a question retired by
+  // a lucky guess can always be drilled again from here.
+  function reviewedIds() {
+    return Object.entries(progress.misses || {})
+      .filter(([, m]) => !m.task && !m.hold && m.last === 'right' && (m.wrong || 0) > 0)
       .map(([id]) => id)
   }
 
@@ -161,7 +194,7 @@ export function ProgressProvider({ children }) {
 
   return (
     <ProgressContext.Provider
-      value={{ progress, completeLevel, recordExam, recordQuizResult, recordTask, tasksToReview, needsWorkIds, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
+      value={{ progress, completeLevel, recordExam, recordQuizResult, recordTask, tasksToReview, needsWorkIds, reviewedIds, setHold, isHeld, clearMisses, resetProgress, totalCompleted, totalLevels: TOTAL_LEVELS }}
     >
       {children}
     </ProgressContext.Provider>

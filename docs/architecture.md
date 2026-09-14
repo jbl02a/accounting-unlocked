@@ -44,8 +44,17 @@ One `localStorage` key, `accounting-unlocked-progress`:
 - `unlocked` is always `true` — kept in the shape only so old saves migrate cleanly.
 - `score: null` means "lesson read, practice skipped."
 - `completeLevel` keeps the **best** score, so a worse retake never erases a good run.
-- `misses` is the weak-area tracker. A question needs work until it is answered
-  correctly on its *most recent* outing — one right answer retires it.
+- `misses` is the weak-area tracker, and it is append-only: entries are updated,
+  never removed. A question needs work while its most recent answer was wrong **or**
+  while the student has set `hold` on it.
+- `hold` is the student's own verdict, deliberately independent of the grader's.
+  Being right once is weak evidence of understanding, so after a correct answer he
+  can tap "keep it on my list" and the question stays active until he says he has
+  it. Every write must spread the existing entry or the flag is lost on the next
+  answer.
+- Questions with `wrong > 0`, `last === 'right'` and no hold form the **reviewed**
+  pile — "used to trip you up, since fixed" — re-drillable at any time, so a question
+  retired by a lucky guess is never actually gone.
 - `migrate()` folds any older shape into the current one. **Extend it whenever you
   add a field.**
 

@@ -55,6 +55,12 @@ These are the things most likely to be broken by accident.
    and the single-topic drills but never `questionsFor('full')` or `'quick'`.
    Adding questions there is safe precisely *because* the IDs are new — they
    cannot collide with anything already in a student's `misses` map.
+9. **`misses` entries carry fields the grader does not own.** `hold` is set by the
+   student ("I got that right but I'm not sure"), and `task`/`label`/`level` are set
+   by hands-on drills. Every write in `ProgressContext` must **spread the existing
+   entry** before overwriting `wrong`/`right`/`last`/`at`, or answering a question
+   again silently discards them. Nothing is ever deleted from `misses`: a question
+   answered correctly moves to the reviewed pile, it does not disappear.
 
 ## Analytics
 

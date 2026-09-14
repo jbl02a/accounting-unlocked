@@ -198,6 +198,26 @@ second cold test. Swapped, with "Start here" / "Then this" labels and a line on 
 focus card pointing back at the drill. Both only appear while both cards are on
 screen. The results screen already ordered its buttons this way.
 
+### Follow-up: the student decides when a question is done (same day)
+`needsWorkIds()` retired a question the moment `last === 'right'`, so one lucky guess
+removed it from the drill permanently with no way back. Raised as: he should be able
+to keep one he is still on the fence about.
+
+Added `hold`, a flag the student sets, kept deliberately separate from whether the
+answer was correct. After any right answer the feedback panel offers "📌 Not yet —
+keep it on my list"; held questions stay on the active list and count as unfinished
+in the focus test. Wrong answers get no control — they stay regardless. The control
+also appears on the results review, which in exam mode is the only place he sees the
+answers at all.
+
+Questions he once missed and has since got right now form a **reviewed** pile on the
+exam screen, re-drillable any time, so nothing is ever actually lost.
+
+The trap: all three `misses` writers rebuilt the entry as a fresh object literal, so
+`hold` would have been wiped by the next grading pass. They now spread the existing
+entry — asserted directly by finishing a whole drill after setting a hold and
+checking the flag is still there.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides

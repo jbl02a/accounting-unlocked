@@ -42,7 +42,7 @@ function OptionButton({ q, index, chosen, revealed, onPick }) {
 }
 
 export default function PracticeExam() {
-  const { progress, recordExam, needsWorkIds, clearMisses } = useProgress()
+  const { progress, recordExam, needsWorkIds, reviewedIds, setHold, isHeld, clearMisses } = useProgress()
   const [stage, setStage] = useState('setup')
   const [mode, setMode] = useState('exam') // 'exam' = feedback at the end, 'practice' = instant
   const [scopeLabel, setScopeLabel] = useState('')
@@ -74,6 +74,7 @@ export default function PracticeExam() {
     }),
   ].filter(w => w.count > 0)
   const weakFromLevels = weakIds.filter(id => id.startsWith('L')).length
+  const reviewed = reviewedIds().filter(id => ALL_QUESTIONS.some(q => q.id === id))
   const weakTopics = weakSections(progress.misses)
   const focusCount = weakTopics.length > 0 ? buildFocusTest(weakTopics.map(t => t.id), progress.misses).length : 0
 
@@ -116,6 +117,16 @@ export default function PracticeExam() {
     // reason has to arrive at the question that exposed it — not on a results
     // screen twenty questions later. The Exam/Practice toggle governs the graded
     // exam and the topic drills; it does not apply here.
+    setMode('practice')
+    setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
+  }
+
+  function startReviewed() {
+    const byId = Object.fromEntries(ALL_QUESTIONS.map(q => [q.id, q]))
+    const picked = shuffle(reviewed.map(id => byId[id]).filter(Boolean)).map(q => shuffleOptions(q))
+    if (picked.length === 0) return
+    setQuestions(picked)
+    setScopeLabel('Reviewed — a second look')
     setMode('practice')
     setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
   }
@@ -203,8 +214,9 @@ export default function PracticeExam() {
                 <p className="text-sm text-slate-300 mt-0.5">
                   Everything you missed last time you saw it — from the exam, the topic drills and the level quizzes alike.
                   {weakFromLevels > 0 && <> <span className="text-white font-semibold">{weakFromLevels}</span> came from level quizzes.</>}
-                  {' '}You get the answer and the reason straight after each one, and getting one
-                  right drops it off the list.
+                  {' '}You get the answer and the reason straight after each one. Get one right and it
+                  moves to Reviewed — unless you tap “keep it on my list”, which holds it here until
+                  you say you have it.
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-3">
                   {weakBySection.map(w => (
@@ -264,6 +276,29 @@ export default function PracticeExam() {
                     : `It does not replace the full exam — that one stays ${QUESTIONS.length} questions so your scores stay comparable.`}
                 </p>
               </div>
+            </div>
+          </div>
+        )}
+
+        {reviewed.length > 0 && (
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4 mb-6">
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-xl">✅</span>
+              <div className="flex-1 min-w-[12rem]">
+                <p className="font-bold text-white text-sm">
+                  {reviewed.length} reviewed
+                </p>
+                <p className="text-xs text-slate-400">
+                  Missed once, since answered right. Nothing is ever deleted — come back whenever you
+                  want to check they stuck.
+                </p>
+              </div>
+              <button
+                onClick={startReviewed}
+                className="px-4 py-2 rounded-xl bg-white/10 text-slate-200 text-sm font-semibold hover:bg-white/20"
+              >
+                Drill these {reviewed.length} again →
+              </button>
             </div>
           </div>
         )}
@@ -479,6 +514,26 @@ export default function PracticeExam() {
                   )}
                 </div>
                 <p className="text-xs text-slate-400 leading-relaxed">{item.explanation}</p>
+
+                {/* In exam mode this review is the only place he sees the answers,
+                    so the "I got that right but I guessed" escape hatch lives here too. */}
+                {right && (
+                  isHeld(item.id) ? (
+                    <button
+                      onClick={() => setHold(item.id, false)}
+                      className="mt-2 text-[11px] px-2.5 py-1 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-200 font-semibold hover:bg-amber-500/30"
+                    >
+                      📌 Kept on your list — tap to retire
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setHold(item.id, true)}
+                      className="mt-2 text-[11px] px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-400 font-semibold hover:bg-white/10 hover:text-slate-200"
+                    >
+                      📌 Not sure — keep it on my list
+                    </button>
+                  )
+                )}
               </div>
             )
           })}
@@ -519,6 +574,35 @@ export default function PracticeExam() {
         <div className={`rounded-xl p-5 mb-5 ${chosen === q.correctIndex ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
           <p className="font-bold text-white mb-2">{chosen === q.correctIndex ? '✅ Correct' : '📖 Not quite'}</p>
           <p className="text-sm text-slate-300">{q.explanation}</p>
+
+          {/* Being right once is weak evidence of understanding. He decides whether
+              it is retired, not the scoreboard. A wrong answer needs no control —
+              it stays on the list either way. */}
+          {chosen === q.correctIndex && (
+            <div className="mt-4 pt-3 border-t border-white/10">
+              {isHeld(q.id) ? (
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs text-amber-300 font-semibold">📌 Kept on your list</span>
+                  <button
+                    onClick={() => setHold(q.id, false)}
+                    className="text-xs px-3 py-1.5 rounded-lg bg-white/10 text-slate-200 font-semibold hover:bg-white/20"
+                  >
+                    Actually, I've got this
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs text-slate-400">Sure about that one?</span>
+                  <button
+                    onClick={() => setHold(q.id, true)}
+                    className="text-xs px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-200 font-semibold hover:bg-amber-500/30"
+                  >
+                    📌 Not yet — keep it on my list
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
 
