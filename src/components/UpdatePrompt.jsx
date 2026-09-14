@@ -29,7 +29,7 @@ export default function UpdatePrompt() {
 
   if (needRefresh) {
     return (
-      <div className="fixed inset-x-0 bottom-0 z-[60] p-3 sm:p-4 pointer-events-none">
+      <div className="no-print fixed inset-x-0 bottom-0 z-[60] p-3 sm:p-4 pointer-events-none">
         <div className="max-w-md mx-auto rounded-2xl border border-indigo-400/40 bg-[#161629] shadow-2xl shadow-black/60 p-4 pointer-events-auto">
           <div className="flex items-start gap-3">
             <span className="text-2xl">✨</span>
@@ -60,7 +60,7 @@ export default function UpdatePrompt() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[60] p-3 sm:p-4 pointer-events-none">
+    <div className="no-print fixed inset-x-0 bottom-0 z-[60] p-3 sm:p-4 pointer-events-none">
       <div className="max-w-md mx-auto rounded-2xl border border-green-500/30 bg-[#161629] shadow-2xl shadow-black/60 px-4 py-3 flex items-center gap-3 pointer-events-auto">
         <span className="text-xl">📥</span>
         <p className="text-sm text-slate-200 flex-1">Ready to use offline.</p>

@@ -85,6 +85,21 @@ export function ProblemSetsIndex() {
         })}
       </div>
 
+      <Link
+        to="/problems/key"
+        className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 mb-4 hover:border-emerald-400 hover:bg-white/10 transition-colors"
+      >
+        <span className="text-2xl">🖨️</span>
+        <div className="flex-1">
+          <p className="font-bold text-white text-sm">Printable answer key</p>
+          <p className="text-xs text-slate-400">
+            All four problems worked in full, with the reason and the trap for every step — for checking
+            work done on paper.
+          </p>
+        </div>
+        <span className="text-emerald-400 font-bold">→</span>
+      </Link>
+
       <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-400">
         <p className="font-bold text-white text-sm mb-1">How these differ from the practice exam</p>
         <p>

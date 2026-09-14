@@ -278,6 +278,20 @@ The data file is deliberately not trusted as its own source of truth: a node che
 re-posts every journal entry into a ledger and compares the result against the stated
 trial-balance totals, net income and closing figures.
 
+### Follow-up: printable answer key (same day)
+`/problems/key` prints all four problems worked in full — every entry, the reason and
+the trap for each of the 49 steps. It is **generated from `problemSets.js`** rather
+than retyped, so the paper key and the site can never disagree; change a figure in
+one place and both follow. 7 pages under a denser `.key-page` print ruleset (10
+before tightening).
+
+Printing it surfaced a real bug in existing pages: the offline and update toasts had
+no `no-print` class, so "Ready to use offline / Dismiss" was printing on the cram
+sheet and the worksheet as well. Caught by grepping the extracted PDF text for
+on-screen furniture — a page-count check would never have found it. Both toasts are
+now `no-print`, verified across all three printable pages, and the cram sheet is
+still exactly 2 pages.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides

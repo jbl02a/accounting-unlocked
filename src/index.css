@@ -75,6 +75,11 @@
 .t-account .t-body > div:first-child { border-right: 1px solid #111827; }
 .t-account .t-body > div { padding: 3px 5px; font-size: 10px; color: #6b7280; }
 
+/* Answer key: a reference sheet, so it is set denser than the worked pages. */
+.key-page .cram-section { margin-bottom: 9px; }
+.key-page td, .key-page th { padding: 1.5px 6px; }
+.key-page .cram-note { line-height: 1.35; }
+
 @media print {
   @page { margin: 12mm; }
   html, body { background: #fff !important; }
@@ -82,6 +87,13 @@
   nav, footer.app-foot { display: none !important; }
   main { max-width: none !important; padding: 0 !important; margin: 0 !important; }
   .cram-page { border-radius: 0; padding: 0; font-size: 11px; box-shadow: none; }
+  .key-page { font-size: 8.9px; line-height: 1.28; }
+  .key-page .cram-section { margin-bottom: 4.5px; }
+  .key-page .cram-section h2 { font-size: 10.5px; padding: 2px 6px; margin-bottom: 5px; }
+  .key-page .cram-note { font-size: 8.4px; margin-top: 1px; }
+  .key-page td, .key-page th { padding: 1px 5px; }
+  .key-page .mono { font-size: 9px; }
+  .key-page .tag-dr, .key-page .tag-cr { font-size: 8px; padding: 0 4px; }
   .break-before { break-before: page; }
   .cram-section { break-inside: avoid; }
 }

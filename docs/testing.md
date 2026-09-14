@@ -41,7 +41,13 @@ await page.emulateMedia({ media: 'print' })
 await page.pdf({ path: 'cram.pdf', format: 'Letter', printBackground: true })
 ```
 
-Then check page count with `pypdf`. The cram sheet should stay at 2 pages.
+Then check page count with `pypdf`. The cram sheet should stay at 2 pages; the
+answer key at `/problems/key` runs to 7.
+
+Also grep the extracted PDF text for on-screen furniture that should never print —
+`Dismiss`, `Ready to use offline`, `A new version is ready`. The offline and update
+toasts once printed on every printable page because they were missing `no-print`,
+and a page-count check alone would never have caught it.
 
 ## Verify the accounting, always
 

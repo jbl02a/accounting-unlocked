@@ -26,7 +26,7 @@ src/
     levelBanks.js            raw MC arrays lifted out of level components
     levelQuestions.js        normalises those into exam shape with namespaced IDs
   pages/
-    Home CheatSheet CramSheet Worksheet PracticeExam ProblemSets
+    Home CheatSheet CramSheet Worksheet PracticeExam ProblemSets ProblemKey
     levels/Level1..Level17
 ```
 
@@ -162,6 +162,11 @@ Steps are recorded with `recordTask`, so they appear on the home review list and
 excluded from the exam drill — they cannot be re-served as multiple choice. They
 therefore do not move the red/amber topic bands either, which stay a measure of the
 question banks.
+
+`/problems/key` is a printable answer key **generated from `problemSets.js`**, not
+retyped — every entry, figure, reason and trap comes from the same data the
+interactive version grades against, so the paper key cannot drift out of step with
+the site. It prints to 7 pages under a denser `.key-page` ruleset.
 
 **The data file is not its own source of truth.** A node check re-posts every
 journal entry in `problemSets.js` into a ledger and compares the result against the
