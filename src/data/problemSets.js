@@ -25,6 +25,11 @@ export const ACCOUNT_SETS = {
     'Accounts Payable', 'Notes Payable', 'Unearned Revenue', 'Common Stock', 'Service Revenue',
     'Wages Expense', 'Rent Expense', 'Utilities Expense', 'Dividends',
   ],
+  brightwave: [
+    'Cash', 'Accounts Receivable', 'Supplies', 'Prepaid Advertising', 'Land', 'Equipment',
+    'Accounts Payable', 'Notes Payable', 'Unearned Revenue', 'Common Stock',
+    'Consulting Revenue', 'Salaries Expense', 'Utilities Expense', 'Dividends',
+  ],
   chapter3: [
     'Cash', 'Accounts Receivable', 'Supplies', 'Prepaid Insurance', 'Equipment',
     'Accumulated Depreciation', 'Accounts Payable', 'Salaries Payable', 'Utilities Payable',
@@ -268,18 +273,6 @@ const COPPERLINE = {
   intro: 'Copperline Event Productions began operations during 2025. Each event below aggregates many individual transactions. Journalize each one, then foot the unadjusted trial balance at 12/31/25.',
   steps: [
     {
-      // The handout PDF skips straight to January 5, but the TA's answer key opens
-      // with this entry and carries $150,000 of Common Stock through to the trial
-      // balance. A company that "began operations" has to be capitalised first, so
-      // the key is right and the handout is missing its first transaction.
-      id: 'P3-0', kind: 'entry', date: 'January 2, 2025',
-      prompt: 'Copperline Event Productions issued common stock to its investors for $150,000 cash to capitalise the business.',
-      answer: { debits: [['Cash', 150000]], credits: [['Common Stock', 150000]] },
-      why: 'Cash comes in, so debit Cash. The investors receive an ownership stake, so credit Common Stock. Equity increases with credits, and this is what funds everything that follows.',
-      watchFor: 'This transaction is missing from the printed handout — it starts at January 5 — but it is in the TA\'s answer key and it carries $150,000 of Common Stock onto the trial balance. If your totals come out $150,000 light, this is why.',
-      hint: 'A company that has just begun operations needs money before it can spend any. Where does the first money come from?',
-    },
-    {
       id: 'P3-1', kind: 'entry', date: 'January 5, 2025',
       prompt: 'Copperline issued a note receivable, lending $75,000 to a business partner. Principal and interest are due in six months.',
       answer: { debits: [['Notes Receivable', 75000]], credits: [['Cash', 75000]] },
@@ -388,10 +381,10 @@ const COPPERLINE = {
     {
       id: 'P3-15', kind: 'numeric',
       prompt: 'What is the balance of CASH at 12/31/25?',
-      answer: 495400,
-      why: 'Running the thirteen entries that touched Cash: 150,000 − 75,000 + 450,000 − 54,000 − 410,000 − 85,000 − 18,000 + 120,000 − 268,000 + 128,000 + 610,000 − 24,600 − 28,000 = $495,400.',
-      watchFor: 'Miss the January 2 stock issuance — the one the handout leaves out — and every figure from here on is $150,000 light.',
-      hint: 'Thirteen of the fifteen entries touch Cash. Take them in date order and keep a running total.',
+      answer: 345400,
+      why: 'Running the twelve entries that touched Cash: −75,000 + 450,000 − 54,000 − 410,000 − 85,000 − 18,000 + 120,000 − 268,000 + 128,000 + 610,000 − 24,600 − 28,000 = $345,400.',
+      watchFor: 'Cash dips deeply negative in the middle of the year and is rescued by the December collections. Do not assume a running balance is wrong just because it goes red part-way.',
+      hint: 'Twelve of the fourteen entries touch Cash. Take them in date order and keep a running total.',
     },
     {
       id: 'P3-16', kind: 'numeric',
@@ -403,10 +396,10 @@ const COPPERLINE = {
     {
       id: 'P3-17', kind: 'numeric',
       prompt: 'What is the total of the trial balance (each column) at 12/31/25?',
-      answer: 1601400,
-      why: 'Both columns foot to $1,601,400. Debits: Cash 495,400 + Notes Receivable 75,000 + A/R 132,000 + Supplies 96,400 + Prepaid Insurance 18,000 + Equipment 410,000 + Wages 268,000 + Rent 54,000 + Utilities 24,600 + Dividends 28,000. Credits: A/P 11,400 + Notes Payable 450,000 + Unearned Revenue 120,000 + Common Stock 150,000 + Service Revenue 870,000.',
-      watchFor: 'Common Stock is $150,000, from the January 2 issuance that the printed handout omits. If your columns agree with each other at $1,451,400, you have simply left out that one transaction — both sides, which is why it still balanced.',
-      hint: 'Total the debit column first, then the credit column. Every account on the worksheet carries a balance.',
+      answer: 1451400,
+      why: 'Both columns foot to $1,451,400. Debits: Cash 345,400 + Notes Receivable 75,000 + A/R 132,000 + Supplies 96,400 + Prepaid Insurance 18,000 + Equipment 410,000 + Wages 268,000 + Rent 54,000 + Utilities 24,600 + Dividends 28,000. Credits: A/P 11,400 + Notes Payable 450,000 + Unearned Revenue 120,000 + Service Revenue 870,000.',
+      watchFor: 'Common Stock has a line on the worksheet, but no transaction in this handout issues any, so it carries no balance — and the columns still foot, because every entry you made put equal amounts on both sides. Do not plug a figure to force a balance. One caveat worth raising with your TA: if the class answer key shows an amount in Common Stock, then a transaction is missing from the printed sheet and every total shifts by that amount.',
+      hint: 'Total the debit column first. Then check: does any account on the worksheet have no entries at all?',
     },
   ],
 }
@@ -543,7 +536,165 @@ const CHAPTER3 = {
   ],
 }
 
-export const PROBLEM_SETS = [CHAPTER1, BOONVILLE, COPPERLINE, CHAPTER3]
+
+// ── 5 · BrightWave: the other Chapter 2 problem, and it has a key ───
+// The only TA problem in this file with an official answer key attached. Every
+// figure below was checked against that key line by line, and the ledger is
+// re-derived from these entries in the verification script.
+const BRIGHTWAVE = {
+  id: 'brightwave',
+  title: 'BrightWave Consulting — Comprehensive',
+  source: 'TA worksheet · Chapter 2 (answer key provided)',
+  icon: '🌊',
+  blurb: 'Thirteen transactions, a three-account entry, and a trial balance with a line that stays empty.',
+  topics: ['journal', 'dr-cr', 'trial', 'ar-ap'],
+  minutes: 35,
+  accounts: 'brightwave',
+  intro: 'BrightWave began operations during 2026. The handout warns you directly: some transactions involve more than two accounts, and similar-looking events — a purchase on account versus a cash purchase, billed revenue versus cash revenue — hit different accounts. Journalize each one, then foot the trial balance at 12/31/26.',
+  steps: [
+    {
+      id: 'P5-1', kind: 'entry', date: 'January 2, 2026',
+      prompt: 'BrightWave Consulting Group, Inc. issued common stock for $150,000 cash.',
+      answer: { debits: [['Cash', 150000]], credits: [['Common Stock', 150000]] },
+      why: 'Cash in, so debit Cash. Investors receive an ownership stake, so credit Common Stock — equity increases with credits. This is the capital that funds everything that follows.',
+      hint: 'A company that has just begun operations needs money before it can spend any. Where does the first money come from?',
+    },
+    {
+      id: 'P5-2', kind: 'entry', date: 'January 8, 2026',
+      prompt: 'The company purchased office equipment for $45,000, paying $15,000 cash and signing a 3-year note payable for the remaining $30,000.',
+      answer: { debits: [['Equipment', 45000]], credits: [['Cash', 15000], ['Notes Payable', 30000]] },
+      why: 'The asset is recorded at its full cost of $45,000 regardless of how it was paid for. The credit side splits: $15,000 of cash left, and a $30,000 obligation was created.',
+      watchFor: 'A compound entry — one debit, two credits. Recording only the $15,000 paid understates the asset and hides the debt entirely. The amount you record is what the thing COST, not what you handed over today.',
+      hint: 'How much equipment does the company now own? Then ask how that was funded — and whether it was funded one way or two.',
+    },
+    {
+      id: 'P5-3', kind: 'entry', date: 'January 20, 2026',
+      prompt: 'BrightWave paid $12,000 cash for a 6-month advertising campaign that will begin next month.',
+      answer: { debits: [['Prepaid Advertising', 12000]], credits: [['Cash', 12000]] },
+      why: 'Paying ahead of the benefit creates an asset. The campaign has not started, so nothing has been used up and no expense belongs to January.',
+      watchFor: '"Will begin next month" is the whole point. Debiting Advertising Expense here reports a cost before a single advert has run.',
+      hint: 'Has the company received the thing it paid for yet?',
+    },
+    {
+      id: 'P5-4', kind: 'entry', date: 'February 5, 2026',
+      prompt: 'The company purchased office supplies for $8,200 cash.',
+      answer: { debits: [['Supplies', 8200]], credits: [['Cash', 8200]] },
+      why: 'Supplies are an asset when bought. They become Supplies Expense only as they are consumed, which is a Chapter 3 adjustment, not a Chapter 2 transaction.',
+      hint: 'Have the supplies been used yet?',
+    },
+    {
+      id: 'P5-5', kind: 'entry', date: 'March 1, 2026',
+      prompt: 'BrightWave purchased land for a future office site, paying $200,000 cash.',
+      answer: { debits: [['Land', 200000]], credits: [['Cash', 200000]] },
+      why: 'Land is an asset carried at cost. Note it is never depreciated, unlike the equipment bought in January.',
+      watchFor: 'This single transaction drives Cash deeply negative on paper for most of the year. That is fine in an aggregated problem — do not assume you have made an error when the running balance goes red.',
+      hint: 'A future office site is still something the company owns today.',
+    },
+    {
+      id: 'P5-6', kind: 'entry', date: 'April 1, 2026',
+      prompt: 'The company received $60,000 cash in advance from a client for a 12-month consulting retainer beginning in May.',
+      answer: { debits: [['Cash', 60000]], credits: [['Unearned Revenue', 60000]] },
+      why: 'Cash arrived, so debit Cash. Nothing has been performed, so the credit is a liability — an obligation to deliver consulting. Unearned Revenue is a liability despite the word revenue.',
+      watchFor: 'This is the mirror image of the January advertising entry: there BrightWave prepaid someone else, here a client prepaid BrightWave. Neither produces revenue or expense on the day the cash moves.',
+      hint: 'What does BrightWave owe the client the moment the money lands?',
+    },
+    {
+      id: 'P5-7', kind: 'entry', date: 'May 15, 2026',
+      prompt: 'BrightWave purchased additional computer equipment on account for $22,000.',
+      answer: { debits: [['Equipment', 22000]], credits: [['Accounts Payable', 22000]] },
+      why: 'Same asset as January, different funding: "on account" means no cash moved, so the credit is Accounts Payable. Equipment now totals $67,000.',
+      watchFor: 'Compare this with the January purchase. Identical-looking events, completely different credits — that is exactly what the handout warns about in its opening paragraph.',
+      hint: 'Did any money leave the business today?',
+    },
+    {
+      id: 'P5-8', kind: 'entry', date: 'June 15, 2026',
+      prompt: 'The company provided consulting services on account, billing clients $175,000.',
+      answer: { debits: [['Accounts Receivable', 175000]], credits: [['Consulting Revenue', 175000]] },
+      why: 'The work is done, so the revenue is earned and recorded now. Billed rather than collected, so the debit is a receivable.',
+      hint: 'Performance is complete. Does an unpaid invoice change that?',
+    },
+    {
+      id: 'P5-9', kind: 'entry', date: 'August 1, 2026',
+      prompt: 'The company collected $120,000 cash from clients previously billed on account.',
+      answer: { debits: [['Cash', 120000]], credits: [['Accounts Receivable', 120000]] },
+      why: 'The revenue was already recorded on 15 June. Collecting swaps one asset for another: receivable down, cash up. Accounts Receivable is left at $55,000.',
+      watchFor: 'Crediting Consulting Revenue here would count $120,000 twice and inflate revenue to $335,000. Always ask whether the revenue is already on the books.',
+      hint: 'Look back at June. Has this revenue been recorded once already?',
+    },
+    {
+      id: 'P5-10', kind: 'entry', date: 'September 1, 2026',
+      prompt: 'BrightWave made a $10,000 principal payment on the note payable from the January equipment purchase.',
+      answer: { debits: [['Notes Payable', 10000]], credits: [['Cash', 10000]] },
+      why: 'A principal payment reduces the debt and reduces cash. Notes Payable falls from $30,000 to $20,000.',
+      watchFor: 'The word PRINCIPAL is doing real work. Interest is not part of this entry — accruing it is a Chapter 3 adjustment, and this problem stops before adjustments.',
+      hint: 'What exactly is being repaid here, and is anything else being paid alongside it?',
+    },
+    {
+      id: 'P5-11', kind: 'entry', date: 'October 1, 2026',
+      prompt: 'The company paid employee salaries totalling $95,000.',
+      answer: { debits: [['Salaries Expense', 95000]], credits: [['Cash', 95000]] },
+      why: 'Incurred and paid together, so expense and cash move at once. No payable remains.',
+      hint: 'Is anything still owed to employees afterwards?',
+    },
+    {
+      id: 'P5-12', kind: 'entry', date: 'November 15, 2026',
+      prompt: 'BrightWave performed consulting services and immediately collected $40,000 cash from clients.',
+      answer: { debits: [['Cash', 40000]], credits: [['Consulting Revenue', 40000]] },
+      why: 'Performed and collected in one moment: debit Cash, credit Consulting Revenue. Revenue for the year is this plus the $175,000 billed in June.',
+      watchFor: 'Compare with 15 June. Same revenue account, different debit — billed revenue creates a receivable, cash revenue does not.',
+      hint: 'Both halves of this transaction happened today.',
+    },
+    {
+      id: 'P5-13', kind: 'entry', date: 'December 31, 2026',
+      prompt: 'BrightWave declared and paid $18,000 in cash dividends.',
+      answer: { debits: [['Dividends', 18000]], credits: [['Cash', 18000]] },
+      why: 'A distribution to owners, not a cost of doing business. Debit Dividends — a debit-balance equity account — and credit Cash.',
+      watchFor: 'Dividends never touch the income statement. They reduce Retained Earnings at closing, not net income.',
+      hint: 'Is this a cost of earning revenue, or a payout of profit already earned?',
+    },
+    {
+      id: 'P5-14', kind: 'numeric',
+      prompt: 'What is the balance of CASH at 12/31/26?',
+      answer: 11800,
+      why: 'Running every entry that touched Cash: 150,000 − 15,000 − 12,000 − 8,200 − 200,000 + 60,000 + 120,000 − 10,000 − 95,000 + 40,000 − 18,000 = $11,800.',
+      watchFor: 'Cash is deeply negative from March until the August collection. That is normal for an aggregated problem and is not a signal that you have gone wrong.',
+      hint: 'Eleven of the thirteen entries touch Cash. Take them in date order and keep a running total.',
+    },
+    {
+      id: 'P5-15', kind: 'numeric',
+      prompt: 'What is the balance of EQUIPMENT at 12/31/26?',
+      answer: 67000,
+      why: '$45,000 bought on 8 January at full cost, plus $22,000 bought on account on 15 May = $67,000.',
+      watchFor: 'If you get $37,000 you recorded the January equipment at the $15,000 cash paid instead of its $45,000 cost.',
+      hint: 'Two purchases. Was either one recorded at less than what the equipment cost?',
+    },
+    {
+      id: 'P5-16', kind: 'numeric',
+      prompt: 'What is the balance of NOTES PAYABLE at 12/31/26?',
+      answer: 20000,
+      why: '$30,000 signed on 8 January less the $10,000 principal repaid on 1 September = $20,000.',
+      hint: 'One note, created once and partly repaid once.',
+    },
+    {
+      id: 'P5-17', kind: 'numeric',
+      prompt: 'What does UTILITIES EXPENSE show on the trial balance?',
+      answer: 0,
+      why: 'Nothing. The account has a printed line on the worksheet, but no transaction in this problem affects it — the TA’s own key states it is $0. A worksheet lists the accounts that MIGHT be used, not the ones that were.',
+      watchFor: 'This is the lesson to carry into any trial balance: an account with a line and no postings has no balance, and the columns still agree because every entry you made put equal amounts on both sides. Never plug a figure to force a balance.',
+      hint: 'Read back through the thirteen transactions. Does a single one of them mention utilities?',
+    },
+    {
+      id: 'P5-18', kind: 'numeric',
+      prompt: 'What is the total of the trial balance (each column) at 12/31/26?',
+      answer: 467000,
+      why: 'Both columns foot to $467,000. Debits: Cash 11,800 + A/R 55,000 + Supplies 8,200 + Prepaid Advertising 12,000 + Land 200,000 + Equipment 67,000 + Salaries 95,000 + Dividends 18,000. Credits: A/P 22,000 + Notes Payable 20,000 + Unearned Revenue 60,000 + Common Stock 150,000 + Consulting Revenue 215,000.',
+      watchFor: 'This figure is confirmed by the TA’s answer key, so it is the one number in these problem sets you can check against the course directly.',
+      hint: 'Total the debit column first, then the credit column, and remember one account contributes nothing.',
+    },
+  ],
+}
+
+export const PROBLEM_SETS = [CHAPTER1, BOONVILLE, COPPERLINE, BRIGHTWAVE, CHAPTER3]
 
 export function problemSetById(id) {
   return PROBLEM_SETS.find(p => p.id === id) || null

@@ -120,7 +120,7 @@ export default function ProblemKey() {
           <h1>Answer Key — TA Practice Problems</h1>
           <p>
             Accounting Unlocked · every figure recomputed from the journal entries ·
-            Copperline foots to $1,601,400 · Boonville to $80,800 · Bulldog net income $42,500
+            Copperline foots to $1,451,400 · Boonville to $80,800 · Bulldog net income $42,500
           </p>
         </header>
 

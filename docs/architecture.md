@@ -22,7 +22,7 @@ src/
   data/
     examQuestions.js         79 exam questions + SECTIONS
     reinforceBank.js         58 extra questions for the hardest topics
-    problemSets.js           the TA's four worksheets, with answers and coaching
+    problemSets.js           the TA's five worksheets, with answers and coaching
     levelBanks.js            raw MC arrays lifted out of level components
     levelQuestions.js        normalises those into exam shape with namespaced IDs
   pages/
@@ -136,7 +136,9 @@ IDs are not in the exam bank.
 
 ## Problem sets
 
-`/problems` runs the TA's own worksheets one step at a time. They are a different
+`/problems` runs the TA's own worksheets one step at a time. Five sets; `brightwave`
+is the only one with an official answer key, and `ps-verify` asserts its entire
+ledger against that key's stated balances. They are a different
 thing from the exam: the exam asks a question, a problem set asks you to work a whole
 problem — journalize fourteen transactions, post them, foot the trial balance, close
 the books — which is the shape the real exam takes.
@@ -168,10 +170,16 @@ retyped — every entry, figure, reason and trap comes from the same data the
 interactive version grades against, so the paper key cannot drift out of step with
 the site. It prints to 7 pages under a denser `.key-page` ruleset.
 
+**Never invent a transaction.** Every entry in a problem set must trace to a line in
+the TA's handout. A figure reported from "the answer key" is not evidence unless the
+key is for *that* problem — one was once added to Copperline from a key belonging to
+a different company, and the verification script now asserts that the set contains
+exactly the fourteen transactions the handout prints.
+
 **The data file is not its own source of truth.** A node check re-posts every
 journal entry in `problemSets.js` into a ledger and compares the result against the
 stated trial-balance totals, net income and closing figures. Copperline foots to
-$1,601,400, Boonville to $80,800, Bulldog's net income is $42,500 and its ending
+$1,451,400, Boonville to $80,800, Bulldog's net income is $42,500 and its ending
 retained earnings $111,150. Re-run it after any content edit.
 
 ## Conventions worth keeping

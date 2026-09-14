@@ -266,8 +266,8 @@ so the focus test can re-serve the ideas without the whole problem. Topic drills
 accordingly — principles 25, adjusting 27, trial 22, debits and credits 21.
 
 Three findings from working the problems:
-- **The Copperline handout is missing its opening transaction** — see the correction
-  below. First read as a deliberate trap; it was not.
+- **Copperline's Common Stock line is unused** and no key for it has been seen — the
+  app states the fact and flags the ambiguity rather than asserting a trap.
 - **Ridgeline's unearned revenue is $12,500, not the $15,000 straight-line gives.**
   The problem states what was performed, and performance governs.
 - **The app already had a "Copperline Freight Co."** in the printable worksheet — a
@@ -291,26 +291,56 @@ on-screen furniture — a page-count check would never have found it. Both toast
 now `no-print`, verified across all three printable pages, and the cram sheet is
 still exactly 2 pages.
 
-### Correction: Copperline's missing first transaction (same day)
-The app shipped telling the student that Copperline never issues stock and that the
-Common Stock line should be left blank. That was wrong.
+### Correction, and its retraction: Copperline (same day)
+Two mistakes in a row on the same line, both worth recording.
 
-The owner checked the TA's answer key: it opens with **January 2 — Dr Cash $150,000
-/ Cr Common Stock $150,000** and carries the $150,000 to the trial balance. The
-printed handout starts at January 5. Re-examined the PDF to be sure the extraction
-had not dropped it — no hidden text, no images, seven pages — so the handout really
-is missing its first transaction, and the key is right.
+First, the app shipped asserting that Copperline never issues stock and that the
+Common Stock line is a deliberate trap. That was over-confident: the handout does
+leave it unused, but nothing established that as intentional.
 
-Why the error was plausible and still wrong: omitting a whole entry removes equal
-amounts from both columns, so the trial balance still balanced perfectly at
-$1,451,400. Internal consistency was taken as evidence of completeness. It is not.
+Then, on a report that "the answer key opens with January 2 — Dr Cash $150,000 / Cr
+Common Stock $150,000", a $150,000 opening entry was added and every downstream
+figure recomputed. The key turned out to belong to a **different practice problem**
+(Brightline), not Copperline. The entry was invented as far as this problem is
+concerned, and has been removed. Cash is $345,400 again and both columns $1,451,400.
 
-Fixed: the entry is now step 1 of the Copperline set, flagged as absent from the
-printed sheet so he is not confused when he compares. Cash becomes **$495,400** and
-both columns **$1,601,400**. The step was given a new ID (`P3-0`) rather than
-renumbering, so no saved history moved. The reinforcement question built on the bad
-reading was rewritten around Boonville's Retained Earnings, which genuinely is a
-printed T-account that never gets used in a first period.
+What the app now says is what can actually be supported: Common Stock has a printed
+line, no transaction issues any, the columns foot without it, do not plug a figure —
+and if the class key shows an amount there, the handout is missing a transaction, so
+ask the TA. No Copperline key has been seen.
+
+Two rules came out of it, both now in the docs and the verification script:
+- Never add a transaction to a problem unless it appears in that problem's own
+  handout or its own key. `ps-verify` asserts Copperline contains exactly the
+  fourteen transactions the handout prints, and starts on January 5 where it starts.
+- A trial balance that foots is not evidence that a problem is complete. Omitting a
+  whole entry removes equal amounts from both columns, so internal consistency
+  survives it. That was the reasoning error behind the first mistake.
+
+The reinforcement question written during all this was rebuilt around Boonville's
+Retained Earnings — a T-account that genuinely is printed and never used in a first
+period — and is kept, because it is true independently of any of the above.
+
+### BrightWave added — the Chapter 2 problem that has a key (same day)
+The $150,000 stock issuance came from **BrightWave Consulting**, a second Chapter 2
+worksheet, not Copperline. Both were supplied; only BrightWave has an answer key.
+Copperline is back to what its own handout says.
+
+BrightWave is now a fifth problem set, 18 steps, and every balance was checked line
+by line against the TA's key: Cash $11,800, A/R $55,000, Equipment $67,000, Notes
+Payable $20,000, both columns $467,000. `ps-verify` asserts the whole ledger against
+the key's stated balances, so this is the one set that cannot drift from the course.
+
+It also adds two things nothing else in the app covered:
+- a **compound entry** — $45,000 of equipment for $15,000 cash plus a $30,000 note,
+  one debit and two credits;
+- a **printed account that stays empty** — the key states Utilities Expense is $0,
+  "no transaction affects this account in this version".
+
+That second one is the evidence the Copperline question was missing: the TA prints
+accounts that might be used, not only the ones that were, and an unused line is left
+blank. Copperline's Common Stock still has no key of its own, so the app states the
+fact and flags the ambiguity rather than asserting a trap.
 
 ## Open items
 

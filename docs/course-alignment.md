@@ -20,31 +20,52 @@ covered; Chapter 4 onward is not.
 
 Four worksheets from the course TA, now in `src/data/problemSets.js`:
 
-| Worksheet | In the app as | Covers |
-|---|---|---|
-| Chapter 1.2 WS | `ch1-terms` | definitions, the statements, 24 classifications |
-| T-Account Worksheet (Boonville) | `boonville` | 9 entries → T-accounts → trial balance |
-| CH2 Practice (Copperline Event Productions) | `copperline-events` | 14 transactions → unadjusted trial balance |
-| Chapter 3 Entire Practice Problem | `ch3-adjusting-closing` | deferrals, accruals, four closing entries |
+**There are two different Chapter 2 worksheets** — Copperline and BrightWave. They
+are separate problems with separate companies, and only BrightWave came with a key.
+Keep them straight: a figure from one says nothing about the other.
+
+| Worksheet | In the app as | Covers | Key? |
+|---|---|---|---|
+| Chapter 1.2 WS | `ch1-terms` | definitions, the statements, 24 classifications | no |
+| T-Account Worksheet (Boonville) | `boonville` | 9 entries → T-accounts → trial balance | no |
+| CH2 Practice (Copperline Event Productions) | `copperline-events` | 14 transactions → unadjusted trial balance | **no** |
+| CH2 Practice (BrightWave Consulting) | `brightwave` | 13 transactions, one compound → trial balance | **yes** |
+| Chapter 3 Entire Practice Problem | `ch3-adjusting-closing` | deferrals, accruals, four closing entries | no |
+
+### BrightWave — the one with an official key
+Every balance in `brightwave` was checked line by line against the TA's answer key
+and matches: Cash $11,800, A/R $55,000, Equipment $67,000, Notes Payable $20,000,
+both columns **$467,000**. The verification script asserts the whole ledger against
+the key's stated balances, so this set cannot drift from the course.
+
+Two things it teaches that nothing else in the app did:
+- **A compound entry.** 8 January buys $45,000 of equipment for $15,000 cash and a
+  $30,000 note — one debit, two credits. Recording only the cash paid understates
+  the asset and hides the debt.
+- **A printed account that stays empty.** The trial balance template lists Utilities
+  Expense and the key states it is **$0** — "no transaction affects this account in
+  this version". That is the TA confirming, in their own key, that an account with a
+  line and no postings simply has no balance. It is the direct evidence the
+  Copperline question below was missing.
 
 Every figure was recomputed before being written down. Two things to know:
 
-- **The Copperline handout is missing its first transaction.** The printed problem
-  opens at January 5, but the TA's answer key starts with **January 2: Dr Cash
-  $150,000 / Cr Common Stock $150,000**, and carries that $150,000 through to the
-  trial balance. A company that "began business operations during 2025" has to be
-  capitalised first, so the key is right and the handout is incomplete.
+- **Copperline's Common Stock line is unused, and that is unresolved.** Common Stock
+  is printed on the T-account page and on the trial balance, but none of the fourteen
+  transactions issues any stock, and both columns foot to $1,451,400 without it. The
+  app reports that as fact and tells the student not to plug a figure — while flagging
+  that if the class key shows an amount there, the handout is missing a transaction
+  and every total shifts. **No key for Copperline has been seen.** Worth asking the TA.
 
-  The app supplies the missing entry as step 1 of the Copperline set, flagged as
-  absent from the printed sheet. With it, Cash is **$495,400** and both columns
-  foot to **$1,601,400**. Without it they foot to $1,451,400 — and still balance,
-  because leaving out a whole entry drops equal amounts from both sides. That is
-  exactly why the omission is easy to miss.
+  BrightWave's key settles the principle even though it is a different problem: the
+  TA there prints Utilities Expense on the trial balance and states it is $0. An
+  unused line is normal and is left blank.
 
-  This was initially read the other way round: the app briefly told the student to
-  leave Common Stock blank. It was corrected once the TA's key was checked. If a
-  worksheet account looks unused, confirm against the key before concluding it is
-  a deliberate trap.
+  History worth keeping: a $150,000 opening stock issuance was briefly added to
+  Copperline on the strength of an answer key that turned out to be **BrightWave's**
+  — a different Chapter 2 problem entirely. It was removed. Do not add a transaction
+  to a problem unless it appears in that problem's own handout or its own key.
+
 - **Ridgeline's unearned revenue is $12,500, not $15,000.** A $120,000 four-year
   contract prepaid on 1 July straight-lines to $15,000 for six months, but the
   problem states that $12,500 of services were actually provided. Performance
