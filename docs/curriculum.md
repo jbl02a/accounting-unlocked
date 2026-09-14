@@ -46,8 +46,11 @@ figure computed in 16 is what makes 17 balance.
 
 ## Other pages
 
-- `/exam` — 79 questions across 8 topics. Full exam, random 15, single topic, or
-  a drill of only what was missed. Exam mode or instant-feedback practice mode.
+- `/exam` — 79 questions across 8 topics. Full exam, random 15, single topic, a
+  drill of only what was missed, or a ~24-question **focus test** built from the
+  topics the student is under 80% on. Exam mode or instant-feedback practice mode.
+  Single-topic drills and the focus test also draw on 44 extra questions in
+  `reinforceBank.js`; the full exam and the Quick 15 do not.
 - `/cheatsheet` — 14 sections, ~130 terms. Reference, not revision.
 - `/cram` — condensed, prints to exactly 2 pages.
 - `/worksheet` — printable full-cycle problem in the professor's layout, with key.

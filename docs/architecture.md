@@ -17,8 +17,11 @@ src/
   lib/
     shuffle.js               option permutation; the fixed-answer fix
     examSession.js           resumable in-progress exam
+    focus.js                 per-topic accuracy bands + the focus-test builder
+    useScrollTop.js          returns a page to the top when its phase changes
   data/
     examQuestions.js         79 exam questions + SECTIONS
+    reinforceBank.js         44 extra questions for the four hardest topics
     levelBanks.js            raw MC arrays lifted out of level components
     levelQuestions.js        normalises those into exam shape with namespaced IDs
   pages/
@@ -73,6 +76,38 @@ the misses drill needs to import them, and importing a component from a data
 module is circular. `data/levelQuestions.js` normalises them — namespacing IDs as
 `L{level}-{key}{n}`, mapping Level 11's `text` field onto `prompt`, and inferring
 `kind`.
+
+## The focus test
+
+`lib/focus.js` answers one question: *which topics is this student actually weak
+at?* It rolls `misses` up by section — every question in that section from both
+banks, its running `right`/`wrong` — and bands the result: **red** under 60%,
+**amber** under 80%, green above, `untested` below three answered questions so a
+single unlucky answer cannot brand a topic.
+
+That is deliberately different from the by-topic bars on the results screen, which
+describe *one sitting*. The bands describe everything the student has ever answered,
+so they survive across attempts and shift as he improves.
+
+`buildFocusTest(sectionIds, misses)` then assembles a short test from the red and
+amber sections only:
+
+- about 24 questions total — 6 each across four weak topics, up to 10 when only one
+  or two are weak
+- **at most half** the slots in a section go to questions he has already seen and
+  missed; the rest is material he has never been served, which is what the
+  reinforcement bank is for
+- already-correct questions come back oldest-first, so a re-test reaches for what
+  has had the longest to fade
+- the result is shuffled across sections so it doesn't read as four blocks
+
+The full exam and the Quick 15 stay inside `examQuestions.js`. Single-topic drills
+and the focus test use `ALL_EXAM_QUESTIONS` (both banks), which is why a topic drill
+is now roughly twice the length of that topic's share of the exam.
+
+`ALL_EXAM_QUESTIONS` is also what `loadExamSession` validates against — a focus test
+interrupted halfway would otherwise be discarded on reload, because its `x`-prefixed
+IDs are not in the exam bank.
 
 ## Conventions worth keeping
 

@@ -34,8 +34,11 @@ worksheet layout. Generic accounting content would be less useful to him.
 ## Current state
 
 - **17 levels** across 5 phases, all unlocked and playable in any order
-- **79 exam questions** across 8 drillable topics, plus **38** multiple-choice
-  questions inside the levels — all feeding one weak-area tracker
+- **79 exam questions** across 8 drillable topics, plus **44** reinforcement
+  questions on the four hardest topics and **38** multiple-choice questions inside
+  the levels — all feeding one weak-area tracker
+- A **focus test** that reads that tracker and serves only the topics the student
+  is scoring under 80% on, mostly with examples he has not seen
 - **Printable** cram sheet and full-cycle practice problem with answer key
 - **Installable PWA**, works fully offline, prompts before applying updates
 - Covers **Chapters 1–3**. Chapter 4 onward is not yet written.

@@ -149,6 +149,34 @@ build:
 - Level 11's React import is spelled differently, so the import insert missed it and the
   level threw "useScrollTop is not defined" — while the build stayed green.
 
+## Phase 12 — Reinforcement bank and the focus test (Sep 14)
+First real practice exam: **77%, 61/79**, and the by-topic bars separated cleanly.
+Green: Closing & Statements 12/12, Journal 9/10, Receivables & Payables 8/9,
+Classifying 7/8. Amber: Debits & Credits 7/9, Adjusting Entries 8/11. Red: Accounting
+Principles 6/11, Trial Balance 4/9.
+
+The existing "drill what I missed" button re-serves the 18 exact questions he got
+wrong, which trains the questions rather than the ideas. What was missing was more
+practice *on the same topics with different examples*.
+
+`src/data/reinforceBank.js` adds 44 questions on exactly those four topics —
+principles 12, trial balance 11, debits & credits 10, adjusting entries 11. They are
+kept **out** of the 79-question exam on purpose: a 77% in September has to mean the
+same thing in October, and it cannot if the denominator moves.
+
+`src/lib/focus.js` reads the `misses` tracker, rolls it up per topic, and bands each
+one (red under 60%, amber under 80%, untested below three answered). The exam screen
+then offers a ~24-question focus test over the red and amber topics only, at most half
+of it questions he actually missed and the rest material he has never been served.
+Single-topic drills draw on both banks too, roughly doubling their length.
+
+The binding constraint was *"I don't want a new update to lose his saved progress."*
+Nothing about the persisted shape changed and every new ID is `x`-prefixed, so a
+collision is impossible — but it was proved rather than argued: his exact save (14
+levels, the 77% attempt, all 79 `misses` entries) was seeded into `localStorage`, the
+new build loaded over it, and levels, best score, attempt history and the missed list
+were asserted byte-identical on disk afterwards — including after taking a focus test.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides

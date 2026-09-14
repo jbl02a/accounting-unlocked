@@ -49,6 +49,12 @@ These are the things most likely to be broken by accident.
 7. **Hints guide, they don't answer.** Every drill has optional per-item hints
    that stop one reasoning step short. Feedback text after answering is where the
    answer gets stated outright. Keep those two registers separate.
+8. **The practice exam is 79 questions and stays 79.** Scores are compared across
+   attempts, so changing its size changes what a score means. Extra practice goes
+   in `src/data/reinforceBank.js` (IDs prefixed `x`), which feeds the focus test
+   and the single-topic drills but never `questionsFor('full')` or `'quick'`.
+   Adding questions there is safe precisely *because* the IDs are new — they
+   cannot collide with anything already in a student's `misses` map.
 
 ## Analytics
 

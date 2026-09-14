@@ -5,6 +5,7 @@ import { useProgress } from '../context/ProgressContext'
 import EntryTable from '../components/EntryTable'
 import { QUESTIONS, SECTIONS, questionsFor, shuffle } from '../data/examQuestions'
 import { LEVEL_QUESTIONS } from '../data/levelQuestions'
+import { ALL_EXAM_QUESTIONS, questionsForTopic, weakSections, buildFocusTest } from '../lib/focus'
 import { saveExamSession, loadExamSession, clearExamSession, describeAge } from '../lib/examSession'
 import { shuffleOptions } from '../lib/shuffle'
 
@@ -50,11 +51,11 @@ export default function PracticeExam() {
   useScrollTop([stage, index])
   const [answers, setAnswers] = useState({})
   const [revealedIds, setRevealedIds] = useState([])
-  const [saved, setSaved] = useState(() => loadExamSession([...QUESTIONS, ...LEVEL_QUESTIONS].map(q => q.id)))
+  const [saved, setSaved] = useState(() => loadExamSession([...ALL_EXAM_QUESTIONS, ...LEVEL_QUESTIONS].map(q => q.id)))
 
   const best = progress.exam?.best
   const attempts = progress.exam?.attempts || []
-  const ALL_QUESTIONS = [...QUESTIONS, ...LEVEL_QUESTIONS]
+  const ALL_QUESTIONS = [...ALL_EXAM_QUESTIONS, ...LEVEL_QUESTIONS]
   const weakIds = needsWorkIds().filter(id => ALL_QUESTIONS.some(q => q.id === id))
   // Group by exam topic, and by level for anything missed inside a level.
   const weakBySection = [
@@ -73,6 +74,8 @@ export default function PracticeExam() {
     }),
   ].filter(w => w.count > 0)
   const weakFromLevels = weakIds.filter(id => id.startsWith('L')).length
+  const weakTopics = weakSections(progress.misses)
+  const focusCount = weakTopics.length > 0 ? buildFocusTest(weakTopics.map(t => t.id), progress.misses).length : 0
 
   useEffect(() => {
     if (stage !== 'taking' || questions.length === 0) return
@@ -112,8 +115,21 @@ export default function PracticeExam() {
     setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
   }
 
+  // Only the topics he is below 80% on, mostly questions he has not seen before.
+  function startFocus() {
+    const picked = buildFocusTest(weakTopics.map(t => t.id), progress.misses).map(q => shuffleOptions(q))
+    if (picked.length === 0) return
+    setQuestions(picked)
+    setScopeLabel('Focus test — weak topics')
+    setIndex(0); setAnswers({}); setRevealedIds([]); setSaved(null); setStage('taking')
+  }
+
   function start(scope, label) {
-    const base = scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor(scope))
+    // 'full' and 'quick' stay inside the 79-question exam so scores compare across
+    // attempts; a single-topic drill gets the reinforcement questions as well.
+    const base = scope === 'full' || scope === 'quick'
+      ? (scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor('full')))
+      : shuffle(questionsForTopic(scope))
     // Randomise which letter the answer sits behind, per attempt.
     const picked = base.map(q => shuffleOptions(q))
     setQuestions(picked)
@@ -166,6 +182,42 @@ export default function PracticeExam() {
             </p>
           )}
         </div>
+
+        {weakTopics.length > 0 && (
+          <div className="rounded-2xl border border-cyan-500/40 bg-cyan-500/10 p-5 mb-6">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">🔬</span>
+              <div className="flex-1">
+                <p className="font-bold text-white">Focus test — your weak topics</p>
+                <p className="text-sm text-slate-300 mt-0.5">
+                  {focusCount} questions drawn only from the topics you are scoring under 80% on, across everything
+                  you have answered so far. Mostly examples you have not seen before, plus the ones you actually
+                  missed — so it tests the idea, not your memory of one question.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {weakTopics.map(t => (
+                    <span
+                      key={t.id}
+                      className={`text-[11px] rounded-full px-2 py-1 border ${
+                        t.band === 'red'
+                          ? 'bg-red-500/15 border-red-500/40 text-red-200'
+                          : 'bg-amber-500/15 border-amber-500/40 text-amber-200'
+                      }`}
+                    >
+                      {t.icon} {t.label} <span className="font-semibold">{t.pct}%</span>
+                    </span>
+                  ))}
+                </div>
+                <button onClick={startFocus} className="w-full mt-3 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 text-white font-bold hover:opacity-90">
+                  Start focus test ({focusCount}) →
+                </button>
+                <p className="text-[11px] text-slate-400 mt-2">
+                  It does not replace the full exam — that one stays {QUESTIONS.length} questions so your scores stay comparable.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {weakIds.length > 0 && (
           <div className="rounded-2xl border border-rose-500/40 bg-rose-500/10 p-5 mb-6">
@@ -262,10 +314,14 @@ export default function PracticeExam() {
           ))}
         </div>
 
-        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Or drill one topic</p>
+        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Or drill one topic</p>
+        <p className="text-xs text-slate-500 mb-3">
+          These pull from the exam bank and the extra practice questions together, so a topic drill goes
+          further than the exam does on that topic.
+        </p>
         <div className="grid sm:grid-cols-2 gap-3 mb-8">
           {SECTIONS.map(s => {
-            const count = QUESTIONS.filter(qq => qq.section === s.id).length
+            const count = questionsForTopic(s.id).length
             return (
               <button
                 key={s.id}
@@ -353,6 +409,11 @@ export default function PracticeExam() {
           {correctCount < questions.length && (
             <button onClick={startMisses} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white font-bold hover:opacity-90">
               Drill the {questions.length - correctCount} I missed →
+            </button>
+          )}
+          {weakTopics.length > 0 && (
+            <button onClick={startFocus} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 text-white font-bold hover:opacity-90">
+              Focus test on my weak topics ({focusCount}) →
             </button>
           )}
           <button onClick={() => setStage('setup')} className="flex-1 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold hover:opacity-90">

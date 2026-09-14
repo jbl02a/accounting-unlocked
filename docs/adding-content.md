@@ -46,11 +46,22 @@ the playbook.
 
 ## Adding exam questions
 
-Append to `src/data/examQuestions.js`:
+**Pick the bank first.**
+
+| Goal | File | ID prefix |
+|---|---|---|
+| Change what the graded practice exam covers | `src/data/examQuestions.js` | the section's letter (`a7`, `t10`) |
+| More practice on a topic, without touching the exam | `src/data/reinforceBank.js` | `x` + the section's letter (`xa12`) |
+
+The exam is **79 questions and stays 79** — scores are compared across attempts, so
+resizing it changes what a score means. Almost every addition therefore belongs in
+the reinforcement bank, which feeds the focus test and the single-topic drills.
+Either way the shape is identical:
 
 ```js
 {
-  id: 'x1',                    // unique across BOTH banks; short for exam questions
+  id: 'xa12',                  // unique across ALL banks — reusing an ID corrupts
+                               // a student's saved history for the old question
   section: 'adjusting',        // must exist in SECTIONS
   kind: 'text',                // or 'entry' for journal-entry options
   prompt: '…',
@@ -63,15 +74,25 @@ Append to `src/data/examQuestions.js`:
 A new topic needs an entry in `SECTIONS` (id, label, icon, blurb) — it then appears
 automatically as a drillable topic on the exam screen.
 
-Then sanity-check:
+Then sanity-check across both banks at once — the check that matters is that no ID
+appears twice, because an ID is the only thing `misses` keys on:
 
 ```bash
-node -e "import('./src/data/examQuestions.js').then(m=>{
-  const ids=m.QUESTIONS.map(q=>q.id);
-  console.log('total',m.QUESTIONS.length,'dupes',ids.length!==new Set(ids).size,
-    'bad',m.QUESTIONS.filter(q=>!q.options[q.correctIndex]).length);
+node -e "Promise.all([
+  import('./src/data/examQuestions.js'), import('./src/data/reinforceBank.js')
+]).then(([e,r])=>{
+  const all=[...e.QUESTIONS,...r.REINFORCE], ids=all.map(q=>q.id);
+  const secs=new Set(e.SECTIONS.map(s=>s.id));
+  console.log('exam',e.QUESTIONS.length,'reinforce',r.REINFORCE.length,
+    'dupes',ids.length!==new Set(ids).size,
+    'bad',all.filter(q=>!q.options[q.correctIndex]||q.correctIndex!==0).length,
+    'unknown section',all.filter(q=>!secs.has(q.section)).length);
 })"
 ```
+
+Any arithmetic in a question gets computed in `node` as well, and any prompt that
+refers to "the entry above" has to be rewritten — questions are shuffled, so nothing
+can depend on what came before it.
 
 ## Writing explanations
 
