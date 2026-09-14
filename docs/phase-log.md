@@ -246,6 +246,38 @@ The migration was verified by diffing `localStorage` field by field before and
 after: one field added (`kind` on the legacy attempt), nothing changed, nothing
 removed.
 
+## Phase 13 — The TA's problem sets (Sep 14)
+Four worksheets arrived from the course TA: Chapter 1 terminology, a T-account
+practice problem (Boonville), a Chapter 2 comprehensive problem (Copperline Event
+Productions) and a Chapter 3 problem covering deferrals, accruals and closing.
+
+They were not hosted as PDFs — he already has those. They are worked in the browser
+one step at a time at `/problems`, marked instantly, with the reason and the trap
+called out. Wrong answers are diagnosed rather than merely marked: reversed debit and
+credit, an entry that does not balance (quoting both totals), an account that does
+not belong, or exactly which classification rows are wrong.
+
+The material lands almost exactly on his four weak topics, which is why it was worth
+building rather than filing: trial balance (his worst at 44%) is drilled twice over,
+adjusting entries and principles once each.
+
+Fourteen questions were also lifted from the TA's traps into the reinforcement bank,
+so the focus test can re-serve the ideas without the whole problem. Topic drills grew
+accordingly — principles 25, adjusting 27, trial 22, debits and credits 21.
+
+Three findings from working the problems:
+- **Copperline never issues stock.** The worksheet lists Common Stock; no transaction
+  creates any; the columns foot to $1,451,400 without it. The app says so outright,
+  because plugging a figure to force a balance is exactly the instinct being tested.
+- **Ridgeline's unearned revenue is $12,500, not the $15,000 straight-line gives.**
+  The problem states what was performed, and performance governs.
+- **The app already had a "Copperline Freight Co."** in the printable worksheet — a
+  name clash with the TA's Copperline Event Productions, noted in course-alignment.
+
+The data file is deliberately not trusted as its own source of truth: a node check
+re-posts every journal entry into a ledger and compares the result against the stated
+trial-balance totals, net income and closing figures.
+
 ## Open items
 
 - **Chapter 4 onward** — needs slides

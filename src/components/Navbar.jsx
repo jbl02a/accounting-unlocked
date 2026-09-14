@@ -25,8 +25,18 @@ export default function Navbar() {
           </div>
 
           <Link to="/exam" className={linkClass('/exam')}>Practice Exam</Link>
-          <Link to="/cram" className={linkClass('/cram')}>Cram Sheet</Link>
-          <Link to="/cheatsheet" className={`hidden sm:inline-block ${linkClass('/cheatsheet')}`}>Cheat Sheet</Link>
+          <Link
+            to="/problems"
+            className={`text-sm px-3 py-1.5 rounded-lg transition-colors font-medium ${
+              location.pathname.startsWith('/problems')
+                ? 'bg-emerald-600 text-white'
+                : 'text-slate-300 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            Problems
+          </Link>
+          <Link to="/cram" className={`hidden sm:inline-block ${linkClass('/cram')}`}>Cram Sheet</Link>
+          <Link to="/cheatsheet" className={`hidden lg:inline-block ${linkClass('/cheatsheet')}`}>Cheat Sheet</Link>
 
           <button
             onClick={() => {

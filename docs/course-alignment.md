@@ -16,6 +16,34 @@ chapters exist.
 The app was cross-checked against those files in September 2026. Chapters 1–3 are
 covered; Chapter 4 onward is not.
 
+## TA practice problems (September 2026)
+
+Four worksheets from the course TA, now in `src/data/problemSets.js`:
+
+| Worksheet | In the app as | Covers |
+|---|---|---|
+| Chapter 1.2 WS | `ch1-terms` | definitions, the statements, 24 classifications |
+| T-Account Worksheet (Boonville) | `boonville` | 9 entries → T-accounts → trial balance |
+| CH2 Practice (Copperline Event Productions) | `copperline-events` | 14 transactions → unadjusted trial balance |
+| Chapter 3 Entire Practice Problem | `ch3-adjusting-closing` | deferrals, accruals, four closing entries |
+
+Every figure was recomputed before being written down. Two things to know:
+
+- **Copperline never issues stock.** Common Stock is a line on the TA's worksheet,
+  but no transaction in the problem issues any, and the columns foot to $1,451,400
+  on both sides without it. The line stays blank. The app says so explicitly rather
+  than quietly omitting the account, because "plug a number to make it balance" is
+  the instinct being tested. Worth confirming with the TA whether it is deliberate.
+- **Ridgeline's unearned revenue is $12,500, not $15,000.** A $120,000 four-year
+  contract prepaid on 1 July straight-lines to $15,000 for six months, but the
+  problem states that $12,500 of services were actually provided. Performance
+  governs. This is the single most likely mark to be lost on that worksheet.
+
+There is also a **name clash**: the app's printable worksheet at `/worksheet` uses
+"Copperline Freight Co." while the TA's Chapter 2 problem is "Copperline Event
+Productions, Inc." Two different Copperlines. Rename the app's one if it causes
+confusion.
+
 ## Decisions that came from the slides
 
 ### The corporate form — not sole proprietorship

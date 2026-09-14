@@ -9,6 +9,7 @@ import CheatSheet from './pages/CheatSheet'
 import CramSheet from './pages/CramSheet'
 import Worksheet from './pages/Worksheet'
 import PracticeExam from './pages/PracticeExam'
+import { ProblemSetsIndex, ProblemSetRunner } from './pages/ProblemSets'
 import Level1 from './pages/levels/Level1'
 import Level2 from './pages/levels/Level2'
 import Level3 from './pages/levels/Level3'
@@ -48,6 +49,8 @@ export default function App() {
               <Route path="/cram" element={<CramSheet />} />
               <Route path="/worksheet" element={<Worksheet />} />
               <Route path="/exam" element={<PracticeExam />} />
+              <Route path="/problems" element={<ProblemSetsIndex />} />
+              <Route path="/problems/:setId" element={<ProblemSetRunner />} />
               <Route path="/level/1" element={<Level1 />} />
               <Route path="/level/2" element={<Level2 />} />
               <Route path="/level/3" element={<Level3 />} />

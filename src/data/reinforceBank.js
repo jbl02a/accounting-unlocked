@@ -453,4 +453,152 @@ export const REINFORCE = [
     correctIndex: 0,
     explanation: 'Every adjustment moves something between a period’s performance and the balance sheet — a revenue or expense on one side, an asset or liability on the other. If your entry has Cash in it, it is not an adjusting entry.',
   },
+
+  // ── From the TA's practice problems ─────────────────────────────────
+  // Every trap below is one the TA's worksheets are built around. The full
+  // problems live in src/data/problemSets.js; these are the single-question
+  // versions, so the focus test can re-serve the idea without the whole problem.
+  {
+    id: 'xt12', section: 'trial', kind: 'text',
+    prompt: 'A trial balance worksheet lists Common Stock, but no transaction during the year issued any stock. The debit and credit columns already agree without it. What do you do?',
+    options: [
+      'Leave it blank — an account with no activity has no balance to report',
+      'Enter a figure large enough to make the columns agree',
+      'Move an equity amount across to fill it',
+      'Delete the line, because a blank row means the trial balance is wrong',
+    ],
+    correctIndex: 0,
+    explanation: 'A printed worksheet lists the accounts that MIGHT be used, not the ones that were. If nothing was posted to Common Stock it has no balance, and the columns balance anyway because every entry you made already put equal amounts on both sides. Plugging a number to "make it balance" invents a transaction that never happened.',
+  },
+  {
+    id: 'xt13', section: 'trial', kind: 'text',
+    prompt: 'A company bills a customer $15,000 on the 20th and collects the full amount on the 28th. What is the Accounts Receivable balance on the trial balance at month end?',
+    options: ['Zero', '$15,000 debit', '$15,000 credit', '$30,000 debit'],
+    correctIndex: 0,
+    explanation: 'The receivable was created on the 20th and settled on the 28th, so it nets to nothing. An account can be used twice during the period and still carry no balance to the trial balance — activity and balance are different things.',
+  },
+  {
+    id: 'xd11', section: 'dr-cr', kind: 'text',
+    prompt: 'Your company LENDS $75,000 to a business partner, repayable with interest in six months. The entry is:',
+    options: [
+      'Debit Notes Receivable $75,000, credit Cash $75,000',
+      'Debit Cash $75,000, credit Notes Payable $75,000',
+      'Debit Notes Payable $75,000, credit Cash $75,000',
+      'Debit Cash $75,000, credit Notes Receivable $75,000',
+    ],
+    correctIndex: 0,
+    explanation: 'Read the direction of the money. Your company handed cash over, so Cash is credited, and what comes back is a formal right to be repaid — Notes RECEIVABLE, an asset. Borrowing would be the mirror image: debit Cash, credit Notes Payable.',
+  },
+  {
+    id: 'xd12', section: 'dr-cr', kind: 'text',
+    prompt: 'A company pays $85,000 toward amounts previously owed to suppliers for inventory already received. The entry is:',
+    options: [
+      'Debit Accounts Payable $85,000, credit Cash $85,000',
+      'Debit Supplies Expense $85,000, credit Cash $85,000',
+      'Debit Cash $85,000, credit Accounts Payable $85,000',
+      'Debit Accounts Payable $85,000, credit Supplies $85,000',
+    ],
+    correctIndex: 0,
+    explanation: 'The expense (or the asset) was recorded when the goods arrived. Paying simply settles the liability: payable down, cash down. Recording an expense here would count the same purchase twice.',
+  },
+  {
+    id: 'xa12', section: 'adjusting', kind: 'text',
+    prompt: 'On 1 November a company pays $18,000 for twelve months of insurance, with coverage beginning 1 January of the FOLLOWING year. What adjusting entry is needed at 31 December?',
+    options: [
+      'None — no coverage has expired yet',
+      'Debit Insurance Expense $3,000, credit Prepaid Insurance $3,000',
+      'Debit Insurance Expense $1,500, credit Prepaid Insurance $1,500',
+      'Debit Insurance Expense $18,000, credit Prepaid Insurance $18,000',
+    ],
+    correctIndex: 0,
+    explanation: 'The cash left in November, so Prepaid Insurance was debited then. But the policy has not started, so nothing has been used up and there is nothing to expense. Pro-rating the two months from November is the trap — the clock starts when coverage starts, not when you pay.',
+  },
+  {
+    id: 'xa13', section: 'adjusting', kind: 'text',
+    prompt: 'A company paid $3,600 on 1 April for a THREE-YEAR insurance policy, coverage beginning that day. What has expired by 31 December of the same year?',
+    options: ['$900', '$2,700', '$1,200', '$300'],
+    correctIndex: 0,
+    explanation: 'Three years is 36 months, so $3,600 ÷ 36 = $100 per month. April through December is nine months: $900. Dividing by 3 instead of 36 gives $1,200 and is the intended miss; $2,700 is what is LEFT, not what expired.',
+  },
+  {
+    id: 'xa14', section: 'adjusting', kind: 'text',
+    prompt: 'A customer prepaid $120,000 on 1 July for a four-year contract. At 31 December the company determines that $12,500 of services have actually been provided. The adjusting entry records:',
+    options: [
+      '$12,500 — the amount actually performed',
+      '$15,000 — six months of the contract, straight-line',
+      '$30,000 — one year of the contract',
+      '$120,000 — the full amount received',
+    ],
+    correctIndex: 0,
+    explanation: 'Revenue is recognised as the performance obligation is satisfied. The problem tells you exactly how much was satisfied, so that figure governs. Straight-lining $120,000 over 48 months gives $2,500 a month and $15,000 for six months — a perfectly reasonable calculation and the wrong answer, because the contract was not performed evenly.',
+  },
+  {
+    id: 'xa15', section: 'adjusting', kind: 'text',
+    prompt: 'A company borrowed $150,000 on a four-year, 8% note payable on 1 March. How much interest is accrued at 31 December of that year?',
+    options: ['$10,000', '$12,000', '$48,000', '$1,000'],
+    correctIndex: 0,
+    explanation: '$150,000 × 8% × 10/12 = $10,000. Two things must both be right: the rate is annual so it has to be pro-rated, and the note has only been outstanding since March, so the fraction is 10/12 rather than a full year. The four-year term does not affect this year’s accrual at all.',
+  },
+  {
+    id: 'xa16', section: 'adjusting', kind: 'text',
+    prompt: 'A company performed $28,000 of consulting work in December but has not yet invoiced the client. The adjusting entry is:',
+    options: [
+      'Debit Accounts Receivable $28,000, credit Service Revenue $28,000',
+      'Debit Cash $28,000, credit Service Revenue $28,000',
+      'Debit Service Revenue $28,000, credit Accounts Receivable $28,000',
+      'None until the invoice is sent',
+    ],
+    correctIndex: 0,
+    explanation: 'This is an accrued revenue: the work came first, the paperwork and the cash come later. Waiting for the invoice would push earned revenue into the wrong year. Cash is never used in an adjusting entry.',
+  },
+  {
+    id: 'xp13', section: 'principles', kind: 'text',
+    prompt: 'A current ratio below 1.00 tells you that:',
+    options: [
+      'Current liabilities exceed current assets, so short-term obligations may be hard to cover',
+      'The company operated at a net loss for the period',
+      'The company has more debt than equity overall',
+      'Retained earnings is negative',
+    ],
+    correctIndex: 0,
+    explanation: 'Current ratio = Current Assets ÷ Current Liabilities, so below 1.00 means the denominator is larger and working capital is negative. It measures liquidity, not profitability — a very profitable company can still fail this test.',
+  },
+  {
+    id: 'xp14', section: 'principles', kind: 'text',
+    prompt: 'Which statement reports assets, liabilities and equity at a single point in time rather than over a period?',
+    options: ['The balance sheet', 'The income statement', 'The statement of cash flows', 'The retained earnings statement'],
+    correctIndex: 0,
+    explanation: 'The balance sheet is headed "as of" a date — it is a photograph. The other three are headed "for the period ended" — they are films. Reading that date line is the fastest way to tell the statements apart on an exam.',
+  },
+  {
+    id: 'xs13', section: 'statements', kind: 'text',
+    prompt: 'Gross margin is:',
+    options: [
+      'Net sales − cost of goods sold',
+      'Net sales − total expenses',
+      'Net income ÷ net sales',
+      'Revenues − dividends',
+    ],
+    correctIndex: 0,
+    explanation: 'Gross margin removes only the cost of the goods themselves; operating expenses come off afterwards to give income from operations. Subtracting every expense gives net income, which is the whole point the subtotal exists to avoid.',
+  },
+  {
+    id: 'xs14', section: 'statements', kind: 'text',
+    prompt: 'When closing the books, Dividends is closed:',
+    options: [
+      'Directly to Retained Earnings',
+      'Through Income Summary, with the expenses',
+      'Through Income Summary, with the revenues',
+      'Not at all — it is a permanent account',
+    ],
+    correctIndex: 0,
+    explanation: 'Dividends is temporary and must be closed, but it is not a cost of earning revenue, so it never passes through Income Summary. Routing it there would understate net income by the amount of the dividend.',
+  },
+  {
+    id: 'xs15', section: 'statements', kind: 'text',
+    prompt: 'An adjusted trial balance shows revenue of $62,000, six expenses totalling $19,500, dividends of $3,200 and opening Retained Earnings of $71,850. Ending Retained Earnings is:',
+    options: ['$111,150', '$114,350', '$42,500', '$107,950'],
+    correctIndex: 0,
+    explanation: 'Net income = 62,000 − 19,500 = 42,500. Ending RE = 71,850 + 42,500 − 3,200 = $111,150. Forgetting the dividend gives 114,350; treating the dividend as an expense gives 107,950; 42,500 is net income alone.',
+  },
 ]

@@ -113,6 +113,26 @@ export default function Home() {
         </div>
       </Link>
 
+      {/* The TA's problems, worked step by step */}
+      <Link to="/problems" className="block mb-10 group">
+        <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-emerald-600/20 via-teal-600/20 to-cyan-600/20 p-5 hover:border-emerald-400 transition-colors">
+          <div className="flex items-center gap-4">
+            <span className="text-4xl">🗂️</span>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="font-bold text-white text-lg">Problem Sets</h2>
+                <span className="text-xs font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">from your TA</span>
+              </div>
+              <p className="text-sm text-slate-400">
+                Four whole problems the way the exam asks them — journalize, post, foot the trial balance,
+                close the books. Marked step by step, with the reason and the trap called out each time.
+              </p>
+            </div>
+            <span className="text-emerald-400 font-bold text-lg group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </div>
+      </Link>
+
       {/* What he got wrong on the hands-on drills */}
       {reviewByLevel.length > 0 && (
         <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 p-5 mb-10">

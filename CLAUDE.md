@@ -68,6 +68,13 @@ These are the things most likely to be broken by accident.
     run of short drills can never evict a graded exam. `scopeKind` is part of the
     saved session — drop it from `loadExamSession` and a resumed exam is demoted to
     a drill.
+11. **Problem sets are the TA's actual worksheets.** `src/data/problemSets.js` holds
+    them step by step with the worked answer, the reason (`why`) and the exam-technique
+    note (`watchFor`). Step IDs are `P{set}-{step}` and are recorded with
+    `recordTask`, not `recordQuizResult` — they are worked problems, not re-servable
+    multiple choice, so they belong on the home review list and must never enter the
+    exam drill. Every figure in that file was re-derived from the raw entries in
+    `node` before it was written; re-run that check after any edit.
 
 ## Analytics
 

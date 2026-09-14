@@ -21,11 +21,12 @@ src/
     useScrollTop.js          returns a page to the top when its phase changes
   data/
     examQuestions.js         79 exam questions + SECTIONS
-    reinforceBank.js         44 extra questions for the four hardest topics
+    reinforceBank.js         58 extra questions for the hardest topics
+    problemSets.js           the TA's four worksheets, with answers and coaching
     levelBanks.js            raw MC arrays lifted out of level components
     levelQuestions.js        normalises those into exam shape with namespaced IDs
   pages/
-    Home CheatSheet CramSheet Worksheet PracticeExam
+    Home CheatSheet CramSheet Worksheet PracticeExam ProblemSets
     levels/Level1..Level17
 ```
 
@@ -132,6 +133,41 @@ resumed drill keeps instant feedback.
 `ALL_EXAM_QUESTIONS` is also what `loadExamSession` validates against — a focus test
 interrupted halfway would otherwise be discarded on reload, because its `x`-prefixed
 IDs are not in the exam bank.
+
+## Problem sets
+
+`/problems` runs the TA's own worksheets one step at a time. They are a different
+thing from the exam: the exam asks a question, a problem set asks you to work a whole
+problem — journalize fourteen transactions, post them, foot the trial balance, close
+the books — which is the shape the real exam takes.
+
+Five step kinds, all graded in the browser: `mc`, `numeric`, `entry` (a journal-entry
+builder with account dropdowns and amount fields), `classify` (one bucket per item)
+and `classify2` (two axes — which statement AND which category).
+
+Each step carries three separate registers, and they must stay separate:
+
+| Field | When it shows | Rule |
+|---|---|---|
+| `hint` | on request, before answering | stops one reasoning step short, never names an account or amount |
+| `why` | after answering | states the answer outright and says why it is right |
+| `watchFor` | after answering | the exam-technique note — the trap, not the arithmetic |
+
+Wrong answers are diagnosed, not just marked. `diagnoseEntry` reports what the
+student actually did: debits and credits reversed, an entry that does not balance
+(with both totals), or an account that does not belong. A classify step names only
+the rows that are wrong.
+
+Steps are recorded with `recordTask`, so they appear on the home review list and are
+excluded from the exam drill — they cannot be re-served as multiple choice. They
+therefore do not move the red/amber topic bands either, which stay a measure of the
+question banks.
+
+**The data file is not its own source of truth.** A node check re-posts every
+journal entry in `problemSets.js` into a ledger and compares the result against the
+stated trial-balance totals, net income and closing figures. Copperline foots to
+$1,451,400, Boonville to $80,800, Bulldog's net income is $42,500 and its ending
+retained earnings $111,150. Re-run it after any content edit.
 
 ## Conventions worth keeping
 
