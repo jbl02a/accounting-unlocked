@@ -63,10 +63,10 @@ function JournalEntryRow({ label, amount, side, isCorrect, isWrong }) {
         </span>
       </div>
       <div className="text-right">
-        <span className={`text-sm font-mono ${side === 'debit' ? 'text-white' : 'text-slate-400'}`}>
+        <span className={`text-sm font-mono ${side === 'debit' ? 'text-white' : 'text-dim'}`}>
           {side === 'debit' ? `$${amount}` : ''}
         </span>
-        <span className="w-16 inline-block text-right text-sm font-mono text-slate-400">
+        <span className="w-16 inline-block text-right text-sm font-mono text-dim">
           {side === 'credit' ? `$${amount}` : ''}
         </span>
       </div>
@@ -126,7 +126,7 @@ export default function Level4() {
         <div className="mb-6">
           <div className="text-sm text-orange-400 font-semibold mb-1">Level 4</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Journal Entries</h1>
-          <p className="text-slate-400">How accountants formally record every business transaction.</p>
+          <p className="text-dim">How accountants formally record every business transaction.</p>
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
@@ -134,7 +134,7 @@ export default function Level4() {
           <p className="text-slate-300 text-sm mb-4">Every journal entry has two parts: a Debit (left) and a Credit (right). They always equal each other.</p>
           {/* Example entry */}
           <div className="rounded-lg overflow-hidden border border-white/10">
-            <div className="grid grid-cols-3 bg-slate-800 text-xs font-bold text-slate-400 uppercase tracking-wider px-3 py-2">
+            <div className="grid grid-cols-3 bg-slate-800 text-xs font-bold text-dim uppercase tracking-wider px-3 py-2">
               <span>Account</span>
               <span className="text-center">Debit</span>
               <span className="text-right">Credit</span>
@@ -142,15 +142,15 @@ export default function Level4() {
             <div className="grid grid-cols-3 px-3 py-2 text-sm">
               <span className="text-white">Cash</span>
               <span className="text-center text-white font-mono">$1,000</span>
-              <span className="text-right font-mono text-slate-400"></span>
+              <span className="text-right font-mono text-dim"></span>
             </div>
             <div className="grid grid-cols-3 px-3 py-2 text-sm bg-white/5">
-              <span className="text-slate-400 pl-4 italic">Common Stock</span>
-              <span className="text-center font-mono text-slate-400"></span>
+              <span className="text-dim pl-4 italic">Common Stock</span>
+              <span className="text-center font-mono text-dim"></span>
               <span className="text-right text-white font-mono">$1,000</span>
             </div>
           </div>
-          <p className="text-xs text-slate-500 mt-2 text-center">Owner invests $1,000 cash → Cash (Asset ⬆️ Debit), Common Stock (Equity ⬆️ Credit)</p>
+          <p className="text-xs text-dim mt-2 text-center">Owner invests $1,000 cash → Cash (Asset ⬆️ Debit), Common Stock (Equity ⬆️ Credit)</p>
         </div>
 
         <div className="space-y-3 mb-8">
@@ -164,7 +164,7 @@ export default function Level4() {
               <span className="text-orange-400 font-bold text-sm shrink-0">#{i + 1}</span>
               <div>
                 <p className="font-semibold text-white text-sm">{item.rule}</p>
-                <p className="text-slate-400 text-xs mt-0.5">{item.detail}</p>
+                <p className="text-dim text-xs mt-0.5">{item.detail}</p>
               </div>
             </div>
           ))}
@@ -193,8 +193,8 @@ export default function Level4() {
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400 mb-2">
           {correct} / 3
         </p>
-        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
-        <p className="text-slate-400 mb-8">
+        {hints.usedCount > 0 && <p className="text-xs text-dim mb-3">{hintTally(hints.usedCount)}</p>}
+        <p className="text-dim mb-8">
           {correct === 3 ? "You're thinking like a real accountant. Every entry balanced perfectly." :
            correct >= 2 ? "Nearly there! Review the explanations — you're very close." :
            "Journal entries take practice. Review the rules and try again!"}
@@ -248,7 +248,7 @@ export default function Level4() {
 
       {/* Entry builder */}
       <div className="rounded-xl border border-white/10 bg-slate-900/50 overflow-hidden mb-6">
-        <div className="grid grid-cols-[3.6rem_1fr_5rem_5rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 py-2">
+        <div className="grid grid-cols-[3.6rem_1fr_5rem_5rem] bg-slate-800 text-[10px] font-bold text-dim uppercase tracking-wider px-4 py-2">
           <span>Date</span>
           <span>Account Description</span>
           <span className="text-right">Debit</span>
@@ -258,7 +258,7 @@ export default function Level4() {
         {/* Debit row */}
         <div className="px-4 py-3 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <span className="w-12 shrink-0 text-xs text-slate-400">{tx.date}</span>
+            <span className="w-12 shrink-0 text-xs text-dim">{tx.date}</span>
             <select
               value={ans.debit}
               onChange={e => setAns('debit', e.target.value)}
@@ -271,7 +271,7 @@ export default function Level4() {
               {tx.debitOptions.map(o => <option key={o} value={o}>{o}</option>)}
             </select>
             <span className="text-white font-mono text-sm">${tx.debitAmount}</span>
-            <span className="w-16 text-right text-slate-600 text-sm font-mono">—</span>
+            <span className="w-16 text-right text-dim text-sm font-mono">—</span>
           </div>
         </div>
 
@@ -291,7 +291,7 @@ export default function Level4() {
               <option value="">Select account to CREDIT…</option>
               {tx.creditOptions.map(o => <option key={o} value={o}>{o}</option>)}
             </select>
-            <span className="text-slate-600 font-mono text-sm w-10 text-right">—</span>
+            <span className="text-dim font-mono text-sm w-10 text-right">—</span>
             <span className="text-white font-mono text-sm w-16 text-right">${tx.creditAmount}</span>
           </div>
         </div>

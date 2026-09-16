@@ -104,7 +104,7 @@ export default function Level17() {
         <div className="mb-6">
           <div className="text-sm text-cyan-400 font-semibold mb-1">Level 17</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Classified Balance Sheet</h1>
-          <p className="text-slate-400">A plain balance sheet lists accounts. A classified one groups them — and that grouping is what lets anyone judge whether the company can pay its bills.</p>
+          <p className="text-dim">A plain balance sheet lists accounts. A classified one groups them — and that grouping is what lets anyone judge whether the company can pay its bills.</p>
         </div>
 
         <div className="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-5 mb-6">
@@ -123,7 +123,7 @@ export default function Level17() {
             ].map((s, i) => (
               <div key={i} className="rounded-xl bg-black/20 p-3">
                 <p className="font-bold text-white text-sm">{s.t}</p>
-                <p className="text-xs text-slate-400">{s.d}</p>
+                <p className="text-xs text-dim">{s.d}</p>
               </div>
             ))}
           </div>
@@ -138,17 +138,17 @@ export default function Level17() {
             <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/30 p-4">
               <p className="text-sm font-bold text-white mb-1">Working capital</p>
               <p className="font-mono text-cyan-200 text-sm mb-1">Current Assets − Current Liabilities</p>
-              <p className="text-xs text-slate-400">A dollar amount. Positive means there is a cushion to cover what is due this year.</p>
+              <p className="text-xs text-dim">A dollar amount. Positive means there is a cushion to cover what is due this year.</p>
             </div>
             <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/30 p-4">
               <p className="text-sm font-bold text-white mb-1">Current ratio</p>
               <p className="font-mono text-cyan-200 text-sm mb-1">Current Assets ÷ Current Liabilities</p>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-dim">
                 A ratio, so it can compare companies of different sizes. Below 1.00 is a warning sign — current liabilities are outpacing current assets.
               </p>
             </div>
           </div>
-          <p className="text-xs text-slate-400 mt-3">
+          <p className="text-xs text-dim mt-3">
             Same two inputs, two different uses: working capital tells you the size of the cushion in dollars, the current ratio lets you compare one company against another.
           </p>
         </div>
@@ -166,7 +166,7 @@ export default function Level17() {
         <button onClick={() => setPhase('play')} className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 text-white font-bold text-lg hover:opacity-90">
           Build a classified balance sheet →
         </button>
-        <button onClick={() => { completeLevel(17); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5">
+        <button onClick={() => { completeLevel(17); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5">
           Skip the practice — mark this lesson read
         </button>
       </div>
@@ -182,17 +182,17 @@ export default function Level17() {
           <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '🧾'}</div>
           <h2 className="text-3xl font-extrabold text-white mb-2">Balance Sheet Complete</h2>
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-400 mb-2">{pct}%</p>
-          <p className="text-slate-400 text-sm">
+          <p className="text-dim text-sm">
             Sections {placeCorrect}/{BS.length} · Totals {totalsCorrect}/{totalDefs.length} · Ratios {ratiosCorrect}/2
           </p>
-          {hints.usedCount > 0 && <p className="text-xs text-slate-500 mt-2">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-dim mt-2">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl border border-white/10 overflow-hidden mb-4">
           <div className="bg-slate-800 px-4 py-3 text-center">
             <p className="font-bold text-white">Lakeside Outfitters, Inc.</p>
             <p className="text-sm text-slate-300">Balance Sheet</p>
-            <p className="text-xs text-slate-500">December 31, 2025</p>
+            <p className="text-xs text-dim">December 31, 2025</p>
           </div>
           <div className="px-4 py-2">
             {BS.map(a => {
@@ -252,7 +252,7 @@ export default function Level17() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Sort each account into its section" />
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-dim mb-4">
           Lakeside Outfitters’ balances at December 31. The test is always the same: will it be used, collected or come due within one year?
         </p>
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
@@ -264,7 +264,7 @@ export default function Level17() {
                 <div className="flex items-center gap-2 mb-1.5">
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-white truncate">{a.name}</p>
-                    <p className="text-xs text-slate-500 font-mono">{a.amt < 0 ? `(${Math.abs(a.amt).toLocaleString()})` : money(a.amt)}</p>
+                    <p className="text-xs text-dim font-mono">{a.amt < 0 ? `(${Math.abs(a.amt).toLocaleString()})` : money(a.amt)}</p>
                   </div>
                   {!checked1 && <HintToggle open={hints.isOpen(a.name)} onClick={() => hints.toggle(a.name)} label={a.name} />}
                 </div>
@@ -276,7 +276,7 @@ export default function Level17() {
                         className={`px-2 py-1 rounded-lg text-[10px] font-bold uppercase border transition-colors ${
                           isAnswer ? 'border-green-500 bg-green-900/40 text-green-300'
                             : pick === sec.id ? 'border-cyan-500 bg-cyan-900/30 text-white'
-                            : 'border-slate-600 bg-slate-800 text-slate-400 hover:border-cyan-400'}`}>
+                            : 'border-slate-600 bg-slate-800 text-dim hover:border-cyan-400'}`}>
                         {sec.short}
                       </button>
                     )
@@ -316,12 +316,12 @@ export default function Level17() {
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Total the balance sheet" />
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
-          <div className="grid grid-cols-[1fr_7rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 py-2">
+          <div className="grid grid-cols-[1fr_7rem] bg-slate-800 text-[10px] font-bold text-dim uppercase tracking-wider px-4 py-2">
             <span>Account</span><span className="text-right">Amount</span>
           </div>
           {BS.map(a => (
             <div key={a.name} className="grid grid-cols-[1fr_7rem] px-4 py-1 text-sm border-t border-white/5">
-              <span className="text-white">{a.name} <span className="text-[10px] text-slate-500 uppercase">({SECTIONS.find(s => s.id === a.section).short})</span></span>
+              <span className="text-white">{a.name} <span className="text-[10px] text-dim uppercase">({SECTIONS.find(s => s.id === a.section).short})</span></span>
               <span className="text-right font-mono text-slate-200">{a.amt < 0 ? `(${Math.abs(a.amt).toLocaleString()})` : money(a.amt)}</span>
             </div>
           ))}
@@ -336,7 +336,7 @@ export default function Level17() {
                 <p className="text-sm font-semibold text-white mb-2">{f.label}</p>
                 {!checked2 && <HintBar open={hints.isOpen(f.k)} onToggle={() => hints.toggle(f.k)} text={f.hint} className="mb-2" />}
                 <div className="flex gap-2">
-                  <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">$</span>
+                  <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
                   <input inputMode="numeric" value={totals[f.k]} onChange={e => !checked2 && setTotals(p => ({ ...p, [f.k]: e.target.value }))} disabled={checked2}
                     placeholder="0" className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-cyan-500 disabled:opacity-70 ${checked2 ? (ok ? 'border-green-500' : 'border-red-500') : 'border-slate-600'}`} />
                 </div>
@@ -386,7 +386,7 @@ export default function Level17() {
             <p className="text-sm font-semibold text-white mb-2">{f.label}</p>
             {!checked3 && <HintBar open={hints.isOpen(f.k)} onToggle={() => hints.toggle(f.k)} text={f.hint} className="mb-2" />}
             <div className="flex gap-2">
-              {f.unit && <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">{f.unit}</span>}
+              {f.unit && <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">{f.unit}</span>}
               <input inputMode="decimal" value={ratios[f.k]} onChange={e => !checked3 && setRatios(p => ({ ...p, [f.k]: e.target.value }))} disabled={checked3}
                 placeholder="0" className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-cyan-500 disabled:opacity-70 ${checked3 ? (f.ok ? 'border-green-500' : 'border-red-500') : 'border-slate-600'}`} />
             </div>

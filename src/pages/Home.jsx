@@ -67,15 +67,15 @@ export default function Home() {
           </span>{' '}
           clicks.
         </h1>
-        <p className="text-slate-400 text-lg max-w-xl mx-auto mb-4">
+        <p className="text-dim text-lg max-w-xl mx-auto mb-4">
           {totalLevels} bite-sized levels that take you from the accounting equation to a finished trial balance — and the principles behind all of it. Read the lessons, and practice as much or as little as you want.
         </p>
-        <p className="text-slate-500 text-sm italic">&ldquo;{quote}&rdquo;</p>
+        <p className="text-dim text-sm italic">&ldquo;{quote}&rdquo;</p>
       </div>
 
       {/* Progress bar */}
       <div className="mb-8">
-        <div className="flex justify-between text-sm text-slate-400 mb-2">
+        <div className="flex justify-between text-sm text-dim mb-2">
           <span>Overall Progress</span>
           <span className="font-semibold text-white">{totalCompleted} / {totalLevels} levels complete</span>
         </div>
@@ -102,7 +102,7 @@ export default function Home() {
                 <h2 className="font-bold text-white text-lg">Problem Sets</h2>
                 <span className="text-xs font-bold text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">from your TA</span>
               </div>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-dim">
                 Four whole problems the way the exam asks them — journalize, post, foot the trial balance,
                 close the books. Marked step by step, with the reason and the trap called out each time.
               </p>
@@ -124,7 +124,7 @@ export default function Home() {
                   <span className="text-xs font-bold text-green-300 bg-green-500/10 border border-green-500/20 px-2 py-0.5 rounded-full">best {best}%</span>
                 )}
               </div>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-dim">
                 Transactions in plain English — categorize them, journalize them, place them on a trial balance. Multiple choice, scored, with a full explanation for every question.
               </p>
             </div>
@@ -159,13 +159,13 @@ export default function Home() {
                 </div>
                 <ul className="space-y-0.5">
                   {group.items.slice(0, 6).map(t => (
-                    <li key={t.id} className="text-xs text-slate-400 flex gap-2">
+                    <li key={t.id} className="text-xs text-dim flex gap-2">
                       <span className="text-rose-400/70 shrink-0">✗</span>
                       <span>{t.label}{t.wrong > 1 && <span className="text-rose-300"> · missed {t.wrong}×</span>}</span>
                     </li>
                   ))}
                   {group.items.length > 6 && (
-                    <li className="text-xs text-slate-500">+ {group.items.length - 6} more in this level</li>
+                    <li className="text-xs text-dim">+ {group.items.length - 6} more in this level</li>
                   )}
                 </ul>
               </div>
@@ -182,7 +182,7 @@ export default function Home() {
               <span className="text-3xl">🖨️</span>
               <div>
                 <h2 className="font-bold text-white">Exam-Day Cram Sheet</h2>
-                <p className="text-sm text-slate-400 mt-0.5">
+                <p className="text-sm text-dim mt-0.5">
                   Everything that gets tested, condensed onto two printable pages. DEALER, normal balances, the adjusting and closing entries, every formula.
                 </p>
               </div>
@@ -195,7 +195,7 @@ export default function Home() {
               <span className="text-3xl">✏️</span>
               <div>
                 <h2 className="font-bold text-white">Printable Practice Problem</h2>
-                <p className="text-sm text-slate-400 mt-0.5">
+                <p className="text-sm text-dim mt-0.5">
                   A full-cycle problem in the same worksheet layout as class — journalize, post, trial balance, adjust. Answer key included.
                 </p>
               </div>
@@ -211,9 +211,9 @@ export default function Home() {
           <div key={phase.id} className="mb-10">
             <div className="flex items-baseline justify-between gap-4 mb-1">
               <h2 className="text-lg font-bold text-white">{phase.label}</h2>
-              <span className="text-xs text-slate-500 shrink-0">{donePhase}/{phase.levels.length} done</span>
+              <span className="text-xs text-dim shrink-0">{donePhase}/{phase.levels.length} done</span>
             </div>
-            <p className="text-sm text-slate-500 mb-4">{phase.blurb}</p>
+            <p className="text-sm text-dim mb-4">{phase.blurb}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {phase.levels.map(num => (
                 <LevelCard key={num} levelNum={num} levelData={progress.levels[num] || { completed: false, score: null }} />
@@ -224,7 +224,7 @@ export default function Home() {
       })}
 
       {/* Footer tip */}
-      <div className="mt-10 text-center text-sm text-slate-600">
+      <div className="mt-10 text-center text-sm text-dim">
         {Object.keys(LEVEL_META).length} levels · progress saves automatically in this browser · no account needed.
       </div>
     </div>

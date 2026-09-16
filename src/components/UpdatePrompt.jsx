@@ -35,7 +35,7 @@ export default function UpdatePrompt() {
             <span className="text-2xl">✨</span>
             <div className="flex-1">
               <p className="font-bold text-white text-sm">A new version is ready</p>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-dim mt-0.5">
                 Refresh to get the latest lessons and fixes. Your progress is kept.
               </p>
             </div>
@@ -64,7 +64,7 @@ export default function UpdatePrompt() {
       <div className="max-w-md mx-auto rounded-2xl border border-green-500/30 bg-[#161629] shadow-2xl shadow-black/60 px-4 py-3 flex items-center gap-3 pointer-events-auto">
         <span className="text-xl">📥</span>
         <p className="text-sm text-slate-200 flex-1">Ready to use offline.</p>
-        <button onClick={() => setOfflineReady(false)} className="text-xs text-slate-500 hover:text-white">Dismiss</button>
+        <button onClick={() => setOfflineReady(false)} className="text-xs text-dim hover:text-white">Dismiss</button>
       </div>
     </div>
   )

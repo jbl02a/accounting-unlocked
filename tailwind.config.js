@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        // The dimmest grey this app is allowed to use for text. Tailwind's
+        // slate-400 reads at 6.9:1 on our card surface and slate-500 at 3.7:1,
+        // which is below WCAG AA and genuinely hard to read on a phone at night.
+        // This clears AAA (8.2:1) and is enforced by scripts/check-contrast.mjs.
+        dim: '#a3b1c4',
+      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },

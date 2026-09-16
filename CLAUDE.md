@@ -76,6 +76,20 @@ These are the things most likely to be broken by accident.
     exam drill. Every figure in that file was re-derived from the raw entries in
     `node` before it was written; re-run that check after any edit.
 
+12. **Text has a minimum brightness, and it is enforced.** Grey-on-near-black is
+    the first thing that goes illegible on a phone at night, so this is a floor
+    rather than a judgement call: every `text-*` colour in `src/` must clear
+    WCAG AA (4.5:1) against `#161629`, the lightest surface the dark chrome
+    paints. `scripts/check-contrast.mjs` asserts it and runs as part of
+    `npm run build`, so a too-dim shade fails the build instead of shipping.
+    **`text-dim` (`#a3b1c4`, 8.2:1) is the dimmest grey allowed** — Tailwind's
+    `slate-400` reads 6.9:1 and `slate-500` only 3.7:1, which is below AA. Do
+    not reach for `slate-500`/`slate-600` for text; if something needs to
+    recede, use `text-dim` at a smaller size or a lighter weight, not a darker
+    grey. The same rule holds for white text on a coloured pill — the active
+    Problems tab is `emerald-700`, not `emerald-600` (3.8:1), for this reason.
+    A light-mode toggle is not a substitute for the floor.
+
 ## Analytics
 
 `<Analytics />` from `@vercel/analytics/react` is mounted in `App.jsx`. It reports page

@@ -113,7 +113,7 @@ export default function Worksheet() {
       <div className="cram-toolbar no-print">
         <div>
           <h1 className="text-2xl font-extrabold text-white">Printable Practice Problem</h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-dim">
             A full-cycle problem in the same Date / Account / Debit / Credit layout as class — meant to be printed and worked with a pencil.
             The answer key is on its own pages, so print it all and keep the key face down.
           </p>

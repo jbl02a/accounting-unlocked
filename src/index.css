@@ -80,6 +80,17 @@
 .key-page td, .key-page th { padding: 1.5px 6px; }
 .key-page .cram-note { line-height: 1.35; }
 
+/* On a phone these printable pages are wider than the screen. Let each section
+   scroll on its own rather than pushing the whole page sideways. */
+@media (max-width: 640px) {
+  .cram-page { padding: 16px 14px; font-size: 11.5px; }
+  .cram-section { overflow-x: auto; }
+  .cram-page table { min-width: 460px; }
+  /* The print/back buttons are wider than a phone side by side. Let them wrap
+     instead of pushing the whole page sideways. */
+  .cram-toolbar { flex-wrap: wrap; }
+}
+
 @media print {
   @page { margin: 12mm; }
   html, body { background: #fff !important; }

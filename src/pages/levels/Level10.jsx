@@ -140,7 +140,7 @@ export default function Level10() {
         <div className="mb-6">
           <div className="text-sm text-fuchsia-400 font-semibold mb-1">Level 10 — Capstone</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Full Cycle Challenge</h1>
-          <p className="text-slate-400">Everything from Levels 1 through 9, on one company, in one sitting. This is what an exam problem actually looks like.</p>
+          <p className="text-dim">Everything from Levels 1 through 9, on one company, in one sitting. This is what an exam problem actually looks like.</p>
         </div>
 
         <div className="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-5 mb-6">
@@ -156,7 +156,7 @@ export default function Level10() {
                 <span className="shrink-0 w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center">{s.n}</span>
                 <div>
                   <p className="font-bold text-sm text-white">{s.t}</p>
-                  <p className="text-xs text-slate-400">{s.d}</p>
+                  <p className="text-xs text-dim">{s.d}</p>
                 </div>
               </div>
             ))}
@@ -165,7 +165,7 @@ export default function Level10() {
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
           <p className="font-bold text-white mb-1">Novak Consulting — March transactions</p>
-          <p className="text-xs text-slate-400 mb-3">Read them once now. You will come back to them in every step.</p>
+          <p className="text-xs text-dim mb-3">Read them once now. You will come back to them in every step.</p>
           <div className="divide-y divide-white/5">
             {LEDGER_STORY.map((t, i) => (
               <div key={i} className="py-2 flex gap-3">
@@ -173,7 +173,7 @@ export default function Level10() {
                 <div className="flex-1">
                   <p className="text-sm text-slate-300">{t.text}</p>
                   {t.given && (
-                    <p className="text-[11px] text-slate-500 mt-1 font-mono">
+                    <p className="text-[11px] text-dim mt-1 font-mono">
                       recorded for you: DR {t.given[0].account} {money(t.given[0].dr)} / CR {t.given[1].account} {money(t.given[1].cr)}
                     </p>
                   )}
@@ -191,7 +191,7 @@ export default function Level10() {
         </button>
         <button
           onClick={() => { completeLevel(10); navigate('/') }}
-          className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+          className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5 transition-colors"
         >
           Skip for now — mark this lesson read
         </button>
@@ -206,22 +206,22 @@ export default function Level10() {
           <div className="text-5xl mb-4">{pct === 100 ? '🏆' : pct >= 80 ? '🎉' : '📊'}</div>
           <h2 className="text-3xl font-extrabold text-white mb-2">Full Cycle Complete</h2>
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-rose-400 mb-3">{pct}%</p>
-          <div className="inline-flex flex-wrap justify-center gap-2 text-xs text-slate-400">
+          <div className="inline-flex flex-wrap justify-center gap-2 text-xs text-dim">
             <span className="rounded-full bg-white/5 px-3 py-1">Journalizing {jResults.filter(Boolean).length}/{JOURNAL_QUIZ.length}</span>
             <span className="rounded-full bg-white/5 px-3 py-1">Posting {postingCorrect}/{POSTING.length}</span>
             <span className="rounded-full bg-white/5 px-3 py-1">Trial balance {columnCorrect + totalsCorrect}/{TRIAL_BALANCE.length + 2}</span>
             <span className="rounded-full bg-white/5 px-3 py-1">Analysis {aResults.filter(Boolean).length}/{ANALYSIS.length}</span>
           </div>
-          {hints.usedCount > 0 && <p className="text-xs text-slate-500 mt-3">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-dim mt-3">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl border border-white/10 overflow-hidden mb-6">
           <div className="bg-slate-800 px-4 py-3 text-center">
             <p className="font-bold text-white">Novak Consulting</p>
             <p className="text-sm text-slate-300">Trial Balance</p>
-            <p className="text-xs text-slate-500">March 31, 2025</p>
+            <p className="text-xs text-dim">March 31, 2025</p>
           </div>
-          <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800/60 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 py-1.5">
+          <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800/60 text-[10px] font-bold text-dim uppercase tracking-wider px-4 py-1.5">
             <span>Account</span><span className="text-right">Debit</span><span className="text-right">Credit</span>
           </div>
           {TRIAL_BALANCE.map(a => (
@@ -243,7 +243,7 @@ export default function Level10() {
           <ul className="text-sm text-slate-300 space-y-1">
             <li>• Net income for March: $8,700 revenue − $3,500 expenses = <span className="text-white font-semibold">$5,200</span></li>
             <li>• Ending retained earnings: $0 + $5,200 − $1,000 dividends = <span className="text-white font-semibold">$4,200</span></li>
-            <li>• Assets $28,500 = Liabilities $4,300 + Equity $24,200 <span className="text-slate-500">($20,000 stock + $4,200 retained earnings)</span></li>
+            <li>• Assets $28,500 = Liabilities $4,300 + Equity $24,200 <span className="text-dim">($20,000 stock + $4,200 retained earnings)</span></li>
           </ul>
         </div>
 
@@ -306,7 +306,7 @@ export default function Level10() {
                 }`}
               >
                 <div className="flex items-start gap-3">
-                  <span className="text-xs font-bold text-slate-500 mt-1">{'ABCD'[i]}</span>
+                  <span className="text-xs font-bold text-dim mt-1">{'ABCD'[i]}</span>
                   <div className="flex-1"><EntryTable date={q.date} lines={opt} dense /></div>
                   {isAnswer && <span className="text-green-400">✓</span>}
                   {isWrongPick && <span className="text-red-400">✗</span>}
@@ -343,7 +343,7 @@ export default function Level10() {
     return (
       <div className="max-w-xl mx-auto">
         <StepHeader title="Post — find each ending balance" />
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-dim mb-4">
           All ten entries have now been posted. Using the March transaction list, work out where each of these four accounts ended up. Enter the amount only — the side is shown for you.
         </p>
 
@@ -357,10 +357,10 @@ export default function Level10() {
                 <div className="flex items-center gap-3 mb-2">
                   <div className="flex-1">
                     <p className="font-semibold text-white text-sm">{p.account}</p>
-                    <p className="text-[11px] text-slate-500 uppercase tracking-wider">{p.side} balance</p>
+                    <p className="text-[11px] text-dim uppercase tracking-wider">{p.side} balance</p>
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className="text-slate-400 font-mono">$</span>
+                    <span className="text-dim font-mono">$</span>
                     <input
                       inputMode="numeric"
                       value={balances[p.account] || ''}
@@ -371,7 +371,7 @@ export default function Level10() {
                     />
                   </div>
                 </div>
-                <p className="text-[11px] text-slate-500">{p.postings}</p>
+                <p className="text-[11px] text-dim">{p.postings}</p>
                 {!checked2 && (
                   <HintBar
                     open={hints.isOpen(`post-${p.account}`)}
@@ -417,7 +417,7 @@ export default function Level10() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Build the trial balance" />
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-dim mb-4">
           The accounts are already in proper order — assets, liabilities, equity, revenue, expenses. Choose the column each balance belongs in, then total both columns.
         </p>
 
@@ -430,7 +430,7 @@ export default function Level10() {
                 <div className="flex items-center gap-2">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-white truncate">{a.name}</p>
-                  <p className="text-xs text-slate-500 font-mono">{money(a.amount)}</p>
+                  <p className="text-xs text-dim font-mono">{money(a.amount)}</p>
                 </div>
                 {!checked3 && (
                   <HintToggle open={hints.isOpen(`col-${a.name}`)} onClick={() => hints.toggle(`col-${a.name}`)} label={a.name} />
@@ -446,7 +446,7 @@ export default function Level10() {
                       className={`w-16 py-1.5 rounded-lg text-xs font-bold uppercase border transition-colors ${
                         isAnswer ? 'border-green-500 bg-green-900/40 text-green-300'
                           : selected ? 'border-fuchsia-500 bg-fuchsia-900/30 text-white'
-                          : 'border-slate-600 bg-slate-800 text-slate-400 hover:border-fuchsia-400'
+                          : 'border-slate-600 bg-slate-800 text-dim hover:border-fuchsia-400'
                       }`}
                     >
                       {s === 'debit' ? 'DR' : 'CR'}
@@ -461,14 +461,14 @@ export default function Level10() {
         </div>
 
         <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-5">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Column totals</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-dim mb-3">Column totals</p>
           <div className="grid grid-cols-2 gap-3">
             {[
               { label: 'Total Debits', val: drTotal, set: setDrTotal, ok: drRight },
               { label: 'Total Credits', val: crTotal, set: setCrTotal, ok: crRight },
             ].map(f => (
               <div key={f.label}>
-                <label className="block text-xs text-slate-500 mb-1">{f.label}</label>
+                <label className="block text-xs text-dim mb-1">{f.label}</label>
                 <input
                   inputMode="numeric" value={f.val} onChange={e => !checked3 && f.set(e.target.value)} disabled={checked3}
                   placeholder="0"
@@ -547,7 +547,7 @@ export default function Level10() {
                   : 'border-white/10 bg-white/5 hover:border-fuchsia-400 hover:bg-white/10'
               }`}
             >
-              <span className="text-xs font-bold text-slate-500 mt-0.5">{'ABCD'[i]}</span>
+              <span className="text-xs font-bold text-dim mt-0.5">{'ABCD'[i]}</span>
               <span className="text-sm text-white flex-1">{opt}</span>
               {isAnswer && <span className="text-green-400">✓</span>}
               {isWrongPick && <span className="text-red-400">✗</span>}

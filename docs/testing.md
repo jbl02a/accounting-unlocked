@@ -90,6 +90,15 @@ touching the progress model. Four layers, in order of what they can prove:
    `best` or evict a graded exam, and that a resumed run keeps its `scopeKind`.
 4. **Routes** — all 22 pages render, no console errors, no horizontal overflow at
    desktop or 390px.
+5. **Contrast** — `npm run contrast` checks every `text-*` class in `src/`
+   against `#161629` and fails the build below WCAG AA (4.5:1). It is a static
+   check, so confirm in the browser too: read the computed `color` and the
+   painted background of every rendered text node and take the worst ratio.
+   Skip nodes whose computed colour is transparent — those are `bg-clip-text`
+   gradient headings, and measuring them reports a meaningless 1.1:1. The
+   things the static check cannot see are white text on a coloured pill (the
+   active Problems tab was `emerald-600`, 3.77:1) and the greys baked into
+   `index.css` for the printable pages.
 
 The always-A property is asserted in *every* mode, not just one: full exam, Quick
 15, focus test and misses drill each have to score far below 100%.

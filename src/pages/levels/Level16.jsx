@@ -108,7 +108,7 @@ export default function Level16() {
         <div className="mb-6">
           <div className="text-sm text-purple-400 font-semibold mb-1">Level 16</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Four Financial Statements</h1>
-          <p className="text-slate-400">Everything the accounting cycle produces ends up in four reports — and they are prepared in a specific order, because each one feeds the next.</p>
+          <p className="text-dim">Everything the accounting cycle produces ends up in four reports — and they are prepared in a specific order, because each one feeds the next.</p>
         </div>
 
         <div className="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-5 mb-6">
@@ -129,7 +129,7 @@ export default function Level16() {
                       <span className="text-[10px] uppercase tracking-wider text-purple-300">{s.period}</span>
                     </div>
                     <p className="text-xs font-mono text-purple-200 my-1">{s.f}</p>
-                    <p className="text-xs text-slate-400">{s.why}</p>
+                    <p className="text-xs text-dim">{s.why}</p>
                   </div>
                 </div>
               </div>
@@ -155,14 +155,14 @@ export default function Level16() {
           <div className="grid sm:grid-cols-2 gap-3 mb-3">
             <div className="rounded-lg bg-slate-900/60 border border-white/10 p-3">
               <p className="font-semibold text-white text-sm mb-1">Single-step</p>
-              <p className="text-xs text-slate-400">Two categories only: <span className="text-white">total revenues</span> minus <span className="text-white">total expenses</span>. One subtraction, one answer.</p>
+              <p className="text-xs text-dim">Two categories only: <span className="text-white">total revenues</span> minus <span className="text-white">total expenses</span>. One subtraction, one answer.</p>
             </div>
             <div className="rounded-lg bg-slate-900/60 border border-white/10 p-3">
               <p className="font-semibold text-white text-sm mb-1">Multiple-step</p>
-              <p className="text-xs text-slate-400">Adds subtotals: Gross margin = Net sales − COGS. Income from operations = Gross margin − operating expenses.</p>
+              <p className="text-xs text-dim">Adds subtotals: Gross margin = Net sales − COGS. Income from operations = Gross margin − operating expenses.</p>
             </div>
           </div>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-dim">
             Two ratios that come off these statements: <span className="text-white">Net profit margin = Net income ÷ Sales revenue</span>.
             And on a multiple-step statement, gross margin is watched closely because it shows profit before operating costs.
           </p>
@@ -180,7 +180,7 @@ export default function Level16() {
         <button onClick={() => setPhase('play')} className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-bold text-lg hover:opacity-90">
           Build the statements in 4 steps →
         </button>
-        <button onClick={() => { completeLevel(16); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5">
+        <button onClick={() => { completeLevel(16); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5">
           Skip the practice — mark this lesson read
         </button>
       </div>
@@ -195,17 +195,17 @@ export default function Level16() {
           <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '📑'}</div>
           <h2 className="text-3xl font-extrabold text-white mb-2">Statements Complete</h2>
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-400 mb-2">{pct}%</p>
-          <p className="text-slate-400 text-sm">
+          <p className="text-dim text-sm">
             Equation {eqCorrect}/{EQUATION_QS.length} · Placement {placeCorrect}/{IS_ACCOUNTS.length} · Totals {totalsCorrect}/3 · Ending R/E {reRight ? 1 : 0}/1
           </p>
-          {hints.usedCount > 0 && <p className="text-xs text-slate-500 mt-2">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-dim mt-2">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl border border-white/10 overflow-hidden mb-4">
           <div className="bg-slate-800 px-4 py-3 text-center">
             <p className="font-bold text-white">Lakeside Outfitters, Inc.</p>
             <p className="text-sm text-slate-300">Income Statement (single-step)</p>
-            <p className="text-xs text-slate-500">For the Year Ended December 31, 2025</p>
+            <p className="text-xs text-dim">For the Year Ended December 31, 2025</p>
           </div>
           <div className="px-4 py-2">
             <p className="text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Revenues</p>
@@ -226,7 +226,7 @@ export default function Level16() {
           <div className="bg-slate-800 px-4 py-3 text-center">
             <p className="font-bold text-white">Lakeside Outfitters, Inc.</p>
             <p className="text-sm text-slate-300">Retained Earnings Statement</p>
-            <p className="text-xs text-slate-500">For the Year Ended December 31, 2025</p>
+            <p className="text-xs text-dim">For the Year Ended December 31, 2025</p>
           </div>
           <div className="px-4 py-2">
             <div className="flex justify-between text-sm py-0.5"><span className="text-slate-300">Retained earnings, January 1</span><span className="font-mono text-slate-200">{money(BEGIN_RE)}</span></div>
@@ -262,7 +262,7 @@ export default function Level16() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Work the accounting equation" />
-        <p className="text-sm text-slate-400 mb-4">Three linked questions about the same company. Each one builds on the last.</p>
+        <p className="text-sm text-dim mb-4">Three linked questions about the same company. Each one builds on the last.</p>
         <div className="space-y-3 mb-5">
           {EQUATION_QS.map(q => {
             const v = parseAmount(eqAnswers[q.id] || '')
@@ -273,7 +273,7 @@ export default function Level16() {
                 <p className="text-sm text-white mb-2">{q.prompt}</p>
                 {!eqChecked && <HintBar open={hints.isOpen(q.id)} onToggle={() => hints.toggle(q.id)} text={q.hint} className="mb-2" />}
                 <div className="flex gap-2">
-                  <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">$</span>
+                  <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
                   <input inputMode="numeric" value={eqAnswers[q.id] || ''} onChange={e => !eqChecked && setEqAnswers(p => ({ ...p, [q.id]: e.target.value }))} disabled={eqChecked}
                     placeholder="0" className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-purple-500 disabled:opacity-70 ${eqChecked ? (ok ? 'border-green-500' : 'border-red-500') : 'border-slate-600'}`} />
                 </div>
@@ -309,7 +309,7 @@ export default function Level16() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Which accounts go on the income statement?" />
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-dim mb-4">
           Lakeside Outfitters’ account balances for the year. Mark each one — three of these do not belong on an income statement at all.
         </p>
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
@@ -321,7 +321,7 @@ export default function Level16() {
                 <div className="flex items-center gap-2">
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-white truncate">{a.name}</p>
-                    <p className="text-xs text-slate-500 font-mono">{money(a.amt)}</p>
+                    <p className="text-xs text-dim font-mono">{money(a.amt)}</p>
                   </div>
                   {!checked2 && <HintToggle open={hints.isOpen(a.name)} onClick={() => hints.toggle(a.name)} label={a.name} />}
                   {opts.map(o => {
@@ -331,7 +331,7 @@ export default function Level16() {
                         className={`w-20 py-1.5 rounded-lg text-[10px] font-bold uppercase border transition-colors ${
                           isAnswer ? 'border-green-500 bg-green-900/40 text-green-300'
                             : pick === o.id ? 'border-purple-500 bg-purple-900/30 text-white'
-                            : 'border-slate-600 bg-slate-800 text-slate-400 hover:border-purple-400'}`}>
+                            : 'border-slate-600 bg-slate-800 text-dim hover:border-purple-400'}`}>
                         {o.label}
                       </button>
                     )
@@ -378,12 +378,12 @@ export default function Level16() {
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Total the single-step income statement" />
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
-          <div className="grid grid-cols-[1fr_7rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 py-2">
+          <div className="grid grid-cols-[1fr_7rem] bg-slate-800 text-[10px] font-bold text-dim uppercase tracking-wider px-4 py-2">
             <span>Account</span><span className="text-right">Amount</span>
           </div>
           {IS_ACCOUNTS.filter(a => a.where !== 'neither').map(a => (
             <div key={a.name} className="grid grid-cols-[1fr_7rem] px-4 py-1 text-sm border-t border-white/5">
-              <span className="text-white">{a.name} <span className="text-[10px] text-slate-500 uppercase">({a.where})</span></span>
+              <span className="text-white">{a.name} <span className="text-[10px] text-dim uppercase">({a.where})</span></span>
               <span className="text-right font-mono text-slate-200">{money(a.amt)}</span>
             </div>
           ))}
@@ -398,7 +398,7 @@ export default function Level16() {
                 <p className="text-sm font-semibold text-white mb-2">{f.label}</p>
                 {!checked3 && <HintBar open={hints.isOpen(f.k)} onToggle={() => hints.toggle(f.k)} text={f.hint} className="mb-2" />}
                 <div className="flex gap-2">
-                  <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">$</span>
+                  <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
                   <input inputMode="numeric" value={totals[f.k]} onChange={e => !checked3 && setTotals(p => ({ ...p, [f.k]: e.target.value }))} disabled={checked3}
                     placeholder="0" className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-purple-500 disabled:opacity-70 ${checked3 ? (ok ? 'border-green-500' : 'border-red-500') : 'border-slate-600'}`} />
                 </div>
@@ -431,7 +431,7 @@ export default function Level16() {
         <p className="text-sm text-slate-300 mb-2">Lakeside Outfitters reports:</p>
         <ul className="text-sm text-white space-y-1">
           <li>• Retained earnings, January 1: <span className="font-mono">{money(BEGIN_RE)}</span></li>
-          <li>• Net income for the year: <span className="font-mono">{money(NET_INCOME)}</span> <span className="text-xs text-slate-400">(from step 3)</span></li>
+          <li>• Net income for the year: <span className="font-mono">{money(NET_INCOME)}</span> <span className="text-xs text-dim">(from step 3)</span></li>
           <li>• Dividends declared: <span className="font-mono">{money(DIVIDENDS)}</span></li>
         </ul>
       </div>
@@ -439,7 +439,7 @@ export default function Level16() {
         <p className="text-sm font-semibold text-white mb-2">What is Retained earnings at December 31?</p>
         {!checked4 && <HintBar open={hints.isOpen('re')} onToggle={() => hints.toggle('re')} text="Beginning R/E + Net Income − Dividends. Profit adds to what the company has kept; dividends take some back out. Note dividends were never subtracted in getting to net income, so they come out here." className="mb-2" />}
         <div className="flex gap-2">
-          <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">$</span>
+          <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
           <input inputMode="numeric" value={reAns} onChange={e => !checked4 && setReAns(e.target.value)} disabled={checked4} placeholder="0"
             className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-purple-500 disabled:opacity-70 ${checked4 ? (reRight ? 'border-green-500' : 'border-red-500') : 'border-slate-600'}`} />
         </div>

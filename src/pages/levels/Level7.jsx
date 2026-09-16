@@ -148,7 +148,7 @@ export default function Level7() {
         <div className="mb-6">
           <div className="text-sm text-violet-400 font-semibold mb-1">Level 7</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Compound Journal Entries</h1>
-          <p className="text-slate-400">Real transactions rarely fit on two lines. Here is how to record the ones with three, four, or more.</p>
+          <p className="text-dim">Real transactions rarely fit on two lines. Here is how to record the ones with three, four, or more.</p>
         </div>
 
         <div className="rounded-2xl border border-violet-500/30 bg-violet-500/10 p-5 mb-6">
@@ -174,11 +174,11 @@ export default function Level7() {
           />
           <div className="grid grid-cols-2 gap-3 mt-3">
             <div className="rounded-lg bg-slate-800/60 p-3 text-center">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500">Total Debits</p>
+              <p className="text-[10px] uppercase tracking-wider text-dim">Total Debits</p>
               <p className="font-mono font-bold text-white">{money(9000)}</p>
             </div>
             <div className="rounded-lg bg-slate-800/60 p-3 text-center">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500">Total Credits</p>
+              <p className="text-[10px] uppercase tracking-wider text-dim">Total Credits</p>
               <p className="font-mono font-bold text-white">{money(9000)}</p>
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function Level7() {
               <span className="text-violet-400 font-bold text-sm shrink-0">#{i + 1}</span>
               <div>
                 <p className="font-semibold text-white text-sm">{item.rule}</p>
-                <p className="text-slate-400 text-xs mt-0.5">{item.detail}</p>
+                <p className="text-dim text-xs mt-0.5">{item.detail}</p>
               </div>
             </div>
           ))}
@@ -211,7 +211,7 @@ export default function Level7() {
         </button>
         <button
           onClick={() => { completeLevel(7); navigate('/') }}
-          className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+          className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5 transition-colors"
         >
           Skip the practice — mark this lesson read
         </button>
@@ -228,8 +228,8 @@ export default function Level7() {
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400 mb-2">
           {correct} / {TRANSACTIONS.length}
         </p>
-        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
-        <p className="text-slate-400 mb-8">
+        {hints.usedCount > 0 && <p className="text-xs text-dim mb-3">{hintTally(hints.usedCount)}</p>}
+        <p className="text-dim mb-8">
           {correct === TRANSACTIONS.length ? 'Every entry balanced and every account correct. That is exam-ready work.'
             : correct >= 4 ? 'Solid. Re-read the ones you missed — the split is usually on the payment side.'
             : 'Work through the lesson example again, then retry. Find the full price first, then split.'}
@@ -279,13 +279,13 @@ export default function Level7() {
         <HintBar open={hints.isOpen(tx.id)} onToggle={() => hints.toggle(tx.id)} text={tx.deeper} className="mb-4" />
       )}
 
-      <p className="text-xs text-slate-500 mb-2">
+      <p className="text-xs text-dim mb-2">
         Type an amount next to each account you need, in the Debit or Credit column. Leave the accounts you do not need blank — some are here as distractors.
       </p>
 
       <div className="rounded-xl border border-white/10 bg-slate-900/50 overflow-hidden mb-4">
-        <div className="grid grid-cols-[1fr_7rem_7rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 py-2">
-          <span>Account Description <span className="normal-case font-normal text-slate-500">· {tx.date}</span></span>
+        <div className="grid grid-cols-[1fr_7rem_7rem] bg-slate-800 text-[10px] font-bold text-dim uppercase tracking-wider px-3 py-2">
+          <span>Account Description <span className="normal-case font-normal text-dim">· {tx.date}</span></span>
           <span className="text-center">Debit</span>
           <span className="text-center">Credit</span>
         </div>
@@ -311,14 +311,14 @@ export default function Level7() {
           </div>
         ))}
         <div className="grid grid-cols-[1fr_7rem_7rem] items-center gap-2 px-3 py-2 border-t-2 border-white/20 bg-slate-800/60">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Totals</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-dim">Totals</span>
           <span className={`text-sm font-mono text-right pr-2 font-bold ${balanced ? 'text-green-400' : 'text-white'}`}>{money(totalDr)}</span>
           <span className={`text-sm font-mono text-right pr-2 font-bold ${balanced ? 'text-green-400' : 'text-white'}`}>{money(totalCr)}</span>
         </div>
       </div>
 
       {!checked && (
-        <p className={`text-sm text-center mb-4 ${balanced ? 'text-green-400' : totalDr || totalCr ? 'text-amber-400' : 'text-slate-500'}`}>
+        <p className={`text-sm text-center mb-4 ${balanced ? 'text-green-400' : totalDr || totalCr ? 'text-amber-400' : 'text-dim'}`}>
           {balanced ? '✓ Debits equal credits — this entry balances.'
             : totalDr || totalCr ? `Out of balance by ${money(Math.abs(totalDr - totalCr))}. Keep going.`
             : 'Enter your amounts. The totals update as you type.'}

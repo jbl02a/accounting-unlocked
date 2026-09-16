@@ -87,7 +87,7 @@ export default function Level2() {
         <div className="mb-6">
           <div className="text-sm text-cyan-400 font-semibold mb-1">Level 2</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Big 5 Account Types</h1>
-          <p className="text-slate-400">Every account in accounting belongs to one of these five families.</p>
+          <p className="text-dim">Every account in accounting belongs to one of these five families.</p>
         </div>
 
         <div className="space-y-3 mb-8">
@@ -112,7 +112,7 @@ export default function Level2() {
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-8">
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-dim">
             <span className="text-white font-semibold">Quick memory trick:</span> Assets and Expenses go UP with debits. Liabilities, Equity, and Revenue go UP with credits. You'll learn why in Level 3!
           </p>
         </div>
@@ -132,11 +132,11 @@ export default function Level2() {
       <div className="mb-4">
         <div className="text-sm text-cyan-400 font-semibold mb-1">Level 2 — Card Sort</div>
         <h1 className="text-2xl font-extrabold text-white mb-1">Sort 10 Cards into the Right Buckets</h1>
-        <p className="text-slate-400 text-sm">Drag cards into their bucket, or use the quick-place buttons.</p>
+        <p className="text-dim text-sm">Drag cards into their bucket, or use the quick-place buttons.</p>
       </div>
 
       {/* Score bar */}
-      <div className="flex items-center gap-2 text-sm text-slate-400 mb-4">
+      <div className="flex items-center gap-2 text-sm text-dim mb-4">
         <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
           <div className="h-full bg-cyan-500 transition-all duration-300" style={{ width: `${(placedCount / CARDS.length) * 100}%` }} />
         </div>
@@ -169,8 +169,8 @@ export default function Level2() {
               ))}
             </div>
           )}
-          <p className="text-xs text-slate-500 mb-3">
-            Tap a card&rsquo;s <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-slate-400 align-middle">?</span> if you want a nudge on it. Hints never cost you points.
+          <p className="text-xs text-dim mb-3">
+            Tap a card&rsquo;s <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-dim align-middle">?</span> if you want a nudge on it. Hints never cost you points.
           </p>
         </div>
       )}
@@ -193,7 +193,7 @@ export default function Level2() {
               <div className="flex items-center gap-2 mb-2">
                 <span>{bucket.icon}</span>
                 <span className={`text-xs font-bold uppercase tracking-wider ${c.text}`}>{bucket.label}</span>
-                <span className="text-xs text-slate-500">{bucket.desc}</span>
+                <span className="text-xs text-dim">{bucket.desc}</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {cardsHere.map(card => {
@@ -227,7 +227,7 @@ export default function Level2() {
       {/* Quick-place UI for mobile */}
       {!submitted && unplaced.length > 0 && (
         <details className="mb-4 rounded-xl bg-slate-900/50 border border-slate-700 overflow-hidden">
-          <summary className="px-4 py-2 text-sm text-slate-400 cursor-pointer hover:text-white">Quick-place (tap to expand)</summary>
+          <summary className="px-4 py-2 text-sm text-dim cursor-pointer hover:text-white">Quick-place (tap to expand)</summary>
           <div className="px-4 pb-4 space-y-2 mt-2">
             {unplaced.map(card => (
               <div key={card.id}>
@@ -252,7 +252,7 @@ export default function Level2() {
         <div className="mb-4 rounded-xl border border-white/10 bg-white/5 p-5">
           <div className="text-center mb-4">
             <p className="text-4xl font-black text-white">{score}%</p>
-            <p className="text-slate-400 text-sm">{Object.values(placed).filter((v, i) => v === CARDS[i]?.correct).length} / 10 correct</p>
+            <p className="text-dim text-sm">{Object.values(placed).filter((v, i) => v === CARDS[i]?.correct).length} / 10 correct</p>
           </div>
           {CARDS.filter(c => placed[c.id] !== c.correct).length > 0 && (
             <div>
@@ -260,16 +260,16 @@ export default function Level2() {
               {CARDS.filter(c => placed[c.id] !== c.correct).map(card => {
                 const correctBucket = BUCKETS.find(b => b.id === card.correct)
                 return (
-                  <div key={card.id} className="text-sm text-slate-400 mb-1">
+                  <div key={card.id} className="text-sm text-dim mb-1">
                     <span className="text-white">{card.emoji} {card.label}</span> belongs in <span className="font-semibold text-white">{correctBucket?.label}</span>
-                    {' '}<span className="text-slate-500">— you put it in {BUCKETS.find(b => b.id === placed[card.id])?.label || 'unplaced'}</span>
+                    {' '}<span className="text-dim">— you put it in {BUCKETS.find(b => b.id === placed[card.id])?.label || 'unplaced'}</span>
                   </div>
                 )
               })}
             </div>
           )}
           {score === 100 && <p className="text-center text-green-400 font-bold mt-2">🎉 Perfect! You know your account types cold.</p>}
-          {hints.usedCount > 0 && <p className="text-xs text-slate-400 mt-3">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-dim mt-3">{hintTally(hints.usedCount)}</p>}
         </div>
       )}
 

@@ -30,7 +30,7 @@ function OptionButton({ q, index, chosen, revealed, onPick }) {
       className={`w-full text-left rounded-xl border p-3 transition-colors ${state}`}
     >
       <div className="flex items-start gap-3">
-        <span className={`text-xs font-bold mt-1 shrink-0 ${selected && !revealed ? 'text-indigo-300' : 'text-slate-500'}`}>{'ABCD'[index]}</span>
+        <span className={`text-xs font-bold mt-1 shrink-0 ${selected && !revealed ? 'text-indigo-300' : 'text-dim'}`}>{'ABCD'[index]}</span>
         <div className="flex-1">
           {q.kind === 'entry' ? <EntryTable lines={q.options[index]} dense /> : <span className="text-sm text-white">{q.options[index]}</span>}
         </div>
@@ -197,7 +197,7 @@ export default function PracticeExam() {
             <span>📝</span><span>Optional — but this is the one that matters</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Practice Exam</h1>
-          <p className="text-slate-400">
+          <p className="text-dim">
             Transactions in plain English. You pick the right account, the right entry, the right column.
             Every question tells you why afterward.
           </p>
@@ -278,7 +278,7 @@ export default function PracticeExam() {
                 <button onClick={startFocus} className="w-full mt-3 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 text-white font-bold hover:opacity-90">
                   Start focus test ({focusCount}) →
                 </button>
-                <p className="text-[11px] text-slate-400 mt-2">
+                <p className="text-[11px] text-dim mt-2">
                   {weakIds.length > 0
                     ? `Worth doing after the ${weakIds.length} above — that drill fixes the ones you got wrong, this one checks the idea stuck on questions you have not seen.`
                     : `It does not replace the full exam — that one stays ${QUESTIONS.length} questions so your scores stay comparable.`}
@@ -296,7 +296,7 @@ export default function PracticeExam() {
                 <p className="font-bold text-white text-sm">
                   {reviewed.length} reviewed
                 </p>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-dim">
                   Missed once, since answered right. Nothing is ever deleted — come back whenever you
                   want to check they stuck.
                 </p>
@@ -334,8 +334,8 @@ export default function PracticeExam() {
         )}
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">How do you want to take it?</p>
-          <p className="text-xs text-slate-500 mb-3">
+          <p className="text-xs font-bold uppercase tracking-wider text-dim mb-1">How do you want to take it?</p>
+          <p className="text-xs text-dim mb-3">
             This sets the full exam, the Quick 15 and the topic drills. The focus test and the
             “questions I got wrong” drill always explain as you go.
           </p>
@@ -352,7 +352,7 @@ export default function PracticeExam() {
                 }`}
               >
                 <p className="font-bold text-white text-sm mb-1">{m.title} {mode === m.id && <span className="text-indigo-400">✓</span>}</p>
-                <p className="text-xs text-slate-400">{m.desc}</p>
+                <p className="text-xs text-dim">{m.desc}</p>
               </button>
             ))}
           </div>
@@ -369,7 +369,7 @@ export default function PracticeExam() {
                 <span className="text-3xl">{s.icon}</span>
                 <div className="flex-1">
                   <p className="font-bold text-white">{s.label}</p>
-                  <p className="text-sm text-slate-400">{s.blurb}</p>
+                  <p className="text-sm text-dim">{s.blurb}</p>
                 </div>
                 <span className="text-indigo-400 font-bold">→</span>
               </div>
@@ -377,8 +377,8 @@ export default function PracticeExam() {
           ))}
         </div>
 
-        <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Or drill one topic</p>
-        <p className="text-xs text-slate-500 mb-3">
+        <p className="text-xs font-bold uppercase tracking-wider text-dim mb-1">Or drill one topic</p>
+        <p className="text-xs text-dim mb-3">
           These pull from the exam bank and the extra practice questions together, so a topic drill goes
           further than the exam does on that topic.
         </p>
@@ -394,9 +394,9 @@ export default function PracticeExam() {
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-xl">{s.icon}</span>
                   <p className="font-semibold text-white text-sm">{s.label}</p>
-                  <span className="ml-auto text-xs text-slate-500">{count} Q</span>
+                  <span className="ml-auto text-xs text-dim">{count} Q</span>
                 </div>
-                <p className="text-xs text-slate-400">{s.blurb}</p>
+                <p className="text-xs text-dim">{s.blurb}</p>
               </button>
             )
           })}
@@ -404,7 +404,7 @@ export default function PracticeExam() {
 
         {attempts.length > 0 && (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Recent attempts</p>
+            <p className="text-xs font-bold uppercase tracking-wider text-dim mb-3">Recent attempts</p>
             <div className="divide-y divide-white/5">
               {attempts.slice(0, 5).map((a, i) => (
                 <div key={i} className="py-2 flex items-center gap-3 text-sm">
@@ -413,8 +413,8 @@ export default function PracticeExam() {
                     {a.label}
                     {a.kind === 'exam' && <span className="ml-1.5 text-[10px] text-indigo-300 font-semibold">GRADED</span>}
                   </span>
-                  <span className="text-slate-500 text-xs">{a.correct}/{a.total}</span>
-                  <span className="text-slate-600 text-xs hidden sm:inline">{new Date(a.date).toLocaleDateString()}</span>
+                  <span className="text-dim text-xs">{a.correct}/{a.total}</span>
+                  <span className="text-dim text-xs hidden sm:inline">{new Date(a.date).toLocaleDateString()}</span>
                 </div>
               ))}
             </div>
@@ -440,8 +440,8 @@ export default function PracticeExam() {
           <div className="text-5xl mb-3">{score === 100 ? '🏆' : score >= 80 ? '🎉' : score >= 60 ? '📈' : '📚'}</div>
           <h1 className="text-3xl font-extrabold text-white mb-1">{scopeLabel}</h1>
           <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 my-3">{score}%</p>
-          <p className="text-slate-400">{correctCount} of {questions.length} correct</p>
-          <p className="text-slate-400 text-sm mt-3 max-w-md mx-auto">
+          <p className="text-dim">{correctCount} of {questions.length} correct</p>
+          <p className="text-dim text-sm mt-3 max-w-md mx-auto">
             {score === 100 ? 'Flawless. Walk into that exam.'
               : score >= 80 ? 'Exam-ready. Read the misses below and you are in great shape.'
               : score >= 60 ? 'Good foundation. The section breakdown shows exactly where to spend your time.'
@@ -450,7 +450,7 @@ export default function PracticeExam() {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
-          <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">By topic</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-dim mb-3">By topic</p>
           <div className="space-y-3">
             {bySection.map(s => {
               const pct = Math.round((s.correct / s.total) * 100)
@@ -505,7 +505,7 @@ export default function PracticeExam() {
                 </div>
                 <div className="text-sm space-y-1 mb-2 pl-1">
                   <div className="flex gap-2">
-                    <span className="text-slate-500 shrink-0 text-xs pt-0.5">Correct:</span>
+                    <span className="text-dim shrink-0 text-xs pt-0.5">Correct:</span>
                     <div className="flex-1">
                       {item.kind === 'entry'
                         ? <EntryTable lines={item.options[item.correctIndex]} dense />
@@ -514,9 +514,9 @@ export default function PracticeExam() {
                   </div>
                   {!right && (
                     <div className="flex gap-2">
-                      <span className="text-slate-500 shrink-0 text-xs pt-0.5">You said:</span>
+                      <span className="text-dim shrink-0 text-xs pt-0.5">You said:</span>
                       <div className="flex-1">
-                        {chosen === undefined ? <span className="text-slate-500 italic">skipped</span>
+                        {chosen === undefined ? <span className="text-dim italic">skipped</span>
                           : item.kind === 'entry'
                             ? <EntryTable lines={item.options[chosen]} dense />
                             : <span className="text-red-300">{item.options[chosen]}</span>}
@@ -524,7 +524,7 @@ export default function PracticeExam() {
                     </div>
                   )}
                 </div>
-                <p className="text-xs text-slate-400 leading-relaxed">{item.explanation}</p>
+                <p className="text-xs text-dim leading-relaxed">{item.explanation}</p>
 
                 {/* In exam mode this review is the only place he sees the answers,
                     so the "I got that right but I guessed" escape hatch lives here too. */}
@@ -539,7 +539,7 @@ export default function PracticeExam() {
                   ) : (
                     <button
                       onClick={() => setHold(item.id, true)}
-                      className="mt-2 text-[11px] px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-400 font-semibold hover:bg-white/10 hover:text-slate-200"
+                      className="mt-2 text-[11px] px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-dim font-semibold hover:bg-white/10 hover:text-slate-200"
                     >
                       📌 Not sure — keep it on my list
                     </button>
@@ -563,7 +563,7 @@ export default function PracticeExam() {
       <div className="mb-4">
         <div className="flex items-center justify-between text-sm mb-2">
           <span className="text-indigo-400 font-semibold">Question {index + 1} of {questions.length}</span>
-          <span className="text-slate-500">{answeredCount} answered</span>
+          <span className="text-dim">{answeredCount} answered</span>
         </div>
         <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
           <div className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-300" style={{ width: `${((index + 1) / questions.length) * 100}%` }} />
@@ -571,7 +571,7 @@ export default function PracticeExam() {
       </div>
 
       <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-5">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">{sectionMeta?.icon} {sectionMeta?.label}</p>
+        <p className="text-[10px] font-bold uppercase tracking-wider text-dim mb-2">{sectionMeta?.icon} {sectionMeta?.label}</p>
         <p className="font-semibold text-white">{q.prompt}</p>
       </div>
 
@@ -603,7 +603,7 @@ export default function PracticeExam() {
                 </div>
               ) : (
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xs text-slate-400">Sure about that one?</span>
+                  <span className="text-xs text-dim">Sure about that one?</span>
                   <button
                     onClick={() => setHold(q.id, true)}
                     className="text-xs px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-200 font-semibold hover:bg-amber-500/30"
@@ -649,11 +649,11 @@ export default function PracticeExam() {
       )}
       <button
         onClick={() => { clearExamSession(); setSaved(null); setStage('setup') }}
-        className="w-full mt-4 text-xs text-slate-600 hover:text-slate-400"
+        className="w-full mt-4 text-xs text-dim hover:text-white"
       >
         Quit and start over
       </button>
-      <p className="text-[10px] text-slate-600 text-center mt-2">
+      <p className="text-[10px] text-dim text-center mt-2">
         Your place is saved automatically — you can close this and come back to it.
       </p>
     </div>

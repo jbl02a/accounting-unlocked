@@ -30,11 +30,11 @@ export function ProblemSetsIndex() {
           <span>🗂️</span><span>Straight from your TA</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Problem Sets</h1>
-        <p className="text-slate-400">
+        <p className="text-dim">
           Your TA's practice problems, worked one step at a time. Every answer is marked instantly, with
           the reason it is right and the trap it was built around.
         </p>
-        <p className="text-slate-500 text-sm mt-2">
+        <p className="text-dim text-sm mt-2">
           These are separate from the levels and the practice exam — nothing here repeats work you have
           already done.
         </p>
@@ -54,11 +54,11 @@ export function ProblemSetsIndex() {
                 <span className="text-3xl shrink-0">{set.icon}</span>
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-white">{set.title}</p>
-                  <p className="text-sm text-slate-400 mt-0.5">{set.blurb}</p>
+                  <p className="text-sm text-dim mt-0.5">{set.blurb}</p>
                   <div className="flex flex-wrap items-center gap-2 mt-2 text-[11px]">
-                    <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-slate-400">{set.source}</span>
-                    <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-slate-400">{set.steps.length} steps</span>
-                    <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-slate-400">~{set.minutes} min</span>
+                    <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-dim">{set.source}</span>
+                    <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-dim">{set.steps.length} steps</span>
+                    <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-dim">~{set.minutes} min</span>
                     {s.attempted === 0 ? (
                       <span className="rounded-full px-2 py-0.5 font-semibold border bg-emerald-500/15 border-emerald-500/40 text-emerald-300">
                         Not started
@@ -92,7 +92,7 @@ export function ProblemSetsIndex() {
         <span className="text-2xl">🖨️</span>
         <div className="flex-1">
           <p className="font-bold text-white text-sm">Printable answer key</p>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-dim">
             All four problems worked in full, with the reason and the trap for every step — for checking
             work done on paper.
           </p>
@@ -100,7 +100,7 @@ export function ProblemSetsIndex() {
         <span className="text-emerald-400 font-bold">→</span>
       </Link>
 
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-400">
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-dim">
         <p className="font-bold text-white text-sm mb-1">How these differ from the practice exam</p>
         <p>
           The exam asks one question at a time. These are whole problems — journalize, post, foot the
@@ -148,11 +148,11 @@ function EntryBuilder({ step, accounts, value, onChange, disabled }) {
   return (
     <div className="space-y-3">
       <div>
-        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Debit</p>
+        <p className="text-[11px] font-bold uppercase tracking-wider text-dim mb-1.5">Debit</p>
         <div className="space-y-2">{rows('debits').map(i => <Row key={`d${i}`} side="debits" i={i} />)}</div>
       </div>
       <div>
-        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1.5 pl-6">Credit</p>
+        <p className="text-[11px] font-bold uppercase tracking-wider text-dim mb-1.5 pl-6">Credit</p>
         <div className="space-y-2 pl-6">{rows('credits').map(i => <Row key={`c${i}`} side="credits" i={i} />)}</div>
       </div>
     </div>
@@ -274,10 +274,10 @@ export function ProblemSetRunner() {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="mb-4">
-        <Link to="/problems" className="text-xs text-slate-500 hover:text-slate-300">← All problem sets</Link>
+        <Link to="/problems" className="text-xs text-dim hover:text-white">← All problem sets</Link>
         <div className="flex items-center justify-between text-sm mt-2 mb-2 gap-3">
           <span className="text-emerald-400 font-semibold truncate">{set.icon} {set.title}</span>
-          <span className="text-slate-500 shrink-0">Step {index + 1} of {set.steps.length}</span>
+          <span className="text-dim shrink-0">Step {index + 1} of {set.steps.length}</span>
         </div>
         <div className="h-1.5 rounded-full bg-white/10 overflow-hidden">
           <div className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300"
@@ -293,7 +293,7 @@ export function ProblemSetRunner() {
 
       <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-5">
         {step.group && <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-1">{step.group}</p>}
-        {step.date && <p className="text-xs text-slate-500 mb-1">{step.date}</p>}
+        {step.date && <p className="text-xs text-dim mb-1">{step.date}</p>}
         <p className="font-semibold text-white">{step.prompt}</p>
       </div>
 
@@ -314,7 +314,7 @@ export function ProblemSetRunner() {
                 onClick={() => setAnswers(p => ({ ...p, [step.id]: i }))}
                 className={`w-full text-left rounded-xl border p-3 transition-colors ${cls}`}>
                 <div className="flex items-start gap-3">
-                  <span className="text-xs font-bold mt-0.5 shrink-0 text-slate-500">{'ABCD'[i]}</span>
+                  <span className="text-xs font-bold mt-0.5 shrink-0 text-dim">{'ABCD'[i]}</span>
                   <span className="text-sm text-white flex-1">{opt}</span>
                   {isAnswer && <span className="text-green-400">✓</span>}
                   {isWrongPick && <span className="text-red-400">✗</span>}
@@ -354,7 +354,7 @@ export function ProblemSetRunner() {
           />
           {result && !result.correct && (
             <div className="mt-4 pt-3 border-t border-white/10">
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">The entry</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-dim mb-1.5">The entry</p>
               {step.answer.debits.map(([a, n], i) => (
                 <p key={`d${i}`} className="text-sm text-green-300">Dr {a} <span className="float-right">{money(n)}</span></p>
               ))}
@@ -432,7 +432,7 @@ export function ProblemSetRunner() {
           </div>
         ) : (
           <button onClick={() => setShowHint(true)}
-            className="w-full mb-5 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-400 text-sm hover:bg-white/10 hover:text-slate-200">
+            className="w-full mb-5 py-2 rounded-xl bg-white/5 border border-white/10 text-dim text-sm hover:bg-white/10 hover:text-slate-200">
             Stuck? Get a hint
           </button>
         )
@@ -506,7 +506,7 @@ export function ProblemSetRunner() {
 
       {answeredAll && (
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
-          <p className="text-sm text-slate-400">You have worked every step of this problem.</p>
+          <p className="text-sm text-dim">You have worked every step of this problem.</p>
           <p className="text-2xl font-extrabold text-white my-1">{rightCount} of {set.steps.length} right first time</p>
           <div className="flex flex-col sm:flex-row gap-2 mt-3">
             <button onClick={() => { setAnswers({}); setChecked({}); setIndex(0) }}

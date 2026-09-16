@@ -19,7 +19,7 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="hidden md:flex items-center gap-1 text-sm text-slate-400">
+          <div className="hidden md:flex items-center gap-1 text-sm text-dim">
             <span className="text-indigo-400 font-semibold">{totalCompleted}</span>
             <span>/{totalLevels} levels done</span>
           </div>
@@ -29,7 +29,7 @@ export default function Navbar() {
             to="/problems"
             className={`text-sm px-3 py-1.5 rounded-lg transition-colors font-medium ${
               location.pathname.startsWith('/problems')
-                ? 'bg-emerald-600 text-white'
+                ? 'bg-emerald-700 text-white'
                 : 'text-slate-300 hover:text-white hover:bg-white/10'
             }`}
           >
@@ -42,7 +42,7 @@ export default function Navbar() {
             onClick={() => {
               if (window.confirm('Reset all progress? This cannot be undone.')) resetProgress()
             }}
-            className="text-xs text-slate-500 hover:text-red-400 transition-colors"
+            className="text-xs text-dim hover:text-red-400 transition-colors"
             title="Reset progress"
           >
             Reset

@@ -92,9 +92,9 @@ function FinishedTB() {
       <div className="bg-slate-800 px-4 py-3 text-center">
         <p className="font-bold text-white">Bayside Landscaping</p>
         <p className="text-sm text-slate-300">Trial Balance</p>
-        <p className="text-xs text-slate-500">June 30, 2025</p>
+        <p className="text-xs text-dim">June 30, 2025</p>
       </div>
-      <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800/60 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 py-1.5 border-t border-white/10">
+      <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800/60 text-[10px] font-bold text-dim uppercase tracking-wider px-4 py-1.5 border-t border-white/10">
         <span>Account</span><span className="text-right">Debit</span><span className="text-right">Credit</span>
       </div>
       {TB.map(a => {
@@ -171,7 +171,7 @@ export default function Level9() {
         <div className="mb-6">
           <div className="text-sm text-amber-400 font-semibold mb-1">Level 9</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Trial Balance</h1>
-          <p className="text-slate-400">Every ledger balance, listed in one place, in one specific order, in the right column — and the two columns must match.</p>
+          <p className="text-dim">Every ledger balance, listed in one place, in one specific order, in the right column — and the two columns must match.</p>
         </div>
 
         <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5 mb-6">
@@ -188,7 +188,7 @@ export default function Level9() {
                 <span className="shrink-0 w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center">{row.n}</span>
                 <div>
                   <p className={`font-bold text-sm ${row.tone}`}>{row.label}</p>
-                  <p className="text-xs text-slate-400">{row.detail}</p>
+                  <p className="text-xs text-dim">{row.detail}</p>
                 </div>
               </li>
             ))}
@@ -266,7 +266,7 @@ export default function Level9() {
         </button>
         <button
           onClick={() => { completeLevel(9); navigate('/') }}
-          className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+          className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5 transition-colors"
         >
           Skip the practice — mark this lesson read
         </button>
@@ -282,13 +282,13 @@ export default function Level9() {
           <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '🧮'}</div>
           <h2 className="text-3xl font-extrabold text-white mb-2">Trial Balance Complete</h2>
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-400 mb-2">{pct}%</p>
-          <p className="text-slate-400 text-sm">
+          <p className="text-dim text-sm">
             Columns {placementCorrect}/{TB.length} · Order {orderCorrect}/{ORDER_QUIZ.length} · Totals {totalsCorrect}/2
           </p>
-          {hints.usedCount > 0 && <p className="text-xs text-slate-500 mt-2">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-dim mt-2">{hintTally(hints.usedCount)}</p>}
         </div>
 
-        <p className="text-sm text-slate-400 mb-3 text-center">Here is the finished statement. This is the format to reproduce on your exam.</p>
+        <p className="text-sm text-dim mb-3 text-center">Here is the finished statement. This is the format to reproduce on your exam.</p>
         <div className="mb-6"><FinishedTB /></div>
 
         <div className="flex flex-col sm:flex-row gap-3">
@@ -321,11 +321,11 @@ export default function Level9() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader />
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-dim mb-4">
           These are Bayside Landscaping&rsquo;s ledger balances on June 30. For each one, choose the column it belongs in on the trial balance.
         </p>
-        <p className="text-xs text-slate-500 mb-4">
-          Stuck on one? Tap its <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-slate-400 align-middle">?</span> for a nudge — it points you at the reasoning without giving away the column. Hints are optional and never cost you points, so skip them on the accounts you already know.
+        <p className="text-xs text-dim mb-4">
+          Stuck on one? Tap its <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-dim align-middle">?</span> for a nudge — it points you at the reasoning without giving away the column. Hints are optional and never cost you points, so skip them on the accounts you already know.
         </p>
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
           {TB.map((a, i) => {
@@ -337,7 +337,7 @@ export default function Level9() {
                 <div className="flex items-center gap-2">
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-white truncate">{a.name}</p>
-                    <p className="text-xs text-slate-500 font-mono">{money(a.amount)}</p>
+                    <p className="text-xs text-dim font-mono">{money(a.amount)}</p>
                   </div>
                   {!checked1 && (
                     <button
@@ -347,7 +347,7 @@ export default function Level9() {
                       className={`w-7 h-7 shrink-0 rounded-full text-xs font-bold border transition-colors ${
                         hints.isOpen(a.name)
                           ? 'border-sky-400 bg-sky-900/40 text-sky-200'
-                          : 'border-slate-600 bg-slate-800 text-slate-400 hover:border-sky-400 hover:text-sky-300'
+                          : 'border-slate-600 bg-slate-800 text-dim hover:border-sky-400 hover:text-sky-300'
                       }`}
                     >
                       ?
@@ -364,7 +364,7 @@ export default function Level9() {
                         className={`w-16 py-1.5 rounded-lg text-xs font-bold uppercase border transition-colors ${
                           isAnswer ? 'border-green-500 bg-green-900/40 text-green-300'
                             : selected ? 'border-amber-500 bg-amber-900/30 text-white'
-                            : 'border-slate-600 bg-slate-800 text-slate-400 hover:border-amber-400'
+                            : 'border-slate-600 bg-slate-800 text-dim hover:border-amber-400'
                         }`}
                       >
                         {s === 'debit' ? 'DR' : 'CR'}
@@ -383,7 +383,7 @@ export default function Level9() {
           <div className={`rounded-xl p-4 mb-5 ${placementCorrect === TB.length ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
             <p className="font-bold text-white">{placementCorrect} of {TB.length} in the right column</p>
             {placementCorrect < TB.length && <p className="text-sm text-slate-300 mt-1">The reason for each miss is shown in amber above. Dividends and Accumulated Depreciation are the two that catch almost everyone.</p>}
-            {hints.usedCount > 0 && <p className="text-xs text-slate-400 mt-2">{hintTally(hints.usedCount)}</p>}
+            {hints.usedCount > 0 && <p className="text-xs text-dim mt-2">{hintTally(hints.usedCount)}</p>}
           </div>
         )}
 
@@ -412,7 +412,7 @@ export default function Level9() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader />
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-dim mb-4">
           Tap the accounts in the order they belong on a trial balance — assets, then liabilities, then equity, then revenue, then expenses.
         </p>
 
@@ -421,8 +421,8 @@ export default function Level9() {
         )}
 
         <div className="rounded-xl border border-white/10 bg-slate-900/50 p-4 mb-4">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">Your trial balance</p>
-          {ordered.length === 0 && <p className="text-sm text-slate-600 italic py-2">Empty — tap an account below to start.</p>}
+          <p className="text-[10px] font-bold uppercase tracking-wider text-dim mb-2">Your trial balance</p>
+          {ordered.length === 0 && <p className="text-sm text-dim italic py-2">Empty — tap an account below to start.</p>}
           <div className="space-y-1.5">
             {ordered.map((name, i) => {
               const right = checked2 && ORDER_QUIZ[i] === name
@@ -431,7 +431,7 @@ export default function Level9() {
                 <div key={name} className={`flex items-center gap-3 rounded-lg px-3 py-2 border ${
                   right ? 'border-green-600 bg-green-900/20' : wrong ? 'border-red-600 bg-red-900/20' : 'border-white/10 bg-white/5'
                 }`}>
-                  <span className="text-xs font-bold text-slate-500 w-4">{i + 1}</span>
+                  <span className="text-xs font-bold text-dim w-4">{i + 1}</span>
                   <span className="text-sm text-white flex-1">{name}</span>
                   {checked2 && (right ? <span className="text-green-400 text-sm">✓</span> : <span className="text-xs text-amber-300">should be {ORDER_QUIZ[i]}</span>)}
                 </div>
@@ -454,7 +454,7 @@ export default function Level9() {
               ))}
             </div>
             {ordered.length > 0 && (
-              <button onClick={() => setOrdered(o => o.slice(0, -1))} className="text-xs text-slate-500 hover:text-white mb-4">
+              <button onClick={() => setOrdered(o => o.slice(0, -1))} className="text-xs text-dim hover:text-white mb-4">
                 ← Undo last
               </button>
             )}
@@ -493,7 +493,7 @@ export default function Level9() {
   return (
     <div className="max-w-2xl mx-auto">
       <StepHeader />
-      <p className="text-sm text-slate-400 mb-4">
+      <p className="text-sm text-dim mb-4">
         Here is the finished trial balance with every account in place. Add up each column and enter the totals.
       </p>
 
@@ -502,7 +502,7 @@ export default function Level9() {
       )}
 
       <div className="mb-5 rounded-xl border border-white/10 overflow-hidden">
-        <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-4 py-2">
+        <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800 text-[10px] font-bold text-dim uppercase tracking-wider px-4 py-2">
           <span>Account</span><span className="text-right">Debit</span><span className="text-right">Credit</span>
         </div>
         {TB.map(a => (
@@ -513,7 +513,7 @@ export default function Level9() {
           </div>
         ))}
         <div className="grid grid-cols-[1fr_6.5rem_6.5rem] gap-2 px-4 py-2 border-t-2 border-white/20 bg-slate-800/60 items-center">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Totals</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-dim">Totals</span>
           <input
             inputMode="numeric" value={drTotal} onChange={e => !checked3 && setDrTotal(e.target.value)} disabled={checked3}
             placeholder="?"

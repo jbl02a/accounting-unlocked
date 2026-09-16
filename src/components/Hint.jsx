@@ -26,7 +26,7 @@ export function HintToggle({ open, onClick, label = 'this item', className = '' 
       className={`w-7 h-7 shrink-0 rounded-full text-xs font-bold border transition-colors ${
         open
           ? 'border-sky-400 bg-sky-900/40 text-sky-200'
-          : 'border-slate-600 bg-slate-800 text-slate-400 hover:border-sky-400 hover:text-sky-300'
+          : 'border-slate-600 bg-slate-800 text-dim hover:border-sky-400 hover:text-sky-300'
       } ${className}`}
     >
       ?
@@ -50,7 +50,7 @@ export function HintBar({ open, onToggle, text, className = '' }) {
       {!open ? (
         <button
           onClick={onToggle}
-          className="flex items-center gap-2 text-xs text-slate-500 hover:text-sky-300 transition-colors"
+          className="flex items-center gap-2 text-xs text-dim hover:text-sky-300 transition-colors"
         >
           <span className="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center text-[10px] font-bold">?</span>
           Stuck? Get a hint
@@ -58,7 +58,7 @@ export function HintBar({ open, onToggle, text, className = '' }) {
       ) : (
         <div>
           <HintPanel>{text}</HintPanel>
-          <button onClick={onToggle} className="mt-1 text-[10px] text-slate-600 hover:text-slate-400">hide hint</button>
+          <button onClick={onToggle} className="mt-1 text-[10px] text-dim hover:text-white">hide hint</button>
         </div>
       )}
     </div>

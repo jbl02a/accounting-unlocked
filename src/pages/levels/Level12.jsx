@@ -92,17 +92,17 @@ export default function Level12() {
         <div className="mb-6">
           <div className="text-sm text-blue-400 font-semibold mb-1">Level 12</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Accrual Accounting &amp; Why We Adjust</h1>
-          <p className="text-slate-400">Chapter 3 opens here. Everything about adjusting entries follows from one idea: cash almost never moves in the same period as the revenue or expense it belongs to.</p>
+          <p className="text-dim">Chapter 3 opens here. Everything about adjusting entries follows from one idea: cash almost never moves in the same period as the revenue or expense it belongs to.</p>
         </div>
 
         <div className="rounded-xl border border-white/10 overflow-hidden mb-6">
-          <div className="grid grid-cols-[9rem_1fr_1fr] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 py-2 gap-2">
+          <div className="grid grid-cols-[9rem_1fr_1fr] bg-slate-800 text-[10px] font-bold text-dim uppercase tracking-wider px-3 py-2 gap-2">
             <span></span><span>Cash Basis</span><span className="text-blue-300">Accrual Basis (GAAP)</span>
           </div>
           {BASIS_ROWS.map((r, i) => (
             <div key={i} className="grid grid-cols-[9rem_1fr_1fr] px-3 py-2 gap-2 text-xs border-t border-white/5">
               <span className="font-semibold text-blue-300">{r.q}</span>
-              <span className="text-slate-400">{r.cash}</span>
+              <span className="text-dim">{r.cash}</span>
               <span className="text-slate-200">{r.accrual}</span>
             </div>
           ))}
@@ -127,7 +127,7 @@ export default function Level12() {
                 <span className="shrink-0 w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center">{i + 1}</span>
                 <div>
                   <p className="font-bold text-sm text-white">{r.rule}</p>
-                  <p className="text-xs text-slate-400">{r.detail}</p>
+                  <p className="text-xs text-dim">{r.detail}</p>
                 </div>
               </div>
             ))}
@@ -135,7 +135,7 @@ export default function Level12() {
         </div>
 
         <h3 className="font-bold text-white mb-1">The four types — and the only question that sorts them</h3>
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-dim mb-4">
           Ask: <span className="text-white font-semibold">did the cash move first, or did the revenue/expense happen first?</span> Cash first = a DEFERRAL. Cash later = an ACCRUAL.
         </p>
         <div className="space-y-3 mb-6">
@@ -145,10 +145,10 @@ export default function Level12() {
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${t.family === 'Deferral' ? 'bg-amber-500/20 text-amber-300' : 'bg-emerald-500/20 text-emerald-300'}`}>{t.family}</span>
                 <p className="font-bold text-white text-sm">{t.label}</p>
               </div>
-              <p className="text-xs text-slate-400 mb-1">{t.timing}</p>
+              <p className="text-xs text-dim mb-1">{t.timing}</p>
               <p className="text-sm text-slate-300 mb-3">{t.plain}</p>
               <EntryTable lines={t.entry} dense />
-              <p className="text-xs text-slate-400 mt-2"><span className="text-white font-semibold">Shape:</span> {t.shape}</p>
+              <p className="text-xs text-dim mt-2"><span className="text-white font-semibold">Shape:</span> {t.shape}</p>
             </div>
           ))}
         </div>
@@ -156,7 +156,7 @@ export default function Level12() {
         <button onClick={() => setPhase('play')} className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg hover:opacity-90">
           Practice: {total} questions →
         </button>
-        <button onClick={() => { completeLevel(12); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5">
+        <button onClick={() => { completeLevel(12); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5">
           Skip the practice — mark this lesson read
         </button>
       </div>
@@ -170,8 +170,8 @@ export default function Level12() {
         <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '📘'}</div>
         <h2 className="text-3xl font-extrabold text-white mb-2">Accrual Basics Complete</h2>
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 mb-2">{earned} / {total}</p>
-        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
-        <p className="text-slate-400 mb-8">
+        {hints.usedCount > 0 && <p className="text-xs text-dim mb-3">{hintTally(hints.usedCount)}</p>}
+        <p className="text-dim mb-8">
           {pct === 100 ? 'You can sort any adjustment into its type. Now go make the entries.'
             : 'Re-read the four types — the sorting question is always "did cash move first?"'}
         </p>
@@ -213,7 +213,7 @@ export default function Level12() {
                 className={`w-full text-left rounded-xl border p-3 flex items-start gap-3 transition-colors ${
                   isAnswer ? 'border-green-500 bg-green-900/30' : isWrong ? 'border-red-500 bg-red-900/30'
                   : chosen !== null ? 'border-white/10 bg-white/5 opacity-60' : 'border-white/10 bg-white/5 hover:border-blue-400 hover:bg-white/10'}`}>
-                <span className="text-xs font-bold text-slate-500 mt-0.5">{'ABCD'[i]}</span>
+                <span className="text-xs font-bold text-dim mt-0.5">{'ABCD'[i]}</span>
                 <span className="text-sm text-white flex-1">{opt}</span>
                 {isAnswer && <span className="text-green-400">✓</span>}
                 {isWrong && <span className="text-red-400">✗</span>}
@@ -267,7 +267,7 @@ export default function Level12() {
                 isAnswer ? 'border-green-500 bg-green-900/30' : isWrong ? 'border-red-500 bg-red-900/30'
                 : cChosen !== null ? 'border-white/10 bg-white/5 opacity-60' : 'border-white/10 bg-white/5 hover:border-blue-400 hover:bg-white/10'}`}>
               <p className="text-sm font-semibold text-white">{t.label}</p>
-              <p className="text-[11px] text-slate-400 mt-0.5">{t.timing}</p>
+              <p className="text-[11px] text-dim mt-0.5">{t.timing}</p>
             </button>
           )
         })}
@@ -278,7 +278,7 @@ export default function Level12() {
             <p className="font-bold text-white mb-2">{cChosen === c.answer ? '✅ Correct' : `📖 This is a ${TYPES.find(t => t.id === c.answer).label}`}</p>
             <p className="text-sm text-slate-300 mb-3">{TYPES.find(t => t.id === c.answer).plain}</p>
             <EntryTable lines={TYPES.find(t => t.id === c.answer).entry} dense />
-            <p className="text-xs text-slate-400 mt-2">Shape: {TYPES.find(t => t.id === c.answer).shape} (amounts will differ).</p>
+            <p className="text-xs text-dim mt-2">Shape: {TYPES.find(t => t.id === c.answer).shape} (amounts will differ).</p>
           </div>
           <button onClick={() => {
             if (cIndex + 1 >= CLASSIFY.length) {

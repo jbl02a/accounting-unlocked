@@ -45,9 +45,9 @@ export default function LevelCard({ levelNum, levelData }) {
               </span>
             )}
           </div>
-          <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Level {levelNum}</div>
+          <div className="text-xs font-semibold text-dim uppercase tracking-wider mb-1">Level {levelNum}</div>
           <h3 className="font-bold text-lg text-white mb-1 group-hover:text-indigo-300 transition-colors">{meta.title}</h3>
-          <p className="text-sm text-slate-400">{meta.desc}</p>
+          <p className="text-sm text-dim">{meta.desc}</p>
           <div className={`mt-4 text-xs font-semibold text-transparent bg-clip-text bg-gradient-to-r ${meta.color}`}>
             {completed ? '↩ Play again' : '→ Start level'}
           </div>

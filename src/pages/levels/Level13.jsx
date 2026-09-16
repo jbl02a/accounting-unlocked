@@ -131,7 +131,7 @@ export default function Level13() {
         <div className="mb-6">
           <div className="text-sm text-amber-400 font-semibold mb-1">Level 13</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Deferrals — Cash Came First</h1>
-          <p className="text-slate-400">Prepayments. The money moved in an earlier period, so at period end you record however much of it has now been used up or earned.</p>
+          <p className="text-dim">Prepayments. The money moved in an earlier period, so at period end you record however much of it has now been used up or earned.</p>
         </div>
 
         <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5 mb-6">
@@ -140,14 +140,14 @@ export default function Level13() {
           <div className="grid sm:grid-cols-2 gap-3">
             <div className="rounded-xl bg-black/20 p-3">
               <p className="font-bold text-amber-300 text-sm mb-1">Deferred EXPENSE (Prepaid)</p>
-              <p className="text-xs text-slate-400 mb-2">You paid in advance. It is an ASSET until used.</p>
-              <p className="text-[11px] text-slate-500">Paid: Dr Prepaid Insurance / Cr Cash</p>
+              <p className="text-xs text-dim mb-2">You paid in advance. It is an ASSET until used.</p>
+              <p className="text-[11px] text-dim">Paid: Dr Prepaid Insurance / Cr Cash</p>
               <p className="text-[11px] text-white">Adjust: Dr Insurance Expense / Cr Prepaid Insurance</p>
             </div>
             <div className="rounded-xl bg-black/20 p-3">
               <p className="font-bold text-amber-300 text-sm mb-1">Deferred REVENUE (Unearned)</p>
-              <p className="text-xs text-slate-400 mb-2">They paid in advance. It is a LIABILITY until earned.</p>
-              <p className="text-[11px] text-slate-500">Received: Dr Cash / Cr Unearned Revenue</p>
+              <p className="text-xs text-dim mb-2">They paid in advance. It is a LIABILITY until earned.</p>
+              <p className="text-[11px] text-dim">Received: Dr Cash / Cr Unearned Revenue</p>
               <p className="text-[11px] text-white">Adjust: Dr Unearned Revenue / Cr Service Revenue</p>
             </div>
           </div>
@@ -164,11 +164,11 @@ export default function Level13() {
               <div key={i} className="rounded-lg bg-slate-900/60 border border-white/10 p-3">
                 <p className="text-sm font-semibold text-white">{c.t}</p>
                 <p className="text-xs text-amber-300 font-mono my-1">{c.f}</p>
-                <p className="text-xs text-slate-400">{c.ex}</p>
+                <p className="text-xs text-dim">{c.ex}</p>
               </div>
             ))}
           </div>
-          <p className="text-xs text-slate-400 mt-3">
+          <p className="text-xs text-dim mt-3">
             The trap in all three: the number you want is usually <span className="text-white font-semibold">not printed in the problem</span>. You have to compute it.
           </p>
         </div>
@@ -192,7 +192,7 @@ export default function Level13() {
         <button onClick={() => setPhase('play')} className="w-full py-4 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-lg hover:opacity-90">
           Prepare 4 adjusting entries →
         </button>
-        <button onClick={() => { completeLevel(13); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5">
+        <button onClick={() => { completeLevel(13); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5">
           Skip the practice — mark this lesson read
         </button>
       </div>
@@ -206,9 +206,9 @@ export default function Level13() {
         <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '🛡️'}</div>
         <h2 className="text-3xl font-extrabold text-white mb-2">Deferrals Complete</h2>
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 mb-2">{pct}%</p>
-        <p className="text-slate-400 text-sm mb-2">{earned} of {maxPoints} points — one for each entry, one for each follow-up balance.</p>
-        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
-        <p className="text-slate-400 mb-8">
+        <p className="text-dim text-sm mb-2">{earned} of {maxPoints} points — one for each entry, one for each follow-up balance.</p>
+        {hints.usedCount > 0 && <p className="text-xs text-dim mb-3">{hintTally(hints.usedCount)}</p>}
+        <p className="text-dim mb-8">
           {pct === 100 ? 'Every computation and every account correct. Deferrals are the harder half — well done.'
             : 'The computation is where most points are lost. Redo the three formulas in the lesson, then run it again.'}
         </p>
@@ -250,19 +250,19 @@ export default function Level13() {
       {!checked && <HintBar open={hints.isOpen(item.id)} onToggle={() => hints.toggle(item.id)} text={item.hint} className="mb-4" />}
 
       <div className="rounded-xl border border-white/10 bg-slate-900/50 p-4 mb-4">
-        <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Amount of the adjustment</label>
+        <label className="block text-xs font-bold uppercase tracking-wider text-dim mb-2">Amount of the adjustment</label>
         <div className="flex gap-2 mb-4">
-          <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">$</span>
+          <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
           <input inputMode="numeric" value={amount} onChange={e => !checked && setAmount(e.target.value)} disabled={checked}
             placeholder="compute it" className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-amber-500 disabled:opacity-70 ${checked ? selCls(amountRight, !amountRight) : 'border-slate-600'}`} />
         </div>
-        <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Debit</label>
+        <label className="block text-xs font-bold uppercase tracking-wider text-dim mb-2">Debit</label>
         <select value={debit} onChange={e => !checked && setDebit(e.target.value)} disabled={checked}
           className={`w-full mb-3 rounded-lg border bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:ring-1 focus:ring-amber-500 disabled:opacity-70 ${checked ? selCls(debitRight, !debitRight) : 'border-slate-600'}`}>
           <option value="">Select the account to DEBIT…</option>
           {item.debitOptions.map(o => <option key={o} value={o}>{o}</option>)}
         </select>
-        <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Credit</label>
+        <label className="block text-xs font-bold uppercase tracking-wider text-dim mb-2">Credit</label>
         <select value={credit} onChange={e => !checked && setCredit(e.target.value)} disabled={checked}
           className={`w-full rounded-lg border bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:ring-1 focus:ring-amber-500 disabled:opacity-70 ${checked ? selCls(creditRight, !creditRight) : 'border-slate-600'}`}>
           <option value="">Select the account to CREDIT…</option>
@@ -281,7 +281,7 @@ export default function Level13() {
             <p className="text-sm font-semibold text-white mb-2">{item.followUp.q}</p>
             {!fuChecked && <HintBar open={hints.isOpen(item.id + '-fu')} onToggle={() => hints.toggle(item.id + '-fu')} text={item.followUp.hint} className="mb-3" />}
             <div className="flex gap-2">
-              <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">$</span>
+              <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
               <input inputMode="numeric" value={followUp} onChange={e => !fuChecked && setFollowUp(e.target.value)} disabled={fuChecked}
                 placeholder="0" className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-amber-500 disabled:opacity-70 ${fuChecked ? selCls(fuRight, !fuRight) : 'border-slate-600'}`} />
               {!fuChecked && (

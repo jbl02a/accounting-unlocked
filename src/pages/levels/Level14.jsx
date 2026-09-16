@@ -110,7 +110,7 @@ export default function Level14() {
         <div className="mb-6">
           <div className="text-sm text-emerald-400 font-semibold mb-1">Level 14</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Accruals — Cash Comes Later</h1>
-          <p className="text-slate-400">The revenue was earned or the expense was incurred, but no cash has moved and nothing has been recorded yet. These are the entries people forget.</p>
+          <p className="text-dim">The revenue was earned or the expense was incurred, but no cash has moved and nothing has been recorded yet. These are the entries people forget.</p>
         </div>
 
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5 mb-6">
@@ -119,15 +119,15 @@ export default function Level14() {
           <div className="grid sm:grid-cols-2 gap-3">
             <div className="rounded-xl bg-black/20 p-3">
               <p className="font-bold text-emerald-300 text-sm mb-1">Accrued REVENUE</p>
-              <p className="text-xs text-slate-400 mb-2">Work done, not billed or collected.</p>
+              <p className="text-xs text-dim mb-2">Work done, not billed or collected.</p>
               <EntryTable lines={[{ account: 'Accounts Receivable', dr: 2000 }, { account: 'Service Revenue', cr: 2000 }]} dense />
-              <p className="text-[11px] text-slate-400 mt-2">Debit an ASSET, credit a REVENUE.</p>
+              <p className="text-[11px] text-dim mt-2">Debit an ASSET, credit a REVENUE.</p>
             </div>
             <div className="rounded-xl bg-black/20 p-3">
               <p className="font-bold text-emerald-300 text-sm mb-1">Accrued EXPENSE</p>
-              <p className="text-xs text-slate-400 mb-2">Cost used, not yet paid.</p>
+              <p className="text-xs text-dim mb-2">Cost used, not yet paid.</p>
               <EntryTable lines={[{ account: 'Salaries Expense', dr: 2000 }, { account: 'Salaries Payable', cr: 2000 }]} dense />
-              <p className="text-[11px] text-slate-400 mt-2">Debit an EXPENSE, credit a LIABILITY.</p>
+              <p className="text-[11px] text-dim mt-2">Debit an EXPENSE, credit a LIABILITY.</p>
             </div>
           </div>
         </div>
@@ -136,11 +136,11 @@ export default function Level14() {
           <h3 className="font-bold text-white mb-2">Accruing interest — the one that needs a calculation</h3>
           <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-4 mb-3 text-center">
             <p className="text-lg font-bold text-white font-mono">Interest = Principal × Rate × Time</p>
-            <p className="text-xs text-slate-400 mt-1">Time is the fraction of a YEAR the money has been borrowed — count the months and put them over 12.</p>
+            <p className="text-xs text-dim mt-1">Time is the fraction of a YEAR the money has been borrowed — count the months and put them over 12.</p>
           </div>
           <div className="rounded-lg bg-slate-900/60 border border-white/10 p-3 mb-3">
             <p className="text-sm text-slate-300 mb-2">Borrowed $150,000 at 6% on <span className="text-white font-semibold">March 1</span>. What has accrued by December 31?</p>
-            <p className="text-xs text-slate-400 mb-1">March, April, May, June, July, August, September, October, November, December = <span className="text-white font-semibold">10 months</span>.</p>
+            <p className="text-xs text-dim mb-1">March, April, May, June, July, August, September, October, November, December = <span className="text-white font-semibold">10 months</span>.</p>
             <p className="text-sm font-mono text-emerald-300">$150,000 × 0.06 × 10/12 = $7,500</p>
           </div>
           <div className="rounded-lg bg-amber-500/10 border border-amber-500/30 p-3">
@@ -157,7 +157,7 @@ export default function Level14() {
         <button onClick={() => setPhase('play')} className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-lg hover:opacity-90">
           Prepare 4 entries, then 4 effects questions →
         </button>
-        <button onClick={() => { completeLevel(14); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5">
+        <button onClick={() => { completeLevel(14); navigate('/') }} className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5">
           Skip the practice — mark this lesson read
         </button>
       </div>
@@ -171,8 +171,8 @@ export default function Level14() {
         <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '⏳'}</div>
         <h2 className="text-3xl font-extrabold text-white mb-2">Accruals Complete</h2>
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-2">{earned} / {total}</p>
-        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-3">{hintTally(hints.usedCount)}</p>}
-        <p className="text-slate-400 mb-8">
+        {hints.usedCount > 0 && <p className="text-xs text-dim mb-3">{hintTally(hints.usedCount)}</p>}
+        <p className="text-dim mb-8">
           {pct === 100 ? 'Entries and effects both. You are ready for the closing process.'
             : 'The effects questions are pure exam bait — re-read them until the pattern is automatic.'}
         </p>
@@ -215,19 +215,19 @@ export default function Level14() {
         {!checked && <HintBar open={hints.isOpen(item.id)} onToggle={() => hints.toggle(item.id)} text={item.hint} className="mb-4" />}
 
         <div className="rounded-xl border border-white/10 bg-slate-900/50 p-4 mb-4">
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Amount</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-dim mb-2">Amount</label>
           <div className="flex gap-2 mb-4">
-            <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">$</span>
+            <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
             <input inputMode="numeric" value={amount} onChange={e => !checked && setAmount(e.target.value)} disabled={checked} placeholder="0"
               className={`flex-1 rounded-lg border bg-slate-800 px-3 py-2 font-mono text-right text-white outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-70 ${checked ? selCls(amountRight, !amountRight) : 'border-slate-600'}`} />
           </div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Debit</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-dim mb-2">Debit</label>
           <select value={debit} onChange={e => !checked && setDebit(e.target.value)} disabled={checked}
             className={`w-full mb-3 rounded-lg border bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-70 ${checked ? selCls(debitRight, !debitRight) : 'border-slate-600'}`}>
             <option value="">Select the account to DEBIT…</option>
             {item.debitOptions.map(o => <option key={o} value={o}>{o}</option>)}
           </select>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Credit</label>
+          <label className="block text-xs font-bold uppercase tracking-wider text-dim mb-2">Credit</label>
           <select value={credit} onChange={e => !checked && setCredit(e.target.value)} disabled={checked}
             className={`w-full rounded-lg border bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:ring-1 focus:ring-emerald-500 disabled:opacity-70 ${checked ? selCls(creditRight, !creditRight) : 'border-slate-600'}`}>
             <option value="">Select the account to CREDIT…</option>
@@ -290,7 +290,7 @@ export default function Level14() {
               className={`w-full text-left rounded-xl border p-3 flex items-start gap-3 transition-colors ${
                 isAnswer ? 'border-green-500 bg-green-900/30' : isWrong ? 'border-red-500 bg-red-900/30'
                 : eChosen !== null ? 'border-white/10 bg-white/5 opacity-60' : 'border-white/10 bg-white/5 hover:border-emerald-400 hover:bg-white/10'}`}>
-              <span className="text-xs font-bold text-slate-500 mt-0.5">{'ABCD'[i]}</span>
+              <span className="text-xs font-bold text-dim mt-0.5">{'ABCD'[i]}</span>
               <span className="text-sm text-white flex-1">{opt}</span>
               {isAnswer && <span className="text-green-400">✓</span>}
               {isWrong && <span className="text-red-400">✗</span>}

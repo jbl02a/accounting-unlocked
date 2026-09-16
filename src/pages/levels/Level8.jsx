@@ -99,9 +99,9 @@ function TAccount({ account, reveal }) {
     <div className="rounded-xl border border-white/10 bg-slate-900/50 overflow-hidden">
       <div className="bg-slate-800 px-4 py-2 text-center">
         <span className="font-bold text-white">{account.name}</span>
-        <span className="text-xs text-slate-400 ml-2">({account.type})</span>
+        <span className="text-xs text-dim ml-2">({account.type})</span>
       </div>
-      <div className="grid grid-cols-2 text-[10px] font-bold uppercase tracking-wider text-slate-500 border-b border-white/10">
+      <div className="grid grid-cols-2 text-[10px] font-bold uppercase tracking-wider text-dim border-b border-white/10">
         <span className="px-4 py-1.5 border-r border-white/10">Debit</span>
         <span className="px-4 py-1.5 text-right">Credit</span>
       </div>
@@ -110,7 +110,7 @@ function TAccount({ account, reveal }) {
           <div className="px-4 py-1.5 border-r border-white/10 min-h-[2rem]">
             {account.debits[i] && (
               <div className="flex justify-between gap-2">
-                <span className="text-[10px] text-slate-500 truncate">{account.debits[i].label}</span>
+                <span className="text-[10px] text-dim truncate">{account.debits[i].label}</span>
                 <span className="font-mono text-white">{account.debits[i].amt.toLocaleString()}</span>
               </div>
             )}
@@ -119,7 +119,7 @@ function TAccount({ account, reveal }) {
             {account.credits[i] && (
               <div className="flex justify-between gap-2">
                 <span className="font-mono text-white">{account.credits[i].amt.toLocaleString()}</span>
-                <span className="text-[10px] text-slate-500 truncate text-right">{account.credits[i].label}</span>
+                <span className="text-[10px] text-dim truncate text-right">{account.credits[i].label}</span>
               </div>
             )}
           </div>
@@ -190,18 +190,18 @@ export default function Level8() {
         <div className="mb-6">
           <div className="text-sm text-lime-400 font-semibold mb-1">Level 8</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">T-Accounts &amp; Ledger Balances</h1>
-          <p className="text-slate-400">Journal entries are a diary in date order. To build a trial balance you need each account gathered in one place and totaled — that is the ledger.</p>
+          <p className="text-dim">Journal entries are a diary in date order. To build a trial balance you need each account gathered in one place and totaled — that is the ledger.</p>
         </div>
 
         <div className="rounded-2xl border border-lime-500/30 bg-lime-500/10 p-5 mb-6">
           <p className="text-xs font-bold uppercase tracking-wider text-lime-300 mb-2">Where you are in the cycle</p>
           <div className="flex flex-wrap items-center gap-2 text-sm">
             <span className="rounded-lg bg-white/10 px-3 py-1.5 text-slate-300">1. Transaction happens</span>
-            <span className="text-slate-600">→</span>
+            <span className="text-dim">→</span>
             <span className="rounded-lg bg-white/10 px-3 py-1.5 text-slate-300">2. Journal entry</span>
-            <span className="text-slate-600">→</span>
+            <span className="text-dim">→</span>
             <span className="rounded-lg bg-lime-500/20 border border-lime-500/40 px-3 py-1.5 text-white font-semibold">3. Post to the ledger</span>
-            <span className="text-slate-600">→</span>
+            <span className="text-dim">→</span>
             <span className="rounded-lg bg-white/10 px-3 py-1.5 text-slate-300">4. Trial balance</span>
           </div>
           <p className="text-sm text-slate-300 mt-3">
@@ -237,13 +237,13 @@ export default function Level8() {
             <p className="text-center text-sm text-white mt-3">
               $18,400 − $4,700 = <span className="font-bold text-lime-300">$13,700 debit balance</span>
             </p>
-            <p className="text-center text-xs text-slate-500 mt-1">The debit side is bigger, so the balance is a debit — exactly what an asset should be.</p>
+            <p className="text-center text-xs text-dim mt-1">The debit side is bigger, so the balance is a debit — exactly what an asset should be.</p>
           </div>
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
           <h3 className="font-bold text-white mb-1">Normal balances — memorize this table</h3>
-          <p className="text-xs text-slate-400 mb-3">A &ldquo;normal balance&rdquo; is the side an account is supposed to land on. If yours lands on the other side, something is usually wrong.</p>
+          <p className="text-xs text-dim mb-3">A &ldquo;normal balance&rdquo; is the side an account is supposed to land on. If yours lands on the other side, something is usually wrong.</p>
           <div className="divide-y divide-white/5">
             {NORMAL_BALANCES.map((row, i) => (
               <div key={i} className="py-2.5 flex items-start gap-3">
@@ -252,7 +252,7 @@ export default function Level8() {
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-white">{row.group}</p>
-                  <p className="text-xs text-slate-400">{row.examples}</p>
+                  <p className="text-xs text-dim">{row.examples}</p>
                 </div>
               </div>
             ))}
@@ -267,7 +267,7 @@ export default function Level8() {
         </button>
         <button
           onClick={() => { completeLevel(8); navigate('/') }}
-          className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+          className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5 transition-colors"
         >
           Skip the practice — mark this lesson read
         </button>
@@ -287,14 +287,14 @@ export default function Level8() {
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-400 mb-2">
             {correct} / {ACCOUNTS.length}
           </p>
-          {hints.usedCount > 0 && <p className="text-xs text-slate-500">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-dim">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
           <p className="font-bold text-white mb-1">Here is Beacon Tutoring&rsquo;s whole ledger</p>
-          <p className="text-xs text-slate-400 mb-3">Every account balance, on its normal side. Look what happens when you add the columns.</p>
+          <p className="text-xs text-dim mb-3">Every account balance, on its normal side. Look what happens when you add the columns.</p>
           <div className="rounded-lg border border-white/10 overflow-hidden">
-            <div className="grid grid-cols-[1fr_6rem_6rem] bg-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 py-2">
+            <div className="grid grid-cols-[1fr_6rem_6rem] bg-slate-800 text-[10px] font-bold text-dim uppercase tracking-wider px-3 py-2">
               <span>Account</span><span className="text-right">Debit</span><span className="text-right">Credit</span>
             </div>
             {FULL_LEDGER.map(a => (
@@ -311,7 +311,7 @@ export default function Level8() {
             </div>
           </div>
           <p className="text-sm text-green-400 text-center mt-3">✓ {money(totalDr)} = {money(totalCr)}</p>
-          <p className="text-xs text-slate-400 text-center mt-1">That list, put in the right order, IS a trial balance. That is Level 9.</p>
+          <p className="text-xs text-dim text-center mt-1">That list, put in the right order, IS a trial balance. That is Level 9.</p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
@@ -339,7 +339,7 @@ export default function Level8() {
         </div>
       </div>
 
-      <p className="text-sm text-slate-400 mb-3">
+      <p className="text-sm text-dim mb-3">
         Beacon Tutoring&rsquo;s entries have been posted for you. Foot the account and report its ending balance.
       </p>
 
@@ -352,9 +352,9 @@ export default function Level8() {
       )}
 
       <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-5">
-        <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Ending balance</label>
+        <label className="block text-xs font-bold uppercase tracking-wider text-dim mb-2">Ending balance</label>
         <div className="flex gap-2 mb-3">
-          <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-slate-400 font-mono">$</span>
+          <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
           <input
             inputMode="numeric"
             value={amount}
@@ -366,7 +366,7 @@ export default function Level8() {
             }`}
           />
         </div>
-        <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">On which side?</label>
+        <label className="block text-xs font-bold uppercase tracking-wider text-dim mb-2">On which side?</label>
         <div className="grid grid-cols-2 gap-2">
           {['debit', 'credit'].map(s => {
             const selected = side === s

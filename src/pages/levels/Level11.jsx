@@ -200,7 +200,7 @@ export default function Level11() {
         <div className="mb-6">
           <div className="text-sm text-teal-400 font-semibold mb-1">Level 11</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Assumptions &amp; Principles</h1>
-          <p className="text-slate-400">
+          <p className="text-dim">
             Four assumptions and four principles hold up everything else you have learned. Exams love them because they are easy to ask about: here is a situation, name the one at work.
           </p>
         </div>
@@ -215,11 +215,11 @@ export default function Level11() {
           <div className="mt-3 grid sm:grid-cols-2 gap-3">
             <div className="rounded-xl bg-black/20 p-3">
               <p className="text-xs font-bold text-teal-300 mb-1">Accrual basis (what you are learning)</p>
-              <p className="text-xs text-slate-400">Revenue when earned, expenses when incurred. Cash timing is irrelevant. Required by GAAP.</p>
+              <p className="text-xs text-dim">Revenue when earned, expenses when incurred. Cash timing is irrelevant. Required by GAAP.</p>
             </div>
             <div className="rounded-xl bg-black/20 p-3">
-              <p className="text-xs font-bold text-slate-400 mb-1">Cash basis</p>
-              <p className="text-xs text-slate-400">Revenue when cash arrives, expenses when cash leaves. Simple, but not allowed for most companies.</p>
+              <p className="text-xs font-bold text-dim mb-1">Cash basis</p>
+              <p className="text-xs text-dim">Revenue when cash arrives, expenses when cash leaves. Simple, but not allowed for most companies.</p>
             </div>
           </div>
         </div>
@@ -230,7 +230,7 @@ export default function Level11() {
         ].map(section => (
         <div key={section.key} className="mb-6">
           <h3 className="font-bold text-white mb-1">{section.label}</h3>
-          <p className="text-xs text-slate-400 mb-3">{section.blurb}</p>
+          <p className="text-xs text-dim mb-3">{section.blurb}</p>
           <div className="space-y-3">
           {PRINCIPLES.filter(p => p.group === section.key).map((p, i) => (
             <div key={p.id} className="rounded-xl bg-white/5 border border-white/10 p-4">
@@ -241,10 +241,10 @@ export default function Level11() {
                   <p className="text-xs text-teal-300 mb-2">{p.short}</p>
                   <p className="text-sm text-slate-300 mb-2">{p.rule}</p>
                   <div className="rounded-lg bg-slate-900/60 border border-white/10 p-3 mb-2">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Example</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-dim mb-1">Example</p>
                     <p className="text-sm text-slate-300">{p.example}</p>
                   </div>
-                  <p className="text-xs text-slate-500 italic">{p.why}</p>
+                  <p className="text-xs text-dim italic">{p.why}</p>
                 </div>
               </div>
             </div>
@@ -255,13 +255,13 @@ export default function Level11() {
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
           <h3 className="font-bold text-white mb-1">Qualitative characteristics of useful information</h3>
-          <p className="text-xs text-slate-400 mb-3">Chapter 2 asks you to name these. Two are fundamental; four enhance them.</p>
+          <p className="text-xs text-dim mb-3">Chapter 2 asks you to name these. Two are fundamental; four enhance them.</p>
           <p className="text-[10px] font-bold uppercase tracking-wider text-teal-300 mb-1">Fundamental</p>
           <div className="divide-y divide-white/5 mb-3">
             {QUALITATIVE.fundamental.map(q => (
               <div key={q.name} className="py-2 flex flex-col sm:flex-row sm:gap-4">
                 <div className="sm:w-40 shrink-0 text-sm font-semibold text-white">{q.name}</div>
-                <div className="text-xs text-slate-400">{q.text}</div>
+                <div className="text-xs text-dim">{q.text}</div>
               </div>
             ))}
           </div>
@@ -270,7 +270,7 @@ export default function Level11() {
             {QUALITATIVE.enhancing.map(q => (
               <div key={q.name} className="py-2 flex flex-col sm:flex-row sm:gap-4">
                 <div className="sm:w-40 shrink-0 text-sm font-semibold text-white">{q.name}</div>
-                <div className="text-xs text-slate-400">{q.text}</div>
+                <div className="text-xs text-dim">{q.text}</div>
               </div>
             ))}
           </div>
@@ -278,12 +278,12 @@ export default function Level11() {
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-8">
           <h3 className="font-bold text-white mb-1">Three more you should recognize</h3>
-          <p className="text-xs text-slate-400 mb-3">Not counted among the four principles, but named in the same chapter.</p>
+          <p className="text-xs text-dim mb-3">Not counted among the four principles, but named in the same chapter.</p>
           <div className="divide-y divide-white/5">
             {EXTRA.map(e => (
               <div key={e.name} className="py-2.5 flex flex-col sm:flex-row sm:gap-4">
                 <div className="sm:w-32 shrink-0 text-sm font-semibold text-teal-300">{e.name}</div>
-                <div className="text-sm text-slate-400">{e.text}</div>
+                <div className="text-sm text-dim">{e.text}</div>
               </div>
             ))}
           </div>
@@ -297,7 +297,7 @@ export default function Level11() {
         </button>
         <button
           onClick={() => { completeLevel(11); navigate('/') }}
-          className="w-full mt-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+          className="w-full mt-3 py-2.5 rounded-xl text-sm text-dim hover:text-white hover:bg-white/5 transition-colors"
         >
           Skip the practice — mark this lesson read
         </button>
@@ -314,11 +314,11 @@ export default function Level11() {
         <div className="text-5xl mb-4">{score >= 90 ? '🎉' : '📜'}</div>
         <h2 className="text-3xl font-extrabold text-white mb-2">Principles Complete</h2>
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400 mb-2">{score}%</p>
-        <p className="text-slate-400 text-sm mb-2">
+        <p className="text-dim text-sm mb-2">
           Matching: {PRINCIPLES.length} pairs in {attempts} guesses ({matchAccuracy}% accuracy) · Scenarios: {scenarioCorrect}/{SCENARIOS.length}
         </p>
-        {hints.usedCount > 0 && <p className="text-xs text-slate-500 mb-6">{hintTally(hints.usedCount)}</p>}
-        <p className="text-slate-400 mb-8">
+        {hints.usedCount > 0 && <p className="text-xs text-dim mb-6">{hintTally(hints.usedCount)}</p>}
+        <p className="text-dim mb-8">
           {score >= 90 ? 'You can name the principle behind any transaction. That is the whole skill.'
             : score >= 70 ? 'Good grasp. Re-read revenue recognition and matching — they carry the most exam points.'
             : 'Go back through the eight cards once more, then run the matching again. The examples are the fastest way to remember the names.'}
@@ -343,11 +343,11 @@ export default function Level11() {
           </div>
           <div className="text-right">
             <p className="text-sm font-bold text-white">{matched.length} / {PRINCIPLES.length}</p>
-            <p className="text-xs text-slate-500">{attempts} guess{attempts === 1 ? '' : 'es'}</p>
+            <p className="text-xs text-dim">{attempts} guess{attempts === 1 ? '' : 'es'}</p>
           </div>
         </div>
 
-        <p className="text-sm text-slate-400 mb-4">
+        <p className="text-sm text-dim mb-4">
           Tap an assumption or principle on the left, then the example on the right that shows it in action. Correct pairs lock in green.
         </p>
 
@@ -358,7 +358,7 @@ export default function Level11() {
         <div className="grid sm:grid-cols-2 gap-3 mb-6">
           {/* Principles */}
           <div className="space-y-2">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-1">Assumption / Principle</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-dim px-1">Assumption / Principle</p>
             {PRINCIPLES.map(p => {
               const isMatched = matched.includes(p.id)
               const isPicked = pickedPrinciple === p.id
@@ -386,7 +386,7 @@ export default function Level11() {
 
           {/* Examples */}
           <div className="space-y-2">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-1">Example</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-dim px-1">Example</p>
             {examples.map(p => {
               const isMatched = matched.includes(p.id)
               const isPicked = pickedExample === p.id
@@ -430,7 +430,7 @@ export default function Level11() {
             </div>
           </>
         ) : (
-          <p className="text-center text-sm text-slate-500">
+          <p className="text-center text-sm text-dim">
             {pickedPrinciple ? 'Now tap the example that matches it.'
               : pickedExample ? 'Now tap the principle it demonstrates.'
               : 'Tap either side to start a pair.'}
@@ -487,7 +487,7 @@ export default function Level11() {
                   : 'border-white/10 bg-white/5 hover:border-teal-400 hover:bg-white/10'
               }`}
             >
-              <span className="text-xs font-bold text-slate-500 mt-0.5">{'ABCD'[i]}</span>
+              <span className="text-xs font-bold text-dim mt-0.5">{'ABCD'[i]}</span>
               <span className="text-sm text-white flex-1">{opt}</span>
               {isAnswer && <span className="text-green-400">✓</span>}
               {isWrongPick && <span className="text-red-400">✗</span>}
