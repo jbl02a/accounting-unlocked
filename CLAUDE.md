@@ -90,6 +90,20 @@ These are the things most likely to be broken by accident.
     Problems tab is `emerald-700`, not `emerald-600` (3.8:1), for this reason.
     A light-mode toggle is not a substitute for the floor.
 
+    **The tier matters as much as the ratio.** `text-dim` is for *chrome* only:
+    uppercase micro-labels, pill badges, counters, back/next links, footers.
+    Anything he is meant to read — table cells, definitions, taglines, and
+    above all the explanation of why an answer was wrong — is `text-slate-200`
+    or `text-slate-300`. Content painted in the chrome tier is what still
+    looked washed out after every colour already cleared AA, and a static
+    contrast check cannot catch it because the ratio was never the problem.
+13. **Native `<select>` popups inherit the control's background.** A translucent
+    one (`bg-black/40`) composites against the page into grey-on-grey and the
+    open dropdown becomes unreadable — the option list is drawn by the browser,
+    not by Tailwind. Selects get an opaque background, and `src/index.css`
+    paints `select option` explicitly. Never give a `<select>` a `/opacity`
+    background.
+
 ## Analytics
 
 `<Analytics />` from `@vercel/analytics/react` is mounted in `App.jsx`. It reports page

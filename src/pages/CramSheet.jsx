@@ -60,7 +60,7 @@ export default function CramSheet() {
       <div className="cram-toolbar no-print">
         <div>
           <h1 className="text-2xl font-extrabold text-white">Exam-Day Cram Sheet</h1>
-          <p className="text-sm text-dim">
+          <p className="text-sm text-slate-300">
             Condensed to what actually gets tested. Prints clean on two sides — the app’s dark theme is dropped automatically.
           </p>
         </div>

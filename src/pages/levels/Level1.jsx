@@ -24,7 +24,7 @@ function Seesaw({ assetCount, liabilityEquityCount }) {
   return (
     <div className="relative flex flex-col items-center my-8 select-none">
       {/* Labels */}
-      <div className="flex w-full max-w-md justify-between text-xs text-dim mb-1 px-4">
+      <div className="flex w-full max-w-md justify-between text-xs text-slate-300 mb-1 px-4">
         <span>Assets (Left)</span>
         <span>Liabilities + Equity (Right)</span>
       </div>
@@ -132,7 +132,7 @@ export default function Level1() {
         <div className="mb-6">
           <div className="text-sm text-indigo-400 font-semibold mb-1">Level 1</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Accounting Equation</h1>
-          <p className="text-dim">The single most important idea in all of accounting.</p>
+          <p className="text-slate-300">The single most important idea in all of accounting.</p>
         </div>
 
         <div className="rounded-2xl bg-indigo-500/10 border border-indigo-500/30 p-8 mb-6 text-center">
@@ -140,24 +140,24 @@ export default function Level1() {
             A = L + E
           </p>
           <p className="text-xl font-bold text-white mb-2">Assets = Liabilities + Equity</p>
-          <p className="text-dim">This equation <span className="text-white font-semibold">always</span> balances. Every single transaction in accounting keeps this true.</p>
+          <p className="text-slate-300">This equation <span className="text-white font-semibold">always</span> balances. Every single transaction in accounting keeps this true.</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="rounded-xl bg-indigo-900/40 border border-indigo-500/20 p-5">
             <div className="text-2xl mb-2">🏠</div>
             <h3 className="font-bold text-indigo-300 mb-1">Assets</h3>
-            <p className="text-sm text-dim">Everything the business <span className="text-white font-semibold">owns</span>. Cash, computers, buildings — anything with value.</p>
+            <p className="text-sm text-slate-300">Everything the business <span className="text-white font-semibold">owns</span>. Cash, computers, buildings — anything with value.</p>
           </div>
           <div className="rounded-xl bg-purple-900/40 border border-purple-500/20 p-5">
             <div className="text-2xl mb-2">💳</div>
             <h3 className="font-bold text-purple-300 mb-1">Liabilities</h3>
-            <p className="text-sm text-dim">Everything the business <span className="text-white font-semibold">owes</span>. Loans, unpaid bills, debt to others.</p>
+            <p className="text-sm text-slate-300">Everything the business <span className="text-white font-semibold">owes</span>. Loans, unpaid bills, debt to others.</p>
           </div>
           <div className="rounded-xl bg-pink-900/40 border border-pink-500/20 p-5">
             <div className="text-2xl mb-2">👤</div>
             <h3 className="font-bold text-pink-300 mb-1">Equity</h3>
-            <p className="text-sm text-dim">What the <span className="text-white font-semibold">owner</span> actually has. What's left after all debts are paid.</p>
+            <p className="text-sm text-slate-300">What the <span className="text-white font-semibold">owner</span> actually has. What's left after all debts are paid.</p>
           </div>
         </div>
 
@@ -185,7 +185,7 @@ export default function Level1() {
       <div className="mb-6">
         <div className="text-sm text-indigo-400 font-semibold mb-1">Level 1 — Challenge</div>
         <h1 className="text-2xl font-extrabold text-white mb-1">Sort These Items</h1>
-        <p className="text-dim text-sm">
+        <p className="text-slate-300 text-sm">
           Place each item on the correct side of the balance. <strong>Assets</strong> go left. <strong>Liabilities &amp; Equity</strong> go right.
         </p>
       </div>
@@ -232,7 +232,7 @@ export default function Level1() {
       {/* Unplaced items */}
       {!submitted && (
         <div className="mb-6">
-          <p className="text-xs text-dim mb-2">
+          <p className="text-xs text-slate-300 mb-2">
             {unplacedItems.length > 0 ? 'Drag or click an item, then click a zone:' : 'All items placed! Click Submit to check.'}
           </p>
           <div className="flex flex-wrap gap-2">
@@ -248,7 +248,7 @@ export default function Level1() {
               </div>
             ))}
           </div>
-          <p className="text-xs text-dim mt-4">
+          <p className="text-xs text-slate-300 mt-4">
             Not sure where one goes? Tap its <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-dim align-middle">?</span> below for a nudge. Hints never cost you points.
           </p>
           {/* Quick-place buttons for mobile */}
@@ -293,13 +293,13 @@ export default function Level1() {
               <>
                 <p className="text-2xl mb-1">🎉</p>
                 <p className="font-bold text-green-400">Perfect score! You've got the equation down.</p>
-                <p className="text-dim text-sm mt-1">Level 2 is now unlocked. Keep going!</p>
+                <p className="text-slate-300 text-sm mt-1">Level 2 is now unlocked. Keep going!</p>
               </>
             ) : (
               <>
                 <p className="text-2xl mb-1">📚</p>
                 <p className="font-bold text-white">{Object.values(feedback).filter(f => f === 'correct').length} / {ITEMS.length} correct</p>
-                <p className="text-dim text-sm mt-1">Review the explanations above, then try again!</p>
+                <p className="text-slate-300 text-sm mt-1">Review the explanations above, then try again!</p>
               </>
             )}
           </div>

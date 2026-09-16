@@ -96,7 +96,7 @@ function CycleCard({ item, accent }) {
       <p className={`text-xs font-bold uppercase tracking-wider mb-1 ${accent}`}>{item.step}</p>
       <p className="text-sm text-slate-300 mb-3">{item.caption}</p>
       <EntryTable lines={item.lines} dense />
-      <p className="text-xs text-dim mt-2 italic">{item.note}</p>
+      <p className="text-xs text-slate-300 mt-2 italic">{item.note}</p>
     </div>
   )
 }
@@ -143,7 +143,7 @@ export default function Level6() {
         <div className="mb-6">
           <div className="text-sm text-sky-400 font-semibold mb-1">Level 6</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Receivables vs. Payables</h1>
-          <p className="text-dim">Two accounts with almost the same name that sit on opposite sides of the balance sheet. Mix them up and every statement you build is wrong.</p>
+          <p className="text-slate-300">Two accounts with almost the same name that sit on opposite sides of the balance sheet. Mix them up and every statement you build is wrong.</p>
         </div>
 
         <div className="rounded-2xl border border-sky-500/30 bg-sky-500/10 p-5 mb-6">
@@ -153,25 +153,25 @@ export default function Level6() {
             <div className="rounded-xl bg-indigo-500/10 border border-indigo-500/30 p-4">
               <p className="font-bold text-indigo-300 mb-1">📥 They owe US</p>
               <p className="text-sm text-white font-semibold">Accounts Receivable</p>
-              <p className="text-xs text-dim mt-1">An <span className="text-white">ASSET</span>. We will <span className="text-white">receive</span> cash later. Increases with a <span className="text-white">DEBIT</span>.</p>
+              <p className="text-xs text-slate-300 mt-1">An <span className="text-white">ASSET</span>. We will <span className="text-white">receive</span> cash later. Increases with a <span className="text-white">DEBIT</span>.</p>
             </div>
             <div className="rounded-xl bg-red-500/10 border border-red-500/30 p-4">
               <p className="font-bold text-red-300 mb-1">📤 WE owe them</p>
               <p className="text-sm text-white font-semibold">Accounts Payable</p>
-              <p className="text-xs text-dim mt-1">A <span className="text-white">LIABILITY</span>. We must <span className="text-white">pay</span> cash later. Increases with a <span className="text-white">CREDIT</span>.</p>
+              <p className="text-xs text-slate-300 mt-1">A <span className="text-white">LIABILITY</span>. We must <span className="text-white">pay</span> cash later. Increases with a <span className="text-white">CREDIT</span>.</p>
             </div>
           </div>
-          <p className="text-xs text-dim mt-3">Memory hook: <span className="text-white font-semibold">Recei<span className="text-indigo-300">v</span>able → we recei<span className="text-indigo-300">v</span>e. Pa<span className="text-red-300">y</span>able → we pa<span className="text-red-300">y</span>.</span></p>
+          <p className="text-xs text-slate-300 mt-3">Memory hook: <span className="text-white font-semibold">Recei<span className="text-indigo-300">v</span>able → we recei<span className="text-indigo-300">v</span>e. Pa<span className="text-red-300">y</span>able → we pa<span className="text-red-300">y</span>.</span></p>
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
           <h3 className="font-bold text-white mb-3">Word-problem decoder</h3>
-          <p className="text-sm text-dim mb-4">Exams hide the answer in the wording. These phrases give it away every time.</p>
+          <p className="text-sm text-slate-300 mb-4">Exams hide the answer in the wording. These phrases give it away every time.</p>
           <div className="divide-y divide-white/5">
             {DECODER.map((d, i) => (
               <div key={i} className="py-2.5 flex flex-col sm:flex-row sm:gap-4">
                 <div className="sm:w-64 shrink-0 text-sm font-semibold text-sky-300">{d.phrase}</div>
-                <div className="text-sm text-dim">{d.means}</div>
+                <div className="text-sm text-slate-300">{d.means}</div>
               </div>
             ))}
           </div>
@@ -189,7 +189,7 @@ export default function Level6() {
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
           <h3 className="font-bold text-white mb-1">&ldquo;Accounts&rdquo; vs. &ldquo;Notes&rdquo; — what actually changes</h3>
-          <p className="text-sm text-dim mb-4">
+          <p className="text-sm text-slate-300 mb-4">
             You will meet Notes Receivable and Notes Payable in the trial balance. Here is the thing students get wrong:
             the formal paperwork does <span className="text-white font-semibold">not</span> change what kind of account it is.
           </p>
@@ -212,7 +212,7 @@ export default function Level6() {
               The note only adds paperwork, interest and time — it never moves the account to the other side of the balance sheet.
             </p>
           </div>
-          <p className="text-sm text-dim mb-3">
+          <p className="text-sm text-slate-300 mb-3">
             The interest is the practical difference. A note costs the borrower <span className="text-white font-semibold">Interest Expense</span> and earns
             the holder <span className="text-white font-semibold">Interest Revenue</span>. An account does neither.
           </p>
@@ -227,7 +227,7 @@ export default function Level6() {
             <li>Recording revenue <span className="text-white font-semibold">again</span> when the customer pays. The revenue was earned when the work was done.</li>
             <li>Recording an expense <span className="text-white font-semibold">again</span> when you pay a bill. The expense was recorded when you received the goods or service.</li>
           </ol>
-          <p className="text-xs text-dim mt-3">Step 2 of either cycle <span className="text-white">never</span> touches Revenue or Expense. It only touches Cash and the receivable/payable.</p>
+          <p className="text-xs text-slate-300 mt-3">Step 2 of either cycle <span className="text-white">never</span> touches Revenue or Expense. It only touches Cash and the receivable/payable.</p>
         </div>
 
         <button
@@ -255,8 +255,8 @@ export default function Level6() {
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-400 mb-2">
           {correct} / {QUESTIONS.length}
         </p>
-        {hints.usedCount > 0 && <p className="text-xs text-dim mb-3">{hintTally(hints.usedCount)}</p>}
-        <p className="text-dim mb-8">
+        {hints.usedCount > 0 && <p className="text-xs text-slate-300 mb-3">{hintTally(hints.usedCount)}</p>}
+        <p className="text-slate-300 mb-8">
           {correct === QUESTIONS.length ? 'Perfect. You can tell a receivable from a payable in your sleep.'
             : correct >= QUESTIONS.length - 3 ? 'Strong work. Re-read the two traps and run it again.'
             : 'Go back through the two cycles — Step 2 never touches revenue or expense.'}

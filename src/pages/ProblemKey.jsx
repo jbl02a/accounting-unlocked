@@ -99,7 +99,7 @@ export default function ProblemKey() {
       <div className="cram-toolbar no-print">
         <div>
           <h1 className="text-2xl font-extrabold text-white">Answer Key — TA Problem Sets</h1>
-          <p className="text-sm text-dim">
+          <p className="text-sm text-slate-300">
             Every one of the TA's four problems worked in full, with the reason and the trap for each
             step. Generated from the same data the site grades against, so it cannot disagree with it.
             Print it to check paper work — or keep it face down and use the site instead.

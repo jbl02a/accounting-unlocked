@@ -236,7 +236,7 @@ export default function CheatSheet() {
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">
           Accounting Cheat Sheet
         </h1>
-        <p className="text-dim">Every key term and rule from all ten levels, in one place. Bookmark this page.</p>
+        <p className="text-slate-300">Every key term and rule from all ten levels, in one place. Bookmark this page.</p>
       </div>
 
       <div className="space-y-6">
@@ -250,7 +250,7 @@ export default function CheatSheet() {
               {section.items.map((item, i) => (
                 <div key={i} className="px-6 py-4 flex flex-col sm:flex-row sm:gap-6 hover:bg-white/5 transition-colors">
                   <div className="sm:w-56 shrink-0 font-semibold text-white mb-1 sm:mb-0">{item.term}</div>
-                  <div className="text-dim text-sm leading-relaxed">{item.def}</div>
+                  <div className="text-slate-300 text-sm leading-relaxed">{item.def}</div>
                 </div>
               ))}
             </div>
@@ -261,7 +261,7 @@ export default function CheatSheet() {
       <div className="mt-8 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 p-6 text-center">
         <p className="text-indigo-300 font-semibold mb-1">The golden rule of accounting:</p>
         <p className="text-2xl font-bold text-white">Assets = Liabilities + Equity</p>
-        <p className="text-dim text-sm mt-2">This equation must always balance. When in doubt, come back to this.</p>
+        <p className="text-slate-300 text-sm mt-2">This equation must always balance. When in doubt, come back to this.</p>
       </div>
     </div>
   )

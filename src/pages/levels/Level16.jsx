@@ -108,7 +108,7 @@ export default function Level16() {
         <div className="mb-6">
           <div className="text-sm text-purple-400 font-semibold mb-1">Level 16</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Four Financial Statements</h1>
-          <p className="text-dim">Everything the accounting cycle produces ends up in four reports — and they are prepared in a specific order, because each one feeds the next.</p>
+          <p className="text-slate-300">Everything the accounting cycle produces ends up in four reports — and they are prepared in a specific order, because each one feeds the next.</p>
         </div>
 
         <div className="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-5 mb-6">
@@ -129,7 +129,7 @@ export default function Level16() {
                       <span className="text-[10px] uppercase tracking-wider text-purple-300">{s.period}</span>
                     </div>
                     <p className="text-xs font-mono text-purple-200 my-1">{s.f}</p>
-                    <p className="text-xs text-dim">{s.why}</p>
+                    <p className="text-xs text-slate-300">{s.why}</p>
                   </div>
                 </div>
               </div>
@@ -155,14 +155,14 @@ export default function Level16() {
           <div className="grid sm:grid-cols-2 gap-3 mb-3">
             <div className="rounded-lg bg-slate-900/60 border border-white/10 p-3">
               <p className="font-semibold text-white text-sm mb-1">Single-step</p>
-              <p className="text-xs text-dim">Two categories only: <span className="text-white">total revenues</span> minus <span className="text-white">total expenses</span>. One subtraction, one answer.</p>
+              <p className="text-xs text-slate-300">Two categories only: <span className="text-white">total revenues</span> minus <span className="text-white">total expenses</span>. One subtraction, one answer.</p>
             </div>
             <div className="rounded-lg bg-slate-900/60 border border-white/10 p-3">
               <p className="font-semibold text-white text-sm mb-1">Multiple-step</p>
-              <p className="text-xs text-dim">Adds subtotals: Gross margin = Net sales − COGS. Income from operations = Gross margin − operating expenses.</p>
+              <p className="text-xs text-slate-300">Adds subtotals: Gross margin = Net sales − COGS. Income from operations = Gross margin − operating expenses.</p>
             </div>
           </div>
-          <p className="text-xs text-dim">
+          <p className="text-xs text-slate-300">
             Two ratios that come off these statements: <span className="text-white">Net profit margin = Net income ÷ Sales revenue</span>.
             And on a multiple-step statement, gross margin is watched closely because it shows profit before operating costs.
           </p>
@@ -195,17 +195,17 @@ export default function Level16() {
           <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '📑'}</div>
           <h2 className="text-3xl font-extrabold text-white mb-2">Statements Complete</h2>
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-400 mb-2">{pct}%</p>
-          <p className="text-dim text-sm">
+          <p className="text-slate-300 text-sm">
             Equation {eqCorrect}/{EQUATION_QS.length} · Placement {placeCorrect}/{IS_ACCOUNTS.length} · Totals {totalsCorrect}/3 · Ending R/E {reRight ? 1 : 0}/1
           </p>
-          {hints.usedCount > 0 && <p className="text-xs text-dim mt-2">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-slate-300 mt-2">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl border border-white/10 overflow-hidden mb-4">
           <div className="bg-slate-800 px-4 py-3 text-center">
             <p className="font-bold text-white">Lakeside Outfitters, Inc.</p>
             <p className="text-sm text-slate-300">Income Statement (single-step)</p>
-            <p className="text-xs text-dim">For the Year Ended December 31, 2025</p>
+            <p className="text-xs text-slate-300">For the Year Ended December 31, 2025</p>
           </div>
           <div className="px-4 py-2">
             <p className="text-[10px] font-bold uppercase tracking-wider text-purple-300 mb-1">Revenues</p>
@@ -226,7 +226,7 @@ export default function Level16() {
           <div className="bg-slate-800 px-4 py-3 text-center">
             <p className="font-bold text-white">Lakeside Outfitters, Inc.</p>
             <p className="text-sm text-slate-300">Retained Earnings Statement</p>
-            <p className="text-xs text-dim">For the Year Ended December 31, 2025</p>
+            <p className="text-xs text-slate-300">For the Year Ended December 31, 2025</p>
           </div>
           <div className="px-4 py-2">
             <div className="flex justify-between text-sm py-0.5"><span className="text-slate-300">Retained earnings, January 1</span><span className="font-mono text-slate-200">{money(BEGIN_RE)}</span></div>
@@ -262,7 +262,7 @@ export default function Level16() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Work the accounting equation" />
-        <p className="text-sm text-dim mb-4">Three linked questions about the same company. Each one builds on the last.</p>
+        <p className="text-sm text-slate-300 mb-4">Three linked questions about the same company. Each one builds on the last.</p>
         <div className="space-y-3 mb-5">
           {EQUATION_QS.map(q => {
             const v = parseAmount(eqAnswers[q.id] || '')
@@ -309,7 +309,7 @@ export default function Level16() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Which accounts go on the income statement?" />
-        <p className="text-sm text-dim mb-4">
+        <p className="text-sm text-slate-300 mb-4">
           Lakeside Outfitters’ account balances for the year. Mark each one — three of these do not belong on an income statement at all.
         </p>
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
@@ -321,7 +321,7 @@ export default function Level16() {
                 <div className="flex items-center gap-2">
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-white truncate">{a.name}</p>
-                    <p className="text-xs text-dim font-mono">{money(a.amt)}</p>
+                    <p className="text-xs text-slate-300 font-mono">{money(a.amt)}</p>
                   </div>
                   {!checked2 && <HintToggle open={hints.isOpen(a.name)} onClick={() => hints.toggle(a.name)} label={a.name} />}
                   {opts.map(o => {

@@ -104,7 +104,7 @@ export default function Level17() {
         <div className="mb-6">
           <div className="text-sm text-cyan-400 font-semibold mb-1">Level 17</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Classified Balance Sheet</h1>
-          <p className="text-dim">A plain balance sheet lists accounts. A classified one groups them — and that grouping is what lets anyone judge whether the company can pay its bills.</p>
+          <p className="text-slate-300">A plain balance sheet lists accounts. A classified one groups them — and that grouping is what lets anyone judge whether the company can pay its bills.</p>
         </div>
 
         <div className="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-5 mb-6">
@@ -123,7 +123,7 @@ export default function Level17() {
             ].map((s, i) => (
               <div key={i} className="rounded-xl bg-black/20 p-3">
                 <p className="font-bold text-white text-sm">{s.t}</p>
-                <p className="text-xs text-dim">{s.d}</p>
+                <p className="text-xs text-slate-300">{s.d}</p>
               </div>
             ))}
           </div>
@@ -138,17 +138,17 @@ export default function Level17() {
             <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/30 p-4">
               <p className="text-sm font-bold text-white mb-1">Working capital</p>
               <p className="font-mono text-cyan-200 text-sm mb-1">Current Assets − Current Liabilities</p>
-              <p className="text-xs text-dim">A dollar amount. Positive means there is a cushion to cover what is due this year.</p>
+              <p className="text-xs text-slate-300">A dollar amount. Positive means there is a cushion to cover what is due this year.</p>
             </div>
             <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/30 p-4">
               <p className="text-sm font-bold text-white mb-1">Current ratio</p>
               <p className="font-mono text-cyan-200 text-sm mb-1">Current Assets ÷ Current Liabilities</p>
-              <p className="text-xs text-dim">
+              <p className="text-xs text-slate-300">
                 A ratio, so it can compare companies of different sizes. Below 1.00 is a warning sign — current liabilities are outpacing current assets.
               </p>
             </div>
           </div>
-          <p className="text-xs text-dim mt-3">
+          <p className="text-xs text-slate-300 mt-3">
             Same two inputs, two different uses: working capital tells you the size of the cushion in dollars, the current ratio lets you compare one company against another.
           </p>
         </div>
@@ -182,17 +182,17 @@ export default function Level17() {
           <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '🧾'}</div>
           <h2 className="text-3xl font-extrabold text-white mb-2">Balance Sheet Complete</h2>
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-400 mb-2">{pct}%</p>
-          <p className="text-dim text-sm">
+          <p className="text-slate-300 text-sm">
             Sections {placeCorrect}/{BS.length} · Totals {totalsCorrect}/{totalDefs.length} · Ratios {ratiosCorrect}/2
           </p>
-          {hints.usedCount > 0 && <p className="text-xs text-dim mt-2">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-slate-300 mt-2">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl border border-white/10 overflow-hidden mb-4">
           <div className="bg-slate-800 px-4 py-3 text-center">
             <p className="font-bold text-white">Lakeside Outfitters, Inc.</p>
             <p className="text-sm text-slate-300">Balance Sheet</p>
-            <p className="text-xs text-dim">December 31, 2025</p>
+            <p className="text-xs text-slate-300">December 31, 2025</p>
           </div>
           <div className="px-4 py-2">
             {BS.map(a => {
@@ -252,7 +252,7 @@ export default function Level17() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Sort each account into its section" />
-        <p className="text-sm text-dim mb-4">
+        <p className="text-sm text-slate-300 mb-4">
           Lakeside Outfitters’ balances at December 31. The test is always the same: will it be used, collected or come due within one year?
         </p>
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
@@ -264,7 +264,7 @@ export default function Level17() {
                 <div className="flex items-center gap-2 mb-1.5">
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-white truncate">{a.name}</p>
-                    <p className="text-xs text-dim font-mono">{a.amt < 0 ? `(${Math.abs(a.amt).toLocaleString()})` : money(a.amt)}</p>
+                    <p className="text-xs text-slate-300 font-mono">{a.amt < 0 ? `(${Math.abs(a.amt).toLocaleString()})` : money(a.amt)}</p>
                   </div>
                   {!checked1 && <HintToggle open={hints.isOpen(a.name)} onClick={() => hints.toggle(a.name)} label={a.name} />}
                 </div>

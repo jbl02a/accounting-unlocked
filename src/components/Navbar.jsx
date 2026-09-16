@@ -19,7 +19,7 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="hidden md:flex items-center gap-1 text-sm text-dim">
+          <div className="hidden md:flex items-center gap-1 text-sm text-slate-300">
             <span className="text-indigo-400 font-semibold">{totalCompleted}</span>
             <span>/{totalLevels} levels done</span>
           </div>

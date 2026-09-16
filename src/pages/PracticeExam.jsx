@@ -44,7 +44,7 @@ function OptionButton({ q, index, chosen, revealed, onPick }) {
 export default function PracticeExam() {
   const { progress, recordExam, needsWorkIds, reviewedIds, setHold, isHeld, clearMisses } = useProgress()
   const [stage, setStage] = useState('setup')
-  const [mode, setMode] = useState('exam') // 'exam' = feedback at the end, 'practice' = instant
+  const [mode, setMode] = useState('practice') // 'practice' = instant feedback, 'exam' = feedback at the end
   const [scopeLabel, setScopeLabel] = useState('')
   // 'exam' only for the full 79-question run — the one whose score is comparable
   // across attempts. Everything else is a drill and must not move the best score.
@@ -197,7 +197,7 @@ export default function PracticeExam() {
             <span>📝</span><span>Optional — but this is the one that matters</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Practice Exam</h1>
-          <p className="text-dim">
+          <p className="text-slate-300">
             Transactions in plain English. You pick the right account, the right entry, the right column.
             Every question tells you why afterward.
           </p>
@@ -278,7 +278,7 @@ export default function PracticeExam() {
                 <button onClick={startFocus} className="w-full mt-3 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 text-white font-bold hover:opacity-90">
                   Start focus test ({focusCount}) →
                 </button>
-                <p className="text-[11px] text-dim mt-2">
+                <p className="text-[11px] text-slate-300 mt-2">
                   {weakIds.length > 0
                     ? `Worth doing after the ${weakIds.length} above — that drill fixes the ones you got wrong, this one checks the idea stuck on questions you have not seen.`
                     : `It does not replace the full exam — that one stays ${QUESTIONS.length} questions so your scores stay comparable.`}
@@ -296,7 +296,7 @@ export default function PracticeExam() {
                 <p className="font-bold text-white text-sm">
                   {reviewed.length} reviewed
                 </p>
-                <p className="text-xs text-dim">
+                <p className="text-xs text-slate-300">
                   Missed once, since answered right. Nothing is ever deleted — come back whenever you
                   want to check they stuck.
                 </p>
@@ -335,14 +335,14 @@ export default function PracticeExam() {
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5 mb-6">
           <p className="text-xs font-bold uppercase tracking-wider text-dim mb-1">How do you want to take it?</p>
-          <p className="text-xs text-dim mb-3">
+          <p className="text-xs text-slate-300 mb-3">
             This sets the full exam, the Quick 15 and the topic drills. The focus test and the
             “questions I got wrong” drill always explain as you go.
           </p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
-              { id: 'exam', title: 'Exam mode', desc: 'No feedback until you submit. Closest to the real thing.' },
-              { id: 'practice', title: 'Practice mode', desc: 'Shows the answer and the reason after every question.' },
+              { id: 'practice', title: 'Practice mode', desc: 'Shows the answer and the reason after every question. Start here.' },
+              { id: 'exam', title: 'Exam mode', desc: 'No feedback until you submit. Closest to the real thing — move here once practice is going well.' },
             ].map(m => (
               <button
                 key={m.id}
@@ -352,7 +352,7 @@ export default function PracticeExam() {
                 }`}
               >
                 <p className="font-bold text-white text-sm mb-1">{m.title} {mode === m.id && <span className="text-indigo-400">✓</span>}</p>
-                <p className="text-xs text-dim">{m.desc}</p>
+                <p className="text-xs text-slate-300">{m.desc}</p>
               </button>
             ))}
           </div>
@@ -369,7 +369,7 @@ export default function PracticeExam() {
                 <span className="text-3xl">{s.icon}</span>
                 <div className="flex-1">
                   <p className="font-bold text-white">{s.label}</p>
-                  <p className="text-sm text-dim">{s.blurb}</p>
+                  <p className="text-sm text-slate-300">{s.blurb}</p>
                 </div>
                 <span className="text-indigo-400 font-bold">→</span>
               </div>
@@ -378,7 +378,7 @@ export default function PracticeExam() {
         </div>
 
         <p className="text-xs font-bold uppercase tracking-wider text-dim mb-1">Or drill one topic</p>
-        <p className="text-xs text-dim mb-3">
+        <p className="text-xs text-slate-300 mb-3">
           These pull from the exam bank and the extra practice questions together, so a topic drill goes
           further than the exam does on that topic.
         </p>
@@ -396,7 +396,7 @@ export default function PracticeExam() {
                   <p className="font-semibold text-white text-sm">{s.label}</p>
                   <span className="ml-auto text-xs text-dim">{count} Q</span>
                 </div>
-                <p className="text-xs text-dim">{s.blurb}</p>
+                <p className="text-xs text-slate-300">{s.blurb}</p>
               </button>
             )
           })}
@@ -440,8 +440,8 @@ export default function PracticeExam() {
           <div className="text-5xl mb-3">{score === 100 ? '🏆' : score >= 80 ? '🎉' : score >= 60 ? '📈' : '📚'}</div>
           <h1 className="text-3xl font-extrabold text-white mb-1">{scopeLabel}</h1>
           <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 my-3">{score}%</p>
-          <p className="text-dim">{correctCount} of {questions.length} correct</p>
-          <p className="text-dim text-sm mt-3 max-w-md mx-auto">
+          <p className="text-slate-300">{correctCount} of {questions.length} correct</p>
+          <p className="text-slate-300 text-sm mt-3 max-w-md mx-auto">
             {score === 100 ? 'Flawless. Walk into that exam.'
               : score >= 80 ? 'Exam-ready. Read the misses below and you are in great shape.'
               : score >= 60 ? 'Good foundation. The section breakdown shows exactly where to spend your time.'
@@ -524,7 +524,7 @@ export default function PracticeExam() {
                     </div>
                   )}
                 </div>
-                <p className="text-xs text-dim leading-relaxed">{item.explanation}</p>
+                <p className="text-sm text-slate-200 leading-relaxed">{item.explanation}</p>
 
                 {/* In exam mode this review is the only place he sees the answers,
                     so the "I got that right but I guessed" escape hatch lives here too. */}
@@ -584,7 +584,7 @@ export default function PracticeExam() {
       {revealed && (
         <div className={`rounded-xl p-5 mb-5 ${chosen === q.correctIndex ? 'bg-green-900/30 border border-green-700' : 'bg-amber-900/30 border border-amber-700'}`}>
           <p className="font-bold text-white mb-2">{chosen === q.correctIndex ? '✅ Correct' : '📖 Not quite'}</p>
-          <p className="text-sm text-slate-300">{q.explanation}</p>
+          <p className="text-sm text-slate-200">{q.explanation}</p>
 
           {/* Being right once is weak evidence of understanding. He decides whether
               it is retired, not the scoreboard. A wrong answer needs no control —
@@ -653,7 +653,7 @@ export default function PracticeExam() {
       >
         Quit and start over
       </button>
-      <p className="text-[10px] text-dim text-center mt-2">
+      <p className="text-[10px] text-slate-300 text-center mt-2">
         Your place is saved automatically — you can close this and come back to it.
       </p>
     </div>

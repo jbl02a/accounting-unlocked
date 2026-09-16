@@ -110,7 +110,7 @@ export default function Level14() {
         <div className="mb-6">
           <div className="text-sm text-emerald-400 font-semibold mb-1">Level 14</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Accruals — Cash Comes Later</h1>
-          <p className="text-dim">The revenue was earned or the expense was incurred, but no cash has moved and nothing has been recorded yet. These are the entries people forget.</p>
+          <p className="text-slate-300">The revenue was earned or the expense was incurred, but no cash has moved and nothing has been recorded yet. These are the entries people forget.</p>
         </div>
 
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5 mb-6">
@@ -119,15 +119,15 @@ export default function Level14() {
           <div className="grid sm:grid-cols-2 gap-3">
             <div className="rounded-xl bg-black/20 p-3">
               <p className="font-bold text-emerald-300 text-sm mb-1">Accrued REVENUE</p>
-              <p className="text-xs text-dim mb-2">Work done, not billed or collected.</p>
+              <p className="text-xs text-slate-300 mb-2">Work done, not billed or collected.</p>
               <EntryTable lines={[{ account: 'Accounts Receivable', dr: 2000 }, { account: 'Service Revenue', cr: 2000 }]} dense />
-              <p className="text-[11px] text-dim mt-2">Debit an ASSET, credit a REVENUE.</p>
+              <p className="text-[11px] text-slate-300 mt-2">Debit an ASSET, credit a REVENUE.</p>
             </div>
             <div className="rounded-xl bg-black/20 p-3">
               <p className="font-bold text-emerald-300 text-sm mb-1">Accrued EXPENSE</p>
-              <p className="text-xs text-dim mb-2">Cost used, not yet paid.</p>
+              <p className="text-xs text-slate-300 mb-2">Cost used, not yet paid.</p>
               <EntryTable lines={[{ account: 'Salaries Expense', dr: 2000 }, { account: 'Salaries Payable', cr: 2000 }]} dense />
-              <p className="text-[11px] text-dim mt-2">Debit an EXPENSE, credit a LIABILITY.</p>
+              <p className="text-[11px] text-slate-300 mt-2">Debit an EXPENSE, credit a LIABILITY.</p>
             </div>
           </div>
         </div>
@@ -136,11 +136,11 @@ export default function Level14() {
           <h3 className="font-bold text-white mb-2">Accruing interest — the one that needs a calculation</h3>
           <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-4 mb-3 text-center">
             <p className="text-lg font-bold text-white font-mono">Interest = Principal × Rate × Time</p>
-            <p className="text-xs text-dim mt-1">Time is the fraction of a YEAR the money has been borrowed — count the months and put them over 12.</p>
+            <p className="text-xs text-slate-300 mt-1">Time is the fraction of a YEAR the money has been borrowed — count the months and put them over 12.</p>
           </div>
           <div className="rounded-lg bg-slate-900/60 border border-white/10 p-3 mb-3">
             <p className="text-sm text-slate-300 mb-2">Borrowed $150,000 at 6% on <span className="text-white font-semibold">March 1</span>. What has accrued by December 31?</p>
-            <p className="text-xs text-dim mb-1">March, April, May, June, July, August, September, October, November, December = <span className="text-white font-semibold">10 months</span>.</p>
+            <p className="text-xs text-slate-300 mb-1">March, April, May, June, July, August, September, October, November, December = <span className="text-white font-semibold">10 months</span>.</p>
             <p className="text-sm font-mono text-emerald-300">$150,000 × 0.06 × 10/12 = $7,500</p>
           </div>
           <div className="rounded-lg bg-amber-500/10 border border-amber-500/30 p-3">
@@ -171,8 +171,8 @@ export default function Level14() {
         <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '⏳'}</div>
         <h2 className="text-3xl font-extrabold text-white mb-2">Accruals Complete</h2>
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-2">{earned} / {total}</p>
-        {hints.usedCount > 0 && <p className="text-xs text-dim mb-3">{hintTally(hints.usedCount)}</p>}
-        <p className="text-dim mb-8">
+        {hints.usedCount > 0 && <p className="text-xs text-slate-300 mb-3">{hintTally(hints.usedCount)}</p>}
+        <p className="text-slate-300 mb-8">
           {pct === 100 ? 'Entries and effects both. You are ready for the closing process.'
             : 'The effects questions are pure exam bait — re-read them until the pattern is automatic.'}
         </p>

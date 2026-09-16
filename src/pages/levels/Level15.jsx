@@ -99,7 +99,7 @@ export default function Level15() {
         <div className="mb-6">
           <div className="text-sm text-rose-400 font-semibold mb-1">Level 15</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Closing Entries</h1>
-          <p className="text-dim">The last step of the cycle. Revenue, expenses and dividends measured THIS year — so before next year starts, they get emptied into Retained Earnings.</p>
+          <p className="text-slate-300">The last step of the cycle. Revenue, expenses and dividends measured THIS year — so before next year starts, they get emptied into Retained Earnings.</p>
         </div>
 
         <div className="rounded-2xl border border-rose-500/30 bg-rose-500/10 p-5 mb-6">
@@ -107,15 +107,15 @@ export default function Level15() {
           <div className="grid sm:grid-cols-2 gap-3">
             <div className="rounded-xl bg-black/20 p-4">
               <p className="font-bold text-white text-sm mb-1">Permanent (real)</p>
-              <p className="text-xs text-dim mb-2">Balances carry forward into next year.</p>
+              <p className="text-xs text-slate-300 mb-2">Balances carry forward into next year.</p>
               <p className="text-sm text-slate-300">Assets · Liabilities · Common Stock · <span className="text-white font-semibold">Retained Earnings</span></p>
-              <p className="text-[11px] text-dim mt-2">Everything on the balance sheet.</p>
+              <p className="text-[11px] text-slate-300 mt-2">Everything on the balance sheet.</p>
             </div>
             <div className="rounded-xl bg-black/20 p-4">
               <p className="font-bold text-white text-sm mb-1">Temporary (nominal)</p>
-              <p className="text-xs text-dim mb-2">Reset to ZERO so next year starts fresh.</p>
+              <p className="text-xs text-slate-300 mb-2">Reset to ZERO so next year starts fresh.</p>
               <p className="text-sm text-slate-300">Revenues · Expenses · <span className="text-white font-semibold">Dividends</span></p>
-              <p className="text-[11px] text-dim mt-2">The income statement — plus Dividends.</p>
+              <p className="text-[11px] text-slate-300 mt-2">The income statement — plus Dividends.</p>
             </div>
           </div>
           <p className="text-sm text-slate-300 mt-3">
@@ -128,12 +128,12 @@ export default function Level15() {
           <div className="space-y-3">
             <div>
               <p className="text-sm font-semibold text-rose-300 mb-1">1. Close revenues</p>
-              <p className="text-xs text-dim mb-2">Revenue has a credit balance, so DEBIT it to zero it out.</p>
+              <p className="text-xs text-slate-300 mb-2">Revenue has a credit balance, so DEBIT it to zero it out.</p>
               <EntryTable lines={[{ account: 'Service Revenue', dr: 187400 }, { account: 'Retained Earnings', cr: 187400 }]} dense />
             </div>
             <div>
               <p className="text-sm font-semibold text-rose-300 mb-1">2. Close expenses</p>
-              <p className="text-xs text-dim mb-2">Expenses have debit balances, so CREDIT them. One line each; Retained Earnings takes the total.</p>
+              <p className="text-xs text-slate-300 mb-2">Expenses have debit balances, so CREDIT them. One line each; Retained Earnings takes the total.</p>
               <EntryTable lines={[
                 { account: 'Retained Earnings', dr: EXPENSES },
                 { account: 'Salaries Expense', cr: 92600 },
@@ -146,12 +146,12 @@ export default function Level15() {
             </div>
             <div>
               <p className="text-sm font-semibold text-rose-300 mb-1">3. Close dividends</p>
-              <p className="text-xs text-dim mb-2">Dividends has a debit balance, so CREDIT it. Never route dividends through income — they are not an expense.</p>
+              <p className="text-xs text-slate-300 mb-2">Dividends has a debit balance, so CREDIT it. Never route dividends through income — they are not an expense.</p>
               <EntryTable lines={[{ account: 'Retained Earnings', dr: 9000 }, { account: 'Dividends', cr: 9000 }]} dense />
             </div>
           </div>
           <div className="mt-4 rounded-lg bg-slate-900/60 border border-white/10 p-3">
-            <p className="text-xs text-dim">
+            <p className="text-xs text-slate-300">
               <span className="text-white font-semibold">Note:</span> some textbooks route revenues and expenses through an <span className="text-white">Income Summary</span> account first,
               then close Income Summary to Retained Earnings — that version has four entries instead of three. The result is identical. Follow whichever your worksheet asks for.
             </p>
@@ -173,7 +173,7 @@ export default function Level15() {
           <p className="text-sm text-slate-300 mb-2">
             The final proof. It lists <span className="text-white font-semibold">only permanent accounts</span> and shows that debits still equal credits for everything carrying into next year.
           </p>
-          <p className="text-xs text-dim">
+          <p className="text-xs text-slate-300">
             If any revenue, expense or dividend account still shows a balance on it, a closing entry was missed. Retained Earnings appears at its NEW ending balance.
           </p>
         </div>
@@ -196,10 +196,10 @@ export default function Level15() {
           <div className="text-5xl mb-4">{pct === 100 ? '🏆' : '🔒'}</div>
           <h2 className="text-3xl font-extrabold text-white mb-2">Books Closed</h2>
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-400 mb-2">{pct}%</p>
-          <p className="text-dim text-sm">
+          <p className="text-slate-300 text-sm">
             Temporary vs permanent {kindCorrect}/{CLASSIFY_SET.length} · Closing entries {ceCorrect}/3 · Ending R/E {reRight ? 1 : 0}/1 · Post-closing {pcCorrect}/{pcSet.length}
           </p>
-          {hints.usedCount > 0 && <p className="text-xs text-dim mt-2">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-slate-300 mt-2">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl bg-rose-500/10 border border-rose-500/20 p-5 mb-6">
@@ -238,7 +238,7 @@ export default function Level15() {
       <div className="bg-slate-800 px-4 py-3 text-center">
         <p className="font-bold text-white">Harbor Point Marine, Inc.</p>
         <p className="text-sm text-slate-300">Adjusted Trial Balance</p>
-        <p className="text-xs text-dim">December 31, 2025</p>
+        <p className="text-xs text-slate-300">December 31, 2025</p>
       </div>
       <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800/60 text-[10px] font-bold text-dim uppercase tracking-wider px-4 py-1.5">
         <span>Account</span><span className="text-right">Debit</span><span className="text-right">Credit</span>
@@ -263,7 +263,7 @@ export default function Level15() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Which accounts get closed?" />
-        <p className="text-sm text-dim mb-4">
+        <p className="text-sm text-slate-300 mb-4">
           Mark each account temporary (it gets closed to zero) or permanent (its balance carries into next year).
         </p>
         <div className="rounded-xl border border-white/10 overflow-hidden mb-5">
@@ -336,7 +336,7 @@ export default function Level15() {
             return (
               <div key={f.k} className={`rounded-xl border p-4 ${ok ? 'border-green-600 bg-green-900/15' : bad ? 'border-red-600 bg-red-900/15' : 'border-white/10 bg-white/5'}`}>
                 <p className="font-semibold text-white text-sm">{f.label}</p>
-                <p className="text-xs text-dim mb-2">{f.sub}</p>
+                <p className="text-xs text-slate-300 mb-2">{f.sub}</p>
                 {!checked2 && <HintBar open={hints.isOpen(f.k)} onToggle={() => hints.toggle(f.k)} text={f.hint} className="mb-2" />}
                 <div className="flex gap-2">
                   <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
@@ -379,7 +379,7 @@ export default function Level15() {
 
       <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-5">
         <p className="font-semibold text-white text-sm mb-1">What is Retained Earnings now?</p>
-        <p className="text-xs text-dim mb-2">Beginning R/E was {money(BEGIN_RE)} on the adjusted trial balance.</p>
+        <p className="text-xs text-slate-300 mb-2">Beginning R/E was {money(BEGIN_RE)} on the adjusted trial balance.</p>
         {!checked3 && <HintBar open={hints.isOpen('re')} onToggle={() => hints.toggle('re')} text={`Use Beginning R/E + Net Income − Dividends. You worked out net income in step 2: revenue ${money(REVENUE)} less expenses ${money(EXPENSES)}. Then take out the dividends.`} className="mb-2" />}
         <div className="flex gap-2">
           <span className="flex items-center px-3 rounded-lg bg-slate-800 border border-slate-600 text-dim font-mono">$</span>
@@ -395,7 +395,7 @@ export default function Level15() {
 
       <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-5">
         <p className="font-semibold text-white text-sm mb-1">Which accounts appear on the POST-CLOSING trial balance?</p>
-        <p className="text-xs text-dim mb-3">Only permanent accounts survive closing.</p>
+        <p className="text-xs text-slate-300 mb-3">Only permanent accounts survive closing.</p>
         <div className="space-y-2">
           {pcSet.map(n => {
             const should = ATB.find(a => a.name === n).kind === 'permanent' ? 'yes' : 'no'

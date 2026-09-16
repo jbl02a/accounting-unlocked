@@ -140,7 +140,7 @@ export default function Level10() {
         <div className="mb-6">
           <div className="text-sm text-fuchsia-400 font-semibold mb-1">Level 10 — Capstone</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Full Cycle Challenge</h1>
-          <p className="text-dim">Everything from Levels 1 through 9, on one company, in one sitting. This is what an exam problem actually looks like.</p>
+          <p className="text-slate-300">Everything from Levels 1 through 9, on one company, in one sitting. This is what an exam problem actually looks like.</p>
         </div>
 
         <div className="rounded-2xl border border-fuchsia-500/30 bg-fuchsia-500/10 p-5 mb-6">
@@ -156,7 +156,7 @@ export default function Level10() {
                 <span className="shrink-0 w-6 h-6 rounded-full bg-white/10 text-white text-xs font-bold flex items-center justify-center">{s.n}</span>
                 <div>
                   <p className="font-bold text-sm text-white">{s.t}</p>
-                  <p className="text-xs text-dim">{s.d}</p>
+                  <p className="text-xs text-slate-300">{s.d}</p>
                 </div>
               </div>
             ))}
@@ -165,7 +165,7 @@ export default function Level10() {
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
           <p className="font-bold text-white mb-1">Novak Consulting — March transactions</p>
-          <p className="text-xs text-dim mb-3">Read them once now. You will come back to them in every step.</p>
+          <p className="text-xs text-slate-300 mb-3">Read them once now. You will come back to them in every step.</p>
           <div className="divide-y divide-white/5">
             {LEDGER_STORY.map((t, i) => (
               <div key={i} className="py-2 flex gap-3">
@@ -173,7 +173,7 @@ export default function Level10() {
                 <div className="flex-1">
                   <p className="text-sm text-slate-300">{t.text}</p>
                   {t.given && (
-                    <p className="text-[11px] text-dim mt-1 font-mono">
+                    <p className="text-[11px] text-slate-300 mt-1 font-mono">
                       recorded for you: DR {t.given[0].account} {money(t.given[0].dr)} / CR {t.given[1].account} {money(t.given[1].cr)}
                     </p>
                   )}
@@ -206,20 +206,20 @@ export default function Level10() {
           <div className="text-5xl mb-4">{pct === 100 ? '🏆' : pct >= 80 ? '🎉' : '📊'}</div>
           <h2 className="text-3xl font-extrabold text-white mb-2">Full Cycle Complete</h2>
           <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-rose-400 mb-3">{pct}%</p>
-          <div className="inline-flex flex-wrap justify-center gap-2 text-xs text-dim">
+          <div className="inline-flex flex-wrap justify-center gap-2 text-xs text-slate-300">
             <span className="rounded-full bg-white/5 px-3 py-1">Journalizing {jResults.filter(Boolean).length}/{JOURNAL_QUIZ.length}</span>
             <span className="rounded-full bg-white/5 px-3 py-1">Posting {postingCorrect}/{POSTING.length}</span>
             <span className="rounded-full bg-white/5 px-3 py-1">Trial balance {columnCorrect + totalsCorrect}/{TRIAL_BALANCE.length + 2}</span>
             <span className="rounded-full bg-white/5 px-3 py-1">Analysis {aResults.filter(Boolean).length}/{ANALYSIS.length}</span>
           </div>
-          {hints.usedCount > 0 && <p className="text-xs text-dim mt-3">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-slate-300 mt-3">{hintTally(hints.usedCount)}</p>}
         </div>
 
         <div className="rounded-xl border border-white/10 overflow-hidden mb-6">
           <div className="bg-slate-800 px-4 py-3 text-center">
             <p className="font-bold text-white">Novak Consulting</p>
             <p className="text-sm text-slate-300">Trial Balance</p>
-            <p className="text-xs text-dim">March 31, 2025</p>
+            <p className="text-xs text-slate-300">March 31, 2025</p>
           </div>
           <div className="grid grid-cols-[1fr_6.5rem_6.5rem] bg-slate-800/60 text-[10px] font-bold text-dim uppercase tracking-wider px-4 py-1.5">
             <span>Account</span><span className="text-right">Debit</span><span className="text-right">Credit</span>
@@ -343,7 +343,7 @@ export default function Level10() {
     return (
       <div className="max-w-xl mx-auto">
         <StepHeader title="Post — find each ending balance" />
-        <p className="text-sm text-dim mb-4">
+        <p className="text-sm text-slate-300 mb-4">
           All ten entries have now been posted. Using the March transaction list, work out where each of these four accounts ended up. Enter the amount only — the side is shown for you.
         </p>
 
@@ -371,7 +371,7 @@ export default function Level10() {
                     />
                   </div>
                 </div>
-                <p className="text-[11px] text-dim">{p.postings}</p>
+                <p className="text-[11px] text-slate-300">{p.postings}</p>
                 {!checked2 && (
                   <HintBar
                     open={hints.isOpen(`post-${p.account}`)}
@@ -417,7 +417,7 @@ export default function Level10() {
     return (
       <div className="max-w-2xl mx-auto">
         <StepHeader title="Build the trial balance" />
-        <p className="text-sm text-dim mb-4">
+        <p className="text-sm text-slate-300 mb-4">
           The accounts are already in proper order — assets, liabilities, equity, revenue, expenses. Choose the column each balance belongs in, then total both columns.
         </p>
 
@@ -430,7 +430,7 @@ export default function Level10() {
                 <div className="flex items-center gap-2">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-white truncate">{a.name}</p>
-                  <p className="text-xs text-dim font-mono">{money(a.amount)}</p>
+                  <p className="text-xs text-slate-300 font-mono">{money(a.amount)}</p>
                 </div>
                 {!checked3 && (
                   <HintToggle open={hints.isOpen(`col-${a.name}`)} onClick={() => hints.toggle(`col-${a.name}`)} label={a.name} />

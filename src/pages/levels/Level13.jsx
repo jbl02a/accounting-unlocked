@@ -131,7 +131,7 @@ export default function Level13() {
         <div className="mb-6">
           <div className="text-sm text-amber-400 font-semibold mb-1">Level 13</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Deferrals — Cash Came First</h1>
-          <p className="text-dim">Prepayments. The money moved in an earlier period, so at period end you record however much of it has now been used up or earned.</p>
+          <p className="text-slate-300">Prepayments. The money moved in an earlier period, so at period end you record however much of it has now been used up or earned.</p>
         </div>
 
         <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5 mb-6">
@@ -140,14 +140,14 @@ export default function Level13() {
           <div className="grid sm:grid-cols-2 gap-3">
             <div className="rounded-xl bg-black/20 p-3">
               <p className="font-bold text-amber-300 text-sm mb-1">Deferred EXPENSE (Prepaid)</p>
-              <p className="text-xs text-dim mb-2">You paid in advance. It is an ASSET until used.</p>
-              <p className="text-[11px] text-dim">Paid: Dr Prepaid Insurance / Cr Cash</p>
+              <p className="text-xs text-slate-300 mb-2">You paid in advance. It is an ASSET until used.</p>
+              <p className="text-[11px] text-slate-300">Paid: Dr Prepaid Insurance / Cr Cash</p>
               <p className="text-[11px] text-white">Adjust: Dr Insurance Expense / Cr Prepaid Insurance</p>
             </div>
             <div className="rounded-xl bg-black/20 p-3">
               <p className="font-bold text-amber-300 text-sm mb-1">Deferred REVENUE (Unearned)</p>
-              <p className="text-xs text-dim mb-2">They paid in advance. It is a LIABILITY until earned.</p>
-              <p className="text-[11px] text-dim">Received: Dr Cash / Cr Unearned Revenue</p>
+              <p className="text-xs text-slate-300 mb-2">They paid in advance. It is a LIABILITY until earned.</p>
+              <p className="text-[11px] text-slate-300">Received: Dr Cash / Cr Unearned Revenue</p>
               <p className="text-[11px] text-white">Adjust: Dr Unearned Revenue / Cr Service Revenue</p>
             </div>
           </div>
@@ -164,11 +164,11 @@ export default function Level13() {
               <div key={i} className="rounded-lg bg-slate-900/60 border border-white/10 p-3">
                 <p className="text-sm font-semibold text-white">{c.t}</p>
                 <p className="text-xs text-amber-300 font-mono my-1">{c.f}</p>
-                <p className="text-xs text-dim">{c.ex}</p>
+                <p className="text-xs text-slate-300">{c.ex}</p>
               </div>
             ))}
           </div>
-          <p className="text-xs text-dim mt-3">
+          <p className="text-xs text-slate-300 mt-3">
             The trap in all three: the number you want is usually <span className="text-white font-semibold">not printed in the problem</span>. You have to compute it.
           </p>
         </div>
@@ -206,9 +206,9 @@ export default function Level13() {
         <div className="text-5xl mb-4">{pct === 100 ? '🎉' : '🛡️'}</div>
         <h2 className="text-3xl font-extrabold text-white mb-2">Deferrals Complete</h2>
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 mb-2">{pct}%</p>
-        <p className="text-dim text-sm mb-2">{earned} of {maxPoints} points — one for each entry, one for each follow-up balance.</p>
-        {hints.usedCount > 0 && <p className="text-xs text-dim mb-3">{hintTally(hints.usedCount)}</p>}
-        <p className="text-dim mb-8">
+        <p className="text-slate-300 text-sm mb-2">{earned} of {maxPoints} points — one for each entry, one for each follow-up balance.</p>
+        {hints.usedCount > 0 && <p className="text-xs text-slate-300 mb-3">{hintTally(hints.usedCount)}</p>}
+        <p className="text-slate-300 mb-8">
           {pct === 100 ? 'Every computation and every account correct. Deferrals are the harder half — well done.'
             : 'The computation is where most points are lost. Redo the three formulas in the lesson, then run it again.'}
         </p>

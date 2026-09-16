@@ -87,7 +87,7 @@ export default function Level2() {
         <div className="mb-6">
           <div className="text-sm text-cyan-400 font-semibold mb-1">Level 2</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">The Big 5 Account Types</h1>
-          <p className="text-dim">Every account in accounting belongs to one of these five families.</p>
+          <p className="text-slate-300">Every account in accounting belongs to one of these five families.</p>
         </div>
 
         <div className="space-y-3 mb-8">
@@ -112,7 +112,7 @@ export default function Level2() {
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-8">
-          <p className="text-sm text-dim">
+          <p className="text-sm text-slate-300">
             <span className="text-white font-semibold">Quick memory trick:</span> Assets and Expenses go UP with debits. Liabilities, Equity, and Revenue go UP with credits. You'll learn why in Level 3!
           </p>
         </div>
@@ -132,11 +132,11 @@ export default function Level2() {
       <div className="mb-4">
         <div className="text-sm text-cyan-400 font-semibold mb-1">Level 2 — Card Sort</div>
         <h1 className="text-2xl font-extrabold text-white mb-1">Sort 10 Cards into the Right Buckets</h1>
-        <p className="text-dim text-sm">Drag cards into their bucket, or use the quick-place buttons.</p>
+        <p className="text-slate-300 text-sm">Drag cards into their bucket, or use the quick-place buttons.</p>
       </div>
 
       {/* Score bar */}
-      <div className="flex items-center gap-2 text-sm text-dim mb-4">
+      <div className="flex items-center gap-2 text-sm text-slate-300 mb-4">
         <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
           <div className="h-full bg-cyan-500 transition-all duration-300" style={{ width: `${(placedCount / CARDS.length) * 100}%` }} />
         </div>
@@ -169,7 +169,7 @@ export default function Level2() {
               ))}
             </div>
           )}
-          <p className="text-xs text-dim mb-3">
+          <p className="text-xs text-slate-300 mb-3">
             Tap a card&rsquo;s <span className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-slate-600 text-[9px] font-bold text-dim align-middle">?</span> if you want a nudge on it. Hints never cost you points.
           </p>
         </div>
@@ -252,7 +252,7 @@ export default function Level2() {
         <div className="mb-4 rounded-xl border border-white/10 bg-white/5 p-5">
           <div className="text-center mb-4">
             <p className="text-4xl font-black text-white">{score}%</p>
-            <p className="text-dim text-sm">{Object.values(placed).filter((v, i) => v === CARDS[i]?.correct).length} / 10 correct</p>
+            <p className="text-slate-300 text-sm">{Object.values(placed).filter((v, i) => v === CARDS[i]?.correct).length} / 10 correct</p>
           </div>
           {CARDS.filter(c => placed[c.id] !== c.correct).length > 0 && (
             <div>
@@ -260,7 +260,7 @@ export default function Level2() {
               {CARDS.filter(c => placed[c.id] !== c.correct).map(card => {
                 const correctBucket = BUCKETS.find(b => b.id === card.correct)
                 return (
-                  <div key={card.id} className="text-sm text-dim mb-1">
+                  <div key={card.id} className="text-sm text-slate-300 mb-1">
                     <span className="text-white">{card.emoji} {card.label}</span> belongs in <span className="font-semibold text-white">{correctBucket?.label}</span>
                     {' '}<span className="text-dim">— you put it in {BUCKETS.find(b => b.id === placed[card.id])?.label || 'unplaced'}</span>
                   </div>
@@ -269,7 +269,7 @@ export default function Level2() {
             </div>
           )}
           {score === 100 && <p className="text-center text-green-400 font-bold mt-2">🎉 Perfect! You know your account types cold.</p>}
-          {hints.usedCount > 0 && <p className="text-xs text-dim mt-3">{hintTally(hints.usedCount)}</p>}
+          {hints.usedCount > 0 && <p className="text-xs text-slate-300 mt-3">{hintTally(hints.usedCount)}</p>}
         </div>
       )}
 

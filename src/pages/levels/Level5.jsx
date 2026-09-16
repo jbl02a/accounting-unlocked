@@ -117,7 +117,7 @@ export default function Level5() {
         <div className="mb-6">
           <div className="text-sm text-rose-400 font-semibold mb-1">Level 5</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Reading a Balance Sheet</h1>
-          <p className="text-dim">A balance sheet is a financial snapshot of a company. Let's learn to read — and audit — one.</p>
+          <p className="text-slate-300">A balance sheet is a financial snapshot of a company. Let's learn to read — and audit — one.</p>
         </div>
 
         <div className="space-y-4 mb-8">
@@ -159,7 +159,7 @@ export default function Level5() {
       <div className="mb-4">
         <div className="text-sm text-rose-400 font-semibold mb-1">Level 5 — Audit Mode</div>
         <h1 className="text-2xl font-extrabold text-white mb-1">Find the 3 Errors in This Balance Sheet</h1>
-        <p className="text-dim text-sm">
+        <p className="text-slate-300 text-sm">
           Click on any row or total that you think contains an error. {!submitted ? `${flagged.size} item${flagged.size !== 1 ? 's' : ''} flagged.` : ''}
         </p>
         {!submitted && (
@@ -189,8 +189,8 @@ export default function Level5() {
         {/* Header */}
         <div className="bg-slate-800 px-6 py-4 text-center border-b border-white/10">
           <h2 className="text-lg font-bold text-white">Griffin Co.</h2>
-          <p className="text-dim text-xs">Balance Sheet</p>
-          <p className="text-dim text-xs">{BALANCE_SHEET.date}</p>
+          <p className="text-slate-300 text-xs">Balance Sheet</p>
+          <p className="text-slate-300 text-xs">{BALANCE_SHEET.date}</p>
         </div>
 
         {/* ASSETS */}
@@ -328,7 +328,7 @@ export default function Level5() {
             <p className="text-3xl font-black text-white mb-1">
               {allErrors.filter(e => flagged.has(e)).length} / 3 errors found
             </p>
-            <p className="text-dim text-sm">
+            <p className="text-slate-300 text-sm">
               {score === 100 ? '🎉 You spotted every error! You think like an auditor.' :
                score >= 67 ? '👍 Good eye! Review the missed error below.' :
                '📚 Tricky ones! Review all three explanations.'}

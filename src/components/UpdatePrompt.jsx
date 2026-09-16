@@ -35,7 +35,7 @@ export default function UpdatePrompt() {
             <span className="text-2xl">✨</span>
             <div className="flex-1">
               <p className="font-bold text-white text-sm">A new version is ready</p>
-              <p className="text-xs text-dim mt-0.5">
+              <p className="text-xs text-slate-300 mt-0.5">
                 Refresh to get the latest lessons and fixes. Your progress is kept.
               </p>
             </div>

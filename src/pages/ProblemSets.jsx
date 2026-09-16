@@ -30,11 +30,11 @@ export function ProblemSetsIndex() {
           <span>🗂️</span><span>Straight from your TA</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white mb-2">Problem Sets</h1>
-        <p className="text-dim">
+        <p className="text-slate-300">
           Your TA's practice problems, worked one step at a time. Every answer is marked instantly, with
           the reason it is right and the trap it was built around.
         </p>
-        <p className="text-dim text-sm mt-2">
+        <p className="text-slate-300 text-sm mt-2">
           These are separate from the levels and the practice exam — nothing here repeats work you have
           already done.
         </p>
@@ -54,7 +54,7 @@ export function ProblemSetsIndex() {
                 <span className="text-3xl shrink-0">{set.icon}</span>
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-white">{set.title}</p>
-                  <p className="text-sm text-dim mt-0.5">{set.blurb}</p>
+                  <p className="text-sm text-slate-300 mt-0.5">{set.blurb}</p>
                   <div className="flex flex-wrap items-center gap-2 mt-2 text-[11px]">
                     <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-dim">{set.source}</span>
                     <span className="rounded-full bg-black/30 border border-white/10 px-2 py-0.5 text-dim">{set.steps.length} steps</span>
@@ -92,7 +92,7 @@ export function ProblemSetsIndex() {
         <span className="text-2xl">🖨️</span>
         <div className="flex-1">
           <p className="font-bold text-white text-sm">Printable answer key</p>
-          <p className="text-xs text-dim">
+          <p className="text-xs text-slate-300">
             All four problems worked in full, with the reason and the trap for every step — for checking
             work done on paper.
           </p>
@@ -100,7 +100,7 @@ export function ProblemSetsIndex() {
         <span className="text-emerald-400 font-bold">→</span>
       </Link>
 
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-dim">
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-300">
         <p className="font-bold text-white text-sm mb-1">How these differ from the practice exam</p>
         <p>
           The exam asks one question at a time. These are whole problems — journalize, post, foot the
@@ -128,7 +128,7 @@ function EntryBuilder({ step, accounts, value, onChange, disabled }) {
           value={cur.account || ''}
           onChange={e => set(side, i, 'account', e.target.value)}
           disabled={disabled}
-          className="flex-1 min-w-0 rounded-lg bg-black/40 border border-white/15 text-white text-sm px-2 py-2 disabled:opacity-60"
+          className="flex-1 min-w-0 rounded-lg bg-[#161629] border border-white/15 text-white text-sm px-2 py-2 disabled:opacity-60"
         >
           <option value="">— account —</option>
           {accounts.map(a => <option key={a} value={a}>{a}</option>)}
@@ -293,7 +293,7 @@ export function ProblemSetRunner() {
 
       <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-5">
         {step.group && <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 mb-1">{step.group}</p>}
-        {step.date && <p className="text-xs text-dim mb-1">{step.date}</p>}
+        {step.date && <p className="text-xs text-slate-300 mb-1">{step.date}</p>}
         <p className="font-semibold text-white">{step.prompt}</p>
       </div>
 
@@ -378,7 +378,7 @@ export function ProblemSetRunner() {
                 <span className="text-sm text-white flex-1 min-w-0">{it.label}</span>
                 <select value={picked} disabled={Boolean(result)}
                   onChange={e => setAnswers(p => ({ ...p, [step.id]: { ...(p[step.id] || {}), [i]: e.target.value } }))}
-                  className="rounded-lg bg-black/40 border border-white/15 text-white text-xs px-2 py-1.5 disabled:opacity-70">
+                  className="rounded-lg bg-[#161629] border border-white/15 text-white text-xs px-2 py-1.5 disabled:opacity-70">
                   <option value="">— pick —</option>
                   {step.buckets.map(b => <option key={b} value={b}>{b}</option>)}
                 </select>
@@ -405,13 +405,13 @@ export function ProblemSetRunner() {
                 <div className="flex flex-wrap gap-2">
                   <select value={cur.statement || ''} disabled={Boolean(result)}
                     onChange={e => upd('statement', e.target.value)}
-                    className="flex-1 min-w-[9rem] rounded-lg bg-black/40 border border-white/15 text-white text-xs px-2 py-1.5 disabled:opacity-70">
+                    className="flex-1 min-w-[9rem] rounded-lg bg-[#161629] border border-white/15 text-white text-xs px-2 py-1.5 disabled:opacity-70">
                     <option value="">— statement —</option>
                     {step.axes[0].options.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
                   <select value={cur.category || ''} disabled={Boolean(result)}
                     onChange={e => upd('category', e.target.value)}
-                    className="flex-1 min-w-[9rem] rounded-lg bg-black/40 border border-white/15 text-white text-xs px-2 py-1.5 disabled:opacity-70">
+                    className="flex-1 min-w-[9rem] rounded-lg bg-[#161629] border border-white/15 text-white text-xs px-2 py-1.5 disabled:opacity-70">
                     <option value="">— classified as —</option>
                     {step.axes[1].options.map(o => <option key={o} value={o}>{o}</option>)}
                   </select>
@@ -506,7 +506,7 @@ export function ProblemSetRunner() {
 
       {answeredAll && (
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-center">
-          <p className="text-sm text-dim">You have worked every step of this problem.</p>
+          <p className="text-sm text-slate-300">You have worked every step of this problem.</p>
           <p className="text-2xl font-extrabold text-white my-1">{rightCount} of {set.steps.length} right first time</p>
           <div className="flex flex-col sm:flex-row gap-2 mt-3">
             <button onClick={() => { setAnswers({}); setChecked({}); setIndex(0) }}

@@ -34,16 +34,16 @@ function TAccount({ account, type }) {
         <div className="flex">
           <div className="flex-1 border-r-2 border-slate-500 p-4 text-center min-h-20">
             <div className="text-xs font-bold text-dim uppercase tracking-wider mb-1">Debit</div>
-            <div className="text-xs text-dim">(Left side)</div>
+            <div className="text-xs text-slate-300">(Left side)</div>
           </div>
           <div className="flex-1 p-4 text-center min-h-20">
             <div className="text-xs font-bold text-dim uppercase tracking-wider mb-1">Credit</div>
-            <div className="text-xs text-dim">(Right side)</div>
+            <div className="text-xs text-slate-300">(Right side)</div>
           </div>
         </div>
       </div>
       <div className="w-0.5 h-4 bg-slate-500" />
-      <div className="text-xs text-dim">pivot</div>
+      <div className="text-xs text-slate-300">pivot</div>
     </div>
   )
 }
@@ -89,7 +89,7 @@ export default function Level3() {
         <div className="mb-6">
           <div className="text-sm text-emerald-400 font-semibold mb-1">Level 3</div>
           <h1 className="text-3xl font-extrabold text-white mb-2">Debits & Credits</h1>
-          <p className="text-dim">The most misunderstood concept in accounting. Let's clear it up once and for all.</p>
+          <p className="text-slate-300">The most misunderstood concept in accounting. Let's clear it up once and for all.</p>
         </div>
 
         {/* T-Account visual */}
@@ -131,7 +131,7 @@ export default function Level3() {
         {/* Mnemonic */}
         <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/30 p-5 mb-8">
           <p className="font-bold text-emerald-400 mb-2">Memory trick: DEALER</p>
-          <p className="text-xs text-dim mb-3">
+          <p className="text-xs text-slate-300 mb-3">
             <span className="text-white font-semibold">D</span>ividends,{' '}
             <span className="text-white font-semibold">E</span>xpenses,{' '}
             <span className="text-white font-semibold">A</span>ssets have normal DEBIT balances.{' '}
@@ -175,8 +175,8 @@ export default function Level3() {
         <div className="text-6xl mb-4">{pct >= 80 ? '🎉' : pct >= 50 ? '👍' : '📚'}</div>
         <h2 className="text-3xl font-extrabold text-white mb-2">Quiz Complete!</h2>
         <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400 mb-2">{pct}%</p>
-        <p className="text-dim mb-2">{correctCount} / {QUESTIONS.length} correct</p>
-        {hints.usedCount > 0 && <p className="text-xs text-dim mb-2">{hintTally(hints.usedCount)}</p>}
+        <p className="text-slate-300 mb-2">{correctCount} / {QUESTIONS.length} correct</p>
+        {hints.usedCount > 0 && <p className="text-xs text-slate-300 mb-2">{hintTally(hints.usedCount)}</p>}
         <p className="text-slate-300 mb-8">
           {pct === 100 ? "Flawless! You've mastered debits and credits." :
            pct >= 80 ? "Great work! The rules are sticking." :
@@ -213,7 +213,7 @@ export default function Level3() {
 
       {/* Question card */}
       <div className="rounded-2xl bg-slate-900/70 border border-white/10 p-8 mb-6 text-center">
-        <p className="text-dim text-sm mb-3">
+        <p className="text-slate-300 text-sm mb-3">
           This account is <span className={`font-bold ${TYPE_COLORS[q.type]}`}>{q.type}</span> type
         </p>
         <h2 className="text-2xl font-extrabold text-white mb-1">{q.account}</h2>
@@ -222,7 +222,7 @@ export default function Level3() {
             {q.action === 'increasing' ? '⬆️ increasing' : '⬇️ decreasing'}
           </span>
         </p>
-        <p className="text-dim text-sm">Should this be recorded as a…</p>
+        <p className="text-slate-300 text-sm">Should this be recorded as a…</p>
       </div>
 
       {!showFeedback && (
@@ -250,7 +250,7 @@ export default function Level3() {
               className={`py-6 rounded-xl border-2 font-bold text-xl transition-colors ${style} disabled:cursor-not-allowed`}
             >
               {choice === 'debit' ? '← Debit' : 'Credit →'}
-              <div className="text-xs font-normal text-dim mt-1">(Left side)</div>
+              <div className="text-xs font-normal text-slate-300 mt-1">(Left side)</div>
             </button>
           )
         })}
