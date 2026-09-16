@@ -202,7 +202,7 @@ export default function Level9() {
               Textbooks list Dividends in the equity group, right after Retained Earnings — that is the order taught here.
               Some worksheets instead put Dividends <span className="text-white">last</span>, after the expenses. Either placement is accepted;
               what is never negotiable is that Dividends sits in the <span className="text-white">DEBIT</span> column and the two totals match.
-              Follow whichever layout your worksheet uses. (Dividends is also sometimes labelled <span className="text-white">Dividends Declared</span> — same account.)
+              Follow whichever layout your worksheet uses. (Dividends is also sometimes labeled <span className="text-white">Dividends Declared</span> — same account.)
             </p>
           </div>
         </div>

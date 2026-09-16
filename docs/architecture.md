@@ -12,7 +12,7 @@ src/
   components/
     Hint.jsx                 useHints() + HintToggle / HintBar / HintPanel / hintTally
     EntryTable.jsx           renders a journal entry the way a textbook prints one
-    LevelCard.jsx            LEVEL_META — titles, icons, colours, phase numbers
+    LevelCard.jsx            LEVEL_META — titles, icons, colors, phase numbers
     Navbar.jsx               UpdatePrompt.jsx
   lib/
     shuffle.js               option permutation; the fixed-answer fix
@@ -24,7 +24,7 @@ src/
     reinforceBank.js         58 extra questions for the hardest topics
     problemSets.js           the TA's five worksheets, with answers and coaching
     levelBanks.js            raw MC arrays lifted out of level components
-    levelQuestions.js        normalises those into exam shape with namespaced IDs
+    levelQuestions.js        normalizes those into exam shape with namespaced IDs
   pages/
     Home CheatSheet CramSheet Worksheet PracticeExam ProblemSets ProblemKey
     levels/Level1..Level17
@@ -83,7 +83,7 @@ both:
 
 Level banks were moved out of their components into `data/levelBanks.js` because
 the misses drill needs to import them, and importing a component from a data
-module is circular. `data/levelQuestions.js` normalises them — namespacing IDs as
+module is circular. `data/levelQuestions.js` normalizes them — namespacing IDs as
 `L{level}-{key}{n}`, mapping Level 11's `text` field onto `prompt`, and inferring
 `kind`.
 

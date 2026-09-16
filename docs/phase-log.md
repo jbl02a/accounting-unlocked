@@ -345,16 +345,16 @@ fact and flags the ambiguity rather than asserting a trap.
 ## Phase 14 — Legibility, as a rule rather than a preference (Sep 15–16)
 Raised while working on the sibling supply chain app, and applied to both:
 *"make sure we implement formatting rules for minimum brightness so the light text
-grey isn't too light — enough contrast to really be legible."*
+gray isn't too light — enough contrast to really be legible."*
 
 Worth recording because it took **two passes**, and the second one is the
 interesting one.
 
-**Pass one put a floor under the colour.** Measured against `#161629`, the lightest
+**Pass one put a floor under the color.** Measured against `#161629`, the lightest
 surface the dark chrome paints, Tailwind's `slate-500` reads **3.74:1** and
 `slate-600` reads **2.35:1** — both below WCAG AA. Between them they carried 113
 labels, counters, step markers and secondary links, and `slate-400` carried another
-245. Every grey became one token, `dim`, and `scripts/check-contrast.mjs` now
+245. Every gray became one token, `dim`, and `scripts/check-contrast.mjs` now
 computes the ratio for every `text-*` class in `src/` and **fails the build below
 AA**, so a too-dim shade cannot ship quietly. It runs as part of `npm run build`,
 which means it runs on Vercel too.
@@ -362,7 +362,7 @@ which means it runs on Vercel too.
 Reading computed styles in a real browser caught two things the static check cannot
 see:
 - **The active Problems tab was white on `emerald-600`, 3.77:1.** Now `emerald-700`.
-  A ratio failure can live in a background as easily as in a text colour.
+  A ratio failure can live in a background as easily as in a text color.
 - **The print toolbar on `/problems/key` overflowed a 390px screen by 62px** (the
   worksheet by 2px), which let the whole page scroll sideways. The toolbar wraps
   below 640px now, and the printable tables scroll inside their own section the way
@@ -376,14 +376,14 @@ and the explanation of why an answer was wrong are the *content*, and they were 
 painted in the chrome tier.
 
 A static contrast check is structurally incapable of catching that, because every
-colour involved was already compliant. `text-dim` is now chrome only and brighter
+color involved was already compliant. `text-dim` is now chrome only and brighter
 with it (`#b2bfd0`, 9.5:1); 210 prose blocks moved up to `slate-300`; and the
 after-answer explanation went from 12px dim to 14px `slate-200` — it had been the
 smallest, faintest text in the app despite being the one sentence that teaches him
 anything.
 
 ### The dropdowns
-Reported in the same round: the select popups were grey-on-grey. A real bug with a
+Reported in the same round: the select popups were gray-on-gray. A real bug with a
 specific cause — a native option list is drawn **by the browser using the control's
 own background**, and four controls carried `bg-black/40`, which composited against
 the page into mush. Tailwind never touches the popup. The controls are opaque now

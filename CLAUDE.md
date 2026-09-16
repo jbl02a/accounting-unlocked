@@ -76,17 +76,17 @@ These are the things most likely to be broken by accident.
     exam drill. Every figure in that file was re-derived from the raw entries in
     `node` before it was written; re-run that check after any edit.
 
-12. **Text has a minimum brightness, and it is enforced.** Grey-on-near-black is
+12. **Text has a minimum brightness, and it is enforced.** Gray-on-near-black is
     the first thing that goes illegible on a phone at night, so this is a floor
-    rather than a judgement call: every `text-*` colour in `src/` must clear
+    rather than a judgment call: every `text-*` color in `src/` must clear
     WCAG AA (4.5:1) against `#161629`, the lightest surface the dark chrome
     paints. `scripts/check-contrast.mjs` asserts it and runs as part of
     `npm run build`, so a too-dim shade fails the build instead of shipping.
-    **`text-dim` (`#a3b1c4`, 8.2:1) is the dimmest grey allowed** — Tailwind's
+    **`text-dim` (`#a3b1c4`, 8.2:1) is the dimmest gray allowed** — Tailwind's
     `slate-400` reads 6.9:1 and `slate-500` only 3.7:1, which is below AA. Do
     not reach for `slate-500`/`slate-600` for text; if something needs to
     recede, use `text-dim` at a smaller size or a lighter weight, not a darker
-    grey. The same rule holds for white text on a coloured pill — the active
+    gray. The same rule holds for white text on a colored pill — the active
     Problems tab is `emerald-700`, not `emerald-600` (3.8:1), for this reason.
     A light-mode toggle is not a substitute for the floor.
 
@@ -95,10 +95,10 @@ These are the things most likely to be broken by accident.
     Anything he is meant to read — table cells, definitions, taglines, and
     above all the explanation of why an answer was wrong — is `text-slate-200`
     or `text-slate-300`. Content painted in the chrome tier is what still
-    looked washed out after every colour already cleared AA, and a static
+    looked washed out after every color already cleared AA, and a static
     contrast check cannot catch it because the ratio was never the problem.
 13. **Native `<select>` popups inherit the control's background.** A translucent
-    one (`bg-black/40`) composites against the page into grey-on-grey and the
+    one (`bg-black/40`) composites against the page into gray-on-gray and the
     open dropdown becomes unreadable — the option list is drawn by the browser,
     not by Tailwind. Selects get an opaque background, and `src/index.css`
     paints `select option` explicitly. Never give a `<select>` a `/opacity`
@@ -121,9 +121,35 @@ There is deliberately **no in-app analytics page**. The app is static with per-d
 `localStorage`, so a page inside it could only ever report the device it is running on —
 which would look like site analytics and be nothing of the kind.
 
+## House language: American English
+
+The student and the course are American, so every word he reads — and every word
+in this repo — uses **American spelling**: `practice` (noun *and* verb), `color`,
+`analyze`, `organize`, `summarize`, `normalize`, `center`, `judgment`, `gray`,
+`labor`, `behavior`, `labeled`, `recognize`, `capitalize`.
+
+British forms read as neutral and slip in one word at a time; a one-off audit
+found 64 of them here. Sweep with a stem check, not a read-through:
+
+```bash
+grep -rhoiE "\b[a-z]{3,}is(e|ed|es|ing)\b" src/ docs/ CLAUDE.md | sort -u
+```
+
+Two traps worth knowing, both hit while doing this:
+
+- **`emphasis` is already American**, and in the sibling app it is also a data
+  field name. A blanket `emphasis → emphasiz` rewrite renames the field and
+  breaks the UI. Only rewrite `emphasise/-ed/-es/-ing`.
+- **Not every `-ise` is British** — `promise`, `premise`, `expertise`,
+  `otherwise`, `revise`, `exercise`, `compromise` are American too. Use a named
+  list, never a blanket rule. And when an identifier is renamed (`normalise` →
+  `normalize`), rename every call site in the same pass.
+
+Never “correct” text quoting the professor, the TA or a source document.
+
 ## Verifying changes
 
-`npm run build` catches syntax only. Anything behavioural is verified by driving
+`npm run build` catches syntax only. Anything behavioral is verified by driving
 the built app in a real browser — that is how the fixed-answer bug, the toast
 swallowing taps, and several arithmetic slips were caught. See
 `docs/testing.md` for the pattern and the Playwright invocation that works in

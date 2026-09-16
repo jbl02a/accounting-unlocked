@@ -1,7 +1,7 @@
 # Testing
 
 There is no test suite. `npm run build` catches syntax and nothing else. Everything
-behavioural is verified by driving the built app in a real browser, and everything
+behavioral is verified by driving the built app in a real browser, and everything
 numeric is verified in `node` before it reaches a component.
 
 That is not a preference — it is what caught the bugs listed at the bottom.
@@ -94,10 +94,10 @@ touching the progress model. Four layers, in order of what they can prove:
    against `#161629` and fails the build below WCAG AA (4.5:1). It is a static
    check, so confirm in the browser too: read the computed `color` and the
    painted background of every rendered text node and take the worst ratio.
-   Skip nodes whose computed colour is transparent — those are `bg-clip-text`
+   Skip nodes whose computed color is transparent — those are `bg-clip-text`
    gradient headings, and measuring them reports a meaningless 1.1:1. The
-   things the static check cannot see are white text on a coloured pill (the
-   active Problems tab was `emerald-600`, 3.77:1) and the greys baked into
+   things the static check cannot see are white text on a colored pill (the
+   active Problems tab was `emerald-600`, 3.77:1) and the grays baked into
    `index.css` for the printable pages.
 
 The always-A property is asserted in *every* mode, not just one: full exam, Quick

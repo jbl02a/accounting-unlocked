@@ -20,12 +20,12 @@ suggestion, not a gate. Each has a lesson phase, an optional practice phase, and
 | 7 | Compound Journal Entries | Multi-line entries | Entry builder with live totals; won't accept an unbalanced entry |
 | 8 | T-Accounts & Ledger Balances | Posting, footing, normal balance side | Foot 6 accounts |
 | 9 | The Trial Balance | Column, order, totals | 3 steps: columns → order → totals |
-| 10 | Full Cycle Challenge | Capstone | 4 steps: journalize → post → trial balance → analyse |
+| 10 | Full Cycle Challenge | Capstone | 4 steps: journalize → post → trial balance → analyze |
 
 ## Phase 3 — The Why Behind the Rules
 | # | Level | Teaches | Practice |
 |---|---|---|---|
-| 11 | Assumptions & Principles | 4 assumptions + 4 principles, qualitative characteristics | Matching game + 9 scenarios |
+| 11 | Assumptions & Principles | 4 assumptions + 4 principles, qualitative characteriztics | Matching game + 9 scenarios |
 
 ## Phase 4 — Adjusting & Closing (Chapter 3)
 | # | Level | Teaches | Practice |
@@ -65,5 +65,5 @@ figure computed in 16 is what makes 17 balance.
 | 4 onward | **Not written.** Needs slides. |
 
 Chapter 1 topics deliberately left thin because they are rarely graded heavily:
-forms of business organisation, business activities, the SEC/FASB/IASB hierarchy,
+forms of business organization, business activities, the SEC/FASB/IASB hierarchy,
 professional ethics. The statement of cash flows is explained but not drilled.

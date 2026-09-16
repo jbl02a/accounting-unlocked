@@ -42,7 +42,7 @@ export function loadExamSession(validIds) {
       index: Math.min(Math.max(0, Number(s.index) || 0), ids.length - 1),
       mode: s.mode === 'practice' ? 'practice' : 'exam',
       scopeLabel: typeof s.scopeLabel === 'string' ? s.scopeLabel : 'Practice exam',
-      // Whether this attempt counts toward the best score. Anything unrecognised
+      // Whether this attempt counts toward the best score. Anything unrecognized
       // is a drill: misclassifying a drill as an exam inflates the record, while
       // the reverse just means one exam does not raise it.
       scopeKind: s.scopeKind === 'exam' ? 'exam' : 'drill',

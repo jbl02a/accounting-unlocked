@@ -154,7 +154,7 @@ export default function PracticeExam() {
     const base = scope === 'full' || scope === 'quick'
       ? (scope === 'quick' ? questionsFor('quick') : shuffle(questionsFor('full')))
       : shuffle(questionsForTopic(scope))
-    // Randomise which letter the answer sits behind, per attempt.
+    // Randomize which letter the answer sits behind, per attempt.
     const picked = base.map(q => shuffleOptions(q))
     setQuestions(picked)
     setScopeLabel(label)

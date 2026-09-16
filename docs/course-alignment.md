@@ -138,7 +138,7 @@ in Chapters 1–3 at all. Harmless and a natural pairing, but it is not on this 
 
 Practice problems deliberately mirror the *structure and wording style* of her
 assigned problems while using different companies and figures, so the student
-learns the method rather than memorising answers he has already seen. The
+learns the method rather than memorizing answers he has already seen. The
 companies in the app — Pinnacle-style but renamed — are Novak Consulting, Beacon
 Tutoring, Bayside Landscaping, Cedar Ridge, Summit Analytics, Harbor Point Marine,
 Lakeside Outfitters, Copperline Freight.

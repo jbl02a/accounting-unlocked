@@ -14,7 +14,7 @@ export const REINFORCE = [
     prompt: 'A firm signs a $40,000 contract in December, does the work in January, and is paid in February. Under revenue recognition, when is the revenue recorded?',
     options: ['January, when the work is performed', 'December, when the contract is signed', 'February, when the cash arrives', 'Split evenly across all three months'],
     correctIndex: 0,
-    explanation: 'Revenue is recognised when the performance obligation is satisfied — when the work is done. Signing a contract is a promise, not a sale; receiving cash is a collection, not a sale.',
+    explanation: 'Revenue is recognized when the performance obligation is satisfied — when the work is done. Signing a contract is a promise, not a sale; receiving cash is a collection, not a sale.',
   },
   {
     id: 'xp2', section: 'principles', kind: 'text',
@@ -35,7 +35,7 @@ export const REINFORCE = [
     prompt: 'A company is being sued and may lose $2 million. The case is unresolved at year end. Which principle requires this to be described in the notes?',
     options: ['Full disclosure', 'Conservatism', 'Materiality', 'Periodicity'],
     correctIndex: 0,
-    explanation: 'Full disclosure requires anything that would affect a reader’s judgement to be reported, in the statements or in the notes. A pending lawsuit of that size clearly qualifies even though no entry is made.',
+    explanation: 'Full disclosure requires anything that would affect a reader’s judgment to be reported, in the statements or in the notes. A pending lawsuit of that size clearly qualifies even though no entry is made.',
   },
   {
     id: 'xp5', section: 'principles', kind: 'text',
@@ -49,7 +49,7 @@ export const REINFORCE = [
     prompt: 'A company with $90 million in revenue expenses a $40 stapler immediately instead of depreciating it over five years. This is acceptable because of:',
     options: ['Materiality', 'Conservatism', 'Going concern', 'Consistency'],
     correctIndex: 0,
-    explanation: 'Materiality: an item too small to change any reader’s decision can be handled the simplest way. At this scale $40 could not affect a judgement, so the cost of being precise exceeds the benefit.',
+    explanation: 'Materiality: an item too small to change any reader’s decision can be handled the simplest way. At this scale $40 could not affect a judgment, so the cost of being precise exceeds the benefit.',
   },
   {
     id: 'xp7', section: 'principles', kind: 'text',
@@ -115,7 +115,7 @@ export const REINFORCE = [
       'That the financial statements will be correct',
     ],
     correctIndex: 0,
-    explanation: 'A trial balance tests arithmetic, not judgement. An entry posted to the wrong account, omitted entirely, or recorded twice still leaves the columns equal. This is the single most tested idea about the trial balance.',
+    explanation: 'A trial balance tests arithmetic, not judgment. An entry posted to the wrong account, omitted entirely, or recorded twice still leaves the columns equal. This is the single most tested idea about the trial balance.',
   },
   {
     id: 'xt2', section: 'trial', kind: 'text',
@@ -260,7 +260,7 @@ export const REINFORCE = [
     prompt: 'Which of these has a normal DEBIT balance?',
     options: ['Dividends', 'Retained Earnings', 'Unearned Revenue', 'Notes Payable'],
     correctIndex: 0,
-    explanation: 'DEALER: Dividends, Expenses and Assets are debits. Dividends sits in the equity family but reduces equity, so it is the exception worth memorising.',
+    explanation: 'DEALER: Dividends, Expenses and Assets are debits. Dividends sits in the equity family but reduces equity, so it is the exception worth memorizing.',
   },
   {
     id: 'xd5', section: 'dr-cr', kind: 'text',
@@ -530,7 +530,7 @@ export const REINFORCE = [
       '$120,000 — the full amount received',
     ],
     correctIndex: 0,
-    explanation: 'Revenue is recognised as the performance obligation is satisfied. The problem tells you exactly how much was satisfied, so that figure governs. Straight-lining $120,000 over 48 months gives $2,500 a month and $15,000 for six months — a perfectly reasonable calculation and the wrong answer, because the contract was not performed evenly.',
+    explanation: 'Revenue is recognized as the performance obligation is satisfied. The problem tells you exactly how much was satisfied, so that figure governs. Straight-lining $120,000 over 48 months gives $2,500 a month and $15,000 for six months — a perfectly reasonable calculation and the wrong answer, because the contract was not performed evenly.',
   },
   {
     id: 'xa15', section: 'adjusting', kind: 'text',

@@ -17,8 +17,8 @@
   }
 }
 
-/* Native <select> popups take their colours from the control itself, and a
-   translucent background composites against the page to a muddy grey — which is
+/* Native <select> popups take their colors from the control itself, and a
+   translucent background composites against the page to a muddy gray — which is
    what made the dropdowns unreadable when open. Both the control and its
    options are painted opaque here. */
 select {

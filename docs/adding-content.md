@@ -33,14 +33,14 @@ the playbook.
    design.
 3. Wire it up in four places:
    - `src/App.jsx` — a `<Route>`
-   - `src/components/LevelCard.jsx` — `LEVEL_META` entry with title, icon, colour, phase
+   - `src/components/LevelCard.jsx` — `LEVEL_META` entry with title, icon, color, phase
    - `src/pages/Home.jsx` — add the number to a phase's `levels` array
    - `src/context/ProgressContext.jsx` — bump `TOTAL_LEVELS`
 4. Add per-item **hints** (`useHints` + `HintBar` or `HintToggle`). They explain the
    reasoning and stop one step short of the answer; the post-answer feedback is
    where the answer is stated.
 5. If the level has multiple-choice questions, put the bank in
-   `src/data/levelBanks.js`, normalise it in `levelQuestions.js`, and call
+   `src/data/levelBanks.js`, normalize it in `levelQuestions.js`, and call
    `recordQuizResult(q.id, correct)` when each answer is given — that is what feeds
    the weak-area drill.
 

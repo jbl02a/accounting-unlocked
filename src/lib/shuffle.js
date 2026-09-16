@@ -1,5 +1,5 @@
 // Every question in this app was authored with the correct answer written first,
-// which made the answer position a giveaway. These helpers randomise option order
+// which made the answer position a giveaway. These helpers randomize option order
 // at runtime and remap the answer index, so authoring order never leaks.
 
 export function permutation(n, rand = Math.random) {

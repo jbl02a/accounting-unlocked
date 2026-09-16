@@ -254,7 +254,7 @@ export default function Level11() {
         ))}
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-5 mb-6">
-          <h3 className="font-bold text-white mb-1">Qualitative characteristics of useful information</h3>
+          <h3 className="font-bold text-white mb-1">Qualitative characteriztics of useful information</h3>
           <p className="text-xs text-slate-300 mb-3">Chapter 2 asks you to name these. Two are fundamental; four enhance them.</p>
           <p className="text-[10px] font-bold uppercase tracking-wider text-teal-300 mb-1">Fundamental</p>
           <div className="divide-y divide-white/5 mb-3">

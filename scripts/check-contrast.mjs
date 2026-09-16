@@ -1,8 +1,8 @@
 // Minimum-brightness check for the dark UI.
 //
-// The app is read at night on a phone, and grey-on-near-black is the first thing
+// The app is read at night on a phone, and gray-on-near-black is the first thing
 // that goes illegible. This enforces a floor rather than relying on taste: every
-// text colour used in `src/` must clear WCAG AA (4.5:1) against the lightest
+// text color used in `src/` must clear WCAG AA (4.5:1) against the lightest
 // surface in the dark chrome, and we aim for AAA (7:1) on body text.
 //
 // The floor is the rule; the light-mode toggle is not a substitute for it.
@@ -65,19 +65,19 @@ const fails = [...seen.entries()].filter(([, v]) => v.r < AA).sort((a, b) => a[1
 const dim = [...seen.entries()].filter(([, v]) => v.r >= AA && v.r < AAA).sort((a, b) => a[1].r - b[1].r)
 
 if (dim.length) {
-  console.log(`contrast: ${dim.length} colour(s) between AA and AAA on ${SURFACE} — acceptable, keep off long body text:`)
+  console.log(`contrast: ${dim.length} color(s) between AA and AAA on ${SURFACE} — acceptable, keep off long body text:`)
   for (const [k, v] of dim) console.log(`  ${k.padEnd(13)} ${v.hex}  ${v.r.toFixed(2)}:1  (${v.hits.length} uses)`)
 }
 
 if (fails.length) {
-  console.error(`\ncontrast: ${fails.length} colour(s) below AA ${AA}:1 on ${SURFACE}:`)
+  console.error(`\ncontrast: ${fails.length} color(s) below AA ${AA}:1 on ${SURFACE}:`)
   for (const [k, v] of fails) {
     console.error(`  ${k.padEnd(13)} ${v.hex}  ${v.r.toFixed(2)}:1`)
     for (const h of v.hits.slice(0, 8)) console.error(`      ${h}`)
     if (v.hits.length > 8) console.error(`      ...and ${v.hits.length - 8} more`)
   }
-  console.error('\nPick a lighter shade. `text-dim` is the dimmest grey this app allows.')
+  console.error('\nPick a lighter shade. `text-dim` is the dimmest gray this app allows.')
   process.exit(1)
 }
 
-console.log(`contrast: ${seen.size} text colours checked, all >= AA on ${SURFACE}`)
+console.log(`contrast: ${seen.size} text colors checked, all >= AA on ${SURFACE}`)

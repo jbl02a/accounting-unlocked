@@ -44,6 +44,6 @@ worksheet layout. Generic accounting content would be less useful to him.
 - **Printable** cram sheet, full-cycle practice problem, and an answer key
   generated from the problem data so paper and site cannot disagree
 - An enforced **contrast floor** — `npm run contrast` fails the build on any text
-  colour below WCAG AA
+  color below WCAG AA
 - **Installable PWA**, works fully offline, prompts before applying updates
 - Covers **Chapters 1–3**. Chapter 4 onward is not yet written.

@@ -1,6 +1,6 @@
 import { L6_QUESTIONS, L10_JOURNAL, L10_ANALYSIS, L11_SCENARIOS, L12_PERIOD, L14_EFFECTS } from './levelBanks.js'
 
-// The level quizzes are normalised into the same shape the practice exam uses, so a
+// The level quizzes are normalized into the same shape the practice exam uses, so a
 // question missed inside a level can be re-served by the weak-area drill. IDs are
 // namespaced by level so they can never collide with the exam bank.
 const SOURCES = [
@@ -12,7 +12,7 @@ const SOURCES = [
   { level: 14, key: 'e', label: 'Accruals — effects',         icon: '⏳', bank: L14_EFFECTS },
 ]
 
-function normalise(src) {
+function normalize(src) {
   return src.bank.map((q, i) => ({
     ...q,
     id: `L${src.level}-${src.key}${i + 1}`,
@@ -26,12 +26,12 @@ function normalise(src) {
   }))
 }
 
-export const L6_QUIZ = normalise(SOURCES[0])
-export const L10_JOURNAL_QUIZ = normalise(SOURCES[1])
-export const L10_ANALYSIS_QUIZ = normalise(SOURCES[2])
-export const L11_SCENARIO_QUIZ = normalise(SOURCES[3])
-export const L12_PERIOD_QUIZ = normalise(SOURCES[4])
-export const L14_EFFECTS_QUIZ = normalise(SOURCES[5])
+export const L6_QUIZ = normalize(SOURCES[0])
+export const L10_JOURNAL_QUIZ = normalize(SOURCES[1])
+export const L10_ANALYSIS_QUIZ = normalize(SOURCES[2])
+export const L11_SCENARIO_QUIZ = normalize(SOURCES[3])
+export const L12_PERIOD_QUIZ = normalize(SOURCES[4])
+export const L14_EFFECTS_QUIZ = normalize(SOURCES[5])
 
 export const LEVEL_QUESTIONS = [
   ...L6_QUIZ, ...L10_JOURNAL_QUIZ, ...L10_ANALYSIS_QUIZ,

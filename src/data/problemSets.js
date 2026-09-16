@@ -200,7 +200,7 @@ const BOONVILLE = {
       prompt: 'Boonville acquires office furniture on account for $7,000.',
       answer: { debits: [['Office Furniture', 7000]], credits: [['Accounts Payable', 7000]] },
       why: 'Furniture lasts beyond this period, so it is an asset, not an expense. "On account" means no cash moved — credit Accounts Payable.',
-      watchFor: 'Two traps in one line: furniture is capitalised rather than expensed, and "on account" means Cash is untouched.',
+      watchFor: 'Two traps in one line: furniture is capitalized rather than expensed, and "on account" means Cash is untouched.',
       hint: 'Will this still be useful next month? And did any money actually change hands?',
     },
     {
@@ -307,7 +307,7 @@ const COPPERLINE = {
       id: 'P3-5', kind: 'entry', date: 'May 1, 2025',
       prompt: 'The company purchased sound and lighting equipment for $410,000 cash.',
       answer: { debits: [['Equipment', 410000]], credits: [['Cash', 410000]] },
-      why: 'Equipment has a life beyond this period, so it is capitalised: debit Equipment, credit Cash. It is expensed gradually through depreciation later.',
+      why: 'Equipment has a life beyond this period, so it is capitalized: debit Equipment, credit Cash. It is expensed gradually through depreciation later.',
       hint: 'Will this still be here next year?',
     },
     {
@@ -436,7 +436,7 @@ const CHAPTER3 = {
       id: 'P4-3', kind: 'entry', date: 'December 31, 2024', group: 'Ridgeline — deferrals',
       prompt: 'Falcon Industries prepaid $120,000 on July 1 for a 4-year consulting contract. At year end, Ridgeline determined that $12,500 of services under the contract have been provided.',
       answer: { debits: [['Unearned Revenue', 12500]], credits: [['Service Revenue', 12500]] },
-      why: 'Revenue is recognised as the obligation is satisfied, and the problem tells you exactly how much was satisfied: $12,500. Move that from the liability to revenue.',
+      why: 'Revenue is recognized as the obligation is satisfied, and the problem tells you exactly how much was satisfied: $12,500. Move that from the liability to revenue.',
       watchFor: 'This one punishes autopilot. Straight-lining $120,000 over 48 months gives $2,500 a month, and six months would be $15,000 — but the problem states what was actually performed. When a problem gives you the work completed, that figure governs, not the calendar.',
       hint: 'Two numbers are available here: one you could calculate, one you were given. Which one measures performance?',
     },
@@ -514,7 +514,7 @@ const CHAPTER3 = {
       prompt: 'Closing entry 3 — close Income Summary to Retained Earnings.',
       answer: { debits: [['Income Summary', 42500]], credits: [['Retained Earnings', 42500]] },
       why: 'Income Summary now holds $62,000 credit less $19,500 debit = $42,500 credit, which is net income. Debit it to zero and credit Retained Earnings — profit belongs to the owners.',
-      watchFor: 'Had the company made a loss, this entry reverses: credit Income Summary, debit Retained Earnings. The direction follows the result, not a memorised pattern.',
+      watchFor: 'Had the company made a loss, this entry reverses: credit Income Summary, debit Retained Earnings. The direction follows the result, not a memorized pattern.',
       hint: 'What balance is sitting in Income Summary after the first two entries, and where does profit end up?',
     },
     {
